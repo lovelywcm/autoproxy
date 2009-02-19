@@ -1,0 +1,62 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is Adblock Plus.
+   -
+   - The Initial Developer of the Original Code is
+   - Wladimir Palant.
+   - Portions created by the Initial Developer are Copyright (C) 2006-2008
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!ENTITY detached.title           "Adblock Plus: элементы открытой страницы (отсоединены)">
+
+<!ENTITY detach.label             "Отсоединить">
+<!ENTITY reattach.label           "Присоединить">
+
+<!ENTITY search.label             "Поиск:">
+<!ENTITY search.accesskey         "о">
+
+<!ENTITY type.label               "Тип">
+<!ENTITY address.label            "Адрес">
+<!ENTITY filter.label             "Фильтр">
+<!ENTITY state.label              "Статус">
+<!ENTITY size.label               "Размер">
+
+<!ENTITY noitems.label            "Блокировать нечего">
+<!ENTITY whitelisted.label        "Отключен на этой странице">
+<!ENTITY notloaded.label          "Adblock Plus не загрузился нормально">
+
+<!ENTITY tooltip.address.label    "Адрес:">
+<!ENTITY tooltip.type.label       "Тип:">
+<!ENTITY tooltip.type.blocked     "(заблокирован)">
+<!ENTITY tooltip.type.whitelisted "(исключение)">
+<!ENTITY tooltip.size.label       "Размер:">
+<!ENTITY tooltip.filter.label     "Применен фильтр:">
+<!ENTITY tooltip.filterSource.label "Источник фильтра:">
+
+<!ENTITY context.block.label      "Заблокировать элемент">
+<!ENTITY context.editfilter.label "Отредактировать примененный фильтр">
+<!ENTITY context.whitelist.label  "Добавить исключение для элемента">
+<!ENTITY context.disablefilter.label  "Отключить фильтр --">
+<!ENTITY context.enablefilter.label   "Включить обратно фильтр --">
+<!ENTITY context.disablefilteronsite.label  "Отключить фильтр на --">
+<!ENTITY context.enablefilteronsite.label   "Включить обратно фильтр на --">
+<!ENTITY context.open.label       "Открыть в новой вкладке">
+<!ENTITY context.flash.label      "Показать расположение элемента">
+<!ENTITY context.copy.label       "Копировать адрес">
+<!ENTITY context.copyFilter.label "Копировать фильтр">
+<!ENTITY context.selectAll.label  "Выделить всё">

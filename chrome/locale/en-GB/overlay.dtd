@@ -1,0 +1,23 @@
+<!ENTITY notloaded.label "Not loaded">
+<!ENTITY notloaded.tooltip "Adblock Plus component couldn&apos;t be loaded; maybe it didn&apos;t install properly">
+<!ENTITY status.tooltip "Status:">
+<!ENTITY blocked.tooltip "Blocked items on this page:">
+<!ENTITY filters.tooltip "Most active filters:">
+<!ENTITY menuitem.label "Adblock Plus Preferences">
+<!ENTITY menuitem.accesskey "B">
+<!ENTITY toolbarbutton.label "Adblock Plus">
+<!ENTITY view.blockableItems.label "Adblock Plus: Blockable Items">
+<!ENTITY context.image.label "Adblock Image">
+<!ENTITY context.object.label "Adblock Object">
+<!ENTITY context.frame.label "Adblock Frame">
+<!ENTITY sidebar.title "Blockable items on current page">
+<!ENTITY settings.label "Preferences">
+<!ENTITY settings.accesskey "F">
+<!ENTITY opensidebar.label "Open blockable items">
+<!ENTITY opensidebar.accesskey "b">
+<!ENTITY closesidebar.label "Close blockable items">
+<!ENTITY closesidebar.accesskey "b">
+<!ENTITY whitelist.site.label "Disable on --">
+<!ENTITY whitelist.page.label "Disable on this page only">
+<!ENTITY objecttab.title "Block">
+<!ENTITY objecttab.tooltip "Block this object with Adblock Plus">

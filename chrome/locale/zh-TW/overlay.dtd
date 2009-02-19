@@ -1,0 +1,23 @@
+<!ENTITY notloaded.label "未載入">
+<!ENTITY notloaded.tooltip "Adblock Plus 元件尚未載入，套件也許未正確安裝">
+<!ENTITY status.tooltip "狀態:">
+<!ENTITY blocked.tooltip "此頁已封鎖項目:">
+<!ENTITY filters.tooltip "最常用的條件:">
+<!ENTITY menuitem.label "Adblock Plus 偏好設定">
+<!ENTITY menuitem.accesskey "B">
+<!ENTITY toolbarbutton.label "Adblock Plus">
+<!ENTITY view.blockableItems.label "Adblock Plus: 可阻擋項目">
+<!ENTITY context.image.label "阻擋圖片">
+<!ENTITY context.object.label "阻擋物件">
+<!ENTITY context.frame.label "阻擋頁框">
+<!ENTITY sidebar.title "本頁可阻擋項目">
+<!ENTITY settings.label "偏好設定">
+<!ENTITY settings.accesskey "F">
+<!ENTITY opensidebar.label "開啟可阻擋項目">
+<!ENTITY opensidebar.accesskey "B">
+<!ENTITY closesidebar.label "關閉可阻擋項目">
+<!ENTITY closesidebar.accesskey "B">
+<!ENTITY whitelist.site.label "此網域設為白名單: --">
+<!ENTITY whitelist.page.label "只將此頁面設為白名單">
+<!ENTITY objecttab.title "封鎖">
+<!ENTITY objecttab.tooltip "請按這裡用 Adblock Plus 封鎖此物件">

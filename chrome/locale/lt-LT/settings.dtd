@@ -1,0 +1,67 @@
+<!ENTITY dialog.title "„Adblock Plus“ nustatymai">
+<!ENTITY filters.label "Filtrai">
+<!ENTITY filters.accesskey "F">
+<!ENTITY add.label "Pridėti filtrą">
+<!ENTITY add.accesskey "D">
+<!ENTITY addsubscription.label "Pridėti filtro prenumeratą">
+<!ENTITY addsubscription.accesskey "P">
+<!ENTITY synchsubscriptions.label "Atnaujinti visas prenumeratas">
+<!ENTITY synchsubscriptions.accesskey "u">
+<!ENTITY import.label "Importuoti filtrus">
+<!ENTITY import.accesskey "M">
+<!ENTITY export.label "Eksportuoti filtrus">
+<!ENTITY export.accesskey "K">
+<!ENTITY clearall.label "Pašalinti visus filtrus">
+<!ENTITY clearall.accesskey "L">
+<!ENTITY resethitcounts.label "Atstatyti aplankymų statistiką">
+<!ENTITY resethitcounts.accesskey "S">
+<!ENTITY edit.label "Taisa">
+<!ENTITY edit.accesskey "T">
+<!ENTITY cut.label "Iškirpti">
+<!ENTITY cut.accesskey "r">
+<!ENTITY copy.label "Kopijuoti">
+<!ENTITY copy.accesskey "K">
+<!ENTITY paste.label "Įdėti">
+<!ENTITY paste.accesskey "d">
+<!ENTITY remove.label "Pašalinti">
+<!ENTITY remove.accesskey "š">
+<!ENTITY menu.find.label "Rasti">
+<!ENTITY menu.find.accesskey "A">
+<!ENTITY menu.findagain.label "Rasti vėl">
+<!ENTITY menu.findagain.accesskey "V">
+<!ENTITY options.label "Pasirinktys">
+<!ENTITY options.accesskey "P">
+<!ENTITY enable.label "Įjungti „Adblock Plus“">
+<!ENTITY enable.accesskey "J">
+<!ENTITY showintoolbar.label "Rodyti priemonių juostoje">
+<!ENTITY showintoolbar.accesskey "P">
+<!ENTITY showinstatusbar.label "Rodyti būsenos juostoje">
+<!ENTITY showinstatusbar.accesskey "B">
+<!ENTITY objecttabs.label "Rodyti korteles Flash ir Java elementams">
+<!ENTITY objecttabs.accesskey "F">
+<!ENTITY collapse.label "Suskleisti užblokuotus elementus">
+<!ENTITY collapse.accesskey "S">
+<!ENTITY help.label "Pagalba">
+<!ENTITY help.accesskey "G">
+<!ENTITY faq.label "Dažnai užduodami klausimai">
+<!ENTITY faq.accesskey "D">
+<!ENTITY faq.url "http://adblockplus.org/en/faq">
+<!ENTITY filterdoc.label "Kaip rašyti „Adblock Plus“ filtrus">
+<!ENTITY filterdoc.accesskey "f">
+<!ENTITY filterdoc.url "http://adblockplus.org/en/filters">
+<!ENTITY about.label "Apie „Adblock Plus“">
+<!ENTITY about.accesskey "A">
+<!ENTITY description "Pridėkite adresus, kuriuos norite blokuoti. Norėdami gauti pasiūlymus, peržiūrėkite išskleidžiamąjį sąrašą. Galite pridėti „*“ kaip pakaitos simbolį norėdami sukurti bendresnius filtrus. Patyrę naudotojai gali naudoti reguliariuosius reiškinius, tokius kaip „/banner\d+\.gif$/“.">
+<!ENTITY enabled.column "Įjungta">
+<!ENTITY hitcount.column "Aplankymai">
+<!ENTITY lasthit.column "Paskutinis blokavimas">
+<!ENTITY context.edit.label "Redaguoti filtrą">
+<!ENTITY context.resethitcount.label "Atstatyti aplankymų statistiką filtrui">
+<!ENTITY context.synchsubscription.label "Atnaujinti prenumeratą">
+<!ENTITY context.editsubscription.label "Redaguoti prenumeratą">
+<!ENTITY context.moveup.label "Perkelti aukščiau">
+<!ENTITY context.movedown.label "Perkelti žemiau">
+<!ENTITY context.movegroupup.label "Perkelti grupę aukščiau">
+<!ENTITY context.movegroupdown.label "Perkelti grupę žemiau">
+<!ENTITY apply.label "Pritaikyti">
+<!ENTITY apply.accesskey "R">

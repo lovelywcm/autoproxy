@@ -1,0 +1,53 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is Adblock Plus.
+   -
+   - The Initial Developer of the Original Code is
+   - Wladimir Palant.
+   - Portions created by the Initial Developer are Copyright (C) 2006-2008
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!ENTITY notloaded.label        "Not loaded">
+<!ENTITY notloaded.tooltip      "Adblock Plus component couldn't be loaded, maybe it didn't install properly.">
+<!ENTITY status.tooltip         "Status:">
+<!ENTITY blocked.tooltip        "Blocked items on this page:">
+<!ENTITY filters.tooltip        "Most active filters:">
+
+<!ENTITY menuitem.label         "Adblock Plus Preferences">
+<!ENTITY menuitem.accesskey     "B">
+<!ENTITY toolbarbutton.label    "Adblock Plus">
+
+<!ENTITY view.blockableItems.label  "Adblock Plus: Blockable Items">
+
+<!ENTITY context.image.label    "Adblock Image">
+<!ENTITY context.object.label   "Adblock Object">
+<!ENTITY context.frame.label    "Adblock Frame">
+
+<!ENTITY sidebar.title          "Blockable items on current page">
+
+<!ENTITY settings.label         "Preferences">
+<!ENTITY settings.accesskey     "F">
+<!ENTITY opensidebar.label      "Open blockable items">
+<!ENTITY opensidebar.accesskey  "B">
+<!ENTITY closesidebar.label     "Close blockable items">
+<!ENTITY closesidebar.accesskey "B">
+<!ENTITY whitelist.site.label   "Disable on --">
+<!ENTITY whitelist.page.label   "Disable on this page only">
+
+<!ENTITY objecttab.title        "Block">
+<!ENTITY objecttab.tooltip      "Click here to block this object with Adblock Plus">

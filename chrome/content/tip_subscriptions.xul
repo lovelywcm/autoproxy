@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is Adblock Plus.
+   -
+   - The Initial Developer of the Original Code is
+   - Wladimir Palant.
+   - Portions created by the Initial Developer are Copyright (C) 2006-2008
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://adblockplus/skin/tip_subscriptions.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://adblockplus/locale/tip_subscriptions.dtd">
+
+<dialog
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  buttons="accept,cancel,extra2"
+  buttonlabelaccept="&subscribe.label;"
+  buttonaccesskeyaccept="&subscribe.accesskey;"
+  buttonlabelextra2="&other.label;"
+  buttonaccesskeyextra2="&other.accesskey;"
+  title="&dialog.title;"
+  id="abpTipSubscriptions"
+  windowtype="abp:tip:subscriptions"
+  width="550"
+  height="500"
+  onload="init()"
+  ondialogaccept="addSubscriptions()"
+  ondialogextra2="addOther()">
+
+<script type="application/x-javascript;version=1.7" src="tip_subscriptions.js"/>
+
+<hbox>
+  <vbox flex="1">
+    <description id="description-par1">&description.par1;</description>
+    <vbox id="adblock-warning" hidden="true">
+      <description>&adblock.warning;</description>
+      <hbox>
+        <button id="adblock-uninstall" label="&adblock.uninstall;" oncommand="uninstallAdblock()"/>
+      </hbox>
+    </vbox>
+    <vbox id="filtersetg-warning" hidden="true">
+      <description>
+        &filterset.g.warning;
+        <description class="moreinfo" _url="&filterset.g.moreinfo.url;" tooltiptext="&filterset.g.moreinfo.url;" value="&filterset.g.moreinfo;" onclick="abp.loadInBrowser(this.getAttribute('_url'))"/>
+      </description>
+      <hbox>
+        <button id="filtersetg-uninstall" label="&filterset.g.uninstall;" oncommand="uninstallFiltersetG()"/>
+      </hbox>
+    </vbox>
+    <description id="description-par2">&description.par2;</description>
+  </vbox>
+  <vbox>
+    <vbox flex="1" pack="center">
+      <hbox pack="center">
+        <image id="icon"/>
+      </hbox>
+    </vbox>
+    <description class="fulllist" _url="&full-list.url;" tooltiptext="&full-list.url;" value="&full-list.label;" onclick="abp.loadInBrowser(this.getAttribute('_url'))"/>
+  </vbox>
+</hbox>
+
+<radiogroup id="subscriptions" flex="1" onkeypress="return handleKeyPress(event)" oncommand="handleCommand(event)">
+  <scrollbox id="subscriptionsScrollbox" flex="1" orient="vertical" datasources="subscriptions.rdf" ref="abp:subscriptions">
+    <template>
+      <hbox uri="rdf:*" class="container" align="center">
+        <radio _title="rdf:http://adblockplus.org/#title" _url="rdf:http://adblockplus.org/#url"/>
+        <vbox flex="1" onclick="this.previousSibling.radioGroup.selectedItem = this.previousSibling;">
+          <hbox>
+            <description class="title" value="rdf:http://adblockplus.org/#title" flex="1"/>
+            <description class="homepage" _url="rdf:http://adblockplus.org/#homepage" tooltiptext="rdf:http://adblockplus.org/#homepage" value="&homepage.label;" onclick="abp.loadInBrowser(this.getAttribute('_url'));event.stopPropagation();"/>
+          </hbox>
+          <hbox pack="start">
+            <description class="location" value="rdf:http://adblockplus.org/#url" onclick="abp.loadInBrowser(this.getAttribute('value'));event.stopPropagation();"/>
+          </hbox>
+        </vbox>
+      </hbox>
+    </template>
+  </scrollbox>
+</radiogroup>
+
+<description flex="1" id="note">&note;</description>
+
+</dialog>

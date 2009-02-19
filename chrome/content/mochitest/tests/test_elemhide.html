@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Element hiding tests</title>
+
+  <link rel="stylesheet" type="text/css" href="/content/tests/SimpleTest/test.css" />
+
+  <script type="text/javascript" src="/content/MochiKit/MochiKit.js"></script>
+  <script type="text/javascript" src="/content/tests/SimpleTest/SimpleTest.js"></script>        
+
+  <script type="application/x-javascript;version=1.7" src="common.js"></script>
+</head>
+<body>
+  <p id="display"></p>
+  <div id="content" style="visibility: hidden;">
+    <div id="test1">foo</div>
+    <div id="test2">bar</div>
+  </div>
+  <pre id="test">
+  <script type="application/x-javascript;version=1.7">
+    let abp = Components.classes["@mozilla.org/adblockplus;1"].createInstance().wrappedJSObject;
+
+    let tests = [
+      [[], "visible visible"],
+      [["#div(test1)"], "visible visible"],
+      [["mochikit#div(test1)"], "hidden visible"],
+      [["mochikit#div(test1)", "foo,foo2#div(test2)"], "hidden visible"],
+      [["mochikit,foo#div(test1)", "foo,mochikit#div(test2)"], "hidden hidden"],
+      [["mochikit#div(test1)", "mochikit#div(test2)"], "hidden hidden"],
+      [["foo#div(test1)", "foo#div(test2)"], "visible visible"],
+    ];
+    let currentTest = 0;
+    let oldEnabled = abp.prefs.enabled;
+
+    function runNextTest()
+    {
+      if (currentTest >= tests.length)
+      {
+        abp.filterStorage.triggerSubscriptionObservers("reload", abp.filterStorage.subscriptions);
+        abp.prefs.enabled = oldEnabled;
+        SimpleTest.finish();
+        return;
+      }
+
+      let [filters, expected] = tests[currentTest++];
+      abp.elemhide.clear();
+      for each (let filter in filters)
+        abp.elemhide.add(abp.Filter.fromText(filter));
+      abp.elemhide.apply();
+
+      document.getElementById("test1").parentNode.appendChild(document.getElementById("test1"));
+      document.getElementById("test2").parentNode.appendChild(document.getElementById("test2"));
+
+      setTimeout(function()
+      {
+        let result = (document.getElementById("test1").offsetHeight > 0 ? "visible" : "hidden") + " " + (document.getElementById("test2").offsetHeight > 0 ? "visible" : "hidden");
+        is(result, expected, filters.join("\n"));
+        runNextTest();
+      }, 0);
+    }
+
+    if (compareGeckoVersion("1.9") >= 0)
+    {
+      SimpleTest.waitForExplicitFinish();
+      abp.prefs.enabled = true;
+      runNextTest();
+    }
+    else
+    {
+      ok(true, "These tests require an application based on Gecko 1.9 or higher");
+    }
+  </script>
+  </pre>
+</body>
+</html>

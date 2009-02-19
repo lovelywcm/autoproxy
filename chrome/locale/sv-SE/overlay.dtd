@@ -1,0 +1,23 @@
+<!ENTITY notloaded.label "Ej laddad">
+<!ENTITY notloaded.tooltip "En Adblock Plus-komponent kunde inte laddades. Kontrollera installationen.">
+<!ENTITY status.tooltip "Status:">
+<!ENTITY blocked.tooltip "Blockerade objekt på denna sida:">
+<!ENTITY filters.tooltip "Mest aktiva filter:">
+<!ENTITY menuitem.label "Adblock Plus inställningar">
+<!ENTITY menuitem.accesskey "A">
+<!ENTITY toolbarbutton.label "Adblock Plus">
+<!ENTITY view.blockableItems.label "Adblock Plus: Blockerbara poster">
+<!ENTITY context.image.label "Adblock Bild">
+<!ENTITY context.object.label "Adblock Objekt">
+<!ENTITY context.frame.label "Adblock Ram">
+<!ENTITY sidebar.title "Objekt att blockera på denna sida">
+<!ENTITY settings.label "Inställningar">
+<!ENTITY settings.accesskey "I">
+<!ENTITY opensidebar.label "Öppna objekt att blockera">
+<!ENTITY opensidebar.accesskey "B">
+<!ENTITY closesidebar.label "Stäng objekt att blockera">
+<!ENTITY closesidebar.accesskey "B">
+<!ENTITY whitelist.site.label "Använd inte på --">
+<!ENTITY whitelist.page.label "Använd inte på denna sida">
+<!ENTITY objecttab.title "Blockera">
+<!ENTITY objecttab.tooltip "Klicka här för att blockera detta objekt med Adblock Plus">

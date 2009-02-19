@@ -1,0 +1,101 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Adblock Plus.
+ *
+ * The Initial Developer of the Original Code is
+ * Wladimir Palant.
+ * Portions created by the Initial Developer are Copyright (C) 2006-2008
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#suggestionsList {
+  margin: 0px;
+}
+
+#detachButton, #reattachButton:not([disabled="true"]) {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#reattachButton[disabled="true"] {
+  color: GrayText;
+}
+
+#detachButton, #reattachButton {
+  font-size: 90%;
+}
+
+tooltip {
+  max-width: none;
+}
+
+#tooltipPreview {
+  margin:10px;
+  max-width: 300px;
+  max-height: 300px;
+}
+
+#tooltip label {
+  font-weight: bold;
+}
+
+#contextBlock,
+#contextWhitelist {
+  font-weight: bold;
+}
+
+#state {
+  min-width: 16px;
+}
+
+#size {
+  text-align: right;
+} 
+
+treechildren::-moz-tree-cell-text(state-filtered, selected-false),
+treechildren::-moz-tree-cell-text(state-hidden, selected-false) {
+  color: #C00000;
+}
+treechildren::-moz-tree-cell-text(state-whitelisted, selected-false) {
+  color: #008000;
+}
+
+treechildren::-moz-tree-image(col-state, dummy-false)
+{
+  list-style-image: url(item-state.png);
+  -moz-image-region: rect(0px 10px 10px 0px);
+  margin-left: 3px;
+}
+treechildren::-moz-tree-image(col-state, filter-disabled-true, dummy-false) {
+  -moz-image-region: rect(10px 10px 20px 0px);
+}
+treechildren::-moz-tree-image(col-state, state-filtered, dummy-false),
+treechildren::-moz-tree-image(col-state, state-hidden, dummy-false) {
+  -moz-image-region: rect(20px 10px 30px 0px);
+}
+treechildren::-moz-tree-image(col-state, state-whitelisted, dummy-false) {
+  -moz-image-region: rect(30px 10px 40px 0px);
+}
+
+treechildren::-moz-tree-cell-text(col-filter, state-hidden, selected-false) {
+  color: #000080;
+}
+treechildren::-moz-tree-cell-text(col-filter, filter-disabled-true, selected-false) {
+  color: #C0C0C0;
+}

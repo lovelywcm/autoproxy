@@ -155,31 +155,12 @@ var policy =
         if (collapse || prefCollapse)
           wnd.setTimeout(postProcessNode, 0, node);
       }
-
-      // Show object tabs unless this is a standalone object
-      if (!match && prefs.frameobjects && contentType == this.type.OBJECT &&
-          node.ownerDocument && /^text\/|[+\/]xml$/.test(node.ownerDocument.contentType)) {
-        // Before adding object tabs always check whether one exist already
-        var hasObjectTab = false;
-        var loc = data.getLocation(this.type.OBJECT, locationText);
-        if (loc)
-          for (var i = 0; i < loc.nodes.length; i++)
-            if (loc.nodes[i] == node && i < loc.nodes.length - 1 && "abpObjTab" in loc.nodes[i+1])
-              hasObjectTab = true;
-
-        if (!hasObjectTab) {
-          objTab = node.ownerDocument.createElementNS("http://www.w3.org/1999/xhtml", "a");
-          objTab.abpObjTab = true;
-        }
-      }
     }
 
     // Store node data
     var nodeData = data.addNode(topWnd, node, contentType, docDomain, thirdParty, locationText, match, objTab);
     if (match)
       filterStorage.increaseHitCount(match);
-    if (objTab)
-      wnd.setTimeout(addObjectTab, 0, topWnd, node, nodeData, objTab);
 
     return !match || match instanceof WhitelistFilter;
   },

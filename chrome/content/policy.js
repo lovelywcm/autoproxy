@@ -39,25 +39,25 @@ const ok = Components.interfaces.nsIContentPolicy.ACCEPT;
 var proxyEnabled = false;
 var autoProxy = 
 {
-    proxyService: Components.classes["@mozilla.org/network/protocol-proxy-service;1"].
-                            getService(Components.interfaces.nsIProtocolProxyService),
+  proxyService: Components.classes["@mozilla.org/network/protocol-proxy-service;1"].
+                          getService(Components.interfaces.nsIProtocolProxyService),
 
-    applyFilter: function(pS, uri, proxy)
-    {
-        return pS.newProxyInfo('http', '127.0.0.1', '8000', 0, 0, null);
-    },
+  applyFilter: function(pS, uri, proxy)
+  {
+      return pS.newProxyInfo('http', '127.0.0.1', '8000', 0, 0, null);
+  },
 
-    goProxy: function()
-    {
-        this.proxyService.registerFilter(this, 0);
-        proxyEnabled = true;
-    },
-    
-    notProxy: function()
-    {
-        this.proxyService.unregisterFilter(this);
-        proxyEnabled = false;
-    }
+  goProxy: function()
+  {
+      this.proxyService.registerFilter(this, 0);
+      proxyEnabled = true;
+  },
+  
+  notProxy: function()
+  {
+      this.proxyService.unregisterFilter(this);
+      proxyEnabled = false;
+  }
 }
 
 var policy =

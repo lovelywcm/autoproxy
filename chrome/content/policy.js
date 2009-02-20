@@ -36,6 +36,7 @@ if ("nsIEffectiveTLDService" in Components.interfaces)
 
 const ok = Components.interfaces.nsIContentPolicy.ACCEPT;
 
+var proxyEnabled = false;
 var autoProxy = 
 {
     proxyService: Components.classes["@mozilla.org/network/protocol-proxy-service;1"].
@@ -49,13 +50,13 @@ var autoProxy =
     goProxy: function()
     {
         this.proxyService.registerFilter(this, 0);
-        return ok;
+        proxyEnabled = true;
     },
     
     notProxy: function()
     {
         this.proxyService.unregisterFilter(this);
-        return ok; 
+        proxyEnabled = false;
     }
 }
 
@@ -298,9 +299,11 @@ var policy =
     // if it's not a blockable type or a whitelisted scheme, use the usual policy
     if (contentType == this.type.DOCUMENT || !this.isBlockableScheme(location))
       return ok;
-
-    return (this.processNode(wnd, node, contentType, location, false) ?
-                                    autoProxy.notProxy() : autoProxy.goProxy() );
+     
+    this.processNode(wnd, node, contentType, location, false) ?
+    proxyEnabled && autoProxy.notProxy() : proxyEnabled || autoProxy.goProxy();
+    
+    return ok;
   },
 
   shouldProcess: function(contentType, contentLocation, requestOrigin, insecNode, mimeType, extra) {

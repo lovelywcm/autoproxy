@@ -35,7 +35,7 @@ if ("nsIEffectiveTLDService" in Components.interfaces)
 }
 
 const ok = Components.interfaces.nsIContentPolicy.ACCEPT;
-const block = Components.interfaces.nsIContentPolicy.REJECT_SERVER;
+const goProxy = Components.interfaces.nsIContentPolicy.REJECT_SERVER;
 
 var policy =
 {
@@ -277,7 +277,7 @@ var policy =
     if (contentType == this.type.DOCUMENT || !this.isBlockableScheme(location))
       return ok;
 
-    return (this.processNode(wnd, node, contentType, location, false) ? ok : block);
+    return (this.processNode(wnd, node, contentType, location, false) ? ok : goProxy);
   },
 
   shouldProcess: function(contentType, contentLocation, requestOrigin, insecNode, mimeType, extra) {

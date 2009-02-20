@@ -135,7 +135,7 @@ var policy =
 
     var objTab = null;
     let docDomain = this.getHostname(wnd.location.href);
-    let thirdParty = this.isThirdParty(location, docDomain);
+    let thirdParty = true;
 
     if (!match && location.scheme == "chrome" && location.host == "global" && /abphit:(\d+)#/.test(location.path) && RegExp.$1 in elemhide.keys)
     {
@@ -249,39 +249,6 @@ var policy =
       return this.isWhitelisted(wnd.location.href);
     }
     return null;
-  },
-
-  /**
-   * Checks whether the location's origin is different from document's origin.
-   */
-  isThirdParty: function(/**nsIURI*/location, /**String*/ docDomain) /**Boolean*/
-  {
-    if (!location || !docDomain)
-      return true;
-
-    try 
-    {
-      if (effectiveTLD)
-      {
-        try {
-          return effectiveTLD.getBaseDomain(location) != effectiveTLD.getBaseDomainFromHost(docDomain);
-        }
-        catch (e) {
-          // EffectiveTLDService throws on IP addresses
-          return location.host != docDomain;
-        }
-      }
-      else
-      {
-        // Stupid fallback algorithm for Gecko 1.8
-        return location.host.replace(/.*?((?:[^.]+\.)?[^.]+\.?)$/, "$1") != docDomain.replace(/.*?((?:[^.]+\.)?[^.]+\.?)$/, "$1");
-      }
-    }
-    catch (e2)
-    {
-      // nsSimpleURL.host will throw, treat those URLs as third-party
-      return true;
-    }
   },
 
   // nsIContentPolicy interface implementation

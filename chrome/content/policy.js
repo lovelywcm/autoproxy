@@ -128,7 +128,8 @@ var policy =
       contentType = this.type.BACKGROUND;
 
     // Fix type for objects misrepresented as frames or images
-    if (contentType != this.type.OBJECT && (node instanceof Components.interfaces.nsIDOMHTMLObjectElement || node instanceof Components.interfaces.nsIDOMHTMLEmbedElement))
+    if (contentType != this.type.OBJECT && (node instanceof Components.interfaces.nsIDOMHTMLObjectElement || 
+                                            node instanceof Components.interfaces.nsIDOMHTMLEmbedElement))
       contentType = this.type.OBJECT;
 
     var data = DataContainer.getDataForWindow(wnd);
@@ -137,7 +138,8 @@ var policy =
     let docDomain = this.getHostname(wnd.location.href);
     let thirdParty = true;
 
-    if (!match && location.scheme == "chrome" && location.host == "global" && /abphit:(\d+)#/.test(location.path) && RegExp.$1 in elemhide.keys)
+    if (!match && location.scheme == "chrome" && location.host == "global" && 
+                                                /abphit:(\d+)#/.test(location.path) && RegExp.$1 in elemhide.keys)
     {
       match = elemhide.keys[RegExp.$1];
       contentType = this.type.ELEMHIDE;
@@ -148,13 +150,6 @@ var policy =
       match = whitelistMatcher.matchesAny(locationText, this.typeDescr[contentType] || "", docDomain, thirdParty);
       if (match == null)
         match = blacklistMatcher.matchesAny(locationText, this.typeDescr[contentType] || "", docDomain, thirdParty);
-
-      if (match instanceof BlockingFilter && node)
-      {
-        var prefCollapse = (match.collapse != null ? match.collapse : !prefs.fastcollapse);
-        if (collapse || prefCollapse)
-          wnd.setTimeout(postProcessNode, 0, node);
-      }
     }
 
     // Store node data

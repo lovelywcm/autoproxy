@@ -81,34 +81,6 @@ function makeURL(url) {
 }
 abp.makeURL = makeURL;
 
-// hides a blocked element and collapses it if necessary
-function postProcessNode(node) {
-  if (!(node instanceof Element))
-    return;
-
-  // adjust frameset's cols/rows for frames
-  var parentNode = node.parentNode;
-  if (parentNode && parentNode instanceof Components.interfaces.nsIDOMHTMLFrameSetElement)
-  {
-    let hasCols = (parentNode.cols && parentNode.cols.indexOf(",") > 0);
-    let hasRows = (parentNode.rows && parentNode.rows.indexOf(",") > 0);
-    if ((hasCols || hasRows) && !(hasCols && hasRows))
-    {
-      var index = -1;
-      for (var frame = node; frame; frame = frame.previousSibling)
-        if (frame instanceof Components.interfaces.nsIDOMHTMLFrameElement || frame instanceof Components.interfaces.nsIDOMHTMLFrameSetElement)
-          index++;
-  
-      var property = (hasCols ? "cols" : "rows");
-      var weights = parentNode[property].split(",");
-      weights[index] = "0";
-      parentNode[property] = weights.join(",");
-    }
-  }
-  else
-    node.style.display = "none";
-}
-
 // Generates a click handler for object tabs
 function generateClickHandler(wnd, data) {
   return function(event) {

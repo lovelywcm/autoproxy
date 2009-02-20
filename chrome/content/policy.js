@@ -35,7 +35,29 @@ if ("nsIEffectiveTLDService" in Components.interfaces)
 }
 
 const ok = Components.interfaces.nsIContentPolicy.ACCEPT;
-const goProxy = Components.interfaces.nsIContentPolicy.REJECT_SERVER;
+
+var autoProxy = 
+{
+    proxyService: Components.classes["@mozilla.org/network/protocol-proxy-service;1"].
+                            getService(Components.interfaces.nsIProtocolProxyService),
+
+    applyFilter: function(pS, uri, proxy)
+    {
+        return pS.newProxyInfo('http', '127.0.0.1', '8000', 0, 0, null);
+    },
+
+    goProxy: function()
+    {
+        this.proxyService.registerFilter(this, 0);
+        return ok;
+    },
+    
+    notProxy: function()
+    {
+        this.proxyService.unregisterFilter(this);
+        return ok; 
+    }
+}
 
 var policy =
 {
@@ -277,7 +299,8 @@ var policy =
     if (contentType == this.type.DOCUMENT || !this.isBlockableScheme(location))
       return ok;
 
-    return (this.processNode(wnd, node, contentType, location, false) ? ok : goProxy);
+    return (this.processNode(wnd, node, contentType, location, false) ?
+                                    autoProxy.notProxy() : autoProxy.goProxy() );
   },
 
   shouldProcess: function(contentType, contentLocation, requestOrigin, insecNode, mimeType, extra) {

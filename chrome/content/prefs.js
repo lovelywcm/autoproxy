@@ -29,10 +29,6 @@
 
 const prefRoot = "extensions.adblockplus.";
 
-var gObjtabClass = ""
-for (let i = 0; i < 20; i++)
-  gObjtabClass += String.fromCharCode("a".charCodeAt(0) + Math.random() * 26);
-
 var prefService = Components.classes["@mozilla.org/preferences-service;1"]
                             .getService(Components.interfaces.nsIPrefService);
 
@@ -100,35 +96,6 @@ var prefs = {
   },
 
   init: function() {
-    try {
-      // Initialize object tabs CSS
-      var channel = ioService.newChannel("chrome://adblockplus/content/objtabs.css", null, null);
-      channel.asyncOpen({
-        data: "",
-        onDataAvailable: function(request, context, stream, offset, count) {
-          stream = ScriptableInputStream(stream);
-          this.data += stream.read(count);
-        },
-        onStartRequest: function() {},
-        onStopRequest: function() {
-          var data = this.data.replace(/%%CLASSNAME%%/g, gObjtabClass);
-          var objtabsCSS = makeURL("data:text/css," + encodeURIComponent(data));
-          Components.classes["@mozilla.org/content/style-sheet-service;1"]
-                    .getService(Components.interfaces.nsIStyleSheetService)
-                    .loadAndRegisterSheet(objtabsCSS, styleService.USER_SHEET);
-          channel = null;
-        },
-        QueryInterface: function(iid) {
-          if (iid.equals(Components.interfaces.nsISupports) ||
-              iid.equals(Components.interfaces.nsIRequestObserver) ||
-              iid.equals(Components.interfaces.nsIStreamListener))
-            return this;
-
-          throw Components.results.NS_ERROR_NO_INTERFACE;
-        }
-      }, null);
-    }
-    catch (e) {}
 
     // Try to fix selected locale in Mozilla/SeaMonkey
     strings = stringService.createBundle("chrome://adblockplus/locale/global.properties");

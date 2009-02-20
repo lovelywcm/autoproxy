@@ -235,18 +235,18 @@ Matcher.prototype = {
     return result;
   }
 };
-abp.Matcher = Matcher;
+aup.Matcher = Matcher;
 
 /**
  * Matcher instance for blocking filters
  * @type Matcher
  */
 var blacklistMatcher = new Matcher();
-abp.blacklistMatcher = blacklistMatcher;
+aup.blacklistMatcher = blacklistMatcher;
 
 /**
  * Matcher instance for exception rules
  * @type Matcher
  */
 var whitelistMatcher = new Matcher();
-abp.whitelistMatcher = whitelistMatcher;
+aup.whitelistMatcher = whitelistMatcher;

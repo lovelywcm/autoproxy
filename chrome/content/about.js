@@ -22,9 +22,9 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-var abp = Components.classes["@mozilla.org/adblockplus;1"].createInstance().wrappedJSObject;
+var aup = Components.classes["@mozilla.org/adblockplus;1"].createInstance().wrappedJSObject;
 
 function fillInVersion() {
   var versionField = document.getElementById("version");
-  versionField.value = abp.getInstalledVersion();
+  versionField.value = aup.getInstalledVersion();
 }

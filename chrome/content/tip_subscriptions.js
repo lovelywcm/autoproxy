@@ -22,8 +22,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-let abp = Components.classes["@mozilla.org/adblockplus;1"].createInstance().wrappedJSObject;
-let prefs = abp.prefs;
+let aup = Components.classes["@mozilla.org/adblockplus;1"].createInstance().wrappedJSObject;
+let prefs = aup.prefs;
 
 let autoAdd;
 let result;
@@ -47,8 +47,8 @@ function init()
     if (isExtensionActive(filtersetG))
       document.getElementById("filtersetg-warning").hidden = false;
 
-    if ("Filterset.G" in abp.filterStorage.knownSubscriptions &&
-        !abp.filterStorage.knownSubscriptions["Filterset.G"].disabled)
+    if ("Filterset.G" in aup.filterStorage.knownSubscriptions &&
+        !aup.filterStorage.knownSubscriptions["Filterset.G"].disabled)
     {
       document.getElementById("filtersetg-warning").hidden = false;
     }
@@ -67,7 +67,7 @@ function addSubscriptions() {
   result.disabled = false;
 
   if (autoAdd)
-    abp.addSubscription(result.url, result.title, result.autoDownload, result.disabled);
+    aup.addSubscription(result.url, result.title, result.autoDownload, result.disabled);
 }
 
 function addOther() {
@@ -75,7 +75,7 @@ function addOther() {
   if ("url" in result)
   {
     if (autoAdd)
-      abp.addSubscription(result.url, result.title, result.autoDownload, result.disabled);
+      aup.addSubscription(result.url, result.title, result.autoDownload, result.disabled);
     window.close();
   }
 }
@@ -160,14 +160,14 @@ function uninstallAdblock()
 function uninstallFiltersetG()
 {
   // Disable further updates
-  abp.denyFiltersetG = true;
+  aup.denyFiltersetG = true;
 
   // Uninstall extension
   uninstallExtension(filtersetG);
 
   // Remove filter subscription
-  if ("Filterset.G" in abp.filterStorage.knownSubscriptions)
-    abp.filterStorage.removeSubscription(abp.filterStorage.knownSubscriptions["Filterset.G"]);
+  if ("Filterset.G" in aup.filterStorage.knownSubscriptions)
+    aup.filterStorage.removeSubscription(aup.filterStorage.knownSubscriptions["Filterset.G"]);
 
   document.getElementById("filtersetg-warning").hidden = true;
 }

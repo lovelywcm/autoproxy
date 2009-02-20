@@ -84,7 +84,7 @@ Subscription.prototype =
     return buffer.join("\n");
   }
 };
-abp.Subscription = Subscription;
+aup.Subscription = Subscription;
 
 /**
  * Cache for known filter subscriptions, maps URL to subscription objects.
@@ -162,7 +162,7 @@ Subscription.fromObject = function(obj)
       if ("requiredVersion" in obj)
       {
         result.requiredVersion = obj.requiredVersion;
-        if (abp.versionComparator.compare(result.requiredVersion, abp.getInstalledVersion()) > 0)
+        if (aup.versionComparator.compare(result.requiredVersion, aup.getInstalledVersion()) > 0)
           result.upgradeRequired = true;
       }
     }
@@ -222,7 +222,7 @@ SpecialSubscription.prototype =
    */
   get title()
   {
-    return abp.getString(this._titleID);
+    return aup.getString(this._titleID);
   },
 
   /**
@@ -245,7 +245,7 @@ SpecialSubscription.prototype =
     return false;
   }
 };
-abp.SpecialSubscription = SpecialSubscription;
+aup.SpecialSubscription = SpecialSubscription;
 
 SpecialSubscription.map = {
   __proto__: null,
@@ -295,7 +295,7 @@ RegularSubscription.prototype =
       buffer.push("lastDownload=" + this.lastDownload);
   }
 };
-abp.RegularSubscription = RegularSubscription;
+aup.RegularSubscription = RegularSubscription;
 
 /**
  * Class for filter subscriptions updated by externally (by other extension)
@@ -321,7 +321,7 @@ ExternalSubscription.prototype =
     buffer.push("external=true");
   }
 };
-abp.ExternalSubscription = ExternalSubscription;
+aup.ExternalSubscription = ExternalSubscription;
 
 /**
  * Class for filter subscriptions updated by externally (by other extension)
@@ -408,4 +408,4 @@ DownloadableSubscription.prototype =
       buffer.push("requiredVersion=" + this.requiredVersion);
   }
 };
-abp.DownloadableSubscription = DownloadableSubscription;
+aup.DownloadableSubscription = DownloadableSubscription;

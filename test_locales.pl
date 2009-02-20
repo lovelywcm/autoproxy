@@ -3,27 +3,27 @@
 use strict;
 
 my %paths = (
-  abp => 'chrome/locale',
+  aup => 'chrome/locale',
   ehh => 'elemhidehelper/chrome/locale',
 );
 
 my @must_differ = (
-  ['abp:overlay:opensidebar.accesskey', 'abp:overlay:settings.accesskey', 'abp:settings:options.accesskey', 'abp:settings:enable.accesskey', 'ehh:overlay:selectelement.accesskey'],
-  ['abp:settings:filters.accesskey', 'abp:settings:edit.accesskey', 'abp:settings:view.accesskey', 'abp:settings:options.accesskey', 'abp:settings:help.accesskey', 'abp:settings:add.accesskey', 'abp:settings:apply.accesskey'],
-  ['abp:settings:add.accesskey', 'abp:settings:addsubscription.accesskey', 'abp:settings:synchsubscriptions.accesskey', 'abp:settings:import.accesskey', 'abp:settings:export.accesskey', 'abp:settings:clearall.accesskey', 'abp:settings:resethitcounts.accesskey'],
-  ['abp:settings:cut.accesskey', 'abp:settings:copy.accesskey', 'abp:settings:paste.accesskey', 'abp:settings:remove.accesskey', 'abp:settings:menu.find.accesskey', 'abp:settings:menu.findagain.accesskey'],
-  ['abp:settings:filter.accesskey', 'abp:settings:enabled.accesskey', 'abp:settings:hitcount.accesskey', 'abp:settings:lasthit.accesskey', 'abp:settings:sort.accesskey'],
-  ['abp:settings:sort.none.accesskey', 'abp:settings:filter.accesskey', 'abp:settings:enabled.accesskey', 'abp:settings:hitcount.accesskey', 'abp:settings:lasthit.accesskey', 'abp:settings:sort.ascending.accesskey', 'abp:settings:sort.descending.accesskey'],
-  ['abp:settings:enable.accesskey', 'abp:settings:showintoolbar.accesskey', 'abp:settings:showinstatusbar.accesskey', 'abp:settings:objecttabs.accesskey', 'abp:settings:collapse.accesskey'],
-  ['abp:settings:gettingStarted.accesskey', 'abp:settings:faq.accesskey', 'abp:settings:filterdoc.accesskey', 'abp:settings:about.accesskey'],
-  ['abp:findbar:next.accesskey', 'abp:findbar:previous.accesskey', 'abp:findbar:highlight.accesskey'],
-  ['abp:subscription:location.accesskey', 'abp:subscription:title.accesskey', 'abp:subscription:autodownload.accesskey', 'abp:subscription:enabled.accesskey'],
-  ['abp:composer:filter.accesskey', 'abp:composer:preferences.accesskey', 'abp:composer:type.filter.accesskey', 'abp:composer:type.whitelist.accesskey', 'abp:composer:custom.pattern.accesskey', 'abp:composer:anchor.start.accesskey', 'abp:composer:anchor.end.accesskey', 'abp:composer:domainRestriction.accesskey', 'abp:composer:firstParty.accesskey', 'abp:composer:thirdParty.accesskey', 'abp:composer:matchCase.accesskey', 'abp:composer:collapse.accesskey'],
+  ['aup:overlay:opensidebar.accesskey', 'aup:overlay:settings.accesskey', 'aup:settings:options.accesskey', 'aup:settings:enable.accesskey', 'ehh:overlay:selectelement.accesskey'],
+  ['aup:settings:filters.accesskey', 'aup:settings:edit.accesskey', 'aup:settings:view.accesskey', 'aup:settings:options.accesskey', 'aup:settings:help.accesskey', 'aup:settings:add.accesskey', 'aup:settings:apply.accesskey'],
+  ['aup:settings:add.accesskey', 'aup:settings:addsubscription.accesskey', 'aup:settings:synchsubscriptions.accesskey', 'aup:settings:import.accesskey', 'aup:settings:export.accesskey', 'aup:settings:clearall.accesskey', 'aup:settings:resethitcounts.accesskey'],
+  ['aup:settings:cut.accesskey', 'aup:settings:copy.accesskey', 'aup:settings:paste.accesskey', 'aup:settings:remove.accesskey', 'aup:settings:menu.find.accesskey', 'aup:settings:menu.findagain.accesskey'],
+  ['aup:settings:filter.accesskey', 'aup:settings:enabled.accesskey', 'aup:settings:hitcount.accesskey', 'aup:settings:lasthit.accesskey', 'aup:settings:sort.accesskey'],
+  ['aup:settings:sort.none.accesskey', 'aup:settings:filter.accesskey', 'aup:settings:enabled.accesskey', 'aup:settings:hitcount.accesskey', 'aup:settings:lasthit.accesskey', 'aup:settings:sort.ascending.accesskey', 'aup:settings:sort.descending.accesskey'],
+  ['aup:settings:enable.accesskey', 'aup:settings:showintoolbar.accesskey', 'aup:settings:showinstatusbar.accesskey', 'aup:settings:objecttabs.accesskey', 'aup:settings:collapse.accesskey'],
+  ['aup:settings:gettingStarted.accesskey', 'aup:settings:faq.accesskey', 'aup:settings:filterdoc.accesskey', 'aup:settings:about.accesskey'],
+  ['aup:findbar:next.accesskey', 'aup:findbar:previous.accesskey', 'aup:findbar:highlight.accesskey'],
+  ['aup:subscription:location.accesskey', 'aup:subscription:title.accesskey', 'aup:subscription:autodownload.accesskey', 'aup:subscription:enabled.accesskey'],
+  ['aup:composer:filter.accesskey', 'aup:composer:preferences.accesskey', 'aup:composer:type.filter.accesskey', 'aup:composer:type.whitelist.accesskey', 'aup:composer:custom.pattern.accesskey', 'aup:composer:anchor.start.accesskey', 'aup:composer:anchor.end.accesskey', 'aup:composer:domainRestriction.accesskey', 'aup:composer:firstParty.accesskey', 'aup:composer:thirdParty.accesskey', 'aup:composer:matchCase.accesskey', 'aup:composer:collapse.accesskey'],
   ['ehh:global:command.select.key', 'ehh:global:command.wider.key', 'ehh:global:command.narrower.key', 'ehh:global:command.quit.key', 'ehh:global:command.blinkElement.key', 'ehh:global:command.viewSource.key', 'ehh:global:command.viewSourceWindow.key', 'ehh:global:command.showMenu.key'],
 );
 
 my @must_equal = (
-  ['abp:overlay:opensidebar.accesskey', 'abp:overlay:closesidebar.accesskey'],
+  ['aup:overlay:opensidebar.accesskey', 'aup:overlay:closesidebar.accesskey'],
   ['ehh:overlay:selectelement.accesskey', 'ehh:overlay:stopselection.accesskey'],
 );
 
@@ -36,24 +36,24 @@ my %keepAccessKeys = map {$_ => $_} (
 
 my @ignoreUntranslated = (
   qr/\.url$/,
-  quotemeta("abp:about:caption.title"),
-  quotemeta("abp:about:version.title"),
-  quotemeta("abp:global:status_active_label"),
-  quotemeta("abp:global:type_label_document"),
-  quotemeta("abp:global:type_label_dtd"),
-  quotemeta("abp:global:type_label_ping"),
-  quotemeta("abp:global:type_label_script"),
-  quotemeta("abp:global:type_label_stylesheet"),
-  quotemeta("abp:global:type_label_xbl"),
-  quotemeta("abp:global:subscription_status"),
-  quotemeta("abp:global:subscription_status_lastdownload_unknown"),
-  quotemeta("abp:overlay:status.tooltip"),
-  quotemeta("abp:overlay:toolbarbutton.label"),
-  quotemeta("abp:settings:filters.label"),
-  quotemeta("abp:sidebar:filter.label"),
+  quotemeta("aup:about:caption.title"),
+  quotemeta("aup:about:version.title"),
+  quotemeta("aup:global:status_active_label"),
+  quotemeta("aup:global:type_label_document"),
+  quotemeta("aup:global:type_label_dtd"),
+  quotemeta("aup:global:type_label_ping"),
+  quotemeta("aup:global:type_label_script"),
+  quotemeta("aup:global:type_label_stylesheet"),
+  quotemeta("aup:global:type_label_xbl"),
+  quotemeta("aup:global:subscription_status"),
+  quotemeta("aup:global:subscription_status_lastdownload_unknown"),
+  quotemeta("aup:overlay:status.tooltip"),
+  quotemeta("aup:overlay:toolbarbutton.label"),
+  quotemeta("aup:settings:filters.label"),
+  quotemeta("aup:sidebar:filter.label"),
   quotemeta("ehh:composer:nodes-tree.class.label"),
   quotemeta("ehh:composer:nodes-tree.id.label"),
-  quotemeta("ehh:global:noabp_warning_title"),
+  quotemeta("ehh:global:noaup_warning_title"),
 );
 
 my @locales = sort {$a cmp $b} makeLocaleList();

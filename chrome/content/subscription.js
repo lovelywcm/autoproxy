@@ -22,8 +22,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-var abp = Components.classes["@mozilla.org/adblockplus;1"].createInstance().wrappedJSObject;
-var prefs = abp.prefs;
+var aup = Components.classes["@mozilla.org/adblockplus;1"].createInstance().wrappedJSObject;
+var prefs = aup.prefs;
 
 var subscription = null;
 var result = null;
@@ -52,10 +52,10 @@ function init() {
   else
     document.getElementById("title").value = "";
 
-  if (subscription instanceof abp.Subscription)
+  if (subscription instanceof aup.Subscription)
   {
     document.getElementById("enabled").setAttribute("checked", !subscription.disabled);
-    if (subscription instanceof abp.ExternalSubscription)
+    if (subscription instanceof aup.ExternalSubscription)
     {
       document.getElementById("location").setAttribute("disabled", "true");
       document.getElementById("external-description").hidden = false;
@@ -79,11 +79,11 @@ function init() {
 
 function saveSubscription()
 {
-  var add = !(subscription instanceof abp.Subscription);
-  var url = (add || subscription instanceof abp.DownloadableSubscription ? document.getElementById("location").value.replace(/^\s+/, "").replace(/\s+$/, "").replace(/^~+/, "") : subscription.url);
+  var add = !(subscription instanceof aup.Subscription);
+  var url = (add || subscription instanceof aup.DownloadableSubscription ? document.getElementById("location").value.replace(/^\s+/, "").replace(/\s+$/, "").replace(/^~+/, "") : subscription.url);
   if (!url)
   {
-    alert(abp.getString("subscription_no_location"));
+    alert(aup.getString("subscription_no_location"));
     document.getElementById("location").focus();
     return false;
   }
@@ -106,7 +106,7 @@ function saveSubscription()
         uri.spec = url;
         url = uri.spec;
       } catch (e) {
-        alert(abp.getString("subscription_invalid_location"));
+        alert(aup.getString("subscription_invalid_location"));
         document.getElementById("location").focus();
         return false;
       }
@@ -122,7 +122,7 @@ function saveSubscription()
   result.disabled = !document.getElementById("enabled").checked;
 
   if (autoAdd)
-    abp.addSubscription(result.url, result.title, result.autoDownload, result.disabled);
+    aup.addSubscription(result.url, result.title, result.autoDownload, result.disabled);
 
   return true;
 }

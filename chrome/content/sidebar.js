@@ -22,17 +22,17 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-var abp = null;
+var aup = null;
 try {
-  abp = Components.classes["@mozilla.org/adblockplus;1"].createInstance().wrappedJSObject;
+  aup = Components.classes["@mozilla.org/adblockplus;1"].createInstance().wrappedJSObject;
 
-  if (abp.prefs.initialized) {
-    var prefs = abp.prefs;
-    var flasher = abp.flasher;
-    var DataContainer = abp.DataContainer;
+  if (aup.prefs.initialized) {
+    var prefs = aup.prefs;
+    var flasher = aup.flasher;
+    var DataContainer = aup.DataContainer;
   }
   else
-    abp = null;
+    aup = null;
 } catch (e) {}
 
 // Main browser window
@@ -45,8 +45,8 @@ var cacheSession = null;
 var noFlash = false;
 
 // Matchers for disabled filters
-var disabledBlacklistMatcher = new abp.Matcher();
-var disabledWhitelistMatcher = new abp.Matcher();
+var disabledBlacklistMatcher = new aup.Matcher();
+var disabledWhitelistMatcher = new aup.Matcher();
 
 function E(id) {
   return document.getElementById(id);
@@ -62,26 +62,26 @@ function init() {
     mainWin.addEventListener("unload", mainUnload, false);
     E("detachButton").hidden = true;
     E("reattachButton").hidden = false;
-    if (!mainWin.document.getElementById("abp-sidebar"))
+    if (!mainWin.document.getElementById("aup-sidebar"))
       E("reattachButton").setAttribute("disabled", "true");
-    if (mainWin.document.getElementById("abp-key-sidebar")) {
-      var sidebarKey = mainWin.document.getElementById("abp-key-sidebar").cloneNode(true);
+    if (mainWin.document.getElementById("aup-key-sidebar")) {
+      var sidebarKey = mainWin.document.getElementById("aup-key-sidebar").cloneNode(true);
       parent.document.getElementById("detached-keyset").appendChild(parent.document.importNode(sidebarKey, true));
     }
   }
-  window.__defineGetter__("content", function() {return mainWin.abpGetBrowser().contentWindow;});
+  window.__defineGetter__("content", function() {return mainWin.aupGetBrowser().contentWindow;});
 
-  if (abp) {
+  if (aup) {
     // Install item listener
     DataContainer.addListener(handleItemChange);
 
     // Initialize matchers for disabled filters
     reloadDisabledFilters();
-    abp.filterStorage.addFilterObserver(reloadDisabledFilters);
-    abp.filterStorage.addSubscriptionObserver(reloadDisabledFilters);
+    aup.filterStorage.addFilterObserver(reloadDisabledFilters);
+    aup.filterStorage.addSubscriptionObserver(reloadDisabledFilters);
 
     // Restore previous state
-    var params = abp.getParams();
+    var params = aup.getParams();
     if (params && params.search) {
       E("searchField").value = params.search;
       treeView.setFilter(params.search);
@@ -104,7 +104,7 @@ function init() {
     }
 
     // Install a handler for tab changes
-    mainWin.abpGetBrowser().addEventListener("select", handleTabChange, false);
+    mainWin.aupGetBrowser().addEventListener("select", handleTabChange, false);
   }
 }
 
@@ -115,15 +115,15 @@ function mainUnload() {
 
 // To be called on unload
 function cleanUp() {
-  if (!abp)
+  if (!aup)
     return;
 
   flasher.stop();
   DataContainer.removeListener(handleItemChange);
-  abp.filterStorage.removeFilterObserver(reloadDisabledFilters);
-  abp.filterStorage.removeSubscriptionObserver(reloadDisabledFilters);
+  aup.filterStorage.removeFilterObserver(reloadDisabledFilters);
+  aup.filterStorage.removeSubscriptionObserver(reloadDisabledFilters);
 
-  mainWin.abpGetBrowser().removeEventListener("select", handleTabChange, false);
+  mainWin.aupGetBrowser().removeEventListener("select", handleTabChange, false);
   mainWin.removeEventListener("unload", mainUnload, false);
 }
 
@@ -136,14 +136,14 @@ function reloadDisabledFilters()
   disabledBlacklistMatcher.clear();
   disabledWhitelistMatcher.clear();
 
-  for each (let subscription in abp.filterStorage.subscriptions)
+  for each (let subscription in aup.filterStorage.subscriptions)
   {
     if (subscription.disabled)
       continue;
 
     for each (let filter in subscription.filters)
-      if (filter instanceof abp.RegExpFilter && filter.disabled)
-        (filter instanceof abp.BlockingFilter ? disabledBlacklistMatcher : disabledWhitelistMatcher).add(filter);
+      if (filter instanceof aup.RegExpFilter && filter.disabled)
+        (filter instanceof aup.BlockingFilter ? disabledBlacklistMatcher : disabledWhitelistMatcher).add(filter);
   }
 }
 
@@ -247,7 +247,7 @@ function fillInTooltip(e) {
     setMultilineContent(E("tooltipAddress"), item.location);
   
     var type = item.localizedDescr;
-    if (filter && filter instanceof abp.WhitelistFilter)
+    if (filter && filter instanceof aup.WhitelistFilter)
       type += " " + E("tooltipType").getAttribute("whitelisted");
     else if (filter && item.typeDescr != "ELEMHIDE")
       type += " " + E("tooltipType").getAttribute("filtered");
@@ -272,7 +272,7 @@ function fillInTooltip(e) {
 
   var showPreview = prefs.previewimages && !("tooltip" in item);
   showPreview = showPreview && (item.typeDescr == "IMAGE" || item.typeDescr == "BACKGROUND");
-  showPreview = showPreview && (!item.filter || item.filter instanceof abp.WhitelistFilter);
+  showPreview = showPreview && (!item.filter || item.filter instanceof aup.WhitelistFilter);
   if (showPreview) {
     // Check whether image is in cache (stolen from ImgLikeOpera)
     if (!cacheSession) {
@@ -335,12 +335,12 @@ function fillInContext(e) {
     menuItem.hidden = false;
   }
 
-  E("contextWhitelist").hidden = ("tooltip" in item || !item.filter || item.filter.disabled || item.filter instanceof abp.WhitelistFilter || item.typeDescr == "ELEMHIDE");
+  E("contextWhitelist").hidden = ("tooltip" in item || !item.filter || item.filter.disabled || item.filter instanceof aup.WhitelistFilter || item.typeDescr == "ELEMHIDE");
   E("contextBlock").hidden = !E("contextWhitelist").hidden;
   E("contextBlock").setAttribute("disabled", "filter" in item && item.filter && !item.filter.disabled);
   E("contextEditFilter").setAttribute("disabled", !("filter" in item && item.filter));
   E("contextOpen").setAttribute("disabled", "tooltip" in item || item.typeDescr == "ELEMHIDE");
-  E("contextFlash").setAttribute("disabled", "tooltip" in item || !(item.typeDescr in visual) || (item.filter && !item.filter.disabled && !(item.filter instanceof abp.WhitelistFilter)));
+  E("contextFlash").setAttribute("disabled", "tooltip" in item || !(item.typeDescr in visual) || (item.filter && !item.filter.disabled && !(item.filter instanceof aup.WhitelistFilter)));
   E("contextCopyFilter").setAttribute("disabled", !allItems.some(function(item) {return "filter" in item && item.filter}));
 
   return true;
@@ -388,11 +388,11 @@ function openInTab(item)
   if (!item || item.typeDescr == "ELEMHIDE")
     return;
 
-  abp.loadInBrowser(item.location, mainWin);
+  aup.loadInBrowser(item.location, mainWin);
 }
 
 function doBlock() {
-  if (!abp)
+  if (!aup)
     return;
 
   var item = treeView.getSelectedItem();
@@ -403,14 +403,14 @@ function doBlock() {
   if ("filter" in item)
     filter = item.filter;
 
-  if (filter && filter instanceof abp.WhitelistFilter)
+  if (filter && filter instanceof aup.WhitelistFilter)
     return;
 
   openDialog("chrome://adblockplus/content/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", window.content, item);
 }
 
 function editFilter() {
-  if (!abp)
+  if (!aup)
     return;
 
   var item = treeView.getSelectedItem();
@@ -423,22 +423,22 @@ function editFilter() {
   if (!("location") in item)
     item.location = undefined
 
-  abp.openSettingsDialog(item.location, item.filter);
+  aup.openSettingsDialog(item.location, item.filter);
 }
 
 function enableFilter(filter, enable) {
-  if (!abp)
+  if (!aup)
     return;
 
   filter.disabled = !enable;
-  abp.filterStorage.triggerFilterObservers(enable ? "enable" : "disable", [filter]);
-  abp.filterStorage.saveToDisk();
+  aup.filterStorage.triggerFilterObservers(enable ? "enable" : "disable", [filter]);
+  aup.filterStorage.saveToDisk();
 
   treeView.boxObject.invalidate();
 }
 
 function copyToClipboard() {
-  if (!abp)
+  if (!aup)
     return;
 
   var items = treeView.getAllSelectedItems();
@@ -451,7 +451,7 @@ function copyToClipboard() {
 }
 
 function copyFilter() {
-  if (!abp)
+  if (!aup)
     return;
 
   var items = treeView.getAllSelectedItems().filter(function(item) {return item.filter});
@@ -467,7 +467,7 @@ function copyFilter() {
 }
 
 function selectAll() {
-  if (!abp)
+  if (!aup)
     return;
 
   treeView.selectAll();
@@ -483,12 +483,12 @@ function saveState() {
     filter: treeView.filter,
     focus: (focused ? focused.id : null)
   };
-  abp.setParams(params);
+  aup.setParams(params);
 }
 
 // detaches the sidebar
 function detach() {
-  if (!abp)
+  if (!aup)
     return;
 
   saveState();
@@ -498,8 +498,8 @@ function detach() {
   var position = ",left="+boxObject.screenX+",top="+boxObject.screenY+",outerWidth="+boxObject.width+",outerHeight="+boxObject.height;
 
   // Close sidebar and open detached window
-  mainWin.abpToggleSidebar();
-  mainWin.abpDetachedSidebar = mainWin.openDialog("chrome://adblockplus/content/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no"+position);
+  mainWin.aupToggleSidebar();
+  mainWin.aupDetachedSidebar = mainWin.openDialog("chrome://adblockplus/content/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no"+position);
 
   // Save setting
   prefs.detachsidebar = true;
@@ -508,7 +508,7 @@ function detach() {
 
 // reattaches the sidebar
 function reattach() {
-  if (!abp)
+  if (!aup)
     return;
 
   saveState();
@@ -518,15 +518,15 @@ function reattach() {
   prefs.save();
 
   // Open sidebar in window
-  mainWin.abpDetachedSidebar = null;
-  mainWin.abpToggleSidebar();
+  mainWin.aupDetachedSidebar = null;
+  mainWin.aupToggleSidebar();
   parent.close();
 }
 
 // Returns items size in the document if available
 function getItemSize(item)
 {
-  if (item.filter && !item.filter.disabled && item.filter instanceof abp.BlockingFilter)
+  if (item.filter && !item.filter.disabled && item.filter instanceof aup.BlockingFilter)
     return null;
 
   for each (let node in item.nodes)
@@ -576,8 +576,8 @@ function compareFilter(item1, item2) {
 }
 
 function compareState(item1, item2) {
-  var state1 = (!item1.filter ? 0 : (item1.filter.disabled ? 1 : (item1.filter instanceof abp.WhitelistFilter ? 2 : 3)));
-  var state2 = (!item2.filter ? 0 : (item2.filter.disabled ? 1 : (item2.filter instanceof abp.WhitelistFilter ? 2 : 3)));
+  var state1 = (!item1.filter ? 0 : (item1.filter.disabled ? 1 : (item1.filter instanceof aup.WhitelistFilter ? 2 : 3)));
+  var state2 = (!item2.filter ? 0 : (item2.filter.disabled ? 1 : (item2.filter instanceof aup.WhitelistFilter ? 2 : 3)));
   return state1 - state2;
 }
 
@@ -647,9 +647,9 @@ var treeView = {
       this.atoms[atom + "-false"] = atomService.getAtom(atom + "-false");
     }
 
-    if (abp) {
-      this.itemsDummyTooltip = abp.getString("no_blocking_suggestions");
-      this.whitelistDummyTooltip = abp.getString("whitelisted_page");
+    if (aup) {
+      this.itemsDummyTooltip = aup.getString("no_blocking_suggestions");
+      this.whitelistDummyTooltip = aup.getString("whitelisted_page");
     }
 
     // Check current sort direction
@@ -729,11 +729,11 @@ var treeView = {
         return (col == "address" ? this.loadDummy : "");
 
       if (col == "filter") {
-        var filter = abp.policy.isWindowWhitelisted(window.content);
+        var filter = aup.policy.isWindowWhitelisted(window.content);
         return filter ? filter.text : "";
       }
 
-      return (abp.policy.isWindowWhitelisted(window.content) ? this.whitelistDummy : this.itemsDummy);
+      return (aup.policy.isWindowWhitelisted(window.content) ? this.whitelistDummy : this.itemsDummy);
     }
   },
 
@@ -761,11 +761,11 @@ var treeView = {
       state = "state-regular";
       if (filter && !filter.disabled)
       {
-        if (filter instanceof abp.WhitelistFilter)
+        if (filter instanceof aup.WhitelistFilter)
           state = "state-whitelisted";
-        else if (filter instanceof abp.BlockingFilter)
+        else if (filter instanceof aup.BlockingFilter)
           state = "state-filtered";
-        else if (filter instanceof abp.ElemHideFilter)
+        else if (filter instanceof aup.ElemHideFilter)
           state = "state-hidden";
       }
     }
@@ -773,7 +773,7 @@ var treeView = {
       properties.AppendElement(this.atoms["dummy-true"]);
 
       state = "state-filtered";
-      if (this.data && abp.policy.isWindowWhitelisted(window.content))
+      if (this.data && aup.policy.isWindowWhitelisted(window.content))
         state = "state-whitelisted";
     }
     properties.AppendElement(this.atoms[state]);
@@ -1034,7 +1034,7 @@ var treeView = {
     if (!this.data || this.data.length)
       return null;
 
-    var filter = abp.policy.isWindowWhitelisted(window.content);
+    var filter = aup.policy.isWindowWhitelisted(window.content);
     if (filter)
       return {tooltip: this.whitelistDummyTooltip, filter: filter};
     else

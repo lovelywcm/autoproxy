@@ -22,7 +22,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-let abp = Components.classes["@mozilla.org/adblockplus;1"].createInstance().wrappedJSObject;
+let aup = Components.classes["@mozilla.org/adblockplus;1"].createInstance().wrappedJSObject;
 
 let wnd = null;
 let item = null;
@@ -40,7 +40,7 @@ function init() {
 
   [wnd, item] = window.arguments;
 
-  E("filterType").value = (!item.filter || item.filter.disabled || item.filter instanceof abp.WhitelistFilter ? "filterlist" : "whitelist");
+  E("filterType").value = (!item.filter || item.filter.disabled || item.filter instanceof aup.WhitelistFilter ? "filterlist" : "whitelist");
   E("customPattern").value = item.location;
 
   let insertionPoint = E("customPatternBox");
@@ -84,7 +84,7 @@ function init() {
     else
       suggestions[3] = suggestions[2];
 
-    E("patternGroup").value = (abp.prefs.composer_default in suggestions ? suggestions[abp.prefs.composer_default] : suggestions[1]);
+    E("patternGroup").value = (aup.prefs.composer_default in suggestions ? suggestions[aup.prefs.composer_default] : suggestions[1]);
   }
   catch (e)
   {
@@ -92,13 +92,13 @@ function init() {
     addSuggestion(item.location);
     E("patternGroup").value = "";
   }
-  if (abp.prefs.composer_default == 0)
+  if (aup.prefs.composer_default == 0)
     E("customPattern").focus();
   else
     E("patternGroup").focus();
 
   let types = [];
-  for (let type in abp.policy.localizedDescr)
+  for (let type in aup.policy.localizedDescr)
   {
     types.push(parseInt(type));
   }
@@ -125,12 +125,12 @@ function init() {
   let typeGroup = E("typeGroup");
   for each (let type in types)
   {
-    if (type == abp.policy.type.ELEMHIDE)
+    if (type == aup.policy.type.ELEMHIDE)
       continue;
 
     let typeNode = document.createElement("checkbox");
-    typeNode.setAttribute("value", abp.policy.typeDescr[type].toLowerCase());
-    typeNode.setAttribute("label", abp.policy.localizedDescr[type].toLowerCase());
+    typeNode.setAttribute("value", aup.policy.typeDescr[type].toLowerCase());
+    typeNode.setAttribute("label", aup.policy.localizedDescr[type].toLowerCase());
     typeNode.setAttribute("checked", "true");
     if (item.type == type)
       typeNode.setAttribute("disabled", "true");
@@ -139,13 +139,13 @@ function init() {
   }
 
   let collapseDefault = E("collapseDefault");
-  collapseDefault.label = collapseDefault.getAttribute(abp.prefs.fastcollapse ? "label_no" : "label_yes");
+  collapseDefault.label = collapseDefault.getAttribute(aup.prefs.fastcollapse ? "label_no" : "label_yes");
   E("collapse").value = "";
   E("collapse").setAttribute("label", collapseDefault.label);
 
   updatePatternSelection();
 
-  document.getElementById("disabledWarning").hidden = abp.prefs.enabled;
+  document.getElementById("disabledWarning").hidden = aup.prefs.enabled;
 }
 
 function updateFilter()
@@ -217,19 +217,19 @@ function updateFilter()
       filter += "$" + options.join(",");
   }
 
-  filter = abp.normalizeFilter(filter);
-  E("regexpWarning").hidden = !abp.Filter.regexpRegExp.test(filter);
+  filter = aup.normalizeFilter(filter);
+  E("regexpWarning").hidden = !aup.Filter.regexpRegExp.test(filter);
 
   let hasShortcut = true;
   if (E("regexpWarning").hidden)
   {
-    let compiledFilter = abp.Filter.fromText(filter);
+    let compiledFilter = aup.Filter.fromText(filter);
 
     let matcher = null;
-    if (compiledFilter instanceof abp.BlockingFilter)
-      matcher = abp.blacklistMatcher;
-    if (compiledFilter instanceof abp.WhitelistFilter)
-      matcher = abp.whitelistMatcher;
+    if (compiledFilter instanceof aup.BlockingFilter)
+      matcher = aup.blacklistMatcher;
+    if (compiledFilter instanceof aup.WhitelistFilter)
+      matcher = aup.whitelistMatcher;
     if (matcher && !matcher.findShortcut(compiledFilter.text))
       hasShortcut = false;
   }
@@ -267,19 +267,19 @@ function updateCustomPattern()
 }
 
 function addFilter() {
-  let filter = abp.Filter.fromText(document.getElementById("filter").value);
+  let filter = aup.Filter.fromText(document.getElementById("filter").value);
 
   if (filter.disabled)
   {
     filter.disabled = false;
-    abp.filterStorage.triggerFilterObservers("enable", [filter]);
+    aup.filterStorage.triggerFilterObservers("enable", [filter]);
   }
 
-  abp.filterStorage.addFilter(filter);
-  abp.filterStorage.saveToDisk();
+  aup.filterStorage.addFilter(filter);
+  aup.filterStorage.saveToDisk();
 
   if (wnd && !wnd.closed)
-    abp.policy.refilterWindow(wnd);
+    aup.policy.refilterWindow(wnd);
 
   return true;
 }
@@ -303,24 +303,24 @@ function disableElement(element, disable, valueProperty, disabledValue) {
   element.disabled = disable;
   if (disable)
   {
-    element._abpStoredValue = element[valueProperty];
+    element._aupStoredValue = element[valueProperty];
     element[valueProperty] = disabledValue;
   }
   else
   {
-    if ("_abpStoredValue" in element)
-      element[valueProperty] = element._abpStoredValue;
-    delete element._abpStoredValue;
+    if ("_aupStoredValue" in element)
+      element[valueProperty] = element._aupStoredValue;
+    delete element._aupStoredValue;
   }
 }
 
 function openPreferences() {
-  abp.openSettingsDialog(item.location, E("filter").value);
+  aup.openSettingsDialog(item.location, E("filter").value);
 }
 
 function doEnable() {
-  abp.prefs.enabled = true;
-  abp.prefs.save();
+  aup.prefs.enabled = true;
+  aup.prefs.save();
   E("disabledWarning").hidden = true;
 }
 

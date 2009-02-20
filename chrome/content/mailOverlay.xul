@@ -26,41 +26,41 @@
 
 <?xul-overlay href="chrome://adblockplus/content/overlayGeneral.xul"?>
 
-<overlay id="abp-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<overlay id="aup-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <!-- Window extensions -->
   <window id="messengerWindow">
-    <popupset id="abp-popupset"/>
-    <keyset id="abp-keyset"/>
-    <commandset id="abp-commandset"/>
+    <popupset id="aup-popupset"/>
+    <keyset id="aup-keyset"/>
+    <commandset id="aup-commandset"/>
   </window>
 
   <!-- Status bar -->
   <statusbar id="status-bar">
-    <statusbarpanel id="abp-status"/>
+    <statusbarpanel id="aup-status"/>
   </statusbar> 
 
   <!-- Thunderbird toolbar -->
   <toolbarpalette id="MailToolbarPalette">
-    <toolbarbutton id="abp-toolbarbutton" type="menu-button" insertafter="button-junk"
+    <toolbarbutton id="aup-toolbarbutton" type="menu-button" insertafter="button-junk"
         class="chromeclass-toolbar-additional"
-        oncontextmenu="abpCheckToolbarContext(event)"/>
+        oncontextmenu="aupCheckToolbarContext(event)"/>
   </toolbarpalette>
 
   <!-- Thunderbird/SeaMonkey Mail tools menu -->
   <menupopup id="taskPopup">
-    <menuitem id="abp-menuitem" insertafter="downloadmgr,javaScriptConsole"/>
+    <menuitem id="aup-menuitem" insertafter="downloadmgr,javaScriptConsole"/>
   </menupopup>
 
   <!-- Context menu -->
   <popup id="messagePaneContext">
-    <menuitem id="abp-image-menuitem"/>
-    <menuitem id="abp-object-menuitem"/>
-    <menuitem id="abp-frame-menuitem"/>
+    <menuitem id="aup-image-menuitem"/>
+    <menuitem id="aup-object-menuitem"/>
+    <menuitem id="aup-frame-menuitem"/>
   </popup>
 
   <!-- Fake sidebar -->
   <vbox id="messagepanebox">
-    <splitter id="abp-sidebar-splitter"/>
-    <vbox id="abp-sidebar"/>
+    <splitter id="aup-sidebar-splitter"/>
+    <vbox id="aup-sidebar"/>
   </vbox>
 </overlay>

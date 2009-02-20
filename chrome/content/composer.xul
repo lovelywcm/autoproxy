@@ -29,7 +29,7 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://adblockplus/skin/composer.css" type="text/css"?>
 
-<dialog id="abp-composer"
+<dialog id="aup-composer"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     title="&dialog.title;"
     onload="init()"
@@ -44,7 +44,7 @@
     buttonlabeldisclosure="&advanced.label;"
     buttonlabeldisclosure_on="&advanced.label;"
     buttonlabeldisclosure_off="&basic.label;"
-    windowtype="abp:composer">
+    windowtype="aup:composer">
   <script type="application/x-javascript;version=1.7" src="composer.js"/>  
   
   <popupset>

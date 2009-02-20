@@ -34,8 +34,8 @@
   buttons="accept,cancel"
   title="&dialog.title;"
   newtitle="&dialog.newtitle;"
-  id="abpEditSubscription"
-  windowtype="abp:subscription"
+  id="aupEditSubscription"
+  windowtype="aup:subscription"
   onload="init()"
   ondialogaccept="return saveSubscription()">
 

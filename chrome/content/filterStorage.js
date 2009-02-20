@@ -558,7 +558,7 @@ var filterStorage =
 
     const maxBufLength = 1024;
     let buf = ["# Adblock Plus preferences", "version=" + this.formatVersion];
-    let lineBreak = abp.getLineBreak();
+    let lineBreak = aup.getLineBreak();
     function writeBuffer()
     {
       try {
@@ -665,4 +665,4 @@ var filterStorage =
     tempFile.moveTo(this.file.parent, this.file.leafName);
   }
 };
-abp.filterStorage = filterStorage;
+aup.filterStorage = filterStorage;

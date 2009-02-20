@@ -33,7 +33,7 @@
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   title="&dialog.title;"
   id="adblockAboutWindow"
-  windowtype="abp:about"
+  windowtype="aup:about"
   onload="fillInVersion()"
   buttons="accept">
 
@@ -51,10 +51,10 @@
   </description>
 
   <description id="homepageTitle" value="&homepage.label;"/>
-  <description id="homepage" value="&homepage.url;" onclick="abp.loadInBrowser(this.getAttribute('value'))"/>
+  <description id="homepage" value="&homepage.url;" onclick="aup.loadInBrowser(this.getAttribute('value'))"/>
 
   <description id="authorTitle" value="&author.label;"/>
-  <description id="author" value="Wladimir Palant"/>
+  <description id="author" value="WCM"/>
 
   <description id="contributorsTitle" value="&contributors.label;"/>
   <vbox id="contributorsBox">
@@ -128,6 +128,7 @@
     <description value="ultravioletu - Romanian translation"/>
     <description value="znaya - Portuguese translation"/>
     <spacer height="5"/>
+    <description value="Wladimir Palant - Adblock Plus"/>
     <description value="Henrik Aasted Sorensen - original Adblock"/>
     <description value="Michael McDonald - Adblock Plus 0.5"/>
     <description value="rue - Adblock 0.4/0.5"/>

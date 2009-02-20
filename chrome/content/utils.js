@@ -31,7 +31,7 @@
 var stringService = Components.classes["@mozilla.org/intl/stringbundle;1"]
                               .getService(Components.interfaces.nsIStringBundleService);
 var strings = stringService.createBundle("chrome://adblockplus/locale/global.properties");
-abp.getString = function(name) {
+aup.getString = function(name) {
   return strings.GetStringFromName(name);
 };
 
@@ -67,7 +67,7 @@ function unwrapURL(url) {
   }
   catch (e) { return url; }
 }
-abp.unwrapURL = unwrapURL;
+aup.unwrapURL = unwrapURL;
 
 // Returns an nsIURI for given url
 function makeURL(url) {
@@ -79,7 +79,7 @@ function makeURL(url) {
     return null;
   }
 }
-abp.makeURL = makeURL;
+aup.makeURL = makeURL;
 
 // Generates a click handler for object tabs
 function generateClickHandler(wnd, data) {
@@ -124,7 +124,7 @@ function getLineBreak() {
   }
   return lineBreak;
 }
-abp.getLineBreak = getLineBreak;
+aup.getLineBreak = getLineBreak;
 
 // Removes unnecessary whitespaces from filter
 function normalizeFilter(text) {
@@ -149,7 +149,7 @@ function normalizeFilter(text) {
   else
     return text.replace(/\s/g, "");
 }
-abp.normalizeFilter = normalizeFilter;
+aup.normalizeFilter = normalizeFilter;
 
 /**
  * Generates filter subscription checksum.
@@ -186,4 +186,4 @@ function generateChecksum(lines)
       stream.close();
   }
 }
-abp.generateChecksum = generateChecksum;
+aup.generateChecksum = generateChecksum;

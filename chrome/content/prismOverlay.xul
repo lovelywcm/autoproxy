@@ -26,34 +26,34 @@
 
 <?xul-overlay href="chrome://adblockplus/content/overlayGeneral.xul"?>
 
-<overlay id="abp-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<overlay id="aup-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <!-- Window extensions -->
   <window id="webrunner">
-    <popupset id="abp-popupset"/>
-    <keyset id="abp-keyset"/>
-    <commandset id="abp-commandset"/>
+    <popupset id="aup-popupset"/>
+    <keyset id="aup-keyset"/>
+    <commandset id="aup-commandset"/>
   </window>
 
   <!-- Status bar -->
   <statusbar id="statusbar">
-    <statusbarpanel id="abp-status" mousethrough="never" insertbefore="button_commands"/>
+    <statusbarpanel id="aup-status" mousethrough="never" insertbefore="button_commands"/>
   </statusbar>
 
   <!-- Tools menu -->
   <menupopup id="popup_tools">
-    <menuitem id="abp-menuitem" insertbefore="menuitem_console"/>
+    <menuitem id="aup-menuitem" insertbefore="menuitem_console"/>
   </menupopup>
 
   <!-- Context menu -->
   <menupopup id="popup_content"> 
-    <menuitem id="abp-image-menuitem"/>
-    <menuitem id="abp-object-menuitem"/>
-    <menuitem id="abp-frame-menuitem"/>
+    <menuitem id="aup-image-menuitem"/>
+    <menuitem id="aup-object-menuitem"/>
+    <menuitem id="aup-frame-menuitem"/>
   </menupopup>
 
   <!-- Fake sidebar -->
   <vbox id="box_content">
-    <splitter id="abp-sidebar-splitter"/>
-    <vbox id="abp-sidebar"/>
+    <splitter id="aup-sidebar-splitter"/>
+    <vbox id="aup-sidebar"/>
   </vbox>
 </overlay>

@@ -67,7 +67,7 @@ Filter.prototype =
     return this.text;
   }
 };
-abp.Filter = Filter;
+aup.Filter = Filter;
 
 /**
  * Cache for known filters, maps string representation to filter objects.
@@ -167,7 +167,7 @@ InvalidFilter.prototype =
    */
   serialize: function(buffer) {}
 };
-abp.InvalidFilter = InvalidFilter;
+aup.InvalidFilter = InvalidFilter;
 
 /**
  * Class for comments
@@ -188,7 +188,7 @@ CommentFilter.prototype =
    */
   serialize: function(buffer) {}
 };
-abp.CommentFilter = CommentFilter;
+aup.CommentFilter = CommentFilter;
 
 /**
  * Abstract base class for filters that can get hits
@@ -237,7 +237,7 @@ ActiveFilter.prototype =
     }
   }
 };
-abp.ActiveFilter = ActiveFilter;
+aup.ActiveFilter = ActiveFilter;
 
 /**
  * Abstract base class for RegExp-based filters
@@ -365,7 +365,7 @@ RegExpFilter.prototype =
             (!docDomain || this.isActiveOnDomain(docDomain)));
   }
 };
-abp.RegExpFilter = RegExpFilter;
+aup.RegExpFilter = RegExpFilter;
 
 /**
  * Creates a RegExp filter from its text representation
@@ -508,7 +508,7 @@ BlockingFilter.prototype =
    */
   collapse: null
 };
-abp.BlockingFilter = BlockingFilter;
+aup.BlockingFilter = BlockingFilter;
 
 /**
  * Class for whitelist filters
@@ -529,7 +529,7 @@ WhitelistFilter.prototype =
 {
   __proto__: RegExpFilter.prototype
 }
-abp.WhitelistFilter = WhitelistFilter;
+aup.WhitelistFilter = WhitelistFilter;
 
 /**
  * Class for element hiding filters
@@ -567,7 +567,7 @@ ElemHideFilter.prototype =
    */
   key: null
 };
-abp.ElemHideFilter = ElemHideFilter;
+aup.ElemHideFilter = ElemHideFilter;
 
 /**
  * Creates an element hiding filter from a pre-parsed text representation
@@ -601,7 +601,7 @@ ElemHideFilter.fromText = function(text, domain, tagName, attrRules, selector)
         }
         else {
           if (id)
-            return new InvalidFilter(text, abp.getString("filter_elemhide_duplicate_id"));
+            return new InvalidFilter(text, aup.getString("filter_elemhide_duplicate_id"));
           else
             id = rule;
         }
@@ -613,7 +613,7 @@ ElemHideFilter.fromText = function(text, domain, tagName, attrRules, selector)
     else if (tagName || additional)
       selector = tagName + additional;
     else
-      return new InvalidFilter(text, abp.getString("filter_elemhide_nocriteria"));
+      return new InvalidFilter(text, aup.getString("filter_elemhide_nocriteria"));
   }
   return new ElemHideFilter(text, domain, selector);
 }

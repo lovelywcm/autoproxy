@@ -129,7 +129,7 @@ function setFindBarStatus(status) {
     var statusCode = (status == "NotFound" ? "notfound" : "wrapped");
     document.getElementById("find-field").setAttribute("status", statusCode);
     document.getElementById("find-status-icon").setAttribute("status", statusCode);
-    document.getElementById("find-status").setAttribute("value", abp.getString(status));
+    document.getElementById("find-status").setAttribute("value", aup.getString(status));
   }
   else {
     document.getElementById("find-field").removeAttribute("status");

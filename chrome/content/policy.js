@@ -98,17 +98,17 @@ var policy =
       {
         this.type[typeName] = iface["TYPE_" + typeName];
         this.typeDescr[this.type[typeName]] = typeName;
-        this.localizedDescr[this.type[typeName]] = abp.getString("type_label_" + typeName.toLowerCase());
+        this.localizedDescr[this.type[typeName]] = aup.getString("type_label_" + typeName.toLowerCase());
       }
     }
   
     this.type.BACKGROUND = 0xFFFE;
     this.typeDescr[0xFFFE] = "BACKGROUND";
-    this.localizedDescr[0xFFFE] = abp.getString("type_label_background");
+    this.localizedDescr[0xFFFE] = aup.getString("type_label_background");
 
     this.type.ELEMHIDE = 0xFFFD;
     this.typeDescr[0xFFFD] = "ELEMHIDE";
-    this.localizedDescr[0xFFFD] = abp.getString("type_label_elemhide");
+    this.localizedDescr[0xFFFD] = aup.getString("type_label_elemhide");
 
     // whitelisted URL schemes
     this.whitelistSchemes = {};
@@ -162,7 +162,7 @@ var policy =
     let thirdParty = true;
 
     if (!match && location.scheme == "chrome" && location.host == "global" && 
-                                                /abphit:(\d+)#/.test(location.path) && RegExp.$1 in elemhide.keys)
+                                                /auphit:(\d+)#/.test(location.path) && RegExp.$1 in elemhide.keys)
     {
       match = elemhide.keys[RegExp.$1];
       contentType = this.type.ELEMHIDE;
@@ -190,7 +190,7 @@ var policy =
    */
   isBlockableScheme: function(location) {
     // HACK: Allow blocking element hiding hits
-    if (location.scheme == "chrome" && location.host == "global" && /abphit:(\d+)#/.test(location.path) && RegExp.$1 in elemhide.keys)
+    if (location.scheme == "chrome" && location.host == "global" && /auphit:(\d+)#/.test(location.path) && RegExp.$1 in elemhide.keys)
       return true;
 
     return !(location.scheme in this.whitelistSchemes);
@@ -291,7 +291,7 @@ var policy =
                      .itemType;
     if (wndType != Components.interfaces.nsIDocShellTreeItem.typeContent &&
         wndType != Components.interfaces.nsIDocShellTreeItem.typeChrome  &&
-      !(location.scheme == "chrome" && location.host == "global" && /abphit:(\d+)#/.test(location.path))
+      !(location.scheme == "chrome" && location.host == "global" && /auphit:(\d+)#/.test(location.path))
     )
       return ok;
 
@@ -318,7 +318,7 @@ var policy =
     if (wnd.closed)
       return;
 
-    var wndData = abp.getDataForWindow(wnd);
+    var wndData = aup.getDataForWindow(wnd);
     var data = wndData.getAllLocations();
     for (var i = start; i < data.length; i++) {
       if (i - start >= 20) {
@@ -342,7 +342,7 @@ var policy =
       }
     }
 
-    abp.DataContainer.notifyListeners(wnd, "invalidate", data);
+    aup.DataContainer.notifyListeners(wnd, "invalidate", data);
   },
 
   // Calls refilterWindowInternal delayed to allow events to process
@@ -351,4 +351,4 @@ var policy =
   }
 };
 
-abp.policy = policy;
+aup.policy = policy;

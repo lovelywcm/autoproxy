@@ -22,68 +22,68 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-var abp = null;
+var aup = null;
 try {
-  abp = Components.classes["@mozilla.org/adblockplus;1"].createInstance().wrappedJSObject;
+  aup = Components.classes["@mozilla.org/adblockplus;1"].createInstance().wrappedJSObject;
 
-  if (!abp.prefs.initialized)
-    abp = null;
+  if (!aup.prefs.initialized)
+    aup = null;
 } catch (e) {}
 
-var abpPrefs = abp ? abp.prefs : {enabled: false};
-var abpDetachedSidebar = null;
-var abpOldShowInToolbar = abpPrefs.showintoolbar;
-var abpHideImageManager;
+var aupPrefs = aup ? aup.prefs : {enabled: false};
+var aupDetachedSidebar = null;
+var aupOldShowInToolbar = aupPrefs.showintoolbar;
+var aupHideImageManager;
 
-window.addEventListener("load", abpInit, false);
+window.addEventListener("load", aupInit, false);
 
-function abpInit() {
-  window.addEventListener("unload", abpUnload, false);
+function aupInit() {
+  window.addEventListener("unload", aupUnload, false);
 
   // Process preferences
-  abpReloadPrefs();
-  if (abp) {
-    abpPrefs.addListener(abpReloadPrefs);
+  aupReloadPrefs();
+  if (aup) {
+    aupPrefs.addListener(aupReloadPrefs);
 
     // Make sure whitelisting gets displayed after at most 2 seconds
-    setInterval(abpReloadPrefs, 2000);
-    abpGetBrowser().addEventListener("select", abpReloadPrefs, false); 
+    setInterval(aupReloadPrefs, 2000);
+    aupGetBrowser().addEventListener("select", aupReloadPrefs, false); 
 
     // Make sure we always configure keys but don't let them break anything
     try {
       // Configure keys
-      for (var key in abpPrefs)
+      for (var key in aupPrefs)
         if (key.match(/(.*)_key$/))
-          abpConfigureKey(RegExp.$1, abpPrefs[key]);
+          aupConfigureKey(RegExp.$1, aupPrefs[key]);
     } catch(e) {}
   }
 
   // Install context menu handler
   var contextMenu = document.getElementById("contentAreaContextMenu") || document.getElementById("messagePaneContext") || document.getElementById("popup_content");
   if (contextMenu) {
-    contextMenu.addEventListener("popupshowing", abpCheckContext, false);
+    contextMenu.addEventListener("popupshowing", aupCheckContext, false);
   
     // Make sure our context menu items are at the bottom
-    contextMenu.appendChild(document.getElementById("abp-frame-menuitem"));
-    contextMenu.appendChild(document.getElementById("abp-object-menuitem"));
-    contextMenu.appendChild(document.getElementById("abp-image-menuitem"));
+    contextMenu.appendChild(document.getElementById("aup-frame-menuitem"));
+    contextMenu.appendChild(document.getElementById("aup-object-menuitem"));
+    contextMenu.appendChild(document.getElementById("aup-image-menuitem"));
   }
 
   // First run actions
-  if (abp && !("doneFirstRunActions" in abpPrefs) && abp.versionComparator.compare(abpPrefs.lastVersion, "0.0") <= 0)
+  if (aup && !("doneFirstRunActions" in aupPrefs) && aup.versionComparator.compare(aupPrefs.lastVersion, "0.0") <= 0)
   {
     // Don't repeat first run actions if new window is opened
-    abpPrefs.doneFirstRunActions = true;
+    aupPrefs.doneFirstRunActions = true;
 
-    // Add ABP icon to toolbar if necessary
-    setTimeout(abpInstallInToolbar, 0);
+    // Add aup icon to toolbar if necessary
+    setTimeout(aupInstallInToolbar, 0);
 
     // Show subscriptions dialog if the user doesn't have any subscriptions yet
-    setTimeout(abpShowSubscriptions, 0);
+    setTimeout(aupShowSubscriptions, 0);
   }
 
   // Move toolbar button to a correct location in Mozilla/SeaMonkey
-  var button = document.getElementById("abp-toolbarbutton");
+  var button = document.getElementById("aup-toolbarbutton");
   if (button && button.parentNode.id == "nav-bar-buttons") {
     var ptf = document.getElementById("bookmarks-ptf");
     ptf.parentNode.insertBefore(button, ptf);
@@ -95,7 +95,7 @@ function abpInit() {
       return node;
 
     if ("id" in node && node.id)
-      node.id = node.id.replace(/abp-status/, "abp-toolbar");
+      node.id = node.id.replace(/aup-status/, "aup-toolbar");
 
     for (var child = node.firstChild; child; child = child.nextSibling)
       fixId(child);
@@ -107,22 +107,22 @@ function abpInit() {
       return;
 
     to = to.firstChild;
-    var from = document.getElementById("abp-status-popup");
+    var from = document.getElementById("aup-status-popup");
     for (var node = from.firstChild; node; node = node.nextSibling)
       to.appendChild(fixId(node.cloneNode(true)));
   };
-  copyMenu(document.getElementById("abp-toolbarbutton"));
-  copyMenu(abpGetPaletteButton());
+  copyMenu(document.getElementById("aup-toolbarbutton"));
+  copyMenu(aupGetPaletteButton());
 
-  setTimeout(abpInitImageManagerHiding, 0);
+  setTimeout(aupInitImageManagerHiding, 0);
 }
 
-function abpUnload() {
-  abpPrefs.removeListener(abpReloadPrefs);
-  abpGetBrowser().removeEventListener("select", abpReloadPrefs, false); 
+function aupUnload() {
+  aupPrefs.removeListener(aupReloadPrefs);
+  aupGetBrowser().removeEventListener("select", aupReloadPrefs, false); 
 }
 
-function abpGetBrowser() {
+function aupGetBrowser() {
   if ("getBrowser" in window)
     return getBrowser();
   else if ("messageContent" in window)
@@ -131,16 +131,16 @@ function abpGetBrowser() {
     return document.getElementById("frame_main_pane") || document.getElementById("browser_content");
 }
 
-function abpReloadPrefs() {
+function aupReloadPrefs() {
   var label;
   var state = null;
-  if (abp) {
-    if (abpPrefs.enabled)
+  if (aup) {
+    if (aupPrefs.enabled)
       state = "active";
     else
       state = "disabled";
 
-    label = abp.getString("status_" + state + "_label");
+    label = aup.getString("status_" + state + "_label");
 
     if (state == "active")
     {
@@ -167,15 +167,15 @@ function abpReloadPrefs() {
       else
       {
         // Firefox web page
-        location = abpGetBrowser().contentWindow.location.href;
+        location = aupGetBrowser().contentWindow.location.href;
       }
 
-      if (location && abp.policy.isWhitelisted(location))
+      if (location && aup.policy.isWhitelisted(location))
         state = "whitelisted";
     }
   }
 
-  var tooltip = document.getElementById("abp-tooltip");
+  var tooltip = document.getElementById("aup-tooltip");
   if (state && tooltip)
     tooltip.setAttribute("curstate", state);
 
@@ -183,26 +183,26 @@ function abpReloadPrefs() {
     if (!element)
       return;
 
-    if (abp) {
+    if (aup) {
       element.removeAttribute("disabled");
 
       if (element.tagName == "statusbarpanel" || element.tagName == "vbox") {
-        element.hidden = !abpPrefs.showinstatusbar;
+        element.hidden = !aupPrefs.showinstatusbar;
 
         var labelElement = element.getElementsByTagName("label")[0];
         labelElement.setAttribute("value", label);
       }
       else
-        element.hidden = !abpPrefs.showintoolbar;
+        element.hidden = !aupPrefs.showintoolbar;
 
       // HACKHACK: Show status bar icon in SeaMonkey Mail and Prism instead of toolbar icon
       if (element.hidden && (element.tagName == "statusbarpanel" || element.tagName == "vbox") && (document.getElementById("msgToolbar") || location.host == "webrunner"))
-        element.hidden = !abpPrefs.showintoolbar;
+        element.hidden = !aupPrefs.showintoolbar;
 
-      if (abpOldShowInToolbar != abpPrefs.showintoolbar)
-        abpInstallInToolbar();
+      if (aupOldShowInToolbar != aupPrefs.showintoolbar)
+        aupInstallInToolbar();
 
-      abpOldShowInToolbar = abpPrefs.showintoolbar;
+      aupOldShowInToolbar = aupPrefs.showintoolbar;
     }
 
     element.removeAttribute("deactivated");
@@ -213,17 +213,17 @@ function abpReloadPrefs() {
       element.setAttribute("deactivated", "true");
   };
 
-  var status = document.getElementById("abp-status");
+  var status = document.getElementById("aup-status");
   updateElement(status);
-  if (abpPrefs.defaultstatusbaraction == 0)
+  if (aupPrefs.defaultstatusbaraction == 0)
     status.setAttribute("popup", status.getAttribute("context"));
   else
     status.removeAttribute("popup");
 
-  var button = document.getElementById("abp-toolbarbutton");
+  var button = document.getElementById("aup-toolbarbutton");
   updateElement(button);
   if (button) {
-    if (button.hasAttribute("context") && abpPrefs.defaulttoolbaraction == 0)
+    if (button.hasAttribute("context") && aupPrefs.defaulttoolbaraction == 0)
     {
       button.setAttribute("popup", button.getAttribute("context"));
       button.removeAttribute("type");
@@ -232,30 +232,30 @@ function abpReloadPrefs() {
       button.removeAttribute("popup");
   }
 
-  updateElement(abpGetPaletteButton());
+  updateElement(aupGetPaletteButton());
 }
 
-function abpInitImageManagerHiding() {
-  if (!abp || typeof abpHideImageManager != "undefined")
+function aupInitImageManagerHiding() {
+  if (!aup || typeof aupHideImageManager != "undefined")
     return;
 
-  abpHideImageManager = false;
-  if (abpPrefs.hideimagemanager && "@mozilla.org/permissionmanager;1" in Components.classes) {
+  aupHideImageManager = false;
+  if (aupPrefs.hideimagemanager && "@mozilla.org/permissionmanager;1" in Components.classes) {
     try {
-      abpHideImageManager = true;
+      aupHideImageManager = true;
       var permissionManager = Components.classes["@mozilla.org/permissionmanager;1"]
                                         .getService(Components.interfaces.nsIPermissionManager);
       var enumerator = permissionManager.enumerator;
-      while (abpHideImageManager && enumerator.hasMoreElements()) {
+      while (aupHideImageManager && enumerator.hasMoreElements()) {
         var item = enumerator.getNext().QueryInterface(Components.interfaces.nsIPermission);
         if (item.type == "image" && item.capability == Components.interfaces.nsIPermissionManager.DENY_ACTION)
-          abpHideImageManager = false;
+          aupHideImageManager = false;
       }
     } catch(e) {}
   }
 }
 
-function abpConfigureKey(key, value) {
+function aupConfigureKey(key, value) {
   var valid = {
     accel: "accel",
     ctrl: "control",
@@ -265,7 +265,7 @@ function abpConfigureKey(key, value) {
     meta: "meta"
   };
 
-  var command = document.getElementById("abp-command-" + key);
+  var command = document.getElementById("aup-command-" + key);
   if (!command)
     return;
 
@@ -284,34 +284,34 @@ function abpConfigureKey(key, value) {
 
   if (keychar || keycode) {
     var element = document.createElement("key");
-    element.setAttribute("id", "abp-key-" + key);
-    element.setAttribute("command", "abp-command-" + key);
+    element.setAttribute("id", "aup-key-" + key);
+    element.setAttribute("command", "aup-command-" + key);
     if (keychar)
       element.setAttribute("key", keychar);
     else
       element.setAttribute("keycode", keycode);
     element.setAttribute("modifiers", modifiers.join(","));
 
-    document.getElementById("abp-keyset").appendChild(element);
+    document.getElementById("aup-keyset").appendChild(element);
   }
 }
 
 // Finds the toolbar button in the toolbar palette
-function abpGetPaletteButton() {
+function aupGetPaletteButton() {
   var toolbox = document.getElementById("navigator-toolbox") || document.getElementById("mail-toolbox");
   if (!toolbox || !("palette" in toolbox) || !toolbox.palette)
     return null;
 
   for (var child = toolbox.palette.firstChild; child; child = child.nextSibling)
-    if (child.id == "abp-toolbarbutton")
+    if (child.id == "aup-toolbarbutton")
       return child;
 
   return null;
 }
 
 // Check whether we installed the toolbar button already
-function abpInstallInToolbar() {
-  if (!document.getElementById("abp-toolbarbutton")) {
+function aupInstallInToolbar() {
+  if (!document.getElementById("aup-toolbarbutton")) {
     var insertBeforeBtn = null;
     var toolbar = document.getElementById("nav-bar");
     if (!toolbar) {
@@ -324,7 +324,7 @@ function abpInstallInToolbar() {
       if (insertBefore && insertBefore.parentNode != toolbar)
         insertBefore = null;
 
-      toolbar.insertItem("abp-toolbarbutton", insertBefore, null, false);
+      toolbar.insertItem("aup-toolbarbutton", insertBefore, null, false);
 
       toolbar.setAttribute("currentset", toolbar.currentSet);
       document.persist(toolbar.id, "currentset");
@@ -347,9 +347,9 @@ function abpInstallInToolbar() {
           var currentSet = (target ? target.QueryInterface(Components.interfaces.nsIRDFLiteral).Value : document.getElementById('mail-bar').getAttribute("defaultset"));
 
           if (/\bbutton-junk\b/.test(currentSet))
-            currentSet = currentSet.replace(/\bbutton-junk\b/, "abp-toolbarbutton,button-junk");
+            currentSet = currentSet.replace(/\bbutton-junk\b/, "aup-toolbarbutton,button-junk");
           else
-            currentSet = currentSet + ",abp-toolbarbutton";
+            currentSet = currentSet + ",aup-toolbarbutton";
 
           if (target)
             localstore.Unassert(resource, arc, target, true);
@@ -361,14 +361,14 @@ function abpInstallInToolbar() {
 }
 
 // Let user choose subscriptions on first start unless he has some already
-function abpShowSubscriptions()
+function aupShowSubscriptions()
 {
   // Look for existing subscriptions
-  for each (let subscription in abp.filterStorage.subscriptions)
-    if (subscription instanceof abp.DownloadableSubscription)
+  for each (let subscription in aup.filterStorage.subscriptions)
+    if (subscription instanceof aup.DownloadableSubscription)
       return;
 
-  let browser = abpGetBrowser();
+  let browser = aupGetBrowser();
   if ("addTab" in browser)
   {
     // We have a tabbrowser
@@ -380,38 +380,38 @@ function abpShowSubscriptions()
   }
 }
 
-function abpFillTooltip(ev) {
+function aupFillTooltip(ev) {
   if (!document.tooltipNode || !document.tooltipNode.hasAttribute("tooltip"))
     return false;
 
-  if (abp) {
-    abpReloadPrefs();
+  if (aup) {
+    aupReloadPrefs();
 
-    var type = (document.tooltipNode && document.tooltipNode.id == "abp-toolbarbutton" ? "toolbar" : "statusbar");
-    var action = parseInt(abpPrefs["default" + type + "action"]);
+    var type = (document.tooltipNode && document.tooltipNode.id == "aup-toolbarbutton" ? "toolbar" : "statusbar");
+    var action = parseInt(aupPrefs["default" + type + "action"]);
     if (isNaN(action))
       action = -1;
 
-    var actionDescr = document.getElementById("abp-tooltip-action");
+    var actionDescr = document.getElementById("aup-tooltip-action");
     actionDescr.hidden = (action < 0 || action > 3);
     if (!actionDescr.hidden)
-      actionDescr.setAttribute("value", abp.getString("action" + action + "_tooltip"));
+      actionDescr.setAttribute("value", aup.getString("action" + action + "_tooltip"));
 
     var state = ev.target.getAttribute("curstate");
-    var statusDescr = document.getElementById("abp-tooltip-status");
-    statusDescr.setAttribute("value", abp.getString(state + "_tooltip"));
+    var statusDescr = document.getElementById("aup-tooltip-status");
+    statusDescr.setAttribute("value", aup.getString(state + "_tooltip"));
 
     var activeFilters = [];
-    document.getElementById("abp-tooltip-blocked-label").hidden = (state != "active");
-    document.getElementById("abp-tooltip-blocked").hidden = (state != "active");
+    document.getElementById("aup-tooltip-blocked-label").hidden = (state != "active");
+    document.getElementById("aup-tooltip-blocked").hidden = (state != "active");
     if (state == "active") {
-      var data = abp.getDataForWindow(abpGetBrowser().contentWindow);
+      var data = aup.getDataForWindow(aupGetBrowser().contentWindow);
       var locations = data.getAllLocations();
 
       var blocked = 0;
       var filterCount = {__proto__: null};
       for (i = 0; i < locations.length; i++) {
-        if (locations[i].filter && !(locations[i].filter instanceof abp.WhitelistFilter))
+        if (locations[i].filter && !(locations[i].filter instanceof aup.WhitelistFilter))
           blocked++;
         if (locations[i].filter) {
           if (locations[i].filter.text in filterCount)
@@ -421,9 +421,9 @@ function abpFillTooltip(ev) {
         }
       }
 
-      var blockedStr = abp.getString("blocked_count_tooltip");
+      var blockedStr = aup.getString("blocked_count_tooltip");
       blockedStr = blockedStr.replace(/--/, blocked).replace(/--/, locations.length);
-      document.getElementById("abp-tooltip-blocked").setAttribute("value", blockedStr);
+      document.getElementById("aup-tooltip-blocked").setAttribute("value", blockedStr);
 
       var filterSort = function(a, b) {
         return filterCount[b] - filterCount[a];
@@ -433,10 +433,10 @@ function abpFillTooltip(ev) {
       activeFilters = activeFilters.sort(filterSort);
     }
 
-    document.getElementById("abp-tooltip-filters-label").hidden = (activeFilters.length == 0);
-    document.getElementById("abp-tooltip-filters").hidden = (activeFilters.length == 0);
+    document.getElementById("aup-tooltip-filters-label").hidden = (activeFilters.length == 0);
+    document.getElementById("aup-tooltip-filters").hidden = (activeFilters.length == 0);
     if (activeFilters.length > 0) {
-      var filtersContainer = document.getElementById("abp-tooltip-filters");
+      var filtersContainer = document.getElementById("aup-tooltip-filters");
       while (filtersContainer.firstChild)
         filtersContainer.removeChild(filtersContainer.firstChild);
 
@@ -456,8 +456,8 @@ function abpFillTooltip(ev) {
 }
 
 // Fills the context menu on the status bar
-function abpFillPopup(popup) {
-  if (!abp)
+function aupFillPopup(popup) {
+  if (!aup)
     return false;
 
   // Not at-target call, ignore
@@ -471,7 +471,7 @@ function abpFillPopup(popup) {
     if (list[i].id && /\-(\w+)$/.test(list[i].id))
       elements[RegExp.$1] = list[i];
 
-  var sidebarOpen = abpIsSidebarOpen();
+  var sidebarOpen = aupIsSidebarOpen();
   elements.opensidebar.hidden = sidebarOpen;
   elements.closesidebar.hidden = !sidebarOpen;
 
@@ -485,7 +485,7 @@ function abpFillPopup(popup) {
   var site = null;
   if ("currentHeaderData" in window && "content-base" in currentHeaderData) {
     // Thunderbird blog entry
-    location = abp.unwrapURL(currentHeaderData["content-base"].headerValue);
+    location = aup.unwrapURL(currentHeaderData["content-base"].headerValue);
   }
   else if ("gDBView" in window) {
     // Thunderbird mail/newsgroup entry
@@ -503,17 +503,17 @@ function abpFillPopup(popup) {
 
     if (site) {
       whitelistItemSite.pattern = "@@|mailto:" + site.replace(' ', '%20') + "|";
-      whitelistItemSite.setAttribute("checked", abpHasFilter(whitelistItemSite.pattern));
+      whitelistItemSite.setAttribute("checked", aupHasFilter(whitelistItemSite.pattern));
       whitelistItemSite.setAttribute("label", whitelistItemSite.getAttribute("labeltempl").replace(/--/, site));
     }
   }
   else {
     // Firefox web page
-    location = abp.unwrapURL(abpGetBrowser().contentWindow.location.href);
+    location = aup.unwrapURL(aupGetBrowser().contentWindow.location.href);
   }
 
   if (!site && location) {
-    if (abp.policy.isBlockableScheme(location)) {
+    if (aup.policy.isBlockableScheme(location)) {
       let ending = "|";
       if (location instanceof Components.interfaces.nsIURL && location.query)
       {
@@ -526,11 +526,11 @@ function abpFillPopup(popup) {
       site = url.replace(/^([^\/]+\/\/[^\/]+\/).*/, "$1");
 
       whitelistItemSite.pattern = "@@|" + site;
-      whitelistItemSite.setAttribute("checked", abpHasFilter(whitelistItemSite.pattern));
+      whitelistItemSite.setAttribute("checked", aupHasFilter(whitelistItemSite.pattern));
       whitelistItemSite.setAttribute("label", whitelistItemSite.getAttribute("labeltempl").replace(/--/, host));
 
       whitelistItemPage.pattern = "@@|" + url + ending;
-      whitelistItemPage.setAttribute("checked", abpHasFilter(whitelistItemPage.pattern));
+      whitelistItemPage.setAttribute("checked", aupHasFilter(whitelistItemPage.pattern));
     }
     else
       location = null;
@@ -540,13 +540,13 @@ function abpFillPopup(popup) {
   whitelistItemPage.hidden = !location;
   whitelistSeparator.hidden = !site && !location;
 
-  elements.enabled.setAttribute("checked", abpPrefs.enabled);
-  elements.frameobjects.setAttribute("checked", abpPrefs.frameobjects);
-  elements.slowcollapse.setAttribute("checked", !abpPrefs.fastcollapse);
-  elements.showintoolbar.setAttribute("checked", abpPrefs.showintoolbar);
-  elements.showinstatusbar.setAttribute("checked", abpPrefs.showinstatusbar);
+  elements.enabled.setAttribute("checked", aupPrefs.enabled);
+  elements.frameobjects.setAttribute("checked", aupPrefs.frameobjects);
+  elements.slowcollapse.setAttribute("checked", !aupPrefs.fastcollapse);
+  elements.showintoolbar.setAttribute("checked", aupPrefs.showintoolbar);
+  elements.showinstatusbar.setAttribute("checked", aupPrefs.showinstatusbar);
 
-  var defAction = (popup.tagName == "menupopup" || document.popupNode.id == "abp-toolbarbutton" ? abpPrefs.defaulttoolbaraction : abpPrefs.defaultstatusbaraction);
+  var defAction = (popup.tagName == "menupopup" || document.popupNode.id == "aup-toolbarbutton" ? aupPrefs.defaulttoolbaraction : aupPrefs.defaultstatusbaraction);
   elements.opensidebar.setAttribute("default", defAction == 1);
   elements.closesidebar.setAttribute("default", defAction == 1);
   elements.settings.setAttribute("default", defAction == 2);
@@ -556,7 +556,7 @@ function abpFillPopup(popup) {
 }
 
 // Only show context menu on toolbar button in vertical toolbars
-function abpCheckToolbarContext(event) {
+function aupCheckToolbarContext(event) {
   var toolbox = event.target;
   while (toolbox && toolbox.tagName != "toolbox")
     toolbox = toolbox.parentNode;
@@ -568,35 +568,35 @@ function abpCheckToolbarContext(event) {
   event.preventDefault();
 }
 
-function abpIsSidebarOpen() {
+function aupIsSidebarOpen() {
   // Test whether detached sidebar window is open
-  if (abpDetachedSidebar && !abpDetachedSidebar.closed)
+  if (aupDetachedSidebar && !aupDetachedSidebar.closed)
     return true;
 
-  var sidebar = document.getElementById("abp-sidebar");
+  var sidebar = document.getElementById("aup-sidebar");
   return (sidebar ? !sidebar.hidden : false);
 }
 
-function abpToggleSidebar() {
-  if (!abp)
+function aupToggleSidebar() {
+  if (!aup)
     return;
 
-  if (abpDetachedSidebar && !abpDetachedSidebar.closed)
-    abpDetachedSidebar.close();
+  if (aupDetachedSidebar && !aupDetachedSidebar.closed)
+    aupDetachedSidebar.close();
   else {
-    var sidebar = document.getElementById("abp-sidebar");
-    if (sidebar && (!abpPrefs.detachsidebar || !sidebar.hidden)) {
-      document.getElementById("abp-sidebar-splitter").hidden = !sidebar.hidden;
-      document.getElementById("abp-sidebar-browser").setAttribute("src", sidebar.hidden ? "chrome://adblockplus/content/sidebar.xul" : "about:blank");
+    var sidebar = document.getElementById("aup-sidebar");
+    if (sidebar && (!aupPrefs.detachsidebar || !sidebar.hidden)) {
+      document.getElementById("aup-sidebar-splitter").hidden = !sidebar.hidden;
+      document.getElementById("aup-sidebar-browser").setAttribute("src", sidebar.hidden ? "chrome://adblockplus/content/sidebar.xul" : "about:blank");
       sidebar.hidden = !sidebar.hidden;
     }
     else
-      abpDetachedSidebar = window.openDialog("chrome://adblockplus/content/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no,width=600,height=300");
+      aupDetachedSidebar = window.openDialog("chrome://adblockplus/content/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no,width=600,height=300");
   }
 
-  let menuItem = document.getElementById("abp-blockableitems");
+  let menuItem = document.getElementById("aup-blockableitems");
   if (menuItem)
-    menuItem.setAttribute("checked", abpIsSidebarOpen());
+    menuItem.setAttribute("checked", aupIsSidebarOpen());
 }
 
 /**
@@ -604,115 +604,115 @@ function abpToggleSidebar() {
  *
  * @param {String} filter   text representation of the filter
  */
-function abpHasFilter(filter)
+function aupHasFilter(filter)
 {
-  filter = abp.Filter.fromText(filter);
-  for each (let subscription in abp.filterStorage.subscriptions)
-    if (subscription instanceof abp.SpecialSubscription && subscription.filters.indexOf(filter) >= 0)
+  filter = aup.Filter.fromText(filter);
+  for each (let subscription in aup.filterStorage.subscriptions)
+    if (subscription instanceof aup.SpecialSubscription && subscription.filters.indexOf(filter) >= 0)
       return true;
 
   return false;
 }
 
 // Toggles the value of a boolean pref
-function abpTogglePref(pref) {
-  if (!abp)
+function aupTogglePref(pref) {
+  if (!aup)
     return;
 
-  abpPrefs[pref] = !abpPrefs[pref];
-  abpPrefs.save();
+  aupPrefs[pref] = !aupPrefs[pref];
+  aupPrefs.save();
 }
 
 // Inserts or removes the specified pattern into/from the list
-function abpTogglePattern(text, insert) {
-  if (!abp)
+function aupTogglePattern(text, insert) {
+  if (!aup)
     return;
 
   if (insert)
-    abp.addPatterns([text], 1);
+    aup.addPatterns([text], 1);
   else
-    abp.removePatterns([text], 1);
+    aup.removePatterns([text], 1);
 
   // Make sure to display whitelisting immediately
-  abpReloadPrefs();
+  aupReloadPrefs();
 }
 
 // Handle clicks on the Adblock statusbar panel
-function abpClickHandler(e) {
+function aupClickHandler(e) {
   if (e.button == 0)
-    abpExecuteAction(abpPrefs.defaultstatusbaraction);
+    aupExecuteAction(aupPrefs.defaultstatusbaraction);
   else if (e.button == 1)
-    abpTogglePref("enabled");
+    aupTogglePref("enabled");
 }
 
-function abpCommandHandler(e) {
-  if (abpPrefs.defaulttoolbaraction == 0)
+function aupCommandHandler(e) {
+  if (aupPrefs.defaulttoolbaraction == 0)
     e.target.open = true;
   else
-    abpExecuteAction(abpPrefs.defaulttoolbaraction);
+    aupExecuteAction(aupPrefs.defaulttoolbaraction);
 }
 
 // Executes default action for statusbar/toolbar by its number
-function abpExecuteAction(action) {
+function aupExecuteAction(action) {
   if (action == 1)
-    abpToggleSidebar();
+    aupToggleSidebar();
   else if (action == 2)
-    abp.openSettingsDialog();
+    aup.openSettingsDialog();
   else if (action == 3)
-    abpTogglePref("enabled");
+    aupTogglePref("enabled");
 }
 
 // Retrieves the image URL for the specified style property
-function abpImageStyle(computedStyle, property) {
+function aupImageStyle(computedStyle, property) {
   var value = computedStyle.getPropertyCSSValue(property);
   if (value.primitiveType == CSSPrimitiveValue.CSS_URI)
-    return abp.unwrapURL(value.getStringValue()).spec;
+    return aup.unwrapURL(value.getStringValue()).spec;
 
   return null;
 }
 
 // Hides the unnecessary context menu items on display
-function abpCheckContext() {
+function aupCheckContext() {
   var contextMenu = document.getElementById("contentAreaContextMenu") || document.getElementById("messagePaneContext") || document.getElementById("popup_content");
   var target = document.popupNode;
 
   var nodeType = null;
-  contextMenu.abpBgData = null;
-  contextMenu.abpFrameData = null;
-  if (abp && target) {
+  contextMenu.aupBgData = null;
+  contextMenu.aupFrameData = null;
+  if (aup && target) {
     // Lookup the node in our stored data
-    var data = abp.getDataForNode(target);
+    var data = aup.getDataForNode(target);
     var targetNode = null;
     if (data) {
       targetNode = data[0];
       data = data[1];
     }
-    contextMenu.abpData = data;
+    contextMenu.aupData = data;
     if (data && !data.filter)
       nodeType = data.typeDescr;
 
     var wnd = (target ? target.ownerDocument.defaultView : null);
-    var wndData = (wnd ? abp.getDataForWindow(wnd) : null);
+    var wndData = (wnd ? aup.getDataForWindow(wnd) : null);
 
     if (wnd.frameElement)
-      contextMenu.abpFrameData = abp.getDataForNode(wnd.frameElement, true);
-    if (contextMenu.abpFrameData)
-      contextMenu.abpFrameData = contextMenu.abpFrameData[1];
-    if (contextMenu.abpFrameData && contextMenu.abpFrameData.filter)
-      contextMenu.abpFrameData = null;
+      contextMenu.aupFrameData = aup.getDataForNode(wnd.frameElement, true);
+    if (contextMenu.aupFrameData)
+      contextMenu.aupFrameData = contextMenu.aupFrameData[1];
+    if (contextMenu.aupFrameData && contextMenu.aupFrameData.filter)
+      contextMenu.aupFrameData = null;
 
     if (nodeType != "IMAGE") {
       // Look for a background image
       var imageNode = target;
-      while (imageNode && !contextMenu.abpBgData) {
+      while (imageNode && !contextMenu.aupBgData) {
         if (imageNode.nodeType == Node.ELEMENT_NODE) {
           var bgImage = null;
           var style = wnd.getComputedStyle(imageNode, "");
-          bgImage = abpImageStyle(style, "background-image") || abpImageStyle(style, "list-style-image");
+          bgImage = aupImageStyle(style, "background-image") || aupImageStyle(style, "list-style-image");
           if (bgImage) {
-            contextMenu.abpBgData = wndData.getLocation(abp.policy.type.BACKGROUND, bgImage);
-            if (contextMenu.abpBgData && contextMenu.abpBgData.filter)
-              contextMenu.abpBgData = null;
+            contextMenu.aupBgData = wndData.getLocation(aup.policy.type.BACKGROUND, bgImage);
+            if (contextMenu.aupBgData && contextMenu.aupBgData.filter)
+              contextMenu.aupBgData = null;
           }
         }
 
@@ -723,21 +723,21 @@ function abpCheckContext() {
     // Hide "Block Images from ..." if hideimagemanager pref is true and the image manager isn't already blocking something
     var imgManagerContext = document.getElementById("context-blockimage");
     if (imgManagerContext) {
-      if (typeof abpHideImageManager == "undefined")
-        abpInitImageManagerHiding();
+      if (typeof aupHideImageManager == "undefined")
+        aupInitImageManagerHiding();
 
       // Don't use "hidden" attribute - it might be overridden by the default popupshowing handler
-      imgManagerContext.style.display = (abpHideImageManager ? "none" : "");
+      imgManagerContext.style.display = (aupHideImageManager ? "none" : "");
     }
   }
 
-  document.getElementById("abp-image-menuitem").hidden = (nodeType != "IMAGE" && contextMenu.abpBgData == null);
-  document.getElementById("abp-object-menuitem").hidden = (nodeType != "OBJECT");
-  document.getElementById("abp-frame-menuitem").hidden = (contextMenu.abpFrameData == null);
+  document.getElementById("aup-image-menuitem").hidden = (nodeType != "IMAGE" && contextMenu.aupBgData == null);
+  document.getElementById("aup-object-menuitem").hidden = (nodeType != "OBJECT");
+  document.getElementById("aup-frame-menuitem").hidden = (contextMenu.aupFrameData == null);
 }
 
 // Bring up the settings dialog for the node the context menu was referring to
-function abpNode(data) {
-  if (abp && data)
-    openDialog("chrome://adblockplus/content/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", abpGetBrowser().contentWindow, data);
+function aupNode(data) {
+  if (aup && data)
+    openDialog("chrome://adblockplus/content/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", aupGetBrowser().contentWindow, data);
 }

@@ -123,7 +123,7 @@ var synchronizer =
     if (minVersion)
     {
       subscription.requiredVersion = minVersion;
-      if (abp.versionComparator.compare(minVersion, abp.getInstalledVersion()) > 0)
+      if (aup.versionComparator.compare(minVersion, aup.getInstalledVersion()) > 0)
         subscription.upgradeRequired = true;
     }
 
@@ -200,7 +200,7 @@ var synchronizer =
     let hadTemporaryRedirect = false;
     subscription.nextURL = null;
 
-    let curVersion = abp.getInstalledVersion();
+    let curVersion = aup.getInstalledVersion();
     let loadFrom = (newURL || url).replace(/%VERSION%/, "ABP" + curVersion);
 
     let request = null;
@@ -369,4 +369,4 @@ var synchronizer =
 };
 
 synchronizer.init();
-abp.synchronizer = synchronizer;
+aup.synchronizer = synchronizer;

@@ -159,9 +159,9 @@ var prefs = {
 
     // Update lastVersion pref if necessary
     this.lastVersion = this.currentVersion;
-    if (this.currentVersion != abp.getInstalledVersion())
+    if (this.currentVersion != aup.getInstalledVersion())
     {
-      this.currentVersion = abp.getInstalledVersion();
+      this.currentVersion = aup.getInstalledVersion();
       this.save();
     }
 
@@ -262,4 +262,4 @@ var prefs = {
 };
 
 prefs.addObservers();
-abp.prefs = prefs;
+aup.prefs = prefs;

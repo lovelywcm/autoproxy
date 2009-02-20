@@ -1,11 +1,11 @@
 // constants
-const APP_DISPLAY_NAME = "Adblock Plus";
-const APP_NAME = "adblockplus";
-const APP_PACKAGE = "/adblockplus.mozdev.org";
+const APP_DISPLAY_NAME = "AutoProxy";
+const APP_NAME = "autoproxy";
+const APP_PACKAGE = "/autoproxy.mozdev.org";
 const APP_VERSION = "{{VERSION}}";
-const WARNING = "WARNING: You need administrator privileges to install Adblock Plus. It will be installed in the application directory for all users. Installing Adblock Plus in your profile is currently not supported in SeaMonkey. Proceed with the installation?";
+const WARNING = "WARNING: You need administrator privileges to install AutoProxy. It will be installed in the application directory for all users. Installing AutoProxy in your profile is currently not supported in SeaMonkey. Proceed with the installation?";
 const VERSION_ERROR = "This extension can only be installed in a browser based on Gecko 1.8 or higher, please upgrade your browser. Compatible browsers include Firefox 1.5, SeaMonkey 1.0 and Flock 0.5.";
-const NOT_WRITABLE_ERROR = "This extension requires write access to the application directory to install properly. Currently write access to some of the relevant subdirectories is forbidden, you probably have to log in as root before installing. After installation no elevated privileges will be necessary, read access is sufficient to use Adblock Plus."
+const NOT_WRITABLE_ERROR = "This extension requires write access to the application directory to install properly. Currently write access to some of the relevant subdirectories is forbidden, you probably have to log in as root before installing. After installation no elevated privileges will be necessary, read access is sufficient to use AutoProxy."
 const locales = [
   "{{LOCALE}}",
   null
@@ -36,10 +36,10 @@ if (!incompatible && confirm(WARNING, APP_DISPLAY_NAME)) {
   var chromeType = DELAYED_CHROME;
 
   var files = [
-    ["chrome/adblockplus.jar", jarFolder],
-    ["components/nsAdblockPlus.js", getFolder("Components")],
-    ["components/nsAdblockPlus.xpt", getFolder("Components")],
-    ["defaults/preferences/adblockplus.js", getFolder(getFolder("Program", "defaults"), "pref")],
+    ["chrome/autoproxy.jar", jarFolder],
+    ["components/nsAutoProxy.js", getFolder("Components")],
+    ["components/nsAutoProxy.xpt", getFolder("Components")],
+    ["defaults/preferences/autoproxy.js", getFolder(getFolder("Program", "defaults"), "pref")],
   ];
   
   // initialize our install
@@ -49,7 +49,7 @@ if (!incompatible && confirm(WARNING, APP_DISPLAY_NAME)) {
   for (var i = 0; i < files.length; i++)
     addFile(APP_NAME, APP_VERSION, files[i][0], files[i][1], null);
 
-  var jar = getFolder(jarFolder, "adblockplus.jar");
+  var jar = getFolder(jarFolder, "autoproxy.jar");
   try {
     var err = registerChrome(CONTENT | chromeType, jar, "content/");
     if (err != SUCCESS)
@@ -72,7 +72,7 @@ if (!incompatible && confirm(WARNING, APP_DISPLAY_NAME)) {
     if (err != SUCCESS && err != 999)
       throw "Committing installation failed (error code " + err + ").";
 
-    alert("Adblock Plus " + APP_VERSION + " is now installed.\n" +
+    alert("AutoProxy " + APP_VERSION + " is now installed.\n" +
           "It will become active after you restart your browser.");
   }
   catch (ex) {

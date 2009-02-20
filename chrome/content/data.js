@@ -34,7 +34,7 @@ function DataContainer(wnd) {
   this.subdocs = [];
   this.install(wnd);
 }
-abp.DataContainer = DataContainer;
+aup.DataContainer = DataContainer;
 
 DataContainer.prototype = {
   topContainer: null,
@@ -51,7 +51,7 @@ DataContainer.prototype = {
     else
       this.topContainer = this;
 
-    wnd.document["abpData" + dataSeed] = this;
+    wnd.document["aupData" + dataSeed] = this;
 
     this.installListeners(wnd);
   },
@@ -142,19 +142,19 @@ DataContainer.prototype = {
       if (!this.topContainer.detached)
         DataContainer.notifyListeners(topWnd, "add", this.topContainer, this.locations[key]);
     }
-    node["abpLocation" + dataSeed] = this.locations[key];
+    node["aupLocation" + dataSeed] = this.locations[key];
 
     if (typeof objTab != "undefined" && objTab) {
       this.locations[key].nodes.push(objTab);
-      objTab["abpLocation" + dataSeed] = this.locations[key];
+      objTab["aupLocation" + dataSeed] = this.locations[key];
     }
 
     return this.locations[key];
   },
 
   removeNode: function(node) {
-    if ("abpLocation" + dataSeed in node) {
-      var nodes = node["abpLocation" + dataSeed].nodes;
+    if ("aupLocation" + dataSeed in node) {
+      var nodes = node["aupLocation" + dataSeed].nodes;
       for (var i = 0; i < nodes.length; i++)
         if (nodes[i] == node)
           nodes.splice(i--, 1);
@@ -190,18 +190,18 @@ DataContainer.prototype = {
 
 // Loads Adblock data associated with a window object
 DataContainer.getDataForWindow = function(wnd) {
-  if ("abpData" + dataSeed in wnd.document)
-    return wnd.document["abpData" + dataSeed];
+  if ("aupData" + dataSeed in wnd.document)
+    return wnd.document["aupData" + dataSeed];
   else
     return new DataContainer(wnd);
 };
-abp.getDataForWindow = DataContainer.getDataForWindow;
+aup.getDataForWindow = DataContainer.getDataForWindow;
 
 // Loads Adblock data associated with a node object
 DataContainer.getDataForNode = function(node, noParent) {
   while (node) {
-    if ("abpLocation" + dataSeed in node)
-      return [node, node["abpLocation" + dataSeed]];
+    if ("aupLocation" + dataSeed in node)
+      return [node, node["aupLocation" + dataSeed]];
 
     if (typeof noParent == "boolean" && noParent)
       return null;
@@ -212,7 +212,7 @@ DataContainer.getDataForNode = function(node, noParent) {
 
   return null;
 };
-abp.getDataForNode = DataContainer.getDataForNode;
+aup.getDataForNode = DataContainer.getDataForNode;
 
 // Adds a new handler to be notified whenever the location list is added
 DataContainer.listeners = [];

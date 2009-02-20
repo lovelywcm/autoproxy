@@ -31,7 +31,7 @@
 
 <page
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-  id="abp-sidebar"
+  id="aup-sidebar"
   onload="init()"
   onunload="cleanUp()">
 

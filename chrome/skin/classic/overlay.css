@@ -24,53 +24,53 @@
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-#abp-status:not([disabled="true"]) *
+#aup-status:not([disabled="true"]) *
 {
   cursor: pointer;
 }
-#abp-status:not([disabled="true"]):hover
+#aup-status:not([disabled="true"]):hover
 {
   text-decoration: underline;
 }
-#abp-status[deactivated]
+#aup-status[deactivated]
 {
   color: #999999;
 }
-#abp-status[whitelisted]
+#aup-status[whitelisted]
 {
   color: #008000;
 }
-#abp-status label {
+#aup-status label {
   display: none;
 }
 
-toolbar[iconsize="small"] #abp-toolbarbutton,
-#PersonalToolbar #abp-toolbarbutton,
-#abp-status image {
-  list-style-image: url("abp-status-16.png");
+toolbar[iconsize="small"] #aup-toolbarbutton,
+#PersonalToolbar #aup-toolbarbutton,
+#aup-status image {
+  list-style-image: url("aup-status-16.png");
   -moz-image-region: rect(0px, 16px, 16px, 0px);
 }
-toolbar[iconsize="small"] #abp-toolbarbutton[deactivated],
-#PersonalToolbar #abp-toolbarbutton[deactivated],
-#abp-status[deactivated] image {
+toolbar[iconsize="small"] #aup-toolbarbutton[deactivated],
+#PersonalToolbar #aup-toolbarbutton[deactivated],
+#aup-status[deactivated] image {
   -moz-image-region: rect(16px, 16px, 32px, 0px);
 }
-toolbar[iconsize="small"] #abp-toolbarbutton[whitelisted],
-#PersonalToolbar #abp-toolbarbutton[whitelisted],
-#abp-status[whitelisted] image {
+toolbar[iconsize="small"] #aup-toolbarbutton[whitelisted],
+#PersonalToolbar #aup-toolbarbutton[whitelisted],
+#aup-status[whitelisted] image {
   -moz-image-region: rect(32px, 16px, 48px, 0px);
 }
-toolbar[iconsize="small"] #abp-toolbarbutton[disabled="true"],
-#PersonalToolbar #abp-toolbarbutton[disabled="true"],
-#abp-status[disabled="true"] image {
+toolbar[iconsize="small"] #aup-toolbarbutton[disabled="true"],
+#PersonalToolbar #aup-toolbarbutton[disabled="true"],
+#aup-status[disabled="true"] image {
   -moz-image-region: rect(48px, 16px, 64px, 0px);
 }
 
-#abp-toolbar-popup {
+#aup-toolbar-popup {
   list-style-image: none;
 }
 
-toolbox[vertical="true"] toolbar #abp-toolbarbutton dropmarker {
+toolbox[vertical="true"] toolbar #aup-toolbarbutton dropmarker {
   display: none !important;
 }
 
@@ -78,44 +78,44 @@ menuitem[default="true"] {
   font-weight: bold;
 }
 
-#abp-toolbarbutton {
-  list-style-image: url("abp-status.png");
+#aup-toolbarbutton {
+  list-style-image: url("aup-status.png");
   -moz-image-region: rect(0px, 24px, 24px, 0px);
   width: auto;
 }
-#abp-toolbarbutton[deactivated] {
+#aup-toolbarbutton[deactivated] {
   -moz-image-region: rect(24px, 24px, 48px, 0px);
 }
-#abp-toolbarbutton[whitelisted] {
+#aup-toolbarbutton[whitelisted] {
   -moz-image-region: rect(48px, 24px, 72px, 0px);
 }
-#abp-toolbarbutton[disabled="true"] {
+#aup-toolbarbutton[disabled="true"] {
   -moz-image-region: rect(72px, 24px, 96px, 0px);
 }
 
-#abp-tooltip {
+#aup-tooltip {
   max-width: none;
 }
 
-#abp-tooltip label {
+#aup-tooltip label {
   font-weight: bold;
   margin-bottom: 0px;
 }
 
-#abp-tooltip description:not([hidden="true"])+label {
+#aup-tooltip description:not([hidden="true"])+label {
   margin-top: 10px;
 }
 
-#abp-sidebar-title {
+#aup-sidebar-title {
   padding-left: 4px;
 }
 
-#abp-sidebar-toolbar {
+#aup-sidebar-toolbar {
     display: -moz-box !important;
     visibility: visible !important;
 }
 
-#abp-sidebar-close {
+#aup-sidebar-close {
   padding: 4px 2px;
   border-style: none !important;
   -moz-user-focus: normal;
@@ -124,10 +124,10 @@ menuitem[default="true"] {
   -moz-image-region: rect(0px, 16px, 16px, 0px);
 }
 
-#abp-sidebar-close:hover {
+#aup-sidebar-close:hover {
   -moz-image-region: rect(0px, 32px, 16px, 16px);
 }
 
-#abp-sidebar-close:hover:active {
+#aup-sidebar-close:hover:active {
   -moz-image-region: rect(0px, 48px, 16px, 32px);
 }

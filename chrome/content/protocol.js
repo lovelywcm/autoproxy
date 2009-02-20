@@ -23,7 +23,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 /*
- * Fake protocol handler for the abp: protocol.
+ * Fake protocol handler for the aup: protocol.
  * This file is included from nsAdblockPlus.js.
  */
 
@@ -33,7 +33,7 @@ var protocol = {
                  Components.interfaces.nsIProtocolHandler.URI_NOAUTH |
                  Components.interfaces.nsIProtocolHandler.URI_INHERITS_SECURITY_CONTEXT |
                  Components.interfaces.nsIProtocolHandler.URI_LOADABLE_BY_ANYONE,
-  scheme: "abp",
+  scheme: "aup",
   allowPort: function() {return false},
 
   newURI: function(spec, originCharset, baseURI) {
@@ -69,7 +69,7 @@ ABPChannel.prototype = {
   },
 
   asyncOpen: function(listener, context) {
-    if (/^abp:\/*subscribe\/*\?(.*)/i.test(this.URI.spec)) {
+    if (/^aup:\/*subscribe\/*\?(.*)/i.test(this.URI.spec)) {
       var unescape = Components.classes["@mozilla.org/intl/texttosuburi;1"]
                                .getService(Components.interfaces.nsITextToSubURI);
 

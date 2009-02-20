@@ -289,7 +289,10 @@ var policy =
                      .getInterface(Components.interfaces.nsIWebNavigation)
                      .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
                      .itemType;
-    if (wndType != Components.interfaces.nsIDocShellTreeItem.typeContent && !(location.scheme == "chrome" && location.host == "global" && /abphit:(\d+)#/.test(location.path)))
+    if (wndType != Components.interfaces.nsIDocShellTreeItem.typeContent &&
+        wndType != Components.interfaces.nsIDocShellTreeItem.typeChrome  &&
+      !(location.scheme == "chrome" && location.host == "global" && /abphit:(\d+)#/.test(location.path))
+    )
       return ok;
 
     // Interpret unknown types as "other"
@@ -297,9 +300,9 @@ var policy =
       contentType = this.type.OTHER;
 
     // if it's not a blockable type or a whitelisted scheme, use the usual policy
-    if (contentType == this.type.DOCUMENT || !this.isBlockableScheme(location))
+    if ( !this.isBlockableScheme(location) )
       return ok;
-     
+
     this.processNode(wnd, node, contentType, location, false) ?
     proxyEnabled && autoProxy.notProxy() : proxyEnabled || autoProxy.goProxy();
     

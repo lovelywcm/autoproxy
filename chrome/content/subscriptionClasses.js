@@ -251,8 +251,7 @@ SpecialSubscription.map = {
   __proto__: null,
   "~il~": ["invalid_description", 1, InvalidFilter, CommentFilter],
   "~wl~": ["whitelist_description", 3, WhitelistFilter, CommentFilter],
-  "~fl~": ["filterlist_description", 4, BlockingFilter, CommentFilter],
-  "~eh~": ["elemhide_description", 2, ElemHideFilter, CommentFilter]
+  "~fl~": ["filterlist_description", 4, BlockingFilter, CommentFilter]
 };
 
 /**

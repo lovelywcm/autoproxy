@@ -125,9 +125,6 @@ function init() {
   let typeGroup = E("typeGroup");
   for each (let type in types)
   {
-    if (type == aup.policy.type.ELEMHIDE)
-      continue;
-
     let typeNode = document.createElement("checkbox");
     typeNode.setAttribute("value", aup.policy.typeDescr[type].toLowerCase());
     typeNode.setAttribute("label", aup.policy.localizedDescr[type].toLowerCase());

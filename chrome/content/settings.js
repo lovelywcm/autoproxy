@@ -564,13 +564,6 @@ function exportList()
             else
               filterVersion = "0";
           }
-          else if (filter instanceof aup.ElemHideFilter)
-          {
-            if (/^#([\w\-]+|\*)(?:\(([\w\-]+)\))?$/.test(filter.text))
-              filterVersion = "0.6.1";
-            else
-              filterVersion = "0.7";
-          }
           else
             filterVersion = "0";
           
@@ -1397,7 +1390,7 @@ let treeView = {
 
     this.boxObject = boxObject;
 
-    let stringAtoms = ["col-filter", "col-enabled", "col-hitcount", "col-lasthit", "type-comment", "type-filterlist", "type-whitelist", "type-elemhide", "type-invalid"];
+    let stringAtoms = ["col-filter", "col-enabled", "col-hitcount", "col-lasthit", "type-comment", "type-filterlist", "type-whitelist", "type-invalid"];
     let boolAtoms = ["selected", "dummy", "subscription", "description", "filter", "filter-regexp", "subscription-special", "subscription-external", "subscription-autoDownload", "subscription-disabled", "subscription-upgradeRequired", "subscription-dummy", "filter-disabled"];
     let atomService = Components.classes["@mozilla.org/atom-service;1"]
                                 .getService(Components.interfaces.nsIAtomService);
@@ -1537,8 +1530,6 @@ let treeView = {
         properties.AppendElement(this.atoms["type-filterlist"]);
       else if (filter instanceof aup.WhitelistFilter)
         properties.AppendElement(this.atoms["type-whitelist"]);
-      else if (filter instanceof aup.ElemHideFilter)
-        properties.AppendElement(this.atoms["type-elemhide"]);
       else if (filter instanceof aup.InvalidFilter)
         properties.AppendElement(this.atoms["type-invalid"]);
     }

@@ -76,11 +76,6 @@ aup.Filter = Filter;
 Filter.knownFilters = {__proto__: null};
 
 /**
- * Regular expression that element hiding filters should match
- * @type RegExp
- */
-Filter.elemhideRegExp = /^([^\/\*\|\@"]*?)#(?:([\w\-]+|\*)((?:\([\w\-]+(?:[$^*]?=[^\(\)"]*)?\))*)|#([^{}]+))$/;
-/**
  * Regular expression that RegExp filters specified as RegExps should match (with options already removed)
  * @type RegExp
  */
@@ -107,8 +102,6 @@ Filter.fromText = function(text)
     return Filter.knownFilters[text];
 
   let ret;
-  if (Filter.elemhideRegExp.test(text))
-    ret = ElemHideFilter.fromText(text, RegExp.$1, RegExp.$2, RegExp.$3, RegExp.$4);
   else if (text[0] == "!")
     ret = new CommentFilter(text);
   else
@@ -530,90 +523,3 @@ WhitelistFilter.prototype =
   __proto__: RegExpFilter.prototype
 }
 aup.WhitelistFilter = WhitelistFilter;
-
-/**
- * Class for element hiding filters
- * @param {String} text see Filter()
- * @param {String} domain     Host name or domain the filter should be restricted to (can be null for no restriction)
- * @param {String} selector   CSS selector for the HTML elements that should be hidden
- * @constructor
- * @augments ActiveFilter
- */
-function ElemHideFilter(text, domain, selector)
-{
-  ActiveFilter.call(this, text);
-
-  this.domain = domain;
-  this.selector = selector;
-}
-ElemHideFilter.prototype =
-{
-  __proto__: ActiveFilter.prototype,
-
-  /**
-   * Host name or domain the filter should be restricted to (can be null for no restriction)
-   * @type String
-   */
-  domain: null,
-  /**
-   * CSS selector for the HTML elements that should be hidden
-   * @type String
-   */
-  selector: null,
-
-  /**
-   * Random key associated with the filter - used to register hits from element hiding filters
-   * @type String
-   */
-  key: null
-};
-aup.ElemHideFilter = ElemHideFilter;
-
-/**
- * Creates an element hiding filter from a pre-parsed text representation
- *
- * @param {String} text       same as in Filter()
- * @param {String} domain     (optional) domain part of the text representation
- * @param {String} tagName    (optional) tag name part
- * @param {String} attrRules  (optional) attribute matching rules
- * @param {String} selector   (optional) raw CSS selector
- * @return {ElemHideFilter or InvalidFilter}
- */
-ElemHideFilter.fromText = function(text, domain, tagName, attrRules, selector)
-{
-  domain = domain.replace(/^,+/, "").replace(/,+$/, "").replace(/,+/g, ",");
-
-  if (!selector)
-  {
-    if (tagName == "*")
-      tagName = "";
-
-    let id = null;
-    let additional = "";
-    if (attrRules) {
-      attrRules = attrRules.match(/\([\w\-]+(?:[$^*]?=[^\(\)"]*)?\)/g);
-      for each (let rule in attrRules) {
-        rule = rule.substr(1, rule.length - 2);
-        let separatorPos = rule.indexOf("=");
-        if (separatorPos > 0) {
-          rule = rule.replace(/=/, '="') + '"';
-          additional += "[" + rule + "]";
-        }
-        else {
-          if (id)
-            return new InvalidFilter(text, aup.getString("filter_elemhide_duplicate_id"));
-          else
-            id = rule;
-        }
-      }
-    }
-
-    if (id)
-      selector = tagName + "." + id + additional + "," + tagName + "#" + id + additional;
-    else if (tagName || additional)
-      selector = tagName + additional;
-    else
-      return new InvalidFilter(text, aup.getString("filter_elemhide_nocriteria"));
-  }
-  return new ElemHideFilter(text, domain, selector);
-}

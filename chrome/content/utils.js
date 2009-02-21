@@ -138,14 +138,6 @@ function normalizeFilter(text) {
     // Don't remove spaces inside comments
     return text.replace(/^\s+/, "").replace(/\s+$/, "");
   }
-  else if (Filter.elemhideRegExp.test(text)) {
-    // Special treatment for element hiding filters, right side is allowed to contain spaces
-    /^(.*?)(#+)(.*)$/.test(text);   // .split(..., 2) will cut off the end of the string
-    var domain = RegExp.$1;
-    var separator = RegExp.$2;
-    var selector = RegExp.$3;
-    return domain.replace(/\s/g, "") + separator + selector.replace(/^\s+/, "").replace(/\s+$/, "");
-  }
   else
     return text.replace(/\s/g, "");
 }

@@ -23,13 +23,13 @@
  * ***** END LICENSE BLOCK ***** */
 
 /*
- * Component synchronizing filter storage with Matcher instances and elemhide.
+ * Component synchronizing filter storage with Matcher instances.
  * This file is included from nsAutoProxy.js.
  */
 
 /**
  * This object will listen for changes in filters and subscription and forward these
- * to Matcher instances and elemhide object.
+ * to Matcher instances.
  * @class
  */
 var filterListener =
@@ -47,7 +47,7 @@ var filterListener =
   },
 
   /**
-   * Notifies Matcher instances or elemhide object about a new filter
+   * Notifies Matcher instances about a new filter
    * if necessary.
    * @param {Filter} filter filter that has been added
    */
@@ -60,12 +60,10 @@ var filterListener =
       blacklistMatcher.add(filter);
     else if (filter instanceof WhitelistFilter)
       whitelistMatcher.add(filter);
-    else if (filter instanceof ElemHideFilter)
-      elemhide.add(filter);
   },
 
   /**
-   * Notifies Matcher instances or elemhide object about removal of a filter
+   * Notifies Matcher instances about removal of a filter
    * if necessary.
    * @param {Filter} filter filter that has been removed
    */
@@ -78,8 +76,6 @@ var filterListener =
       blacklistMatcher.remove(filter);
     else if (filter instanceof WhitelistFilter)
       whitelistMatcher.remove(filter);
-    else if (filter instanceof ElemHideFilter)
-      elemhide.remove(filter);
   },
 
   /**
@@ -136,14 +132,10 @@ var filterListener =
     {
       blacklistMatcher.clear();
       whitelistMatcher.clear();
-      elemhide.clear();
       for each (let subscription in subscriptions)
         if (!subscription.disabled)
           subscription.filters.forEach(this.addFilter, this);
     }
-
-    if (elemhide.isDirty)
-      elemhide.apply();
   },
 
   /**
@@ -170,8 +162,6 @@ var filterListener =
         });
       }
       filters.forEach(method, this);
-      if (elemhide.isDirty)
-        elemhide.apply();
     }
   }
 };

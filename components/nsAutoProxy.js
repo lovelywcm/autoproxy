@@ -526,7 +526,6 @@ function init()
   loader.loadSubScript('chrome://autoproxy/content/subscriptionClasses.js');
   loader.loadSubScript('chrome://autoproxy/content/filterStorage.js');
   loader.loadSubScript('chrome://autoproxy/content/matcher.js');
-  loader.loadSubScript('chrome://autoproxy/content/elemhide.js');
   loader.loadSubScript('chrome://autoproxy/content/filterListener.js');
   loader.loadSubScript('chrome://autoproxy/content/protocol.js');
   loader.loadSubScript('chrome://autoproxy/content/policy.js');

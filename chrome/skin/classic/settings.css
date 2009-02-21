@@ -71,7 +71,7 @@ treechildren::-moz-tree-cell-text(col-filter, filter-true, type-whitelist, selec
   color: #008000;
 }
 
-treechildren::-moz-tree-cell-text(col-filter, filter-true, type-elemhide, selected-false) {
+treechildren::-moz-tree-cell-text(col-filter, filter-true, selected-false) {
   color: #000080;
 }
 

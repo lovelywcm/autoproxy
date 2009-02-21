@@ -106,10 +106,6 @@ var policy =
     this.typeDescr[0xFFFE] = "BACKGROUND";
     this.localizedDescr[0xFFFE] = aup.getString("type_label_background");
 
-    this.type.ELEMHIDE = 0xFFFD;
-    this.typeDescr[0xFFFD] = "ELEMHIDE";
-    this.localizedDescr[0xFFFD] = aup.getString("type_label_elemhide");
-
     // whitelisted URL schemes
     this.whitelistSchemes = {};
     for each (var scheme in prefs.whitelistschemes.toLowerCase().split(" "))
@@ -117,7 +113,7 @@ var policy =
   },
 
   /**
-   * Checks whether a node should be blocked, hides it if necessary
+   * Checks whether a node should be blocked
    * @param wnd {nsIDOMWindow}
    * @param node {nsIDOMElement}
    * @param contentType {String}
@@ -161,14 +157,6 @@ var policy =
     let docDomain = this.getHostname(wnd.location.href);
     let thirdParty = true;
 
-    if (!match && location.scheme == "chrome" && location.host == "global" && 
-                                                /auphit:(\d+)#/.test(location.path) && RegExp.$1 in elemhide.keys)
-    {
-      match = elemhide.keys[RegExp.$1];
-      contentType = this.type.ELEMHIDE;
-      locationText = match.text.replace(/^.*?#/, '#');
-    }
-
     if (!match && prefs.enabled) {
       match = whitelistMatcher.matchesAny(locationText, this.typeDescr[contentType] || "", docDomain, thirdParty);
       if (match == null)
@@ -189,9 +177,6 @@ var policy =
    * @return {Boolean}
    */
   isBlockableScheme: function(location) {
-    // HACK: Allow blocking element hiding hits
-    if (location.scheme == "chrome" && location.host == "global" && /auphit:(\d+)#/.test(location.path) && RegExp.$1 in elemhide.keys)
-      return true;
 
     return !(location.scheme in this.whitelistSchemes);
   },

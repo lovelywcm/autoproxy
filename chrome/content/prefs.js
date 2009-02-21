@@ -194,7 +194,6 @@ var prefs = {
     for each (var pref in this.prefList)
       this.loadPref(pref);
 
-    elemhide.apply();
 
     // Fire pref listeners
     for each (var listener in this.listeners)

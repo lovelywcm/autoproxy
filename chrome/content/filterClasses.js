@@ -378,7 +378,6 @@ RegExpFilter.fromText = function(text)
   let matchCase = null;
   let domains = null;
   let thirdParty = null;
-  let collapse = null;
   let options;
   if (Filter.optionsRegExp.test(text))
   {
@@ -409,10 +408,6 @@ RegExpFilter.fromText = function(text)
         thirdParty = true;
       else if (option == "~THIRD_PARTY")
         thirdParty = false;
-      else if (option == "COLLAPSE")
-        collapse = true;
-      else if (option == "~COLLAPSE")
-        collapse = false;
     }
   }
 
@@ -445,7 +440,7 @@ RegExpFilter.fromText = function(text)
 
   try
   {
-    return new constructor(origText, regexp, contentType, matchCase, domains, thirdParty, collapse);
+    return new constructor(origText, regexp, contentType, matchCase, domains, thirdParty, false);
   }
   catch (e)
   {
@@ -481,25 +476,17 @@ RegExpFilter.typeMap = {
  * @param {Boolean} matchCase see RegExpFilter()
  * @param {String} domains see RegExpFilter()
  * @param {Boolean} thirdParty see RegExpFilter()
- * @param {Boolean} collapse  defines whether the filter should collapse blocked content, can be null
  * @constructor
  * @augments RegExpFilter
  */
-function BlockingFilter(text, regexp, contentType, matchCase, domains, thirdParty, collapse)
+function BlockingFilter(text, regexp, contentType, matchCase, domains, thirdParty, false)
 {
   RegExpFilter.call(this, text, regexp, contentType, matchCase, domains, thirdParty);
-
-  this.collapse = collapse;
 }
 BlockingFilter.prototype =
 {
-  __proto__: RegExpFilter.prototype,
-
-  /**
-   * Defines whether the filter should collapse blocked content. Can be null (use the global preference).
-   * @type Boolean
-   */
-  collapse: null
+  __proto__: RegExpFilter.prototype
+  
 };
 aup.BlockingFilter = BlockingFilter;
 

@@ -1085,7 +1085,6 @@ function fillOptionsPopup()
 {
   E("aup-enabled").setAttribute("checked", prefs.enabled);
   E("frameobjects").setAttribute("checked", prefs.frameobjects);
-  E("slowcollapse").setAttribute("checked", !prefs.fastcollapse);
   E("showintoolbar").setAttribute("checked", prefs.showintoolbar);
   E("showinstatusbar").setAttribute("checked", prefs.showinstatusbar);
 }

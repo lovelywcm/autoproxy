@@ -103,16 +103,6 @@
       </hbox>
       <vbox flex="1" id="typeGroup"/>
 
-      <vbox>
-        <label control="collapse" value="&collapse.label;" accesskey="&collapse.accesskey;"/>
-        <menulist id="collapse" oncommand="updateFilter()">
-          <menupopup>
-            <menuitem id="collapseDefault" value="" label_yes="&collapse.default.yes.label;" label_no="&collapse.default.no.label;" selected="true"/>
-            <menuitem label="&collapse.yes.label;" value="collapse"/>
-            <menuitem label="&collapse.no.label;" value="~collapse"/>
-          </menupopup>
-        </menulist>
-      </vbox>
     </groupbox>
   </hbox>
 </dialog>

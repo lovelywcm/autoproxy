@@ -57,7 +57,6 @@
       <menu id="aup-status-options" label="&options.label;" accesskey="&options.accesskey;">
         <menupopup id="aup-status-options-popup">
           <menuitem id="aup-status-frameobjects" label="&objecttabs.label;" accesskey="&objecttabs.accesskey;" type="checkbox" oncommand="aupTogglePref('frameobjects')"/>
-          <menuitem id="aup-status-slowcollapse" label="&collapse.label;" accesskey="&collapse.accesskey;" type="checkbox" oncommand="aupTogglePref('fastcollapse')"/>
           <menuseparator/>
           <menuitem id="aup-status-showintoolbar" label="&showintoolbar.label;" accesskey="&showintoolbar.accesskey;" type="checkbox" oncommand="aupTogglePref('showintoolbar')"/>
           <menuitem id="aup-status-showinstatusbar" label="&showinstatusbar.label;" accesskey="&showinstatusbar.accesskey;" type="checkbox" oncommand="aupTogglePref('showinstatusbar')"/>

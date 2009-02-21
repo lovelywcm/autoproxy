@@ -542,7 +542,6 @@ function aupFillPopup(popup) {
 
   elements.enabled.setAttribute("checked", aupPrefs.enabled);
   elements.frameobjects.setAttribute("checked", aupPrefs.frameobjects);
-  elements.slowcollapse.setAttribute("checked", !aupPrefs.fastcollapse);
   elements.showintoolbar.setAttribute("checked", aupPrefs.showintoolbar);
   elements.showinstatusbar.setAttribute("checked", aupPrefs.showinstatusbar);
 

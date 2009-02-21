@@ -135,11 +135,6 @@ function init() {
     typeGroup.appendChild(typeNode);
   }
 
-  let collapseDefault = E("collapseDefault");
-  collapseDefault.label = collapseDefault.getAttribute(aup.prefs.fastcollapse ? "label_no" : "label_yes");
-  E("collapse").value = "";
-  E("collapse").setAttribute("label", collapseDefault.label);
-
   updatePatternSelection();
 
   document.getElementById("disabledWarning").hidden = aup.prefs.enabled;
@@ -184,10 +179,7 @@ function updateFilter()
     if (E("matchCase").checked)
       options.push("match-case");
 
-    let collapse = E("collapse");
-    disableElement(collapse, type == "whitelist", "value", "");
-    if (collapse.value != "")
-      options.push(collapse.value);
+    disableElement(false, type == "whitelist", "value", "");
 
     let enabledTypes = [];
     let disabledTypes = [];

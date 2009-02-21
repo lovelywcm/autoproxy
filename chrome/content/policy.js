@@ -118,10 +118,9 @@ var policy =
    * @param node {nsIDOMElement}
    * @param contentType {String}
    * @param location {nsIURI}
-   * @param collapse {Boolean} true to force hiding of the node
    * @return {Boolean} false if the node is blocked
    */
-  processNode: function(wnd, node, contentType, location, collapse) {
+  processNode: function(wnd, node, contentType, location, false) {
     var topWnd = wnd.top;
     if (!topWnd || !topWnd.location || !topWnd.location.href)
       return true;

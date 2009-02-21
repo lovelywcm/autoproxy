@@ -22,12 +22,12 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-const ABP_PACKAGE = "/adblockplus.mozdev.org"; 
-const ABP_EXTENSION_ID = "{d10d0bf8-f5b5-c8b4-a8b2-2b9879e08c5d}";
-const ABP_CONTRACTID = "@mozilla.org/adblockplus;1";
-const ABP_CID = Components.ID("{79c889f6-f5a2-abba-8b27-852e6fec4d56}");
-const ABP_PROT_CONTRACTID = "@mozilla.org/network/protocol;1?name=abp";
-const ABP_PROT_CID = Components.ID("{6a5987fd-93d8-049c-19ac-b9bfe88718fe}");
+const aup_PACKAGE = "/autoproxy.mozdev.org"; 
+const aup_EXTENSION_ID = "{d10d0bf8-f5b5-c8b4-a8b2-2b9879e08c5d}";
+const aup_CONTRACTID = "@mozilla.org/autoproxy;1";
+const aup_CID = Components.ID("{79c889f6-f5a2-abba-8b27-852e6fec4d56}");
+const aup_PROT_CONTRACTID = "@mozilla.org/network/protocol;1?name=aup";
+const aup_PROT_CID = Components.ID("{6a5987fd-93d8-049c-19ac-b9bfe88718fe}");
 const locales = [
   "{{LOCALE}}",
   null
@@ -46,38 +46,38 @@ const module = {
   registerSelf: function(compMgr, fileSpec, location, type)
   {
     compMgr = compMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar);
-    compMgr.registerFactoryLocation(ABP_CID, 
+    compMgr.registerFactoryLocation(aup_CID, 
                     "Adblock content policy",
-                    ABP_CONTRACTID,
+                    aup_CONTRACTID,
                     fileSpec, location, type);
-    compMgr.registerFactoryLocation(ABP_PROT_CID,
-                    "ABP protocol handler",
-                    ABP_PROT_CONTRACTID,
+    compMgr.registerFactoryLocation(aup_PROT_CID,
+                    "aup protocol handler",
+                    aup_PROT_CONTRACTID,
                     fileSpec, location, type);
 
     // Need to delete category before removing, nsIContentPolicies in Gecko 1.9 listens to
     // category changes
     var catman = Components.classes["@mozilla.org/categorymanager;1"]
                            .getService(Components.interfaces.nsICategoryManager);
-    catman.deleteCategoryEntry("content-policy", ABP_CONTRACTID, true);
-    catman.addCategoryEntry("content-policy", ABP_CONTRACTID,
-              ABP_CONTRACTID, true, true);
+    catman.deleteCategoryEntry("content-policy", aup_CONTRACTID, true);
+    catman.addCategoryEntry("content-policy", aup_CONTRACTID,
+              aup_CONTRACTID, true, true);
   },
 
   unregisterSelf: function(compMgr, fileSpec, location)
   {
     compMgr = compMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar);
 
-    compMgr.unregisterFactoryLocation(ABP_CID, fileSpec);
-    compMgr.unregisterFactoryLocation(ABP_PROT_CID, fileSpec);
+    compMgr.unregisterFactoryLocation(aup_CID, fileSpec);
+    compMgr.unregisterFactoryLocation(aup_PROT_CID, fileSpec);
     var catman = Components.classes["@mozilla.org/categorymanager;1"]
                            .getService(Components.interfaces.nsICategoryManager);
-    catman.deleteCategoryEntry("content-policy", ABP_CONTRACTID, true);
+    catman.deleteCategoryEntry("content-policy", aup_CONTRACTID, true);
   },
 
   getClassObject: function(compMgr, cid, iid)
   {
-    if (!cid.equals(ABP_CID) && !cid.equals(ABP_PROT_CID))
+    if (!cid.equals(aup_CID) && !cid.equals(aup_PROT_CID))
       throw Components.results.NS_ERROR_NO_INTERFACE;
 
     if (!iid.equals(Components.interfaces.nsIFactory))
@@ -112,7 +112,7 @@ const factory = {
     if (!initialized)
       init();
 
-    return abp.QueryInterface(iid);
+    return aup.QueryInterface(iid);
   },
 
   // nsISupports interface implementation
@@ -156,7 +156,7 @@ catch(e)
  * Content policy class definition
  */
 
-const abp =
+const aup =
 {
   //
   // nsISupports interface implementation
@@ -176,7 +176,7 @@ const abp =
     if (!iid.equals(Components.interfaces.nsIClassInfo) &&
         !iid.equals(Components.interfaces.nsISecurityCheckedComponent) &&
         !iid.equals(Components.interfaces.nsIDOMWindow))
-      dump("Adblock Plus: abp.QI to an unknown interface: " + iid + "\n");
+      dump("Adblock Plus: aup.QI to an unknown interface: " + iid + "\n");
 
     throw Components.results.NS_ERROR_NO_INTERFACE;
   },
@@ -389,7 +389,7 @@ const abp =
    */
   openSettingsDialog: function(location, filter)
   {
-    var dlg = windowMediator.getMostRecentWindow("abp:settings");
+    var dlg = windowMediator.getMostRecentWindow("aup:settings");
     var func = function()
     {
       if (typeof location == "string")
@@ -409,14 +409,14 @@ const abp =
       catch (e)
       {
         // There must be some modal dialog open
-        dlg = windowMediator.getMostRecentWindow("abp:subscription") || windowMediator.getMostRecentWindow("abp:about");
+        dlg = windowMediator.getMostRecentWindow("aup:subscription") || windowMediator.getMostRecentWindow("aup:about");
         if (dlg)
           dlg.focus();
       }
     }
     else
     {
-      dlg = windowWatcher.openWindow(null, "chrome://adblockplus/content/settings.xul", "_blank", "chrome,centerscreen,resizable,dialog=no", null);
+      dlg = windowWatcher.openWindow(null, "chrome://autoproxy/content/settings.xul", "_blank", "chrome,centerscreen,resizable,dialog=no", null);
       dlg.addEventListener("post-load", func, false);
     }
   },
@@ -486,7 +486,7 @@ const abp =
 
   headerParser: headerParser
 };
-abp.wrappedJSObject = abp;
+aup.wrappedJSObject = aup;
 
 /*
  * Core Routines
@@ -506,12 +506,12 @@ function init()
 
     try
     {
-      registry.installPackage("jar:resource:/chrome/adblockplus.jar!/content/", false);
+      registry.installPackage("jar:resource:/chrome/autoproxy.jar!/content/", false);
     } catch(e) {}
 
     try
     {
-      registry.installSkin("jar:resource:/chrome/adblockplus.jar!/skin/classic/", false, true);
+      registry.installSkin("jar:resource:/chrome/autoproxy.jar!/skin/classic/", false, true);
     } catch(e) {}
 
     for (var i = 0; i < locales.length; i++)
@@ -521,27 +521,27 @@ function init()
 
       try
       {
-        registry.installLocale("jar:resource:/chrome/adblockplus.jar!/locale/" + locales[i] + "/", false);
+        registry.installLocale("jar:resource:/chrome/autoproxy.jar!/locale/" + locales[i] + "/", false);
       } catch(e) {}
     }
   }
 
-  abp.versionComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
+  aup.versionComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
                                     .createInstance(Components.interfaces.nsIVersionComparator);
 
-  loader.loadSubScript('chrome://adblockplus/content/utils.js');
-  loader.loadSubScript('chrome://adblockplus/content/filterClasses.js');
-  loader.loadSubScript('chrome://adblockplus/content/subscriptionClasses.js');
-  loader.loadSubScript('chrome://adblockplus/content/filterStorage.js');
-  loader.loadSubScript('chrome://adblockplus/content/matcher.js');
-  loader.loadSubScript('chrome://adblockplus/content/elemhide.js');
-  loader.loadSubScript('chrome://adblockplus/content/filterListener.js');
-  loader.loadSubScript('chrome://adblockplus/content/protocol.js');
-  loader.loadSubScript('chrome://adblockplus/content/policy.js');
-  loader.loadSubScript('chrome://adblockplus/content/data.js');
-  loader.loadSubScript('chrome://adblockplus/content/prefs.js');
-  loader.loadSubScript('chrome://adblockplus/content/synchronizer.js');
-  loader.loadSubScript('chrome://adblockplus/content/flasher.js');
+  loader.loadSubScript('chrome://autoproxy/content/utils.js');
+  loader.loadSubScript('chrome://autoproxy/content/filterClasses.js');
+  loader.loadSubScript('chrome://autoproxy/content/subscriptionClasses.js');
+  loader.loadSubScript('chrome://autoproxy/content/filterStorage.js');
+  loader.loadSubScript('chrome://autoproxy/content/matcher.js');
+  loader.loadSubScript('chrome://autoproxy/content/elemhide.js');
+  loader.loadSubScript('chrome://autoproxy/content/filterListener.js');
+  loader.loadSubScript('chrome://autoproxy/content/protocol.js');
+  loader.loadSubScript('chrome://autoproxy/content/policy.js');
+  loader.loadSubScript('chrome://autoproxy/content/data.js');
+  loader.loadSubScript('chrome://autoproxy/content/prefs.js');
+  loader.loadSubScript('chrome://autoproxy/content/synchronizer.js');
+  loader.loadSubScript('chrome://autoproxy/content/flasher.js');
   
   timeLine.log("init() done");
 }
@@ -587,7 +587,7 @@ function fixPackageLocale()
 
     var registry = Components.classes["@mozilla.org/chrome/chrome-registry;1"]
                              .getService(Components.interfaces.nsIChromeRegistrySea);
-    registry.selectLocaleForPackage(select, "adblockplus", true);
+    registry.selectLocaleForPackage(select, "autoproxy", true);
   } catch(e) {}
 }
 
@@ -610,6 +610,6 @@ var timeLine = {
     let padding = [];
     for (var i = msg.toString().length; i < 40; i++)
       padding.push(" ");
-    dump("ABP timeline: " + msg + padding.join("") + "\t (" + diff + ")\n");
+    dump("aup timeline: " + msg + padding.join("") + "\t (" + diff + ")\n");
   }
 };

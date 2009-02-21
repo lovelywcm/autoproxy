@@ -24,10 +24,10 @@
 
 /*
  * Manages Adblock Plus preferences.
- * This file is included from nsAdblockPlus.js.
+ * This file is included from nsAutoProxy.js.
  */
 
-const prefRoot = "extensions.adblockplus.";
+const prefRoot = "extensions.autoproxy.";
 
 var prefService = Components.classes["@mozilla.org/preferences-service;1"]
                             .getService(Components.interfaces.nsIPrefService);
@@ -98,9 +98,9 @@ var prefs = {
   init: function() {
 
     // Try to fix selected locale in Mozilla/SeaMonkey
-    strings = stringService.createBundle("chrome://adblockplus/locale/global.properties");
+    strings = stringService.createBundle("chrome://autoproxy/locale/global.properties");
     fixPackageLocale();
-    strings = stringService.createBundle("chrome://adblockplus/locale/global.properties");
+    strings = stringService.createBundle("chrome://autoproxy/locale/global.properties");
 
     // Initialize prefs list
     var defaultBranch = prefService.getDefaultBranch(prefRoot);

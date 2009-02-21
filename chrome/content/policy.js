@@ -24,7 +24,7 @@
 
 /**
  * Content policy implementation, responsible for blocking things.
- * This file is included from nsAdblockPlus.js.
+ * This file is included from nsAutoProxy.js.
  */
 
 var effectiveTLD = null;

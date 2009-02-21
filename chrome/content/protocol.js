@@ -24,7 +24,7 @@
 
 /*
  * Fake protocol handler for the aup: protocol.
- * This file is included from nsAdblockPlus.js.
+ * This file is included from nsAutoProxy.js.
  */
 
 var protocol = {
@@ -92,7 +92,7 @@ ABPChannel.prototype = {
 
         var browser = windowMediator.getMostRecentWindow("navigator:browser") || windowMediator.getMostRecentWindow("emusic:window");
         if (browser) {
-          browser.openDialog("chrome://adblockplus/content/subscription.xul", "_blank",
+          browser.openDialog("chrome://autoproxy/content/subscription.xul", "_blank",
                              "chrome,centerscreen,modal", subscription);
         }
       }

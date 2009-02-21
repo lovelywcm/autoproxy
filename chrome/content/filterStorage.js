@@ -24,7 +24,7 @@
 
 /*
  * FilterStorage class responsible to managing user's subscriptions and filters.
- * This file is included from nsAdblockPlus.js.
+ * This file is included from nsAutoProxy.js.
  */
 
 var dirService = Components.classes["@mozilla.org/file/directory_service;1"]
@@ -358,7 +358,7 @@ var filterStorage =
       this.file = getFileByPath(this.prefList.patternsfile[2]);   // Try default
 
     if (!this.file)
-      dump("Adblock Plus: Failed to resolve filter file location from extensions.adblockplus.patternsfile preference\n");
+      dump("Adblock Plus: Failed to resolve filter file location from extensions.autoproxy.patternsfile preference\n");
 
     let stream = null;
     if (this.file)

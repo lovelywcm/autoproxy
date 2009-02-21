@@ -30,7 +30,7 @@
 // String service
 var stringService = Components.classes["@mozilla.org/intl/stringbundle;1"]
                               .getService(Components.interfaces.nsIStringBundleService);
-var strings = stringService.createBundle("chrome://adblockplus/locale/global.properties");
+var strings = stringService.createBundle("chrome://autoproxy/locale/global.properties");
 aup.getString = function(name) {
   return strings.GetStringFromName(name);
 };
@@ -85,7 +85,7 @@ aup.makeURL = makeURL;
 function generateClickHandler(wnd, data) {
   return function(event) {
     event.preventDefault();
-    wnd.openDialog("chrome://adblockplus/content/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", wnd, data); 
+    wnd.openDialog("chrome://autoproxy/content/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", wnd, data); 
   }
 }
 

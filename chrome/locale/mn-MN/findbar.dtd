@@ -1,14 +1,0 @@
-<!ENTITY find.label "Ол:">
-<!ENTITY findCloseButton.tooltip "Олох самбарыг хаа">
-<!ENTITY next.accesskey "Д">
-<!ENTITY next.label "Дараах">
-<!ENTITY next.tooltip "Өгүүлбэрийн дараагийн харагдцыг ол">
-<!ENTITY previous.accesskey "Ө">
-<!ENTITY previous.label "Өмнөх">
-<!ENTITY previous.tooltip "Өгүүлбэрийн өмнөх харагдцыг ол">
-<!ENTITY highlight.accesskey "Б">
-<!ENTITY highlight.label "Бүгдийг гэрэлтүүл">
-<!ENTITY highlight.tooltiptext "Өгүүлбэрийн олдцыг гэрэлтүүлж харуул">
-<!ENTITY caseSensitiveCheckbox.label "Яг тааруулж">
-<!ENTITY caseSensitiveCheckbox.accesskey "г">
-

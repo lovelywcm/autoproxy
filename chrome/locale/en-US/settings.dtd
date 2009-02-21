@@ -22,7 +22,7 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
-<!ENTITY dialog.title               "Adblock Plus Preferences">
+<!ENTITY dialog.title               "AutoProxy Preferences">
 
 <!ENTITY filters.label              "Filters">
 <!ENTITY filters.accesskey          "F">
@@ -73,7 +73,7 @@
 <!ENTITY options.label              "Options">
 <!ENTITY options.accesskey          "O">
 
-<!ENTITY enable.label               "Enable Adblock Plus">
+<!ENTITY enable.label               "Enable AutoProxy">
 <!ENTITY enable.accesskey           "N">
 <!ENTITY showintoolbar.label        "Show in toolbar">
 <!ENTITY showintoolbar.accesskey    "B">
@@ -93,10 +93,10 @@
 <!ENTITY faq.label                  "Frequently Asked Questions">
 <!ENTITY faq.accesskey              "F">
 <!ENTITY faq.url                    "http://autoproxy.org/en/faq">
-<!ENTITY filterdoc.label            "Writing Adblock Plus filters">
+<!ENTITY filterdoc.label            "Writing AutoProxy filters">
 <!ENTITY filterdoc.accesskey        "R">
 <!ENTITY filterdoc.url              "http://autoproxy.org/en/filters">
-<!ENTITY about.label                "About Adblock Plus">
+<!ENTITY about.label                "About AutoProxy">
 <!ENTITY about.accesskey            "B">
 
 <!ENTITY description                "The following filters determine which addresses should be blocked and which ones should be allowed:">

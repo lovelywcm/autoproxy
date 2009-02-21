@@ -10,8 +10,8 @@
 
   <!-- package description -->
   <RDF:Description about="urn:mozilla:package:autoproxy"
-    chrome:displayName="Adblock Plus"
-    chrome:author="Wladimir Palant"
+    chrome:displayName="AutoProxy"
+    chrome:author="WCM"
     chrome:name="autoproxy"
     chrome:authorURL="http://autoproxy.org/"
     chrome:extension="true"

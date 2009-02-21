@@ -375,13 +375,13 @@ DownloadableSubscription.prototype =
   errors: 0,
 
   /**
-   * Minimal Adblock Plus version required for this subscription
+   * Minimal AutoProxy version required for this subscription
    * @type String
    */
   requiredVersion: null,
 
   /**
-   * Should be true if requiredVersion is higher than current Adblock Plus version
+   * Should be true if requiredVersion is higher than current AutoProxy version
    * @type Boolean
    */
   upgradeRequired: false,

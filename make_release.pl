@@ -17,7 +17,7 @@ open(VERSION, ">version");
 print VERSION $ARGV[0];
 close(VERSION);
 
-@ARGV = ("../downloads/adblockplus-$version.xpi");
+@ARGV = ("../downloads/autoproxy-$version.xpi");
 do './create_xpi.pl';
 
 opendir(LOCALES, "chrome/locale");
@@ -27,17 +27,17 @@ closedir(LOCALES);
 # Create new single-locale builds
 for my $locale (@locales)
 {
-  @ARGV = ("../downloads/adblockplus-$version-$locale.xpi", $locale);
+  @ARGV = ("../downloads/autoproxy-$version-$locale.xpi", $locale);
   do './create_xpi.pl';
 }
 
 chdir('..');
-system("hg add downloads/adblockplus-$version.xpi");
-system(qq(hg commit -m "Releasing Adblock Plus $version" downloads src));
+system("hg add downloads/autoproxy-$version.xpi");
+system(qq(hg commit -m "Releasing AutoProxy $version" downloads src));
 
 my $branch = $version;
 $branch =~ s/\./_/g;
-$branch = "ADBLOCK_PLUS_".$branch."_RELEASE";
+$branch = "AutoProxy_".$branch."_RELEASE";
 system(qq(hg tag $branch));
 
 system(qq(hg push));

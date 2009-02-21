@@ -22,11 +22,11 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
-<!ENTITY dialog.title               "Add Adblock Plus filter subscription">
+<!ENTITY dialog.title               "Add AutoProxy filter subscription">
 
 <!ENTITY description.par1           "
-  Thank you for installing Adblock Plus. This extension can
-  eliminate 99&#x25; of the advertisements you see on the web. However,
+  Thank you for installing AutoProxy. This extension can
+  eliminate 99% of the advertisements you see on the web. However,
   effective ad filtering requires you to define a good set of
   filters. You can do it yourself, or you can simply subscribe
   to filter lists others maintain for you. It will still be possible
@@ -37,7 +37,7 @@
 <!ENTITY description.par2           "
   You can choose one subscription from the
   list of recommended subscriptions below (more subscriptions can be
-  added in Adblock Plus Preferences later though usually this is not
+  added in AutoProxy Preferences later though usually this is not
   necessary):
 ">
 

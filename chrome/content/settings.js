@@ -468,7 +468,7 @@ function importList()
       lines.push(aup.normalizeFilter(line.value));
     stream.close();
 
-    if (/\[Adblock(?:\s*Plus\s*([\d\.]+)?)?\]/i.test(lines[0]))
+    if (/\[AutoProxy\s+\d\.\d\.\d\]/i.test(lines[0]))
     {
       let minVersion = RegExp.$1;
       let warning = "";
@@ -533,7 +533,7 @@ function exportList()
     saveDefaultDir(picker.file.parent.QueryInterface(Components.interfaces.nsILocalFile));
     let lineBreak = aup.getLineBreak();
 
-    let list = ["[Adblock]"];
+    let list = ["[AutoProxy]"];
     let minVersion = "0";
     for each (let subscription in treeView.subscriptions)
     {
@@ -584,9 +584,9 @@ function exportList()
     if (minVersion != "0")
     {
       if (aup.versionComparator.compare(minVersion, "0.7.1") >= 0)
-        list[0] = "[Adblock Plus " + minVersion + "]";
+        list[0] = "[AutoProxy " + minVersion + "]";
       else
-        list[0] = "(Adblock Plus " + minVersion + " or higher required) " + list[0];
+        list[0] = "(AutoProxy " + minVersion + " or higher required) " + list[0];
     }
 
     list.push("");
@@ -612,7 +612,7 @@ function exportList()
     }
     catch (e)
     {
-      dump("Adblock Plus: error writing to file: " + e + "\n");
+      dump("AutoProxy: error writing to file: " + e + "\n");
       alert(aup.getString("filters_write_error"));
     }
   }
@@ -1262,7 +1262,7 @@ function showTreeTooltip(/**Event*/ event) /**Boolean*/
 }
 
 /**
- * Opens About Adblock Plus dialog
+ * Opens About AutoProxy dialog
  */
 function openAbout()
 {

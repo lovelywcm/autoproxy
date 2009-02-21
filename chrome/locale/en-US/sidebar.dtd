@@ -22,7 +22,7 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
-<!ENTITY detached.title           "Adblock Plus: Blockable items (detached)">
+<!ENTITY detached.title           "AutoProxy: Proxyable items (detached)">
 
 <!ENTITY detach.label             "Detach">
 <!ENTITY reattach.label           "Reattach">
@@ -38,7 +38,7 @@
 
 <!ENTITY noitems.label            "No blockable items">
 <!ENTITY whitelisted.label        "Whitelisted page">
-<!ENTITY notloaded.label          "Adblock Plus hasn't been installed properly">
+<!ENTITY notloaded.label          "AutoProxy hasn't been installed properly">
 
 <!ENTITY tooltip.address.label    "Address:">
 <!ENTITY tooltip.type.label       "Type:">

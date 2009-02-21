@@ -358,7 +358,7 @@ var filterStorage =
       this.file = getFileByPath(this.prefList.patternsfile[2]);   // Try default
 
     if (!this.file)
-      dump("Adblock Plus: Failed to resolve filter file location from extensions.autoproxy.patternsfile preference\n");
+      dump("AutoProxy: Failed to resolve filter file location from extensions.autoproxy.patternsfile preference\n");
 
     let stream = null;
     if (this.file)
@@ -374,7 +374,7 @@ var filterStorage =
         stream = stream.QueryInterface(Components.interfaces.nsIUnicharLineInputStream);
       }
       catch (e) {
-        dump("Adblock Plus: Failed to read filters from file " + this.file.path + ": " + e + "\n");
+        dump("AutoProxy: Failed to read filters from file " + this.file.path + ": " + e + "\n");
         stream = null;
       }
     }
@@ -432,7 +432,7 @@ var filterStorage =
 
   /**
    * Parses filter data from a stream. If the data contains user filters outside of filter
-   * groups (Adblock Plus 0.7.x data) these filters are returned - they need to be added
+   * groups (AutoProxy 0.7.x data) these filters are returned - they need to be added
    * separately.
    */
   parseIniFile: function(/**nsIUnicharLineInputStream*/ stream) /**Array of String*/
@@ -552,12 +552,12 @@ var filterStorage =
       stream.init(fileStream, "UTF-8", 16384, Components.interfaces.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
     }
     catch (e) {
-      dump("Adblock Plus: failed to create file " + tempFile.path + ": " + e + "\n");
+      dump("AutoProxy: failed to create file " + tempFile.path + ": " + e + "\n");
       return;
     }
 
     const maxBufLength = 1024;
-    let buf = ["# Adblock Plus preferences", "version=" + this.formatVersion];
+    let buf = ["# AutoProxy preferences", "version=" + this.formatVersion];
     let lineBreak = aup.getLineBreak();
     function writeBuffer()
     {
@@ -568,7 +568,7 @@ var filterStorage =
       }
       catch (e) {
         stream.close();
-        dump("Adblock Plus: failed to write to file " + tempFile.path + ": " + e + "\n");
+        dump("AutoProxy: failed to write to file " + tempFile.path + ": " + e + "\n");
         try {
           tempFile.remove(false);
         }
@@ -615,7 +615,7 @@ var filterStorage =
       stream.close();
     }
     catch (e) {
-      dump("Adblock Plus: failed to close file " + tempFile.path + ": " + e + "\n");
+      dump("AutoProxy: failed to close file " + tempFile.path + ": " + e + "\n");
       try {
         tempFile.remove(false);
       }

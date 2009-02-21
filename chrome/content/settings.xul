@@ -60,7 +60,7 @@
 <script type="application/x-javascript;version=1.7" src="settings.js"/>
 <script type="application/x-javascript;version=1.7" src="findbar.js"/>
 
-<keyset id="adblockKeys">
+<keyset id="autoProxyKeys">
   <key id="synchsubscription-key" key="t" modifiers="accel"/>
   <key id="synchsubscriptions-key" key="t" modifiers="accel,shift" command="synchsubscriptions-command"/>
   <key id="import-key" key="i" modifiers="accel" command="import-command"/>

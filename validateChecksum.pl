@@ -2,7 +2,7 @@
 
 #############################################################################
 # This is a reference script to validate the checksum in downloadable       #
-# subscription. This performs the same validation as Adblock Plus when it   #
+# subscription. This performs the same validation as AutoProxy when it      #
 # downloads the subscription.                                               #
 #                                                                           #
 # To validate a subscription file, run the script like this:                #

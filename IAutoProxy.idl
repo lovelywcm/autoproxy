@@ -25,7 +25,7 @@
 #include "nsISupports.idl"
 
 [scriptable, uuid(2a311a4f-f32b-472a-9fc9-f1b1529924ad)]
-interface IAdblockPlusSubscription: nsISupports
+interface IAutoProxySubscription: nsISupports
 {
   /**
    * Subscription identifier, this is its URL unless the attribute external is set
@@ -89,7 +89,7 @@ interface IAdblockPlusSubscription: nsISupports
 };
 
 [scriptable, uuid(6e70a4b4-bef8-b0b3-25a2-62146012352b)]
-interface IAdblockPlus : nsISupports
+interface IAutoProxy : nsISupports
 {
   /**
    * Number of subscriptions in the list
@@ -101,14 +101,14 @@ interface IAdblockPlus : nsISupports
    *
    * @param id        subscription identifier
   */
-  IAdblockPlusSubscription getSubscription(in AString id);
+  IAutoProxySubscription getSubscription(in AString id);
 
   /**
    * Retrieves a subscription by its position in the list.
    *
    * @param index     index of the subscription in the list
   */
-  IAdblockPlusSubscription getSubscriptionAt(in PRInt32 index);
+  IAutoProxySubscription getSubscriptionAt(in PRInt32 index);
 
   /**
    * Adds an external subscription or updates subscription's patterns if it
@@ -152,7 +152,7 @@ interface IAdblockPlus : nsISupports
   void removePatterns([array, size_is(length)] in wstring patterns, in unsigned long length);
 
   /**
-   * Returns the installed version of Adblock Plus.
+   * Returns the installed version of AutoProxy.
   */
   AString getInstalledVersion();
 };

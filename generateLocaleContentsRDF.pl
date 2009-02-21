@@ -24,7 +24,7 @@ foreach my $locale (readdir(DIR))
   <RDF:Description about="urn:mozilla:locale:$locale">
     <chrome:packages>
       <RDF:Seq about="urn:mozilla:locale:$locale:packages">
-        <RDF:li resource="urn:mozilla:locale:$locale:adblockplus"/>
+        <RDF:li resource="urn:mozilla:locale:$locale:autoproxy"/>
       </RDF:Seq>
     </chrome:packages>
   </RDF:Description>

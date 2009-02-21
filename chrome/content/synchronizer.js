@@ -93,7 +93,7 @@ var synchronizer =
   readFilters: function(subscription, text)
   {
     let lines = text.split(/[\r\n]+/);
-    if (!/\[Adblock(?:\s*Plus\s*([\d\.]+)?)?\]/i.test(lines[0]))
+    if (!/\[AutoProxy\s+\d\.\d\.\d\]/i.test(lines[0]))
     {
       this.setError(subscription, "synchronize_invalid_data");
       return null;

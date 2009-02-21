@@ -386,23 +386,6 @@ var filterStorage =
 
       stream.close();
     }
-    else
-    {
-      // Probably the first time we run - try to import settings from Adblock
-      let importBranch = prefService.getBranch("adblock.");
-
-      try {
-        if (importBranch.prefHasUserValue("patterns"))
-          for each (let text in importBranch.getCharPref("patterns").split(" "))
-            this.addFilter(Filter.fromText(text), true);
-      } catch (e) {}
-
-      try {
-        for each (let url in importBranch.getCharPref("syncpath").split("|"))
-          if (!(url in this.knownSubscriptions))
-            this.addSubscription(Subscription.fromURL(url));
-      } catch (e) {}
-    }
 
     // Add missing special subscriptions if necessary
     for each (let specialSubscription in ["~il~", "~wl~", "~fl~", "~eh~"])

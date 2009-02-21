@@ -42,16 +42,6 @@ dialog {
   overflow: auto;
 }
 
-#adblock-warning,
-#filtersetg-warning {
-  color: #F00000;
-}
-
-#adblock-uninstall,
-#filtersetg-uninstall {
-  margin-left: 20px;
-}
-
 template+.container, .containerAdded {
   border-top: 1px solid black;
 }

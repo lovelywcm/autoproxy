@@ -28,31 +28,11 @@ let prefs = aup.prefs;
 let autoAdd;
 let result;
 
-let adblockID = "{34274bf4-1d97-a289-e984-17e546307e4f}";
-let filtersetG = "filtersetg@updater";
-
 function init()
 {
   autoAdd = !(window.arguments && window.arguments.length);
   result = (autoAdd ? {disabled: false, external: false, autoDownload: true} : window.arguments[0]);
   document.getElementById("description-par1").hidden = !autoAdd;
-
-  // Don't show Adblock/Filterset.G warning in SeaMonkey - no point showing
-  // a warning if we cannot uninstall.
-  if ("@mozilla.org/extensions/manager;1" in Components.classes)
-  {
-    if (isExtensionActive(adblockID))
-      document.getElementById("adblock-warning").hidden = false;
-
-    if (isExtensionActive(filtersetG))
-      document.getElementById("filtersetg-warning").hidden = false;
-
-    if ("Filterset.G" in aup.filterStorage.knownSubscriptions &&
-        !aup.filterStorage.knownSubscriptions["Filterset.G"].disabled)
-    {
-      document.getElementById("filtersetg-warning").hidden = false;
-    }
-  }  
 }
 
 function addSubscriptions() {
@@ -149,25 +129,4 @@ function isExtensionActive(id)
     return false;
 
   return true;
-}
-
-function uninstallAdblock()
-{
-  uninstallExtension(adblockID);
-  document.getElementById("adblock-warning").hidden = true;
-}
-
-function uninstallFiltersetG()
-{
-  // Disable further updates
-  aup.denyFiltersetG = true;
-
-  // Uninstall extension
-  uninstallExtension(filtersetG);
-
-  // Remove filter subscription
-  if ("Filterset.G" in aup.filterStorage.knownSubscriptions)
-    aup.filterStorage.removeSubscription(aup.filterStorage.knownSubscriptions["Filterset.G"]);
-
-  document.getElementById("filtersetg-warning").hidden = true;
 }

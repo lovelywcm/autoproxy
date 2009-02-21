@@ -637,7 +637,7 @@ function aupTogglePattern(text, insert) {
   aupReloadPrefs();
 }
 
-// Handle clicks on the Adblock statusbar panel
+// Handle clicks on the statusbar panel
 function aupClickHandler(e) {
   if (e.button == 0)
     aupExecuteAction(aupPrefs.defaultstatusbaraction);

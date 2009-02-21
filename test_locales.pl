@@ -4,11 +4,10 @@ use strict;
 
 my %paths = (
   aup => 'chrome/locale',
-  ehh => 'elemhidehelper/chrome/locale',
 );
 
 my @must_differ = (
-  ['aup:overlay:opensidebar.accesskey', 'aup:overlay:settings.accesskey', 'aup:settings:options.accesskey', 'aup:settings:enable.accesskey', 'ehh:overlay:selectelement.accesskey'],
+  ['aup:overlay:opensidebar.accesskey', 'aup:overlay:settings.accesskey', 'aup:settings:options.accesskey', 'aup:settings:enable.accesskey'],
   ['aup:settings:filters.accesskey', 'aup:settings:edit.accesskey', 'aup:settings:view.accesskey', 'aup:settings:options.accesskey', 'aup:settings:help.accesskey', 'aup:settings:add.accesskey', 'aup:settings:apply.accesskey'],
   ['aup:settings:add.accesskey', 'aup:settings:addsubscription.accesskey', 'aup:settings:synchsubscriptions.accesskey', 'aup:settings:import.accesskey', 'aup:settings:export.accesskey', 'aup:settings:clearall.accesskey', 'aup:settings:resethitcounts.accesskey'],
   ['aup:settings:cut.accesskey', 'aup:settings:copy.accesskey', 'aup:settings:paste.accesskey', 'aup:settings:remove.accesskey', 'aup:settings:menu.find.accesskey', 'aup:settings:menu.findagain.accesskey'],
@@ -19,12 +18,10 @@ my @must_differ = (
   ['aup:findbar:next.accesskey', 'aup:findbar:previous.accesskey', 'aup:findbar:highlight.accesskey'],
   ['aup:subscription:location.accesskey', 'aup:subscription:title.accesskey', 'aup:subscription:autodownload.accesskey', 'aup:subscription:enabled.accesskey'],
   ['aup:composer:filter.accesskey', 'aup:composer:preferences.accesskey', 'aup:composer:type.filter.accesskey', 'aup:composer:type.whitelist.accesskey', 'aup:composer:custom.pattern.accesskey', 'aup:composer:anchor.start.accesskey', 'aup:composer:anchor.end.accesskey', 'aup:composer:domainRestriction.accesskey', 'aup:composer:firstParty.accesskey', 'aup:composer:thirdParty.accesskey', 'aup:composer:matchCase.accesskey', 'aup:composer:collapse.accesskey'],
-  ['ehh:global:command.select.key', 'ehh:global:command.wider.key', 'ehh:global:command.narrower.key', 'ehh:global:command.quit.key', 'ehh:global:command.blinkElement.key', 'ehh:global:command.viewSource.key', 'ehh:global:command.viewSourceWindow.key', 'ehh:global:command.showMenu.key'],
 );
 
 my @must_equal = (
   ['aup:overlay:opensidebar.accesskey', 'aup:overlay:closesidebar.accesskey'],
-  ['ehh:overlay:selectelement.accesskey', 'ehh:overlay:stopselection.accesskey'],
 );
 
 my %keepAccessKeys = map {$_ => $_} (
@@ -51,9 +48,6 @@ my @ignoreUntranslated = (
   quotemeta("aup:overlay:toolbarbutton.label"),
   quotemeta("aup:settings:filters.label"),
   quotemeta("aup:sidebar:filter.label"),
-  quotemeta("ehh:composer:nodes-tree.class.label"),
-  quotemeta("ehh:composer:nodes-tree.id.label"),
-  quotemeta("ehh:global:noaup_warning_title"),
 );
 
 my @locales = sort {$a cmp $b} makeLocaleList();

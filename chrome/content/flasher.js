@@ -24,7 +24,7 @@
 
 /*
  * Draws a blinking border for a list of matching nodes.
- * This file is included from nsAdblockPlus.js.
+ * This file is included from nsAutoProxy.js.
  */
 
 var flasher = {
@@ -49,7 +49,7 @@ var flasher = {
                         .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
                         .getInterface(Components.interfaces.nsIDOMWindow)
                         .wrappedJSObject
-                        .abpGetBrowser()
+                        .aupGetBrowser()
                         .markupDocumentViewer;
         viewer.scrollToNode(nodes[0]);
       } catch(e) {}
@@ -104,4 +104,4 @@ var flasher = {
   }
 };
 
-abp.flasher = flasher;
+aup.flasher = flasher;

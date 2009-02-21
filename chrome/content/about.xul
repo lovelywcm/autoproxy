@@ -25,9 +25,9 @@
    - ***** END LICENSE BLOCK ***** -->
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
-<?xml-stylesheet href="chrome://adblockplus/skin/about.css" type="text/css"?>
+<?xml-stylesheet href="chrome://autoproxy/skin/about.css" type="text/css"?>
 
-<!DOCTYPE dialog SYSTEM "chrome://adblockplus/locale/about.dtd">
+<!DOCTYPE dialog SYSTEM "chrome://autoproxy/locale/about.dtd">
 
 <dialog
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"

@@ -24,7 +24,7 @@
 
 let aup = null;
 try {
-  aup = Components.classes["@mozilla.org/adblockplus;1"].createInstance().wrappedJSObject;
+  aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
 
   if (!aup.prefs.initialized)
     aup = null;

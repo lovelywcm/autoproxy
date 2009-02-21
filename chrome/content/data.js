@@ -23,7 +23,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 /*
- * Stores Adblock Plus data to be attached to a window.
+ * Stores AutoProxy data to be attached to a window.
  * This file is included from nsAutoProxy.js.
  */
 
@@ -114,6 +114,43 @@ DataContainer.prototype = {
     if (!this.detached)
       DataContainer.notifyListeners(topWnd, "refresh", this);
   },
+  addNode: function(topWnd, node, contentType, docDomain, thirdParty, location, filter, objTab) {
+    // If we had this node already, remove it from the list first
+    this.removeNode(node);
+
+    // for images repeated on page store node for each repeated image
+    var key = " " + contentType + " " + location;
+    if (key in this.locations) {
+      // Always override the filter just in case a known node has been blocked
+      if (filter)
+        this.locations[key].filter = filter;
+      this.locations[key].nodes.push(node);
+    }
+    else {
+      // Add a new location and notify the listeners
+      this.locations[key] = {
+        nodes: [node],
+        location: location,
+        type: contentType,
+        typeDescr: policy.typeDescr[contentType],
+        docDomain: docDomain,
+        thirdParty: thirdParty,
+        localizedDescr: policy.localizedDescr[contentType],
+        filter: filter
+      };
+
+      if (!this.topContainer.detached)
+        DataContainer.notifyListeners(topWnd, "add", this.topContainer, this.locations[key]);
+    }
+    node["aupLocation" + dataSeed] = this.locations[key];
+
+    if (typeof objTab != "undefined" && objTab) {
+      this.locations[key].nodes.push(objTab);
+      objTab["aupLocation" + dataSeed] = this.locations[key];
+    }
+
+    return this.locations[key];
+  },
 
   removeNode: function(node) {
     if ("aupLocation" + dataSeed in node) {
@@ -151,7 +188,7 @@ DataContainer.prototype = {
   }
 };
 
-// Loads Adblock data associated with a window object
+// Loads AutoProxy data associated with a window object
 DataContainer.getDataForWindow = function(wnd) {
   if ("aupData" + dataSeed in wnd.document)
     return wnd.document["aupData" + dataSeed];
@@ -160,7 +197,7 @@ DataContainer.getDataForWindow = function(wnd) {
 };
 aup.getDataForWindow = DataContainer.getDataForWindow;
 
-// Loads Adblock data associated with a node object
+// Loads AutoProxy data associated with a node object
 DataContainer.getDataForNode = function(node, noParent) {
   while (node) {
     if ("aupLocation" + dataSeed in node)

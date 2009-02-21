@@ -24,4 +24,4 @@ pref("extensions.autoproxy.subscriptions_fallbackurl", "http://autoproxy.org/get
 pref("extensions.autoproxy.subscriptions_fallbackerrors", 5);
 pref("extensions.autoproxy.savestats", true);
 pref("extensions.autoproxy.composer_default", 2);
-pref("extensions.{d10d0bf8-f5b5-c8b4-a8b2-2b9879e08c5d}.description", "chrome://autoproxy/locale/global.properties");
+pref("extensions.autoproxy@autoproxy.org.description", "chrome://autoproxy/locale/global.properties");

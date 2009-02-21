@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 
 <RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:abp="http://autoproxy.org/#">
+     xmlns:aup="http://autoproxy.org/#">
 
   <RDF:Seq about="aup:subscriptions">
     <RDF:li>
       <RDF:Description>
-        <abp:title>EasyList (USA)</abp:title>
-        <abp:url>http://easylist.autoproxy.org/adblock_rick752.txt</abp:url>
-        <abp:homepage>http://easylist.autoproxy.org/</abp:homepage>
+        <aup:title>EasyList (USA)</aup:title>
+        <aup:url>http://easylist.autoproxy.org/autoproxy_rick752.txt</aup:url>
+        <aup:homepage>http://easylist.autoproxy.org/</aup:homepage>
       </RDF:Description>
     </RDF:li>
   </RDF:Seq>

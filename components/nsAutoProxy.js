@@ -23,7 +23,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 const aup_PACKAGE = "/autoproxy.mozdev.org"; 
-const aup_EXTENSION_ID = "{d10d0bf8-f5b5-c8b4-a8b2-2b9879e08c5d}";
+const aup_EXTENSION_ID = "autoproxy@autoproxy.org";
 const aup_CONTRACTID = "@mozilla.org/autoproxy;1";
 const aup_CID = Components.ID("{79c889f6-f5a2-abba-8b27-852e6fec4d56}");
 const aup_PROT_CONTRACTID = "@mozilla.org/network/protocol;1?name=aup";
@@ -47,7 +47,7 @@ const module = {
   {
     compMgr = compMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar);
     compMgr.registerFactoryLocation(aup_CID, 
-                    "Adblock content policy",
+                    "AutoProxy content policy",
                     aup_CONTRACTID,
                     fileSpec, location, type);
     compMgr.registerFactoryLocation(aup_PROT_CID,
@@ -123,7 +123,7 @@ const factory = {
       return this;
 
     if (!iid.equals(Components.interfaces.nsIClassInfo))
-      dump("Adblock Plus: factory.QI to an unknown interface: " + iid + "\n");
+      dump("AutoProxy: factory.QI to an unknown interface: " + iid + "\n");
 
     throw Components.results.NS_ERROR_NO_INTERFACE;
   }
@@ -176,13 +176,13 @@ const aup =
     if (!iid.equals(Components.interfaces.nsIClassInfo) &&
         !iid.equals(Components.interfaces.nsISecurityCheckedComponent) &&
         !iid.equals(Components.interfaces.nsIDOMWindow))
-      dump("Adblock Plus: aup.QI to an unknown interface: " + iid + "\n");
+      dump("AutoProxy: aup.QI to an unknown interface: " + iid + "\n");
 
     throw Components.results.NS_ERROR_NO_INTERFACE;
   },
 
   //
-  // IAdblockPlus interface implementation
+  // IAutoProxy interface implementation
   //
 
   /**
@@ -195,9 +195,9 @@ const aup =
   },
 
   /**
-   * Wraps a subscription into IAdblockPlusSubscription structure.
+   * Wraps a subscription into IAutoProxySubscription structure.
    */
-  _getSubscriptionWrapper: function(/**Subscription*/ subscription) /**IAdblockPlusSubscription*/
+  _getSubscriptionWrapper: function(/**Subscription*/ subscription) /**IAutoProxySubscription*/
   {
     if (!subscription)
       return null;
@@ -229,7 +229,7 @@ const aup =
   /**
    * Gets a subscription by its URL
    */
-  getSubscription: function(/**String*/ id) /**IAdblockPlusSubscription*/
+  getSubscription: function(/**String*/ id) /**IAutoProxySubscription*/
   {
     if (id in filterStorage.knownSubscriptions)
       return this._getSubscriptionWrapper(filterStorage.knownSubscriptions[id]);
@@ -240,7 +240,7 @@ const aup =
   /**
    * Gets a subscription by its position in the list
    */
-  getSubscriptionAt: function(/**Integer*/ index) /**IAdblockPlusSubscription*/
+  getSubscriptionAt: function(/**Integer*/ index) /**IAutoProxySubscription*/
   {
     if (index < 0 || index >= filterStorage.subscriptions.length)
       return null;
@@ -333,7 +333,7 @@ const aup =
   },
 
   /**
-   * Returns installed Adblock Plus version
+   * Returns installed AutoProxy version
    */
   getInstalledVersion: function() /**String*/
   {
@@ -592,7 +592,7 @@ function fixPackageLocale()
 }
 
 /**
- * Time logging module, used to measure startup time of Adblock Plus (development builds only).
+ * Time logging module, used to measure startup time of AutoProxy (development builds only).
  * @class
  */
 var timeLine = {

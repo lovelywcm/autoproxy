@@ -5,7 +5,7 @@
 
   <Description about="urn:mozilla:install-manifest">
   
-  <em:id>{d10d0bf8-f5b5-c8b4-a8b2-2b9879e08c5d}</em:id>
+  <em:id>autoproxy@autoproxy.org</em:id>
   <em:version>{{VERSION}}</em:version>
   
   <!-- Target Application this extension can install into, 

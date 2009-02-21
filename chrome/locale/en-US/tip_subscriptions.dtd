@@ -59,7 +59,7 @@
   sites. It is recommended that you uninstall Filterset.G now.
 ">
 <!ENTITY filterset.g.moreinfo       "More information">
-<!ENTITY filterset.g.moreinfo.url   "http://adblockplus.org/en/faq_project#filterset.g">
+<!ENTITY filterset.g.moreinfo.url   "http://autoproxy.org/en/faq_project#filterset.g">
 <!ENTITY filterset.g.uninstall      "Uninstall Filterset.G">
 
 <!ENTITY homepage.label             "Home page">
@@ -69,5 +69,5 @@
 <!ENTITY other.label                "Add a different subscription">
 <!ENTITY other.accesskey            "f">
 
-<!ENTITY full-list.url              "http://adblockplus.org/en/subscriptions">
+<!ENTITY full-list.url              "http://autoproxy.org/en/subscriptions">
 <!ENTITY full-list.label            "View all subscriptions">

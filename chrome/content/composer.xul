@@ -24,10 +24,10 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
-<!DOCTYPE overlay SYSTEM "chrome://adblockplus/locale/composer.dtd">
+<!DOCTYPE overlay SYSTEM "chrome://autoproxy/locale/composer.dtd">
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
-<?xml-stylesheet href="chrome://adblockplus/skin/composer.css" type="text/css"?>
+<?xml-stylesheet href="chrome://autoproxy/skin/composer.css" type="text/css"?>
 
 <dialog id="aup-composer"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"

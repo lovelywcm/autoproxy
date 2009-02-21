@@ -24,7 +24,7 @@
 
 var aup = null;
 try {
-  aup = Components.classes["@mozilla.org/adblockplus;1"].createInstance().wrappedJSObject;
+  aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
 
   if (!aup.prefs.initialized)
     aup = null;
@@ -372,11 +372,11 @@ function aupShowSubscriptions()
   if ("addTab" in browser)
   {
     // We have a tabbrowser
-    browser.selectedTab = browser.addTab("chrome://adblockplus/content/tip_subscriptions.xul");
+    browser.selectedTab = browser.addTab("chrome://autoproxy/content/tip_subscriptions.xul");
   }
   else
   {
-	window.openDialog("chrome://adblockplus/content/tip_subscriptions.xul", "_blank", "chrome,centerscreen,resizable=no,dialog=no");
+	window.openDialog("chrome://autoproxy/content/tip_subscriptions.xul", "_blank", "chrome,centerscreen,resizable=no,dialog=no");
   }
 }
 
@@ -587,11 +587,11 @@ function aupToggleSidebar() {
     var sidebar = document.getElementById("aup-sidebar");
     if (sidebar && (!aupPrefs.detachsidebar || !sidebar.hidden)) {
       document.getElementById("aup-sidebar-splitter").hidden = !sidebar.hidden;
-      document.getElementById("aup-sidebar-browser").setAttribute("src", sidebar.hidden ? "chrome://adblockplus/content/sidebar.xul" : "about:blank");
+      document.getElementById("aup-sidebar-browser").setAttribute("src", sidebar.hidden ? "chrome://autoproxy/content/sidebar.xul" : "about:blank");
       sidebar.hidden = !sidebar.hidden;
     }
     else
-      aupDetachedSidebar = window.openDialog("chrome://adblockplus/content/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no,width=600,height=300");
+      aupDetachedSidebar = window.openDialog("chrome://autoproxy/content/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no,width=600,height=300");
   }
 
   let menuItem = document.getElementById("aup-blockableitems");
@@ -739,5 +739,5 @@ function aupCheckContext() {
 // Bring up the settings dialog for the node the context menu was referring to
 function aupNode(data) {
   if (aup && data)
-    openDialog("chrome://adblockplus/content/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", aupGetBrowser().contentWindow, data);
+    openDialog("chrome://autoproxy/content/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", aupGetBrowser().contentWindow, data);
 }

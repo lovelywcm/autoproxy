@@ -11,7 +11,7 @@
   <RDF:Description about="urn:mozilla:skin:classic/1.0" chrome:name="classic/1.0">
   <chrome:packages>
     <RDF:Seq about="urn:mozilla:skin:classic/1.0:packages">
-      <RDF:li resource="urn:mozilla:skin:classic/1.0:adblockplus"/>
+      <RDF:li resource="urn:mozilla:skin:classic/1.0:autoproxy"/>
     </RDF:Seq>
   </chrome:packages>
   </RDF:Description>
@@ -21,6 +21,6 @@
   </RDF:Seq>
 
   <RDF:Seq about="chrome://global/content/customizeToolbar.xul">
-    <RDF:li>chrome://adblockplus/skin/overlay.css</RDF:li>
+    <RDF:li>chrome://autoproxy/skin/overlay.css</RDF:li>
   </RDF:Seq>
 </RDF:RDF>

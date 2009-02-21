@@ -157,6 +157,7 @@ var policy =
 
     var data = DataContainer.getDataForWindow(wnd);
 
+    var objTab = null;
     let docDomain = this.getHostname(wnd.location.href);
     let thirdParty = true;
 
@@ -174,6 +175,8 @@ var policy =
         match = blacklistMatcher.matchesAny(locationText, this.typeDescr[contentType] || "", docDomain, thirdParty);
     }
 
+    // Store node data
+    var nodeData = data.addNode(topWnd, node, contentType, docDomain, thirdParty, locationText, match, objTab);
     if (match)
       filterStorage.increaseHitCount(match);
 
@@ -328,7 +331,13 @@ var policy =
         var nodes = data[i].nodes;
         data[i].nodes = [];
         for (var j = 0; j < nodes.length; j++) {
-          this.processNode(wnd, nodes[j], data[i].type, makeURL(data[i].location), true);
+          if ("abpObjTab" in nodes[j]) {
+            // Remove object tabs
+            if (nodes[j].parentNode)
+              nodes[j].parentNode.removeChild(nodes[j]);
+          }
+          else
+            this.processNode(wnd, nodes[j], data[i].type, makeURL(data[i].location), true);
         }
       }
     }

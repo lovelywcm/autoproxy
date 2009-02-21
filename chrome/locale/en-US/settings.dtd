@@ -89,13 +89,13 @@
 
 <!ENTITY gettingStarted.label       "Getting started">
 <!ENTITY gettingStarted.accesskey   "s">
-<!ENTITY gettingStarted.url         "http://adblockplus.org/en/getting_started">
+<!ENTITY gettingStarted.url         "http://autoproxy.org/en/getting_started">
 <!ENTITY faq.label                  "Frequently Asked Questions">
 <!ENTITY faq.accesskey              "F">
-<!ENTITY faq.url                    "http://adblockplus.org/en/faq">
+<!ENTITY faq.url                    "http://autoproxy.org/en/faq">
 <!ENTITY filterdoc.label            "Writing Adblock Plus filters">
 <!ENTITY filterdoc.accesskey        "R">
-<!ENTITY filterdoc.url              "http://adblockplus.org/en/filters">
+<!ENTITY filterdoc.url              "http://autoproxy.org/en/filters">
 <!ENTITY about.label                "About Adblock Plus">
 <!ENTITY about.accesskey            "B">
 

@@ -24,7 +24,7 @@
 
 var aup = null;
 try {
-  aup = Components.classes["@mozilla.org/adblockplus;1"].createInstance().wrappedJSObject;
+  aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
 
   if (aup.prefs.initialized) {
     var prefs = aup.prefs;
@@ -406,7 +406,7 @@ function doBlock() {
   if (filter && filter instanceof aup.WhitelistFilter)
     return;
 
-  openDialog("chrome://adblockplus/content/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", window.content, item);
+  openDialog("chrome://autoproxy/content/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", window.content, item);
 }
 
 function editFilter() {
@@ -499,7 +499,7 @@ function detach() {
 
   // Close sidebar and open detached window
   mainWin.aupToggleSidebar();
-  mainWin.aupDetachedSidebar = mainWin.openDialog("chrome://adblockplus/content/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no"+position);
+  mainWin.aupDetachedSidebar = mainWin.openDialog("chrome://autoproxy/content/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no"+position);
 
   // Save setting
   prefs.detachsidebar = true;

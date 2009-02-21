@@ -9,7 +9,7 @@
   <RDF:Description about="urn:mozilla:locale:en-US">
     <chrome:packages>
       <RDF:Seq about="urn:mozilla:locale:en-US:packages">
-        <RDF:li resource="urn:mozilla:locale:en-US:adblockplus"/>
+        <RDF:li resource="urn:mozilla:locale:en-US:autoproxy"/>
       </RDF:Seq>
     </chrome:packages>
   </RDF:Description>

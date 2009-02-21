@@ -23,11 +23,15 @@
  * ***** END LICENSE BLOCK ***** */
 
 /*
- * Manages Adblock Plus preferences.
+ * Manages AutoProxy preferences.
  * This file is included from nsAutoProxy.js.
  */
 
 const prefRoot = "extensions.autoproxy.";
+
+var gObjtabClass = ""
+for (let i = 0; i < 20; i++)
+  gObjtabClass += String.fromCharCode("a".charCodeAt(0) + Math.random() * 26);
 
 var prefService = Components.classes["@mozilla.org/preferences-service;1"]
                             .getService(Components.interfaces.nsIPrefService);
@@ -50,7 +54,7 @@ var prefs = {
       branchInternal.addObserver("", this, true);
     }
     catch (e) {
-      dump("Adblock Plus: exception registering pref observer: " + e + "\n");
+      dump("AutoProxy: exception registering pref observer: " + e + "\n");
     }
 
     var observerService = Components.classes["@mozilla.org/observer-service;1"]
@@ -62,7 +66,7 @@ var prefs = {
       observerService.addObserver(this, "profile-after-change", true);
     }
     catch (e) {
-      dump("Adblock Plus: exception registering profile observer: " + e + "\n");
+      dump("AutoProxy: exception registering profile observer: " + e + "\n");
     }
 
     // Add Private Browsing observer
@@ -77,7 +81,7 @@ var prefs = {
       }
       catch(e)
       {
-        dump("Adblock Plus: exception initializing private browsing observer: " + e + "\n");
+        dump("AutoProxy: exception initializing private browsing observer: " + e + "\n");
       }
     }
 
@@ -96,6 +100,35 @@ var prefs = {
   },
 
   init: function() {
+    try {
+      // Initialize object tabs CSS
+      var channel = ioService.newChannel("chrome://autoproxy/content/objtabs.css", null, null);
+      channel.asyncOpen({
+        data: "",
+        onDataAvailable: function(request, context, stream, offset, count) {
+          stream = ScriptableInputStream(stream);
+          this.data += stream.read(count);
+        },
+        onStartRequest: function() {},
+        onStopRequest: function() {
+          var data = this.data.replace(/%%CLASSNAME%%/g, gObjtabClass);
+          var objtabsCSS = makeURL("data:text/css," + encodeURIComponent(data));
+          Components.classes["@mozilla.org/content/style-sheet-service;1"]
+                    .getService(Components.interfaces.nsIStyleSheetService)
+                    .loadAndRegisterSheet(objtabsCSS, styleService.USER_SHEET);
+          channel = null;
+        },
+        QueryInterface: function(iid) {
+          if (iid.equals(Components.interfaces.nsISupports) ||
+              iid.equals(Components.interfaces.nsIRequestObserver) ||
+              iid.equals(Components.interfaces.nsIStreamListener))
+            return this;
+
+          throw Components.results.NS_ERROR_NO_INTERFACE;
+        }
+      }, null);
+    }
+    catch (e) {}
 
     // Try to fix selected locale in Mozilla/SeaMonkey
     strings = stringService.createBundle("chrome://autoproxy/locale/global.properties");

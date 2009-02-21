@@ -24,7 +24,7 @@
 
 /*
  * Element hiding implementation.
- * This file is included from nsAdblockPlus.js.
+ * This file is included from nsAutoProxy.js.
  */
 
 var styleService = Components.classes["@mozilla.org/content/style-sheet-service;1"]
@@ -144,12 +144,12 @@ var elemhide =
 
     // Joining domains list
     let cssData = "";
-    let cssTemplate = "-moz-binding: url(chrome://global/content/bindings/general.xml?abphit:%ID%#basecontrol) !important;"
+    let cssTemplate = "-moz-binding: url(chrome://global/content/bindings/general.xml?auphit:%ID%#basecontrol) !important;"
 
     let geckoVersion = "0.0";
     if ("nsIXULAppInfo" in  Components.interfaces)
         geckoVersion = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo).platformVersion;
-    if (abp.versionComparator.compare(geckoVersion, "1.9a1") < 0)
+    if (aup.versionComparator.compare(geckoVersion, "1.9a1") < 0)
     {
       // Gecko 1.8 does not apply bindings to table rows and cells, need to
       // change the value for display here. This might have undesired
@@ -180,7 +180,7 @@ var elemhide =
     if (cssData)
     {
       try {
-        this.url = ioService.newURI("data:text/css;charset=utf8,/*** Adblock Plus ***/" + encodeURIComponent("\n" + cssData), null, null);
+        this.url = ioService.newURI("data:text/css;charset=utf8,/*** AutoProxy ***/" + encodeURIComponent("\n" + cssData), null, null);
         styleService.loadAndRegisterSheet(this.url, styleService.USER_SHEET);
       } catch(e) {};
     }
@@ -198,4 +198,4 @@ var elemhide =
     }
   }
 };
-abp.elemhide = elemhide;
+aup.elemhide = elemhide;

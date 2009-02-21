@@ -79,8 +79,6 @@
 <!ENTITY showintoolbar.accesskey    "B">
 <!ENTITY showinstatusbar.label      "Show in status bar">
 <!ENTITY showinstatusbar.accesskey  "S">
-<!ENTITY objecttabs.label           "Show tabs on Flash and Java">
-<!ENTITY objecttabs.accesskey       "T">
 
 <!ENTITY help.label                 "Help">
 <!ENTITY help.accesskey             "H">

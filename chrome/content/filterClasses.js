@@ -102,7 +102,7 @@ Filter.fromText = function(text)
     return Filter.knownFilters[text];
 
   let ret;
-  else if (text[0] == "!")
+  if (text[0] == "!")
     ret = new CommentFilter(text);
   else
     ret = RegExpFilter.fromText(text);
@@ -479,7 +479,7 @@ RegExpFilter.typeMap = {
  * @constructor
  * @augments RegExpFilter
  */
-function BlockingFilter(text, regexp, contentType, matchCase, domains, thirdParty, false)
+function BlockingFilter(text, regexp, contentType, matchCase, domains, thirdParty)
 {
   RegExpFilter.call(this, text, regexp, contentType, matchCase, domains, thirdParty);
 }

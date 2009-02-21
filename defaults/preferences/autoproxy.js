@@ -2,7 +2,6 @@
 
 pref("extensions.autoproxy.currentVersion", "0.0");
 pref("extensions.autoproxy.enabled", true);
-pref("extensions.autoproxy.frameobjects", true);
 pref("extensions.autoproxy.showintoolbar", true);
 pref("extensions.autoproxy.showinstatusbar", false);
 pref("extensions.autoproxy.detachsidebar", false);

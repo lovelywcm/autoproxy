@@ -541,7 +541,6 @@ function aupFillPopup(popup) {
   whitelistSeparator.hidden = !site && !location;
 
   elements.enabled.setAttribute("checked", aupPrefs.enabled);
-  elements.frameobjects.setAttribute("checked", aupPrefs.frameobjects);
   elements.showintoolbar.setAttribute("checked", aupPrefs.showintoolbar);
   elements.showinstatusbar.setAttribute("checked", aupPrefs.showinstatusbar);
 

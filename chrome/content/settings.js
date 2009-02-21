@@ -1084,7 +1084,6 @@ function setSortOrder(order)
 function fillOptionsPopup()
 {
   E("aup-enabled").setAttribute("checked", prefs.enabled);
-  E("frameobjects").setAttribute("checked", prefs.frameobjects);
   E("showintoolbar").setAttribute("checked", prefs.showintoolbar);
   E("showinstatusbar").setAttribute("checked", prefs.showinstatusbar);
 }

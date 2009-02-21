@@ -120,7 +120,7 @@ var policy =
    * @param location {nsIURI}
    * @return {Boolean} false if the node is blocked
    */
-  processNode: function(wnd, node, contentType, location, false) {
+  processNode: function(wnd, node, contentType, location) {
     var topWnd = wnd.top;
     if (!topWnd || !topWnd.location || !topWnd.location.href)
       return true;
@@ -287,7 +287,7 @@ var policy =
     if ( !this.isBlockableScheme(location) )
       return ok;
 
-    this.processNode(wnd, node, contentType, location, false) ?
+    this.processNode(wnd, node, contentType, location) ?
     proxyEnabled && autoProxy.notProxy() : proxyEnabled || autoProxy.goProxy();
     
     return ok;
@@ -315,13 +315,7 @@ var policy =
         var nodes = data[i].nodes;
         data[i].nodes = [];
         for (var j = 0; j < nodes.length; j++) {
-          if ("abpObjTab" in nodes[j]) {
-            // Remove object tabs
-            if (nodes[j].parentNode)
-              nodes[j].parentNode.removeChild(nodes[j]);
-          }
-          else
-            this.processNode(wnd, nodes[j], data[i].type, makeURL(data[i].location), true);
+          //this.processNode(wnd, nodes[j], data[i].type, makeURL(data[i].location));
         }
       }
     }

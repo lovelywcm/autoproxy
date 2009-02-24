@@ -95,8 +95,16 @@ var synchronizer =
     let lines = text.split(/[\r\n]+/);
     if (!/\[AutoProxy\s+\d\.\d\.\d\]/i.test(lines[0]))
     {
-      this.setError(subscription, "synchronize_invalid_data");
-      return null;
+      //base64 --wrap=1
+      text = text.replace(/[\r\n]/g, '');
+      //base64 decode
+      text = windowMediator.getMostRecentWindow("").atob(text);
+      lines = text.split(/[\r\n]+/);
+      if (!/\[AutoProxy\s+\d\.\d\.\d\]/i.test(lines[0]))
+      {
+        this.setError(subscription, "synchronize_invalid_data");
+        return null;
+      }
     }
     let minVersion = RegExp.$1;
 

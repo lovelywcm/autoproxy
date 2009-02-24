@@ -25,9 +25,9 @@
 const aup_PACKAGE = "/autoproxy.mozdev.org"; 
 const aup_EXTENSION_ID = "autoproxy@autoproxy.org";
 const aup_CONTRACTID = "@mozilla.org/autoproxy;1";
-const aup_CID = Components.ID("{79c889f6-f5a2-abba-8b27-852e6fec4d56}");
+const aup_CID = Components.ID("{7FCE727A-028D-11DE-9E0F-298E56D89593}");
 const aup_PROT_CONTRACTID = "@mozilla.org/network/protocol;1?name=aup";
-const aup_PROT_CID = Components.ID("{6a5987fd-93d8-049c-19ac-b9bfe88718fe}");
+const aup_PROT_CID = Components.ID("{8A6417BC-028D-11DE-B190-998E56D89593}");
 const locales = [
   "{{LOCALE}}",
   null

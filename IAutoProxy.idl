@@ -24,7 +24,7 @@
 
 #include "nsISupports.idl"
 
-[scriptable, uuid(2a311a4f-f32b-472a-9fc9-f1b1529924ad)]
+[scriptable, uuid(62B7B3B8-028D-11DE-BC3C-3E8D56D89593)]
 interface IAutoProxySubscription: nsISupports
 {
   /**
@@ -88,7 +88,7 @@ interface IAutoProxySubscription: nsISupports
                    [retval, array, size_is(length)] out wstring patterns);
 };
 
-[scriptable, uuid(6e70a4b4-bef8-b0b3-25a2-62146012352b)]
+[scriptable, uuid(70EAF9EA-028D-11DE-B53C-A18D56D89593)]
 interface IAutoProxy : nsISupports
 {
   /**

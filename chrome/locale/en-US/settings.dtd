@@ -106,12 +106,12 @@
 <!ENTITY lasthit.column             "Last hit">
 <!ENTITY lasthit.accesskey          "L">
 
-<!ENTITY context.edit.label         "Edit filter">
+<!ENTITY context.edit.label         "Edit rule">
 <!ENTITY context.resethitcount.label      "Reset hit statistics for rule">
 <!ENTITY context.synchsubscription.label  "Update subscription now">
 <!ENTITY context.editsubscription.label   "Edit subscription">
-<!ENTITY context.moveup.label       "Move filter up">
-<!ENTITY context.movedown.label     "Move filter down">
+<!ENTITY context.moveup.label       "Move rule up">
+<!ENTITY context.movedown.label     "Move rule down">
 <!ENTITY context.movegroupup.label        "Move group up">
 <!ENTITY context.movegroupdown.label      "Move group down">
 <!ENTITY context.enable.label       "Enable">

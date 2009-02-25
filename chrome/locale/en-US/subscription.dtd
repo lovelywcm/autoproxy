@@ -22,37 +22,22 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
-<!ENTITY dialog.title               "Edit rule subscription">
+<!ENTITY dialog.title               "Edit subscription list">
 <!ENTITY dialog.newtitle            "Add rule subscription">
 
-<!ENTITY new.description            "
-  Please enter the web address or file containing a list of
-  AutoProxy rules.
-">
+<!ENTITY new.description            "Please enter the web address or file containing a list of AutoProxy rules.">
 
-<!ENTITY edit.description           "
-  The rule list for this subscription will be downloaded
-  from the location given.
-">
+<!ENTITY edit.description           "The rule list for this subscription will be downloaded from the location given.">
 
-<!ENTITY external.description       "
-  This is an external filter subscription, its filter list
-  will be kept up-to-date by the extension that created this
-  subscription.
-">
+<!ENTITY external.description       "This is an external rule subscription, its rule list will be kept up-to-date by the extension that created this subscription.">
 
-<!ENTITY autodownload.description   "
-  If you choose 'Update automatically' this location will be
-  checked for updates daily. With this option disabled you still
-  can trigger an update manually from the subscription's context
-  menu.
-">
+<!ENTITY autodownload.description   "If you choose 'Update automatically' this location will be checked for updates daily. With this option disabled you still can trigger an update manually from the subscription's context menu.">
 
-<!ENTITY location.label             "Filter list location:">
+<!ENTITY location.label             "Rule list location:">
 <!ENTITY location.accesskey         "L">
 <!ENTITY title.label                "Subscription title:">
 <!ENTITY title.accesskey            "T">
 <!ENTITY autodownload.label         "Update automatically">
 <!ENTITY autodownload.accesskey     "P">
-<!ENTITY enabled.label              "Enable filters">
+<!ENTITY enabled.label              "Enable rules">
 <!ENTITY enabled.accesskey          "N">

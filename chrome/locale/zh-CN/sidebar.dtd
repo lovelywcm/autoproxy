@@ -1,62 +1,18 @@
-<!-- ***** BEGIN LICENSE BLOCK *****
-   - Version: MPL 1.1
-   -
-   - The contents of this file are subject to the Mozilla Public License Version
-   - 1.1 (the "License"); you may not use this file except in compliance with
-   - the License. You may obtain a copy of the License at
-   - http://www.mozilla.org/MPL/
-   -
-   - Software distributed under the License is distributed on an "AS IS" basis,
-   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
-   - for the specific language governing rights and limitations under the
-   - License.
-   -
-   - The Original Code is Adblock Plus.
-   -
-   - The Initial Developer of the Original Code is
-   - Wladimir Palant.
-   - Portions created by the Initial Developer are Copyright (C) 2006-2008
-   - the Initial Developer. All Rights Reserved.
-   -
-   - Contributor(s):
-   -
-   - ***** END LICENSE BLOCK ***** -->
-
-<!ENTITY detached.title           "AutoProxy: Proxyable items (detached)">
-
-<!ENTITY detach.label             "Detach">
-<!ENTITY reattach.label           "Reattach">
-
-<!ENTITY search.label             "Search:">
-<!ENTITY search.accesskey         "S">
-
-<!ENTITY type.label               "Type">
-<!ENTITY address.label            "Address">
-<!ENTITY filter.label             "Rule">
-<!ENTITY state.label              "State">
-<!ENTITY size.label               "Size">
-
-<!ENTITY noitems.label            "No proxyable items">
-<!ENTITY whitelisted.label        "Blacklisted page">
-<!ENTITY notloaded.label          "AutoProxy hasn't been installed properly">
-
-<!ENTITY tooltip.address.label    "Address:">
-<!ENTITY tooltip.type.label       "Type:">
-<!ENTITY tooltip.type.blocked     "(proxyed)">
-<!ENTITY tooltip.type.whitelisted "(blacklisted)">
-<!ENTITY tooltip.size.label       "Size:">
-<!ENTITY tooltip.filter.label     "Rule in effect:">
-<!ENTITY tooltip.filterSource.label "Rule source:">
-
-<!ENTITY context.block.label      "Proxy this item">
-<!ENTITY context.editfilter.label "Edit rule in effect">
-<!ENTITY context.whitelist.label  "Add no-proxy rule for item">
-<!ENTITY context.disablefilter.label  "Disable rule --">
-<!ENTITY context.enablefilter.label   "Re-enable rule --">
-<!ENTITY context.disablefilteronsite.label  "Disable this rule on --">
-<!ENTITY context.enablefilteronsite.label   "Re-enable rule on --">
-<!ENTITY context.open.label       "Open in New Tab">
-<!ENTITY context.flash.label      "Flash item's borders">
-<!ENTITY context.copy.label       "Copy item's address">
-<!ENTITY context.copyFilter.label "Copy filter">
-<!ENTITY context.selectAll.label  "Select all">
+<!ENTITY search.label "搜索:">
+<!ENTITY search.accesskey "S">
+<!ENTITY filter.label "规则">
+<!ENTITY state.label "State">
+<!ENTITY size.label "Size">
+<!ENTITY notloaded.label "AutoProxy 安装出错">
+<!ENTITY tooltip.address.label "Address:">
+<!ENTITY tooltip.type.label "Type:">
+<!ENTITY tooltip.type.blocked "(已代理)">
+<!ENTITY tooltip.type.whitelisted "(禁止使用代理)">
+<!ENTITY tooltip.size.label "Size:">
+<!ENTITY tooltip.filter.label "生效的规则:">
+<!ENTITY tooltip.filterSource.label "规则来源:">
+<!ENTITY context.editfilter.label "禁用/启用该规则">
+<!ENTITY context.whitelist.label "Add no-proxy rule for item">
+<!ENTITY context.open.label "在新标签页打开">
+<!ENTITY context.copyFilter.label "复制规则">
+<!ENTITY context.selectAll.label "全选">

@@ -24,20 +24,20 @@
 
 <!ENTITY dialog.title               "AutoProxy Preferences">
 
-<!ENTITY filters.label              "Filters">
-<!ENTITY filters.accesskey          "F">
+<!ENTITY filters.label              "Rules">
+<!ENTITY filters.accesskey          "R">
 
-<!ENTITY add.label                  "Add filter">
+<!ENTITY add.label                  "Add rule">
 <!ENTITY add.accesskey              "A">
-<!ENTITY addsubscription.label      "Add filter subscription">
+<!ENTITY addsubscription.label      "Add rule subscription">
 <!ENTITY addsubscription.accesskey  "S">
 <!ENTITY synchsubscriptions.label       "Update all subscriptions">
 <!ENTITY synchsubscriptions.accesskey   "D">
-<!ENTITY import.label               "Import filters">
+<!ENTITY import.label               "Import rules">
 <!ENTITY import.accesskey           "M">
-<!ENTITY export.label               "Export custom filters">
+<!ENTITY export.label               "Export custom rules">
 <!ENTITY export.accesskey           "X">
-<!ENTITY clearall.label             "Remove all custom filters">
+<!ENTITY clearall.label             "Remove all custom rules">
 <!ENTITY clearall.accesskey         "L">
 <!ENTITY resethitcounts.label       "Reset hit statistics">
 <!ENTITY resethitcounts.accesskey   "R">
@@ -89,15 +89,15 @@
 <!ENTITY faq.label                  "Frequently Asked Questions">
 <!ENTITY faq.accesskey              "F">
 <!ENTITY faq.url                    "http://autoproxy.org/en/faq">
-<!ENTITY filterdoc.label            "Writing AutoProxy filters">
+<!ENTITY filterdoc.label            "Writing AutoProxy rules">
 <!ENTITY filterdoc.accesskey        "R">
-<!ENTITY filterdoc.url              "http://autoproxy.org/en/filters">
+<!ENTITY filterdoc.url              "http://autoproxy.org/en/rules">
 <!ENTITY about.label                "About AutoProxy">
 <!ENTITY about.accesskey            "B">
 
-<!ENTITY description                "The following filters determine which addresses should be blocked and which ones should be allowed:">
+<!ENTITY description                "The following rules determine which addresses should be proxyed and which ones should not:">
 
-<!ENTITY filter.column              "Filter rule">
+<!ENTITY filter.column              "Rules">
 <!ENTITY filter.accesskey           "F">
 <!ENTITY enabled.column             "Enabled">
 <!ENTITY enabled.accesskey          "n">
@@ -107,7 +107,7 @@
 <!ENTITY lasthit.accesskey          "L">
 
 <!ENTITY context.edit.label         "Edit filter">
-<!ENTITY context.resethitcount.label      "Reset hit statistics for filter">
+<!ENTITY context.resethitcount.label      "Reset hit statistics for rule">
 <!ENTITY context.synchsubscription.label  "Update subscription now">
 <!ENTITY context.editsubscription.label   "Edit subscription">
 <!ENTITY context.moveup.label       "Move filter up">

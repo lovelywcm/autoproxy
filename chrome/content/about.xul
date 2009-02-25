@@ -58,14 +58,9 @@
 
   <description id="contributorsTitle" value="&contributors.label;"/>
   <vbox id="contributorsBox">
-    <description value="WCM - Chinese and English translation"/>
+
     <spacer height="5"/>
-    <description value="Wladimir Palant - Adblock Plus"/>
-    <description value="Henrik Aasted Sorensen - original Adblock"/>
-    <description value="Michael McDonald - Adblock Plus 0.5"/>
-    <description value="rue - Adblock 0.4/0.5"/>
-    <description value="Ben Karel - Adblock 0.4/0.5"/>
-    <description value="Stefan Kinitz - Adblock 0.4/0.5"/>
+    <description value="Wladimir Palant - the Author of Adblock Plus"/>
   </vbox>
 </groupbox>
 

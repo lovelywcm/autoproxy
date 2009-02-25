@@ -27,12 +27,12 @@
 <!ENTITY caption.title      "AutoProxy">
 <!ENTITY version.title      "Version">
 <!ENTITY description        "
-  AutoProxy allows you to decide what you don't want to see on the web.
-  You don't need to download all the ads and banners any more, if you
-  don't want them - tell AutoProxy!
+  AutoProxy allows you to decide which site will be proxyed while leaving others 
+  surfed directly. You don't need to switch the proxy status between enabled 
+  and disabled manually any more.
 ">
 
 <!ENTITY homepage.label     "AutoProxy homepage:">
-<!ENTITY homepage.url       "http://autoproxy.org/en/">
+<!ENTITY homepage.url       "http://autoproxy.org/">
 <!ENTITY author.label       "Author:">
 <!ENTITY contributors.label "Contributors:">

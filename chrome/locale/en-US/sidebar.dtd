@@ -32,29 +32,29 @@
 
 <!ENTITY type.label               "Type">
 <!ENTITY address.label            "Address">
-<!ENTITY filter.label             "Filter">
+<!ENTITY filter.label             "Rule">
 <!ENTITY state.label              "State">
 <!ENTITY size.label               "Size">
 
-<!ENTITY noitems.label            "No blockable items">
+<!ENTITY noitems.label            "No proxyable items">
 <!ENTITY whitelisted.label        "Whitelisted page">
 <!ENTITY notloaded.label          "AutoProxy hasn't been installed properly">
 
 <!ENTITY tooltip.address.label    "Address:">
 <!ENTITY tooltip.type.label       "Type:">
-<!ENTITY tooltip.type.blocked     "(blocked)">
+<!ENTITY tooltip.type.blocked     "(proxyed)">
 <!ENTITY tooltip.type.whitelisted "(whitelisted)">
 <!ENTITY tooltip.size.label       "Size:">
-<!ENTITY tooltip.filter.label     "Filter in effect:">
-<!ENTITY tooltip.filterSource.label "Filter source:">
+<!ENTITY tooltip.filter.label     "Rule in effect:">
+<!ENTITY tooltip.filterSource.label "Rule source:">
 
-<!ENTITY context.block.label      "Block this item">
-<!ENTITY context.editfilter.label "Edit filter in effect">
-<!ENTITY context.whitelist.label  "Add exception rule for item">
-<!ENTITY context.disablefilter.label  "Disable filter --">
-<!ENTITY context.enablefilter.label   "Re-enable filter --">
-<!ENTITY context.disablefilteronsite.label  "Disable this filter on --">
-<!ENTITY context.enablefilteronsite.label   "Re-enable filter on --">
+<!ENTITY context.block.label      "Proxy this item">
+<!ENTITY context.editfilter.label "Edit rule in effect">
+<!ENTITY context.whitelist.label  "Add no-proxy rule for item">
+<!ENTITY context.disablefilter.label  "Disable rule --">
+<!ENTITY context.enablefilter.label   "Re-enable rule --">
+<!ENTITY context.disablefilteronsite.label  "Disable this rule on --">
+<!ENTITY context.enablefilteronsite.label   "Re-enable rule on --">
 <!ENTITY context.open.label       "Open in New Tab">
 <!ENTITY context.flash.label      "Flash item's borders">
 <!ENTITY context.copy.label       "Copy item's address">

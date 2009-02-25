@@ -56,7 +56,6 @@
       <menuseparator/>
       <menu id="aup-status-options" label="&options.label;" accesskey="&options.accesskey;">
         <menupopup id="aup-status-options-popup">
-          <menuseparator/>
           <menuitem id="aup-status-showintoolbar" label="&showintoolbar.label;" accesskey="&showintoolbar.accesskey;" type="checkbox" oncommand="aupTogglePref('showintoolbar')"/>
           <menuitem id="aup-status-showinstatusbar" label="&showinstatusbar.label;" accesskey="&showinstatusbar.accesskey;" type="checkbox" oncommand="aupTogglePref('showinstatusbar')"/>
         </menupopup>

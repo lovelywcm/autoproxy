@@ -25,29 +25,29 @@
 <!ENTITY notloaded.label        "Not loaded">
 <!ENTITY notloaded.tooltip      "AutoProxy component couldn't be loaded, maybe it didn't install properly.">
 <!ENTITY status.tooltip         "Status:">
-<!ENTITY blocked.tooltip        "Blocked items on this page:">
-<!ENTITY filters.tooltip        "Most active filters:">
+<!ENTITY blocked.tooltip        "Proxyed items on this page:">
+<!ENTITY filters.tooltip        "Most active rules:">
 
 <!ENTITY menuitem.label         "AutoProxy Preferences">
 <!ENTITY menuitem.accesskey     "B">
 <!ENTITY toolbarbutton.label    "AutoProxy">
 
-<!ENTITY view.blockableItems.label  "AutoProxy: Blockable Items">
+<!ENTITY view.blockableItems.label  "AutoProxy: Proxyable Items">
 
 <!ENTITY context.image.label    "Proxy Image">
 <!ENTITY context.object.label   "Proxy Object">
 <!ENTITY context.frame.label    "Proxy Frame">
 
-<!ENTITY sidebar.title          "Blockable items on current page">
+<!ENTITY sidebar.title          "Proxyable items on current page">
 
 <!ENTITY settings.label         "Preferences">
 <!ENTITY settings.accesskey     "F">
-<!ENTITY opensidebar.label      "Open blockable items">
+<!ENTITY opensidebar.label      "Open proxyable items">
 <!ENTITY opensidebar.accesskey  "B">
-<!ENTITY closesidebar.label     "Close blockable items">
+<!ENTITY closesidebar.label     "Close proxyable items">
 <!ENTITY closesidebar.accesskey "B">
 <!ENTITY whitelist.site.label   "Disable on --">
 <!ENTITY whitelist.page.label   "Disable on this page only">
 
-<!ENTITY objecttab.title        "Block">
+<!ENTITY objecttab.title        "Proxy">
 <!ENTITY objecttab.tooltip      "Click here to proxy this object with AutoProxy">

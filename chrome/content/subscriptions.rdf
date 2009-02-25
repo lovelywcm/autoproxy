@@ -6,9 +6,9 @@
   <RDF:Seq about="aup:subscriptions">
     <RDF:li>
       <RDF:Description>
-        <aup:title>EasyList (USA)</aup:title>
-        <aup:url>http://easylist.autoproxy.org/autoproxy_rick752.txt</aup:url>
-        <aup:homepage>http://easylist.autoproxy.org/</aup:homepage>
+        <aup:title>gfwList (P.R.China)</aup:title>
+        <aup:url>http://autoproxy-gfwlist.googlecode.com/svn/trunk/gfwlist.txt</aup:url>
+        <aup:homepage>http://autoproxy-gfwlist.googlecode.com/</aup:homepage>
       </RDF:Description>
     </RDF:li>
   </RDF:Seq>

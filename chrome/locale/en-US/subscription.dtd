@@ -22,16 +22,16 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
-<!ENTITY dialog.title               "Edit filter subscription">
-<!ENTITY dialog.newtitle            "Add filter subscription">
+<!ENTITY dialog.title               "Edit rule subscription">
+<!ENTITY dialog.newtitle            "Add rule subscription">
 
 <!ENTITY new.description            "
   Please enter the web address or file containing a list of
-  AutoProxy filters.
+  AutoProxy rules.
 ">
 
 <!ENTITY edit.description           "
-  The filter list for this subscription will be downloaded
+  The rule list for this subscription will be downloaded
   from the location given.
 ">
 

@@ -7,14 +7,14 @@
 <!ENTITY disabled.warning.afterLink "。">
 <!ENTITY filter.label "新规则:">
 <!ENTITY filter.accesskey "f">
-<!ENTITY preferences.label "显示已有规则...">
+<!ENTITY preferences.label "显示现有规则...">
 <!ENTITY preferences.accesskey "S">
 <!ENTITY type.filter.label "代理规则">
 <!ENTITY type.filter.accesskey "B">
 <!ENTITY type.whitelist.label "禁止使用代理">
 <!ENTITY type.whitelist.accesskey "x">
 <!ENTITY pattern.label "查找模式">
-<!ENTITY pattern.explanation "模式可以是地址的任意部分，符号 * 表示通配符。与规则匹配的地址将会触发该规则（启用/禁用代理）。">
+<!ENTITY pattern.explanation "规则可以是地址的任意部分，符号 * 表示通配符。与规则匹配的地址将会触发该规则（启用/禁用代理）。">
 <!ENTITY regexp.warning "您输入的规则将会被当着正则表达式处理。过多的正则表达式可以会影响您的浏览速度。如果您没有打算使用正则表达式，请在规则的后面加一个通配符 *。">
 <!ENTITY shortpattern.warning "您输入的规则太短而无法被优化。太多这样的规则可能会降低您的浏览速度，建议您选择一个长一点的字符串。">
 <!ENTITY custom.pattern.label "自定义:">

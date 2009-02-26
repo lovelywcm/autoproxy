@@ -9,7 +9,7 @@
         <!-- Each li is a different version of the same add-on -->
         <RDF:li>
           <RDF:Description>
-            <em:version>0.1.1</em:version> <!-- This is the version number of the add-on -->
+            <em:version>0.1.2</em:version> <!-- This is the version number of the add-on -->
             
             <!-- One targetApplication for each application the add-on is compatible with -->
             <em:targetApplication>
@@ -18,10 +18,10 @@
                 <em:minVersion>2.0</em:minVersion>
                 <em:maxVersion>3.2a1pre</em:maxVersion>
                 <!-- This is where this version of the add-on will be downloaded from -->
-                <em:updateLink>http://autoproxy.googlecode.com/files/autoproxy-0.1.1.xpi</em:updateLink>
-                <em:updateHash>sha1:8f3f01c65f592301d60bee06320b0774ef6b9b80</em:updateHash>
+                <em:updateLink>http://downloads.mozdev.org/autoproxy/autoproxy-0.1.2.xpi</em:updateLink>
+                <em:updateHash>sha1:0391b4600d46f06163d067801585d8ee95d65a17</em:updateHash>
                 <!-- A page describing what is new in this updated version -->
-                <em:updateInfoURL>http://autoproxy.mozdev.org/update/whatsnew-0.1.1.xhtml</em:updateInfoURL>
+                <em:updateInfoURL>http://autoproxy.mozdev.org/update/whatsnew-0.1.2.xhtml</em:updateInfoURL>
               </RDF:Description>
             </em:targetApplication>
 

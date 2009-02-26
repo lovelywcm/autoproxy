@@ -24,24 +24,21 @@
 
 <!ENTITY dialog.title               "Add AutoProxy rule subscription">
 
-<!ENTITY description.par1           "
-  Thank you for installing AutoProxy. This extension can help you using proxy
-  automatically. However, effective proxy management requires you to define a
-  good set of rules. You can do it yourself, or you can simply subscribe
-  to rule lists others maintain for you. It will still be possible
-  to add your own rules or deactivate/remove subscriptions
-  whenever necessary.
+<!ENTITY description.par1           "Thank you for installing AutoProxy. 
+  This extension can help you using proxy automatically. However, effective
+  proxy management requires you to define a good set of rules. You can do it
+  yourself, or you can simply subscribe to rule lists others maintain for you.
+  It will still be possible to add your own rules or deactivate/remove
+  subscriptions whenever necessary.
 ">
 
-<!ENTITY description.par2           "
-  You can choose one subscription from the
+<!ENTITY description.par2           "You can choose one subscription from the
   list of recommended subscriptions below (more subscriptions can be
   added in AutoProxy Preferences later):
 ">
 
-<!ENTITY note                       "
-  Note: A rule list is typically most effective when applied
-  to web sites from the region this rule list was created for.
+<!ENTITY note                       "Note: A rule list is typically most
+  effective when applied to web sites from the region this rule list was created for.
 ">
 
 <!ENTITY homepage.label             "Home page">

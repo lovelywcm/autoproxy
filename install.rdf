@@ -105,7 +105,7 @@
   <em:optionsURL>chrome://autoproxy/content/settings.xul</em:optionsURL>
   
   <!-- Update-->
-  <em:updateURL>http://127.0.0.1/update.rdf</em:updateURL>
+  <em:updateURL>http://autoproxy.mozdev.org/update.rdf</em:updateURL>
   <em:updateKey>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDa90iwPXBxB+12fTnfdk5Wc6Th
     tvCyjRZr558hyfHrYZalDBPp3XgaSSWKEKHRIhLg+LHN3T7wpylkXbmnua1G7swV2DhORaNu/aD1
     6CFP3yUCNvEY61EGEzh+SntNNHfxN6+7c/WUN4Rtroa98Sk3GTw1xm2JtiihZkoERGBUAwIDAQAB"

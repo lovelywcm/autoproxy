@@ -18,13 +18,13 @@
                 <em:minVersion>2.0</em:minVersion>
                 <em:maxVersion>3.2a1pre</em:maxVersion>
                 <!-- This is where this version of the add-on will be downloaded from -->
-                <em:updateLink>http://127.0.0.1/autoproxy-0.1.1.xpi</em:updateLink>
-                <em:updateHash>sha1:00fbe73b5d30c3504306153df3f39f2bf61cdf49</em:updateHash>
+                <em:updateLink>http://autoproxy.googlecode.com/files/autoproxy-0.1.1.xpi</em:updateLink>
+                <em:updateHash>sha1:8f3f01c65f592301d60bee06320b0774ef6b9b80</em:updateHash>
                 <!-- A page describing what is new in this updated version -->
-                <em:updateInfoURL>http://127.0.0.1/whatsnew-0.1.1.xhtml</em:updateInfoURL>
+                <em:updateInfoURL>http://autoproxy.mozdev.org/update/whatsnew-0.1.1.xhtml</em:updateInfoURL>
               </RDF:Description>
             </em:targetApplication>
-            
+
           </RDF:Description>
         </RDF:li>
       </RDF:Seq>

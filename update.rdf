@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:em="http://www.mozilla.org/2004/em-rdf#">
-
   <RDF:Description about="urn:mozilla:extension:autoproxy@autoproxy.org">
     <em:updates>
       <RDF:Seq>
@@ -10,17 +8,15 @@
         <RDF:li>
           <RDF:Description>
             <em:version>0.1.2</em:version> <!-- This is the version number of the add-on -->
-            
-            <!-- One targetApplication for each application the add-on is compatible with -->
+
+            <!-- Firefox -->
             <em:targetApplication>
               <RDF:Description>
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
                 <em:minVersion>2.0</em:minVersion>
                 <em:maxVersion>3.2a1pre</em:maxVersion>
-                <!-- This is where this version of the add-on will be downloaded from -->
                 <em:updateLink>http://downloads.mozdev.org/autoproxy/autoproxy-0.1.2.xpi</em:updateLink>
                 <em:updateHash>sha1:0391b4600d46f06163d067801585d8ee95d65a17</em:updateHash>
-                <!-- A page describing what is new in this updated version -->
                 <em:updateInfoURL>http://autoproxy.mozdev.org/update/whatsnew-0.1.2.xhtml</em:updateInfoURL>
               </RDF:Description>
             </em:targetApplication>
@@ -29,8 +25,6 @@
         </RDF:li>
       </RDF:Seq>
     </em:updates>
-    <!-- A signature is only necessary if your add-on includes an updateKey
-         in its install.rdf. -->
     <em:signature>MIGTMA0GCSqGSIb3DQEBBQUAA4GBAMO1O2gwSCCth1GwYMgscfaNakpN40PJfOWt
                   ub2HVdg8+OXMciF8d/9eVWm8eH/IxuxyZlmRZTs3O5tv9eWAY5uBCtqDf1WgTsGk
                   jrgZow1fITkZI7w0//C8eKdMLAtGueGfNs2IlTd5P/0KH/hf1rPc1wUqEqKCd4+L

@@ -1,7 +1,7 @@
 <!ENTITY notloaded.label "未载入">
 <!ENTITY notloaded.tooltip "AutoProxy 组件未能载入，可能是安装错误。">
 <!ENTITY status.tooltip "状态:">
-<!ENTITY blocked.tooltip "本页已使用代理的资源:">
+<!ENTITY blocked.tooltip "本页已使用代理的项目:">
 <!ENTITY filters.tooltip "最活跃的代理规则:">
 <!ENTITY menuitem.label "AutoProxy 首选项">
 <!ENTITY menuitem.accesskey "B">

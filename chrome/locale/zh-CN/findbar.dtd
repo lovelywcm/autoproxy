@@ -1,13 +1,13 @@
-<!ENTITY find.label "Find:">
-<!ENTITY next.label "Next">
+<!ENTITY find.label "查找:">
+<!ENTITY next.label "下一个">
 <!ENTITY next.accesskey "N">
-<!ENTITY next.tooltip "Find the next occurrence of the phrase">
-<!ENTITY previous.label "Previous">
+<!ENTITY next.tooltip "查找与该短语匹配的下一条规则">
+<!ENTITY previous.label "上一个">
 <!ENTITY previous.accesskey "P">
-<!ENTITY previous.tooltip "Find the previous occurrence of the phrase">
-<!ENTITY findCloseButton.tooltip "Close Find bar">
-<!ENTITY highlight.label "Highlight all">
+<!ENTITY previous.tooltip "查找与该短语匹配的上一条规则">
+<!ENTITY findCloseButton.tooltip "关闭查找栏">
+<!ENTITY highlight.label "全部高亮显示">
 <!ENTITY highlight.accesskey "a">
-<!ENTITY highlight.tooltiptext "Highlight all occurrences of the phrase">
-<!ENTITY caseSensitiveCheckbox.label "Match case">
+<!ENTITY highlight.tooltiptext "高亮显示所有与该短语匹配的规则">
+<!ENTITY caseSensitiveCheckbox.label "区分大小写">
 <!ENTITY caseSensitiveCheckbox.accesskey "c">

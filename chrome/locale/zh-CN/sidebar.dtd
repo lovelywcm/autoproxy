@@ -1,18 +1,32 @@
+<!ENTITY detached.title "AutoProxy：可代理资源列表（分离式）">
+<!ENTITY detach.label "分离">
+<!ENTITY reattach.label "合体">
 <!ENTITY search.label "搜索:">
 <!ENTITY search.accesskey "S">
+<!ENTITY type.label "类型">
+<!ENTITY address.label "地址">
 <!ENTITY filter.label "规则">
-<!ENTITY state.label "State">
-<!ENTITY size.label "Size">
+<!ENTITY state.label "状态">
+<!ENTITY size.label "大小">
+<!ENTITY noitems.label "没有可代理的项目">
+<!ENTITY whitelisted.label "禁止使用代理的项目">
 <!ENTITY notloaded.label "AutoProxy 安装出错">
-<!ENTITY tooltip.address.label "Address:">
-<!ENTITY tooltip.type.label "Type:">
+<!ENTITY tooltip.address.label "地址：">
+<!ENTITY tooltip.type.label "类型：">
 <!ENTITY tooltip.type.blocked "(已代理)">
 <!ENTITY tooltip.type.whitelisted "(禁止使用代理)">
-<!ENTITY tooltip.size.label "Size:">
+<!ENTITY tooltip.size.label "大小:">
 <!ENTITY tooltip.filter.label "生效的规则:">
 <!ENTITY tooltip.filterSource.label "规则来源:">
+<!ENTITY context.block.label "用代理访问这个项目">
 <!ENTITY context.editfilter.label "禁用/启用该规则">
-<!ENTITY context.whitelist.label "Add no-proxy rule for item">
+<!ENTITY context.whitelist.label "对该项目禁止使用代理">
+<!ENTITY context.disablefilter.label "禁用代理规则 --">
+<!ENTITY context.enablefilter.label "重新启用代理规则">
+<!ENTITY context.disablefilteronsite.label "这 --  禁用这条规则">
+<!ENTITY context.enablefilteronsite.label "在 -- 重新启用代理规则">
 <!ENTITY context.open.label "在新标签页打开">
+<!ENTITY context.flash.label "闪动显示该项目的边框">
+<!ENTITY context.copy.label "复制项目地址">
 <!ENTITY context.copyFilter.label "复制规则">
 <!ENTITY context.selectAll.label "全选">

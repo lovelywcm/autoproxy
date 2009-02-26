@@ -1,12 +1,8 @@
-<!ENTITY dialog.title "About AutoProxy">
+<!ENTITY dialog.title "关于 AutoProxy">
 <!ENTITY caption.title "AutoProxy">
-<!ENTITY version.title "Version">
-<!ENTITY description "
-	AutoProxy allows you to decide which site will be proxyed while leaving others 
-	surfed directly. You don&apos;t need to switch the proxy status between enabled 
-	and disabled manually any more.
-">
-<!ENTITY homepage.label "AutoProxy homepage:">
+<!ENTITY version.title "版本">
+<!ENTITY description "使用 AutoProxy 您可以自由地决定哪些网站使用代理访问，而其它的则直接连接。AutoProxy 自动判断当前访问的网站是否通过代理，您不再需要手动在代理和非代理模式之间不停地切换。">
+<!ENTITY homepage.label "AutoProxy 主页：">
 <!ENTITY homepage.url "http://autoproxy.org/">
-<!ENTITY author.label "Author:">
-<!ENTITY contributors.label "Contributors:">
+<!ENTITY author.label "作者：">
+<!ENTITY contributors.label "贡献者：">

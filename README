@@ -5,8 +5,8 @@ Introduction
 ===
 AutoProxy ==
 
-  FoxyProxy (Use patterns to determine which or none proxy server to be used 
-    when connecting, no need to switch status of proxy manually any more.) +
+  Better FoxyProxy (Use patterns to determine which or none proxy server to be
+    used when connecting, no need to switch proxy status manually any more.) +
 
   Subscribe (Like Adblock Plus. Advanced users can share their patterns to the 
     whole world/country/school..., while normal users even don't need to know 
@@ -30,13 +30,13 @@ Please move there: http://autoproxy.googlecode.com/
 
 Status
 ===
-AutoProxy has already work well.
+AutoProxy already works well.
 
 But some of it's features still under development. See below:
 
   * The third feature stated above in "Introduction" has not yet been accomplished.
     As now, just the default 127.0.0.1:8000 proxy server supported.
-    GAppProxy provide proxy service at this port, you may want a try:
+    GAppProxy provide proxy service at 8000 port, you may want a try:
     http://code.google.com/p/gappproxy/
 
 

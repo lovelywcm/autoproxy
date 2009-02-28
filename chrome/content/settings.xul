@@ -137,6 +137,13 @@
         <menuitem id="resethitcounts" label="&resethitcounts.label;..." accesskey="&resethitcounts.accesskey;" oncommand="resetHitCounts(true)"/>
       </menupopup>
     </menu>
+
+    <menu id="proxies-menu" label="&proxies.label;" accesskey="&proxies.accesskey;">
+      <menupopup id="proxies-popup" >
+        <menuitem id="editproxies" label="&editproxies.label;..." accesskey="&editproxies.accesskey;" oncommand="editProxyServer()"/>
+      </menupopup>
+    </menu>
+
     <menu id="edit-menu" label="&edit.label;" accesskey="&edit.accesskey;">
       <menupopup id="edit-popup" onpopupshowing="fillContext()">
         <menuitem id="cut" label="&cut.label;" accesskey="&cut.accesskey;" command="cut-command" key="cut-key"/>

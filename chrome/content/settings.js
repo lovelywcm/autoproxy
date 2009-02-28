@@ -839,6 +839,14 @@ function editFilter(type) /**Boolean*/
 }
 
 /**
+  Only single Proxy Server supported as far as now.
+ */
+function editProxyServer()
+{
+  openDialog("editProxyServer.xul", "_blank", "chrome,centerscreen,modal");
+}
+
+/**
  * Starts editor for a given subscription (pass null to add a new subscription).
  */
 function editSubscription(/**Subscription*/ subscription)

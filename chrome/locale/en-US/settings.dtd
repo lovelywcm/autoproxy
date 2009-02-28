@@ -24,7 +24,7 @@
 
 <!ENTITY dialog.title               "AutoProxy Preferences">
 
-<!ENTITY filters.label              "Rules">
+<!ENTITY filters.label              "Proxy Rule">
 <!ENTITY filters.accesskey          "R">
 
 <!ENTITY add.label                  "Add rule">
@@ -41,6 +41,11 @@
 <!ENTITY clearall.accesskey         "L">
 <!ENTITY resethitcounts.label       "Reset hit statistics">
 <!ENTITY resethitcounts.accesskey   "R">
+
+<!ENTITY proxies.label              "Proxy Server">
+<!ENTITY proxies.accesskey          "S">
+<!ENTITY editproxies.label          "Edit proxy server">
+<!ENTITY editproxies.accesskey      "E">
 
 <!ENTITY edit.label                 "Edit">
 <!ENTITY edit.accesskey             "E">

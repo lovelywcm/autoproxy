@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is AutoProxy.
+   -
+   - The Initial Developer of the Original Code is
+   - Wang Congming.
+   - Portions created by the Initial Developer are Copyright (C) 2006-2008
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://autoproxy/skin/editProxyServer.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://autoproxy/locale/editProxyServer.dtd">
+
+<dialog
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  buttons="accept,cancel"
+  title="&dialog.title;"
+  id="aupsettingProxyServer"
+  windowtype="aup:settingProxyServer"
+  onload="init()"
+  ondialogaccept="return saveProxyServerSettings()">
+
+<script type="application/x-javascript;version=1.7" src="editProxyServer.js"/>
+
+<grid>
+  <rows>
+    <row id="discription" align="center">
+      <label value="&name.label;" accesskey="&name.accesskey;" control="name"/>
+      <label value="&host.label;" accesskey="&host.accesskey;" control="host"/>
+      <label value="&port.label;" accesskey="&port.accesskey;" control="port"/>
+      <columns>
+        <label value="http"/>
+        <label value="socks4"/>
+        <label value="socks5"/>
+      </columns>
+    </row>
+    <row id="Server" align="center">
+      <textbox id="serverName"/>
+      <textbox id="serverHost"/>
+      <textbox id="serverPort"/>
+      <radiogroup orient="horizontal">
+        <radio id="http" selected="true"/>
+        <radio id="socks4"/>
+        <radio id="socks5"/>
+      </radiogroup>
+    </row>
+  </rows>
+</grid>
+
+</dialog>

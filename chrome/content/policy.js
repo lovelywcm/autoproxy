@@ -20,6 +20,8 @@
  *
  * Contributor(s):
  *
+ * Wang Congming <lovelywcm@gmail.com> Modified for AutoProxy.
+ *
  * ***** END LICENSE BLOCK ***** */
 
 /**
@@ -53,7 +55,7 @@ var autoProxy =
       proxyEnabled = true;
   },
   
-  notProxy: function()
+  noProxy: function()
   {
       this.proxyService.unregisterFilter(this);
       proxyEnabled = false;
@@ -288,7 +290,7 @@ var policy =
       return ok;
 
     this.processNode(wnd, node, contentType, location) ?
-    proxyEnabled && autoProxy.notProxy() : proxyEnabled || autoProxy.goProxy();
+    proxyEnabled && autoProxy.noProxy() : proxyEnabled || autoProxy.goProxy();
     
     return ok;
   },

@@ -14,7 +14,7 @@
  * The Original Code is AutoProxy.
  *
  * The Initial Developer of the Original Code is
- * Wang Congming.
+ * Wang Congming <lovelywcm@gmail.com>.
  * Portions created by the Initial Developer are Copyright (C) 2006-2008
  * the Initial Developer. All Rights Reserved.
  *
@@ -25,102 +25,35 @@
 var aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
 var prefs = aup.prefs;
 
-var proxyServer = null;
-//var result = null;
-//var autoAdd = false;
+// may support multi-proxy later
+var proxy = prefs.proxyServer.split("$")[0].split(";");
+// default
+var proxyName = proxy[0] || "default";
+var proxyHost = proxy[1] || "127.0.0.1";
+var proxyPort = proxy[2] || "8000";
+var proxyType = proxy[3] || "http";
+
+let E = function(a) { return document.getElementById(a); }
 
 function init() {
-//  if (window.arguments)
-//  {
-//    // In K-Meleon we might get the arguments wrapped
-//    for (var i = 0; i < window.arguments.length; i++)
-//      if (window.arguments[i] && "wrappedJSObject" in window.arguments[i])
-//        window.arguments[i] = window.arguments[i].wrappedJSObject;
-
-//    [subscription, result] = window.arguments;
-//  }
-
-//  autoAdd = !result;
-//  if (!result)
-//    result = {};
-
-//  if (subscription)
-//  {
-//    document.getElementById("location").value = subscription.url;
-//    document.getElementById("title").value = subscription.title;
-//  }
-//  else
-//    document.getElementById("title").value = "";
-
-//  if (subscription instanceof aup.Subscription)
-//  {
-//    document.getElementById("enabled").setAttribute("checked", !subscription.disabled);
-//    if (subscription instanceof aup.ExternalSubscription)
-//    {
-//      document.getElementById("location").setAttribute("disabled", "true");
-//      document.getElementById("autodownload").setAttribute("checked", "true");
-//      document.getElementById("autodownload").setAttribute("disabled", "true");
-//    }
-//    else
-//    {
-//      document.getElementById("edit-description").hidden = false;
-//      document.getElementById("autodownload").setAttribute("checked", subscription.autoDownload);
-//    }
-//  }
-//  else
-//  {
-//    document.title = document.documentElement.getAttribute("newtitle");
-//    document.getElementById("new-description").hidden = false;
-//    document.getElementById("autodownload").setAttribute("checked", "true");
-//  }
+  E("serverName").setAttribute("value", proxyName);
+  E("serverHost").setAttribute("value", proxyHost);
+  E("serverPort").setAttribute("value", proxyPort);
+  // the first radio button is selected by default, may selecte 2 radios.
+  E("http").setAttribute("selected", "false");
+  E(proxyType).setAttribute("selected", "true");
 }
 
 function saveProxyServerSettings()
 {
-//  var add = !(subscription instanceof aup.Subscription);
-//  var url = (add || subscription instanceof aup.DownloadableSubscription ? document.getElementById("location").value.replace(/^\s+/, "").replace(/\s+$/, "").replace(/^~+/, "") : subscription.url);
-//  if (!url)
-//  {
-//    alert(aup.getString("subscription_no_location"));
-//    document.getElementById("location").focus();
-//    return false;
-//  }
-
-//  if (add || subscription.url != url)
-//  {
-//    var file = Components.classes["@mozilla.org/file/local;1"]
-//                          .createInstance(Components.interfaces.nsILocalFile);
-//    try {
-//      file.initWithPath(url);
-//      var ioService = Components.classes["@mozilla.org/network/io-service;1"]
-//                                .getService(Components.interfaces.nsIIOService); 
-//      var protHandler = ioService.getProtocolHandler('file')
-//                                .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
-//      url = protHandler.newFileURI(file).spec;
-//    } catch (e2) {
-//      try {
-//        var uri = Components.classes["@mozilla.org/network/simple-uri;1"]
-//                            .createInstance(Components.interfaces.nsIURI);
-//        uri.spec = url;
-//        url = uri.spec;
-//      } catch (e) {
-//        alert(aup.getString("subscription_invalid_location"));
-//        document.getElementById("location").focus();
-//        return false;
-//      }
-//    }
-//  }
-
-//  result.url = url;
-//  result.title = document.getElementById("title").value.replace(/^\s+/, "").replace(/\s+$/, "");
-//  if (!result.title)
-//    result.title = result.url;
-
-//  result.autoDownload = document.getElementById("autodownload").checked;
-//  result.disabled = !document.getElementById("enabled").checked;
-
-//  if (autoAdd)
-//    aup.addSubscription(result.url, result.title, result.autoDownload, result.disabled);
-
-//  return true;
+  proxyName = E("serverName").value;
+  proxyHost = E("serverHost").value;
+  proxyPort = E("serverPort").value;
+  if ( E("http").selected ) proxyType = "http";
+  else if ( E("socks4").selected ) proxyType = "socks4";
+  else proxyType = "socks5";
+  prefs.proxyServer =
+          proxyName + ";" + proxyHost + ";" + proxyPort + ";" + proxyType + "$";
+  prefs.save();
 }
+

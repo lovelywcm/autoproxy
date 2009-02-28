@@ -57,7 +57,7 @@
       <textbox id="serverHost"/>
       <textbox id="serverPort"/>
       <radiogroup orient="horizontal">
-        <radio id="http" selected="true"/>
+        <radio id="http"/>
         <radio id="socks4"/>
         <radio id="socks5"/>
       </radiogroup>

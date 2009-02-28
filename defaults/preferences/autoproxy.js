@@ -6,7 +6,7 @@ pref("extensions.autoproxy.showintoolbar", true);
 pref("extensions.autoproxy.showinstatusbar", false);
 pref("extensions.autoproxy.detachsidebar", false);
 pref("extensions.autoproxy.synchronizationinterval", 24);
-pref("extensions.autoproxy.defaulttoolbaraction", 1);
+pref("extensions.autoproxy.defaulttoolbaraction", 2);
 pref("extensions.autoproxy.defaultstatusbaraction", 2);
 pref("extensions.autoproxy.sidebar_key", "Accel Shift O");
 pref("extensions.autoproxy.settings_key", "Accel Shift P");

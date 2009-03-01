@@ -26,9 +26,24 @@
 
 <!ENTITY name.label                 "Give it a Name:">
 <!ENTITY name.accesskey             "N">
-<!ENTITY host.label                 "Server Host:">
+
+<!ENTITY host.label                 "Proxy Host:">
 <!ENTITY host.accesskey             "H">
+
 <!ENTITY port.label                 "Port:">
 <!ENTITY port.accesskey             "P">
+
 <!ENTITY type.label                 "Server Type:">
 <!ENTITY type.accesskey             "T">
+
+<!ENTITY http.label                 "http">
+<!ENTITY http.accesskey             "t">
+
+<!ENTITY socks4.label               "socks4">
+<!ENTITY socks4.accesskey           "4">
+
+<!ENTITY socks5.label               "socks5">
+<!ENTITY socks5.accesskey           "5">
+
+<!ENTITY delete.label               "Delete">
+<!ENTITY delete.accesskey           "D">

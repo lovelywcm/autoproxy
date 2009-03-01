@@ -25,26 +25,34 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 @namespace html url("http://www.w3.org/1999/xhtml");
 
-dialog {
-  padding: 0px;
+#introduction {
+  font-size: 18px;
 }
 
-#serverName {
-  width: 100px;
+menuseparator {
+  margin-top: 10px;
 }
 
-#serverHost {
+textbox.proxyName {
+  width: 110px;
+}
+
+.proxyHost {
   width: 120px;
 }
 
-#serverPort {
-  width: 50px;
+.proxyPort {
+  width: 45px;
 }
 
-radiogroup > #http {
+radiogroup > .proxyHttp {
   margin-left: 10px;
 }
 
-radiogroup > #socks4, radiogroup > #socks5 {
+radiogroup > .proxySocks4, radiogroup > .proxySocks5 {
   margin-left: 21px;
+}
+
+.deleBox {
+  margin-left: 20px;
 }

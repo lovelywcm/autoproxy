@@ -36,33 +36,27 @@
   id="aupsettingProxyServer"
   windowtype="aup:settingProxyServer"
   onload="init()"
-  ondialogaccept="return saveProxyServerSettings()">
+  ondialogaccept="saveProxyServerSettings()">
 
 <script type="application/x-javascript;version=1.7" src="editProxyServer.js"/>
 
+<description id="introduction">Say something here.</description>
+<menuseparator/>
 <grid>
   <rows>
-    <row id="discription" align="center">
-      <label value="&name.label;" accesskey="&name.accesskey;" control="name"/>
-      <label value="&host.label;" accesskey="&host.accesskey;" control="host"/>
-      <label value="&port.label;" accesskey="&port.accesskey;" control="port"/>
-      <columns>
-        <label value="http"/>
-        <label value="socks4"/>
-        <label value="socks5"/>
-      </columns>
+    <row id="discription">
+      <label value="&name.label;" accesskey="&name.accesskey;" control="proxy0name"/>
+      <label value="&host.label;" accesskey="&host.accesskey;" control="proxy0host"/>
+      <label value="&port.label;" accesskey="&port.accesskey;" control="proxy0port"/>
+      <hbox>
+        <label value="&http.label;" accesskey="&http.accesskey;" control="proxy0http"/>
+        <label value="&socks4.label;" accesskey="&socks4.accesskey;" control="proxy0socks4"/>
+        <label value="&socks5.label;" accesskey="&socks5.accesskey;" control="proxy0socks5"/>
+      </hbox>
+      <label value="&delete.label;" accesskey="&delete.accesskey;" control="proxy0dele"/>
     </row>
-    <row id="Server" align="center">
-      <textbox id="serverName"/>
-      <textbox id="serverHost"/>
-      <textbox id="serverPort"/>
-      <radiogroup orient="horizontal">
-        <radio id="http"/>
-        <radio id="socks4"/>
-        <radio id="socks5"/>
-      </radiogroup>
-    </row>
+    <!-- Proxy configs: will be added here by JS -->
   </rows>
 </grid>
-
+<menuseparator/>
 </dialog>

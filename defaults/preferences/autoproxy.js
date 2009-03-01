@@ -22,5 +22,6 @@ pref("extensions.autoproxy.subscriptions_fallbackurl", "http://autoproxy.org/get
 pref("extensions.autoproxy.subscriptions_fallbackerrors", 5);
 pref("extensions.autoproxy.savestats", true);
 pref("extensions.autoproxy.composer_default", 2);
-pref("extensions.autoproxy.proxyServer", "default;127.0.0.1;8000;http$");
+pref("extensions.autoproxy.defaultServer", "GAppProxy;;8000;$Tor;;9050;socks5");
+pref("extensions.autoproxy.customServer", "");
 pref("extensions.autoproxy@autoproxy.org.description", "chrome://autoproxy/locale/global.properties");

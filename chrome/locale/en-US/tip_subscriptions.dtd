@@ -45,7 +45,7 @@
 
 <!ENTITY subscribe.label            "Subscribe">
 <!ENTITY subscribe.accesskey        "R">
-<!ENTITY other.label                "Add a different subscription">
+<!ENTITY other.label                "Add a custom subscription">
 <!ENTITY other.accesskey            "f">
 
 <!ENTITY full-list.url              "http://autoproxy.org/en/subscriptions">

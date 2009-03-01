@@ -585,7 +585,7 @@ var filterStorage =
       subscription.serialize(buf);
       if (subscription.filters.length)
       {
-        buf.push("", "[Subscription filters]")
+        buf.push("", "[Subscription filters]");
         subscription.serializeFilters(buf);
       }
 

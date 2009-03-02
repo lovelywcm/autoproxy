@@ -22,7 +22,7 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
-<!ENTITY dialog.title               "Add AutoProxy rule subscription">
+<!ENTITY dialog.title               "Welcome to AutoProxy">
 
 <!ENTITY description.par1           "Thank you for installing AutoProxy. 
   This extension can help you using proxy automatically. However, effective

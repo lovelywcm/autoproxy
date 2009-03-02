@@ -1,4 +1,4 @@
-<!ENTITY dialog.title "编辑订阅列表">
+<!ENTITY dialog.title "编辑订阅">
 <!ENTITY dialog.newtitle "添加订阅">
 <!ENTITY new.description "请输入包含 AutoProxy 规则的网址。">
 <!ENTITY edit.description "订阅的规则列表将从指定的地址下载。">
@@ -10,5 +10,5 @@
 <!ENTITY title.accesskey "T">
 <!ENTITY autodownload.label "自动更新">
 <!ENTITY autodownload.accesskey "P">
-<!ENTITY enabled.label "启用该订阅的规则">
+<!ENTITY enabled.label "启用该订阅中的规则">
 <!ENTITY enabled.accesskey "N">

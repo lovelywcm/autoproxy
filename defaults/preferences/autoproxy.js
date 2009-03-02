@@ -22,6 +22,9 @@ pref("extensions.autoproxy.subscriptions_fallbackurl", "http://autoproxy.org/get
 pref("extensions.autoproxy.subscriptions_fallbackerrors", 5);
 pref("extensions.autoproxy.savestats", true);
 pref("extensions.autoproxy.composer_default", 2);
-pref("extensions.autoproxy.defaultProxy", "GAppProxy;;8000;$Tor;;9050;socks5$aaa;;8118;");
+pref("extensions.autoproxy.globalProxy", true);
+pref("extensions.autoproxy.globalProxyId", 0);
+pref("extensions.autoproxy.proxyMode", "auto");
 pref("extensions.autoproxy.customProxy", "");
+pref("extensions.autoproxy.defaultProxy", "GAppProxy;;8000;$Tor;;9050;socks5$JAP;;4001;$Your Freedom;;8080;$Wu Jie;;9666;$Free Gate;;8567;");
 pref("extensions.autoproxy@autoproxy.org.description", "chrome://autoproxy/locale/global.properties");

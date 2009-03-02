@@ -36,11 +36,11 @@
   buttonaccesskeyaccept="&subscribe.accesskey;"
   buttonlabelextra2="&other.label;"
   buttonaccesskeyextra2="&other.accesskey;"
-  title="&dialog.title;"
+  title="&subscribe.title;"
   id="aupTipSubscriptions"
   windowtype="aup:tip:subscriptions"
   width="550"
-  height="500"
+  height="320"
   onload="init()"
   ondialogaccept="addSubscriptions()"
   ondialogextra2="addOther()">

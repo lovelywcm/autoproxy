@@ -367,7 +367,6 @@ function aupShowSubscriptions()
   for each (let subscription in aup.filterStorage.subscriptions)
     if (subscription instanceof aup.DownloadableSubscription)
       return;
-  //openDialog("tip_subscriptions.xul", "_blank", "chrome,centerscreen,modal");
   openDialog("chrome://autoproxy/content/tip_subscriptions.xul", "_blank", "chrome, centerscreen");
 }
 

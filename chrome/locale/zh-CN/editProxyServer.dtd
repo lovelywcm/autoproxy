@@ -1,0 +1,17 @@
+<!ENTITY dialog.title "编辑代理服务器">
+<!ENTITY name.label "给它取个名字">
+<!ENTITY name.accesskey "N">
+<!ENTITY host.label "代理主机">
+<!ENTITY host.accesskey "H">
+<!ENTITY port.label "端口">
+<!ENTITY port.accesskey "P">
+<!ENTITY type.label "代理类型">
+<!ENTITY type.accesskey "T">
+<!ENTITY http.label "http">
+<!ENTITY http.accesskey "t">
+<!ENTITY socks4.label "socks4">
+<!ENTITY socks4.accesskey "4">
+<!ENTITY socks5.label "socks5">
+<!ENTITY socks5.accesskey "5">
+<!ENTITY delete.label "删除">
+<!ENTITY delete.accesskey "D">

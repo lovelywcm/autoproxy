@@ -15,6 +15,10 @@
 <!ENTITY clearall.accesskey "L">
 <!ENTITY resethitcounts.label "重置规则计数">
 <!ENTITY resethitcounts.accesskey "R">
+<!ENTITY proxies.label "代理服务器">
+<!ENTITY proxies.accesskey "S">
+<!ENTITY editproxies.label "编辑代理服务器">
+<!ENTITY editproxies.accesskey "E">
 <!ENTITY edit.label "编辑">
 <!ENTITY edit.accesskey "E">
 <!ENTITY cut.label "剪切">

@@ -33,7 +33,7 @@
 <!ENTITY port.label                 "Port:">
 <!ENTITY port.accesskey             "P">
 
-<!ENTITY type.label                 "Server Type:">
+<!ENTITY type.label                 "Proxy Type:">
 <!ENTITY type.accesskey             "T">
 
 <!ENTITY http.label                 "http">

@@ -22,7 +22,7 @@
 <!ENTITY context.editfilter.label "编辑该规则">
 <!ENTITY context.whitelist.label "对该项目禁止使用代理">
 <!ENTITY context.disablefilter.label "禁用代理规则 --">
-<!ENTITY context.enablefilter.label "重新启用代理规则">
+<!ENTITY context.enablefilter.label "重新启用规则 --">
 <!ENTITY context.disablefilteronsite.label "这 --  禁用这条规则">
 <!ENTITY context.enablefilteronsite.label "在 -- 重新启用代理规则">
 <!ENTITY context.open.label "在新标签页打开">

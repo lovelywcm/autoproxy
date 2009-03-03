@@ -22,7 +22,7 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
-<!ENTITY subscribe.title       "Add AutoProxy rule subscription">
+<!ENTITY subscribe.title       "Add AutoProxy Rule Subscription">
 
 <!ENTITY description.par1      "Thank you for installing AutoProxy. 
   This extension can help you using proxy automatically. However, effective
@@ -49,10 +49,14 @@
 
 <!ENTITY homepage.label       "Home page">
 
+<!ENTITY full-list.label      "View all subscriptions">
+<!ENTITY full-list.url        "http://autoproxy.org/en/subscriptions">
+
 <!ENTITY other.label          "Add a Custom Subscription">
 <!ENTITY other.accesskey      "C">
 
-<!ENTITY full-list.url        "http://autoproxy.org/en/subscriptions">
-<!ENTITY full-list.label      "View all subscriptions">
+<!ENTITY defaultBtn.label     "Default Proxy: ">
+<!ENTITY defaultBtn.accesskey "P">
 
-<!ENTITY defaultButton        "Default Proxy">
+<!ENTITY acceptBtn.label      "Subscribe">
+<!ENTITY acceptBtn.accesskey  "S">

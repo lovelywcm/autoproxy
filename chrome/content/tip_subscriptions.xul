@@ -37,10 +37,10 @@
   title="&subscribe.title;"
   id="aupTipSubscriptions"
   windowtype="aup:tip:subscriptions"
-  width="600"
+  width="550"
   height="400"
   onload="init()"
-  ondialogaccept="addSubscriptions()"
+  ondialogaccept="subscribeAndSetDefault()"
   ondialogextra2="addOther()">
 
 <script type="application/x-javascript;version=1.7" src="tip_subscriptions.js"/>
@@ -81,10 +81,17 @@
   </scrollbox>
   <description id="note">&note;</description>
 </radiogroup>
-<hbox>
-  <button dlgtype="extra2"/>
-  <button id="defaultButton" label="&defaultButton;: GAppProxy"/>
-  <button dlgtype="accept"/>
-  <button dlgtype="cancel"/>
+<hbox flex="3">
+  <hbox flex="2">
+    <button dlgtype="extra2"/>
+    <button type="menu" id="defaultButton" label="&defaultBtn.label;" accesskey="&defaultBtn.accesskey;">
+      <menupopup></menupopup>
+    </button>
+  </hbox>
+  <hbox flex="1">
+    <button dlgtype="cancel"/>
+    <button dlgtype="accept" id="acceptButton"/>
+    <button hidden="true" id="acceptButton2" label="&acceptBtn.label;" accesskey="&acceptBtn.accesskey;"/>
+  </hbox>
 </hbox>
 </dialog>

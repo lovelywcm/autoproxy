@@ -28,9 +28,9 @@ var prefs = aup.prefs;
 var proxies = prefs.customProxy.split("$");
 if (proxies == "") proxies = prefs.defaultProxy.split("$");
 
-let gE = function(a) { return document.getElementById(a); }
+let gE = function(a) { return document.getElementById(a); };
 let cE = function(b) { return document.createElementNS(
-          "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", b) }
+		 "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", b); };
 
 function init()
 {

@@ -24,12 +24,9 @@
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-dialog {
-  max-width: 600px;
-}
-
 #icon {
   list-style-image: url(autoproxy.png);
+  margin-bottom: 5px;
 }
 
 #subscriptions {
@@ -73,3 +70,8 @@ radio + vbox {
 radio[focused="true"] + vbox {
   border: 1px dotted ThreeDDarkShadow;
 }
+
+radiogroup + hbox {
+  max-height: 35px;
+}
+

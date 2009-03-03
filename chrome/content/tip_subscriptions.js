@@ -20,6 +20,8 @@
  *
  * Contributor(s):
  *
+ * Wang Congming Modified for AutoProxy.
+ * 
  * ***** END LICENSE BLOCK ***** */
 
 let aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
@@ -27,21 +29,58 @@ let prefs = aup.prefs;
 
 let autoAdd;
 let result;
+let defaultLabel;
+let proxies;
+let selectedId;
+let E = function(id) { return document.getElementById(id); };
 
 function init()
 {
   autoAdd = !(window.arguments && window.arguments.length);
   result = (autoAdd ? {disabled: false, external: false, autoDownload: true} : window.arguments[0]);
-  document.getElementById("description-par1").hidden = !autoAdd;
-  document.getElementById("description-par3").hidden = !autoAdd;
+  E("description-par1").hidden = !autoAdd;
+  E("description-par3").hidden = !autoAdd;
   if (!autoAdd) {
-    document.getElementById("description-par2").style.visibility = "hidden";
-    document.getElementById("defaultButton").style.visibility = "hidden";
+    E("description-par2").style.visibility = "hidden";
+    E("defaultButton").style.visibility = "hidden";
+    E("acceptButton").label = E("acceptButton2").label;
+    E("acceptButton").setAttribute("accesskey", E("acceptButton2").getAttribute("accesskey"));
+  }
+  else{
+    selectedId = 0;
+    proxies = prefs.defaultProxy.split("$");
+    defaultLabel = E("defaultButton").label;
+    E("defaultButton").label += proxies[0].split(";")[0];
+    E("aupTipSubscriptions").width = "600px";
+    for(let i=0; i<proxies.length; i++) {
+      var mitem = document.createElementNS(
+        "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "menuitem");
+      mitem.setAttribute("id", i);
+      mitem.setAttribute("type", "radio");
+      mitem.setAttribute("label", proxies[i].split(";")[0]);
+      mitem.setAttribute("onclick", "changeDefaultLabel(this)");
+      E("defaultButton").firstChild.appendChild(mitem);
+    }
   }
 }
 
-function addSubscriptions() {
-  var group = document.getElementById("subscriptions");
+function changeDefaultLabel(mitem)
+{
+  selectedId = parseInt(mitem.id);
+  E("defaultButton").label = defaultLabel + mitem.label;
+}
+
+function subscribeAndSetDefault() {
+  if (autoAdd) {
+    var sP = proxies[selectedId];
+    sP = sP.split(";");
+    if (sP[1] == "") sP[1] = "127.0.0.1";
+    if (sP[3] == "") sP[3] = "http";
+    prefs.globalProxy = sP[0] + ";" + sP[1] + ";" + sP[2] + ";" + sP[3];
+    prefs.save();
+  }
+
+  var group = E("subscriptions");
   var selected = group.selectedItem;
   if (!selected)
     return;
@@ -82,9 +121,8 @@ function handleKeyPress(e) {
 
 function handleCommand(event)
 {
-  let scrollBox = document.getElementById("subscriptionsScrollbox")
-                          .boxObject
-                          .QueryInterface(Components.interfaces.nsIScrollBoxObject);
+  let scrollBox = document.getElementById("subscriptionsScrollbox").boxObject
+                     .QueryInterface(Components.interfaces.nsIScrollBoxObject);
   scrollBox.ensureElementIsVisible(event.target);
   scrollBox.ensureElementIsVisible(event.target.nextSibling);
 }

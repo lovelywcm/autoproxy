@@ -30,7 +30,6 @@ dialog {
 
 #icon {
   list-style-image: url(autoproxy.png);
-  margin: 15px;
 }
 
 #subscriptions {
@@ -48,12 +47,8 @@ template+.container, .containerAdded {
 
 .container, .containerAdded {
   padding-top: 5px;
-  padding-bottom: 5px;
+  padding-bottom: 0px;
   margin: 0px;
-}
-
-.container {
-  border-bottom: 1px solid black;
 }
 
 .fulllist, .location, .homepage, .moreinfo {
@@ -64,6 +59,7 @@ template+.container, .containerAdded {
 
 radiogroup {
   -moz-box-align: stretch;
+  border-bottom: 1px solid black;
 }
 
 radio .radio-label-box {
@@ -73,7 +69,7 @@ radio .radio-label-box {
 radio + vbox {
   border: 1px solid transparent;
 }
+
 radio[focused="true"] + vbox {
   border: 1px dotted ThreeDDarkShadow;
 }
-

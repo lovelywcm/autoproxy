@@ -33,6 +33,11 @@ function init()
   autoAdd = !(window.arguments && window.arguments.length);
   result = (autoAdd ? {disabled: false, external: false, autoDownload: true} : window.arguments[0]);
   document.getElementById("description-par1").hidden = !autoAdd;
+  document.getElementById("description-par3").hidden = !autoAdd;
+  if (!autoAdd) {
+    document.getElementById("description-par2").style.visibility = "hidden";
+    document.getElementById("defaultButton").style.visibility = "hidden";
+  }
 }
 
 function addSubscriptions() {

@@ -19,7 +19,6 @@
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
- *
  * Wang Congming Modified for AutoProxy.
  * 
  * ***** END LICENSE BLOCK ***** */
@@ -66,13 +65,21 @@ function init()
   }
 }
 
+/**
+ * Change the "Default Proxy" button's label. for example: 
+ * Default Proxy: GAppProxy --> Default Proxy: Tor
+ */ 
 function changeDefaultLabel(mitem)
 {
   selectedId = parseInt(mitem.id);
   E("defaultButton").label = defaultLabel + mitem.label;
 }
 
-function subscribeAndSetDefault() {
+/**
+ * function for accept button, save default proxy and subscribe.
+ */
+function subscribeAndSetDefault()
+{
   if (autoAdd) {
     var sP = proxies[selectedId];
     sP = sP.split(";");
@@ -96,7 +103,11 @@ function subscribeAndSetDefault() {
     aup.addSubscription(result.url, result.title, result.autoDownload, result.disabled);
 }
 
-function addOther() {
+/**
+ * Popup dialog for add a custom subscription.
+ */
+function addOther()
+{
   openDialog("subscription.xul", "_blank", "chrome,centerscreen,modal", null, result);
   if ("url" in result)
   {
@@ -106,7 +117,8 @@ function addOther() {
   }
 }
 
-function handleKeyPress(e) {
+function handleKeyPress(e)
+{
   switch (e.keyCode) {
     case e.DOM_VK_PAGE_UP:
     case e.DOM_VK_PAGE_DOWN:

@@ -14,7 +14,8 @@
  * The Original Code is AutoProxy.
  *
  * The Initial Developer of the Original Code is
- * Wang Congming.
+ * Wang Congming <lovelywcm@gmail.com>.
+ *
  * Portions created by the Initial Developer are Copyright (C) 2009
  * the Initial Developer. All Rights Reserved.
  *
@@ -22,47 +23,16 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
-@namespace html url("http://www.w3.org/1999/xhtml");
+var aup = Components.classes["@mozilla.org/autoproxy;1"]
+                          .createInstance().wrappedJSObject;
+var prefs = aup.prefs;
+var proxies = prefs.customProxy.split("$");
 
-#introduction {
-  font-size: 18px;
+function init()
+{
 }
 
-menuseparator {
-  margin-top: 10px;
+function saveChosen()
+{
 }
 
-textbox.proxyName {
-  width: 110px;
-}
-
-.proxyHost {
-  width: 120px;
-}
-
-.proxyPort {
-  width: 45px;
-}
-
-radiogroup > .proxyHttp {
-  margin-left: 10px;
-}
-
-radiogroup > .proxySocks4, radiogroup > .proxySocks5 {
-  margin-left: 21px;
-}
-
-.deleBox {
-  margin-left: 20px;
-}
-
-
-grid + menuseparator + hbox > hbox:first-child {
-  -moz-box-flex: 1;
-}
-
-grid + menuseparator + hbox > hbox:last-child {
-  -moz-box-flex: 1;
-  -moz-box-pack: end;
-}

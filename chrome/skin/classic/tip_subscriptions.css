@@ -26,7 +26,7 @@
 
 #icon {
   list-style-image: url(autoproxy.png);
-  margin-bottom: 5px;
+  margin: 10px;
 }
 
 #subscriptions {
@@ -71,7 +71,6 @@ radio[focused="true"] + vbox {
   border: 1px dotted ThreeDDarkShadow;
 }
 
-radiogroup + hbox {
-  max-height: 35px;
+radiogroup + hbox > hbox:first-child {
+  -moz-box-flex: 1;
 }
-

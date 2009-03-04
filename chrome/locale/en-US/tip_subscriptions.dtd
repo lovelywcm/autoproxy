@@ -22,6 +22,7 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
+<!ENTITY welcome.title         "Welcome to AutoProxy">
 <!ENTITY subscribe.title       "Add AutoProxy Rule Subscription">
 
 <!ENTITY description.par1      "Thank you for installing AutoProxy. 

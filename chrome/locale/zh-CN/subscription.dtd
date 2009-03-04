@@ -1,9 +1,9 @@
 <!ENTITY dialog.title "编辑订阅">
 <!ENTITY dialog.newtitle "添加订阅">
-<!ENTITY new.description "请输入包含 AutoProxy 规则的网址。">
+<!ENTITY new.description "请输入包含 AutoProxy 规则的订阅的网址或文件路径。">
 <!ENTITY edit.description "订阅的规则列表将从指定的地址下载。">
 <!ENTITY external.description "这是一个外部的规则订阅，它的规则列表将由创建该订阅的扩展保持最新状态。">
-<!ENTITY autodownload.description "如果您选择了“自动更新”，它会每天自动检查。禁用该选项，你仍然可以在该订阅的右键菜单中进行手动更新。">
+<!ENTITY autodownload.description "如果您选择了“自动更新”，它会每天自动检查。取消自动更新，您仍然可以在该订阅的右键菜单中进行手动更新。">
 <!ENTITY location.label "规则列表的地址:">
 <!ENTITY location.accesskey "L">
 <!ENTITY title.label "给它取个名字:">

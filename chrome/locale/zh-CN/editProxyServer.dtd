@@ -5,8 +5,6 @@
 <!ENTITY host.accesskey "H">
 <!ENTITY port.label "端口">
 <!ENTITY port.accesskey "P">
-<!ENTITY type.label "代理类型">
-<!ENTITY type.accesskey "T">
 <!ENTITY http.label "http">
 <!ENTITY http.accesskey "t">
 <!ENTITY socks4.label "socks4">
@@ -15,3 +13,9 @@
 <!ENTITY socks5.accesskey "5">
 <!ENTITY delete.label "删除">
 <!ENTITY delete.accesskey "D">
+<!ENTITY addButton.label            "添加代理">
+<!ENTITY addButton.accesskey        "A">
+<!ENTITY delButton.label            "删除代理">
+<!ENTITY delButton.accesskey        "R">
+<!ENTITY resetButton.label          "重置为默认设置">
+<!ENTITY resetButton.accesskey      "S">

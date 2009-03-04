@@ -43,15 +43,17 @@ function init()
   if (!autoAdd) {
     E("description-par2").style.visibility = "hidden";
     E("defaultButton").style.visibility = "hidden";
-    E("acceptButton").label = E("acceptButton2").label;
-    E("acceptButton").setAttribute("accesskey", E("acceptButton2").getAttribute("accesskey"));
+    E("acceptButton").label = E("acceptButton").getAttribute("label2");
+    E("acceptButton").setAttribute("accesskey", E("acceptButton").getAttribute("accesskey2"));
   }
   else{
+    E("aupTipSubscriptions").width = "600px";
+    document.title = E("aupTipSubscriptions").getAttribute("welcome");
+
     selectedId = 0;
     proxies = prefs.defaultProxy.split("$");
     defaultLabel = E("defaultButton").label;
     E("defaultButton").label += proxies[0].split(";")[0];
-    E("aupTipSubscriptions").width = "600px";
     for(let i=0; i<proxies.length; i++) {
       var mitem = document.createElementNS(
         "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "menuitem");

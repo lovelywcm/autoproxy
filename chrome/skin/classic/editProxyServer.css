@@ -56,3 +56,13 @@ radiogroup > .proxySocks4, radiogroup > .proxySocks5 {
 .deleBox {
   margin-left: 20px;
 }
+
+
+grid + menuseparator + hbox > hbox:first-child {
+  -moz-box-flex: 1;
+}
+
+grid + menuseparator + hbox > hbox:last-child {
+  -moz-box-flex: 1;
+  -moz-box-pack: end;
+}

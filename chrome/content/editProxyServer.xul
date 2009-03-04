@@ -55,8 +55,21 @@
       </hbox>
       <label value="&delete.label;" accesskey="&delete.accesskey;" control="proxy0dele"/>
     </row>
-    <!-- Proxy configs: will be added here by JS -->
+    <!-- Proxy configs will be added here by JS -->
   </rows>
 </grid>
 <menuseparator/>
+<hbox>
+  <hbox>
+    <button label="&addButton.label;" accesskey="&addButton.accesskey;" onclick="addNewRow()"/>
+    <button label="&delButton.label;" accesskey="&delButton.accesskey;" onclick="delSelectedRow()"/>
+  </hbox>
+  <hbox>
+    <button label="&resetButton.label;" accesskey="&resetButton.accesskey;" onclick="reset2Default()"/>
+  </hbox>
+  <hbox>
+    <button dlgtype="cancel"/>
+    <button dlgtype="accept"/>
+  </hbox>
+</hbox>
 </dialog>

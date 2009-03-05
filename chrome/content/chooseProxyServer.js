@@ -26,13 +26,60 @@
 var aup = Components.classes["@mozilla.org/autoproxy;1"]
                           .createInstance().wrappedJSObject;
 var prefs = aup.prefs;
+var subscriptions = aup.filterStorage.subscriptions;
+
+var curGlobalProxy = prefs.globalProxy;
 var proxies = prefs.customProxy.split("$");
+if (proxies == "") proxies = prefs.defaultProxy.split("$");
+
+let globalPrimary;
+
+let cE = function(tag) { return document.createElementNS(
+		 "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", tag); };
 
 function init()
 {
+  // insert menu items to global primary proxy menu list
+  globalPrimary = document.getElementById("globalPrimary");
+  for each (let proxy in proxies) {
+    var mitem = cE("menuitem");
+    mitem.setAttribute("label", proxy.split(";")[0]);
+    globalPrimary.firstChild.appendChild(mitem);
+    if (proxy == curGlobalProxy) globalPrimary.selectedItem = mitem;
+  }
+
+  // one row per group
+  var rows = document.getElementsByTagName("rows")[0];
+  for each (let subscription in subscriptions) {
+    if ( subscription.url != "~il~" && subscription.url != "~wl~" ) {
+      var row = cE("row");
+      var label = cE("label");
+      var primaryBtn = cE("menulist");
+      var SecondaryBtn = cE("menulist");
+      var checkbox = cE("checkbox");
+      label.setAttribute("value", subscription.title);
+
+      // still under development
+      label.setAttribute("disabled", "true");
+      primaryBtn.setAttribute("disabled", "true");
+      SecondaryBtn.setAttribute("disabled", "true");
+      checkbox.setAttribute("disabled", "true");
+
+      row.appendChild(label);
+      row.appendChild(primaryBtn);
+      row.appendChild(SecondaryBtn);
+      row.appendChild(checkbox);
+      rows.appendChild(row);
+    }
+  }
 }
 
 function saveChosen()
 {
+  var selectedProxy = proxies[globalPrimary.selectedIndex];
+  if ( selectedProxy != curGlobalProxy ) {
+    prefs.globalProxy = selectedProxy;
+    prefs.save();
+  }
 }
 

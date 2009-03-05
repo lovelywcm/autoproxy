@@ -25,6 +25,22 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 @namespace html url("http://www.w3.org/1999/xhtml");
 
-#introduction {
-  font-size: 18px;
+row > label:first-child {
+  text-align: right;
+}
+
+#description {
+  font-weight: bold;
+}
+
+row:not(:first-child) > label:first-child {
+  padding-top: 8px;
+}
+
+row > checkbox {
+  padding-left: 10px;;
+}
+
+row + checkbox {
+  text-align: left;
 }

@@ -19,6 +19,8 @@
 <!ENTITY proxies.accesskey "S">
 <!ENTITY editproxies.label "编辑代理服务器">
 <!ENTITY editproxies.accesskey "E">
+<!ENTITY chooseproxies.label "选择代理服务器">
+<!ENTITY chooseproxies.accesskey "C">
 <!ENTITY edit.label "编辑">
 <!ENTITY edit.accesskey "E">
 <!ENTITY cut.label "剪切">

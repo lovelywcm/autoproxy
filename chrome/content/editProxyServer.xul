@@ -40,8 +40,6 @@
 
 <script type="application/x-javascript;version=1.7" src="editProxyServer.js"/>
 
-<description id="introduction">Say something here.</description>
-<menuseparator/>
 <grid>
   <rows>
     <row id="discription">

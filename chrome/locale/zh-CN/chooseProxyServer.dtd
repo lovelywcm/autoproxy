@@ -23,19 +23,19 @@
    - ***** END LICENSE BLOCK ***** -->
 
 
-<!ENTITY dialog.title      "Choose Proxy Server for Different Rule Groups">
+<!ENTITY dialog.title      "选择各个规则组各自使用的代理">
 
-<!ENTITY groupName.label   "Group name">
+<!ENTITY groupName.label   "规则组的名称">
 
-<!ENTITY primary.label     "Primary proxy">
+<!ENTITY primary.label     "主代理">
 <!ENTITY primary.accesskey "P">
 
-<!ENTITY secondary.label   "Secondary proxy">
-<!ENTITY secondary.tip     "If the primary proxy failed, AutoProxy will try to request another time using the secondary proxy.">
+<!ENTITY secondary.label   "辅助代理">
+<!ENTITY secondary.tip     "如果主代理失败了，AutoProxy 会自动使用辅助代理再次尝试。">
 
-<!ENTITY advance.label     "Advance">
+<!ENTITY advance.label     "高级">
 
-<!ENTITY default.label     "Default">
+<!ENTITY default.label     "默认">
 
-<!ENTITY checkbox.label    "Use same settings for all rule groups">
+<!ENTITY checkbox.label    "所有的规则组使用相同的设置">
 

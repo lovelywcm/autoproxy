@@ -32,25 +32,35 @@
 <dialog
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   buttons="accept,cancel"
-  title="Choose Proxy Server for Every Groups"
-  id="chooseProxyServer"
-  windowtype="aup:chooseProxyServer"
+  title="&dialog.title;"
   onload="init()"
   ondialogaccept="saveChosen()">
 
 <script type="application/x-javascript;version=1.7" src="chooseProxyServer.js"/>
 
-<description id="introduction">Say something here.</description>
-<menuseparator/>
 <grid>
   <rows>
-    <row id="discription">
-      <label value="Group name" accesskey="n" control="proxy0name"/>
-      <label value="Primary proxy" accesskey="p" control="proxy0host"/>
-      <label value="Secondary proxy" accesskey="S" control="proxy0port"/>
-      <label value="Advance" accesskey="A" control="proxy0dele"/>
+    <row id="description">
+      <label value="&groupName.label;"/>
+      <label value="&primary.label;" accesskey="&primary.accesskey;" control="globalPrimary"/>
+      <label value="&secondary.label;(?)" tooltiptext="&secondary.tip;"/>
+      <label value="&advance.label;"/>
     </row>
-    <!-- Proxy configs will be added here by JS -->
+    <menuseparator/>
+    <row id="global">
+      <label value="&default.label;"/>
+      <menulist id="globalPrimary">
+        <menupopup>
+          <!-- menu items will be added here by JS -->
+        </menupopup>
+      </menulist>
+      <menulist disabled="true"/>
+      <checkbox disabled="true"/>
+    </row>
+    <checkbox label="&checkbox.label;" checked="true" disabled="true"/>
+    <description>Some of functions are still under development. ^_^</description>
+    <menuseparator/>
+    <!-- rule groups will be added here by JS -->
   </rows>
 </grid>
 <menuseparator/>

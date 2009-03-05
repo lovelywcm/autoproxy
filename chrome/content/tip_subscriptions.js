@@ -83,8 +83,6 @@ function subscribeAndSetDefault()
   if (autoAdd) {
     var sP = proxies[selectedId];
     sP = sP.split(";");
-    if (sP[1] == "") sP[1] = "127.0.0.1";
-    if (sP[3] == "") sP[3] = "http";
     prefs.globalProxy = sP[0] + ";" + sP[1] + ";" + sP[2] + ";" + sP[3];
     prefs.save();
   }

@@ -140,13 +140,14 @@ function saveProxyServerSettings()
   for (let row=rows.firstChild.nextSibling; row; row=row.nextSibling) {
     var pDs = row.firstChild; // proxyDetails -> proxyName
     for (var i = 0; i <= 2; i++) { //name, host, port
+      if (pDs.value == "127.0.0.1") pDs.value = ""; //127.0.0.1 is default
       pconfig += pDs.value;
       pconfig += ";"
       pDs = pDs.nextSibling
     }
 
     pDs = pDs.firstChild; // pDs -> 'http'
-    if (pDs.selected) pconfig += "http";
+    if (pDs.selected) ; // http is default
     else if (pDs.nextSibling.selected) pconfig += "socks4";
       else pconfig += "socks5";
 

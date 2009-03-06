@@ -58,6 +58,7 @@
 
 <!ENTITY defaultBtn.label     "Default Proxy: ">
 <!ENTITY defaultBtn.accesskey "P">
+<!ENTITY defaultBtn.custom    "Add a new proxy">
 
 <!ENTITY acceptBtn.label      "Subscribe">
 <!ENTITY acceptBtn.accesskey  "S">

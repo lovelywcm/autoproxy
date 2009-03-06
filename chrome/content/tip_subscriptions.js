@@ -29,9 +29,12 @@ let prefs = aup.prefs;
 let autoAdd;
 let result;
 let defaultLabel;
+let menupop;
 let proxies;
 let selectedId;
 let E = function(id) { return document.getElementById(id); };
+let cE = function(tag) { return document.createElementNS(
+        "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", tag); };
 
 function init()
 {
@@ -48,27 +51,54 @@ function init()
   else{
     E("aupTipSubscriptions").width = "600px";
     document.title = E("aupTipSubscriptions").getAttribute("welcome");
-
-    selectedId = 0;
-    proxies = prefs.defaultProxy.split("$");
     defaultLabel = E("defaultButton").label;
-    E("defaultButton").label += proxies[0].split(";")[0];
-    for(let i=0; i<proxies.length; i++) {
-      var mitem = document.createElementNS(
-        "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "menuitem");
-      mitem.setAttribute("id", i);
-      mitem.setAttribute("type", "radio");
-      mitem.setAttribute("label", proxies[i].split(";")[0]);
-      mitem.setAttribute("onclick", "changeDefaultLabel(this)");
-      E("defaultButton").firstChild.appendChild(mitem);
-    }
+    menupop = E("defaultButton").firstChild;
+    createMenuItems();
   }
+}
+
+/**
+ * Create menu items for user to choose a default/global proxy.
+ * Re-create these items if user customed a new proxy.
+ */ 
+function createMenuItems()
+{
+  selectedId = 0;
+  proxies = prefs.customProxy.split("$");
+  if (proxies == "") proxies = prefs.defaultProxy.split("$");
+  E("defaultButton").label = defaultLabel + proxies[0].split(";")[0];
+
+  for(let i=0; i<proxies.length; i++) {
+    var mitem = cE("menuitem")
+    mitem.setAttribute("id", i);
+    mitem.setAttribute("type", "radio");
+    mitem.setAttribute("label", proxies[i].split(";")[0]);
+    mitem.setAttribute("onclick", "changeDefaultLabel(this)");
+    menupop.appendChild(mitem);
+  }
+
+  // user don't use listed proxy, add by himself.
+  var customItem = cE("menuitem");
+  customItem.setAttribute("id", "customItem");
+  customItem.setAttribute("label", E("defaultButton").getAttribute("customLabel"));
+  customItem.setAttribute("onclick", "customGlobalProxy()");
+  menupop.appendChild(customItem);
+}
+
+/**
+ * Click handler of "Add a new proxy" button item.
+ */
+function customGlobalProxy()
+{
+  openDialog("editProxyServer.xul", "_blank", "chrome,centerscreen,modal");
+  while ( menupop.firstChild ) menupop.removeChild(menupop.firstChild);
+  createMenuItems();
 }
 
 /**
  * Change the "Default Proxy" button's label. for example: 
  * Default Proxy: GAppProxy --> Default Proxy: Tor
- */ 
+ */
 function changeDefaultLabel(mitem)
 {
   selectedId = parseInt(mitem.id);

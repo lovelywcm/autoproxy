@@ -86,7 +86,8 @@
 <hbox>
   <hbox>
     <button dlgtype="extra2"/>
-    <button type="menu" id="defaultButton" label="&defaultBtn.label;" accesskey="&defaultBtn.accesskey;">
+    <button type="menu" id="defaultButton" label="&defaultBtn.label;"
+            accesskey="&defaultBtn.accesskey;" customLabel="&defaultBtn.custom;">
       <menupopup></menupopup>
     </button>
   </hbox>

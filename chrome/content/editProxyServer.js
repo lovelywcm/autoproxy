@@ -159,6 +159,6 @@ function saveProxyServerSettings()
     pconfig = pconfig.replace(/\$$/, "");
 
   prefs.customProxy = pconfig;
-  prefs.save()
+  prefs.save();
 }
 

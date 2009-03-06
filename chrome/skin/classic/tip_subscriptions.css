@@ -74,3 +74,8 @@ radio[focused="true"] + vbox {
 radiogroup + hbox > hbox:first-child {
   -moz-box-flex: 1;
 }
+
+#customItem {
+  margin-left: -15px;
+  text-align: center;
+}

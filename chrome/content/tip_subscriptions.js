@@ -20,7 +20,7 @@
  *
  * Contributor(s):
  * Wang Congming Modified for AutoProxy.
- * 
+ *
  * ***** END LICENSE BLOCK ***** */
 
 let aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
@@ -60,7 +60,7 @@ function init()
 /**
  * Create menu items for user to choose a default/global proxy.
  * Re-create these items if user customed a new proxy.
- */ 
+ */
 function createMenuItems()
 {
   selectedId = 0;
@@ -96,7 +96,7 @@ function customGlobalProxy()
 }
 
 /**
- * Change the "Default Proxy" button's label. for example: 
+ * Change the "Default Proxy" button's label. for example:
  * Default Proxy: GAppProxy --> Default Proxy: Tor
  */
 function changeDefaultLabel(mitem)
@@ -112,9 +112,11 @@ function subscribeAndSetDefault()
 {
   if (autoAdd) {
     var sP = proxies[selectedId];
-    sP = sP.split(";");
-    prefs.globalProxy = sP[0] + ";" + sP[1] + ";" + sP[2] + ";" + sP[3];
-    prefs.save();
+    if (prefs.globalProxy != sP) {
+      prefs.globalProxy = sP;
+      prefs.save();
+      aup.policy.readGlobalProxy();
+    }
   }
 
   var group = E("subscriptions");

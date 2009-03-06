@@ -80,6 +80,6 @@ function saveChosen()
   if ( selectedProxy != curGlobalProxy ) {
     prefs.globalProxy = selectedProxy;
     prefs.save();
+    aup.policy.readGlobalProxy();
   }
 }
-

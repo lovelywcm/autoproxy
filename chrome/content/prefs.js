@@ -29,7 +29,7 @@
 
 const prefRoot = "extensions.autoproxy.";
 
-var gObjtabClass = ""
+var gObjtabClass = "";
 for (let i = 0; i < 20; i++)
   gObjtabClass += String.fromCharCode("a".charCodeAt(0) + Math.random() * 26);
 
@@ -174,7 +174,7 @@ var prefs = {
   // Saves the changes back into the prefs
   save: function() {
     this.disableObserver = true;
-  
+
     for each (var pref in this.prefList)
       this.savePref(pref);
 
@@ -184,7 +184,7 @@ var prefs = {
     try {
       prefService.savePrefFile(null);
     }
-    catch(e) {}  
+    catch(e) {}
 
     this.reload();
   },

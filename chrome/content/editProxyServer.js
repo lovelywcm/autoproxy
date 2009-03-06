@@ -50,7 +50,7 @@ function init()
     pDs = pDs.firstChild; // pDs -> http
     switch (pconfig[3]) {
       case "socks4": { pDs = pDs.nextSibling; break; }
-      case "socks5": { pDs = pDs.nextSibling.nextSibling; break; }
+      case "socks": { pDs = pDs.nextSibling.nextSibling; break; }
     }
     pDs.parentNode.selectedItem = pDs;
   }
@@ -149,7 +149,7 @@ function saveProxyServerSettings()
     pDs = pDs.firstChild; // pDs -> 'http'
     if (pDs.selected) ; // http is default
     else if (pDs.nextSibling.selected) pconfig += "socks4";
-      else pconfig += "socks5";
+      else pconfig += "socks"; // socks means socks5
 
     pconfig += "$";
   }

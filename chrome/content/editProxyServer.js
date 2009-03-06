@@ -138,25 +138,32 @@ function saveProxyServerSettings()
 {
   var pconfig = "";
   for (let row=rows.firstChild.nextSibling; row; row=row.nextSibling) {
+    var temp = "";
     var pDs = row.firstChild; // proxyDetails -> proxyName
     for (var i = 0; i <= 2; i++) { //name, host, port
-      if (pDs.value == "127.0.0.1") pDs.value = ""; //127.0.0.1 is default
-      pconfig += pDs.value;
-      pconfig += ";"
-      pDs = pDs.nextSibling
+      temp += pDs.value;
+      temp += ";";
+      pDs = pDs.nextSibling;
     }
+
+    // not filled, ignore this row.
+    if ( /(^;|;;)/.test(temp) ) continue;
 
     pDs = pDs.firstChild; // pDs -> 'http'
     if (pDs.selected) ; // http is default
-    else if (pDs.nextSibling.selected) pconfig += "socks4";
-      else pconfig += "socks"; // socks means socks5
+    else if (pDs.nextSibling.selected) temp += "socks4";
+      else temp += "socks"; // socks means socks5
 
+    pconfig += temp;
     pconfig += "$";
   }
 
-  if (pconfig)
+  if (pconfig) {
     // remove the last "$" symbol
     pconfig = pconfig.replace(/\$$/, "");
+    // 127.0.0.1 is default
+    pconfig = pconfig.replace(/127\.0\.0\.1/g, "");
+  }
 
   prefs.customProxy = pconfig;
   prefs.save();

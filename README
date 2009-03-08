@@ -3,7 +3,7 @@ AutoProxy - the firefox proxy management add-on
 What's New
 ===
 Version 0.2.0 released at 08, Mar, 2009.
-After subscribe to pattern lists, we now can custom the proxy server.
+After ability of subscribe to pattern lists, we now can custom the proxy server.
 
 More details see below.
 
@@ -15,13 +15,23 @@ AutoProxy ==
   Better FoxyProxy (Use patterns to determine which or none proxy server to be
     used when connecting, no need to switch proxy status manually any more.) +
 
+    * Better UI -- I think so (AutoProxy is derived from Adblock Plus, 
+        if you like the interface of ABP, you may also like AutoProxy.)
+
+    * More efficient -- the truth (matching algorithm has a constant time complexity, 
+        the time used for matching is almost independent from the number of patterns)
+
+
   Subscribe (Like Adblock Plus. Advanced users can share their patterns to the 
     whole world/country/school..., while normal users even don't need to know 
-    what a pattern is, just subscribe to a maintained pattern list.) +
+    what a pattern is, just subscribe to a maintained pattern list. Even if people
+    know well about this, why should we waste our time to write so many duplicate
+    patterns again and again?) +
+
 
   Built-in Proxy Server (You also don't trouble to find and run a proxy server,
     here is a built-in one. Immediately work after install, no configuration
-    needed -- Of course, you can turn it off and use another one.)
+    needed -- Of course, you can turn it off and use other proxies.)
 
 
 
@@ -40,8 +50,8 @@ Status
 AutoProxy already works well. Include:
 
   * Write your own patterns;
-  * Subscribe to a pattern list;
-  * Edit your proxy server;
+  * Subscribe to pattern lists;
+  * Custom proxy servers;
   * ......
 
 But some of it's features are still under development. Include:

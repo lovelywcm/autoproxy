@@ -1,5 +1,12 @@
 AutoProxy - the firefox proxy management add-on
 
+What's New
+===
+Version 0.2.0 released at 08, Mar, 2009.
+After subscribe to pattern lists, we now can custom the proxy server.
+
+More details see below.
+
 
 Introduction
 ===
@@ -11,7 +18,7 @@ AutoProxy ==
   Subscribe (Like Adblock Plus. Advanced users can share their patterns to the 
     whole world/country/school..., while normal users even don't need to know 
     what a pattern is, just subscribe to a maintained pattern list.) +
-  
+
   Built-in Proxy Server (You also don't trouble to find and run a proxy server,
     here is a built-in one. Immediately work after install, no configuration
     needed -- Of course, you can turn it off and use another one.)
@@ -30,15 +37,18 @@ Please move there: http://autoproxy.googlecode.com/
 
 Status
 ===
-AutoProxy already works well.
+AutoProxy already works well. Include:
 
-But some of it's features still under development. See below:
+  * Write your own patterns;
+  * Subscribe to a pattern list;
+  * Edit your proxy server;
+  * ......
 
-  * The third feature stated above in "Introduction" has not yet been accomplished.
-    As now, just the default 127.0.0.1:8000 proxy server supported.
-    GAppProxy provide proxy service at 8000 port, you may want a try:
-    http://code.google.com/p/gappproxy/
+But some of it's features are still under development. Include:
 
+  * Built-in server;
+  * Multi Proxies support;
+  * ......
 
 
 

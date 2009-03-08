@@ -21,6 +21,7 @@
    - the Initial Developer. All Rights Reserved.
    -
    - Contributor(s):
+   - Wang Congming Modified for AutoProxy.
    -
    - ***** END LICENSE BLOCK ***** -->
 
@@ -32,17 +33,16 @@
 <dialog
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   buttons="accept,cancel,extra2"
-  buttonlabelaccept="&subscribe.label;"
-  buttonaccesskeyaccept="&subscribe.accesskey;"
   buttonlabelextra2="&other.label;"
   buttonaccesskeyextra2="&other.accesskey;"
-  title="&dialog.title;"
+  title="&subscribe.title;"
+  welcome="&welcome.title;"
   id="aupTipSubscriptions"
   windowtype="aup:tip:subscriptions"
   width="550"
-  height="500"
+  height="400"
   onload="init()"
-  ondialogaccept="addSubscriptions()"
+  ondialogaccept="subscribeAndSetDefault()"
   ondialogextra2="addOther()">
 
 <script type="application/x-javascript;version=1.7" src="tip_subscriptions.js"/>
@@ -51,6 +51,8 @@
   <vbox flex="1">
     <description id="description-par1">&description.par1;</description>
     <description id="description-par2">&description.par2;</description>
+    <description id="description-par3">&description.par3;</description>
+    <description id="description-par4">&description.par4;</description>
   </vbox>
   <vbox>
     <vbox flex="1" pack="center">
@@ -79,8 +81,19 @@
       </hbox>
     </template>
   </scrollbox>
+  <description id="note">&note;</description>
 </radiogroup>
-
-<description flex="1" id="note">&note;</description>
-
+<hbox>
+  <hbox>
+    <button dlgtype="extra2"/>
+    <button type="menu" id="defaultButton" label="&defaultBtn.label;"
+            accesskey="&defaultBtn.accesskey;" customLabel="&defaultBtn.custom;">
+      <menupopup></menupopup>
+    </button>
+  </hbox>
+  <hbox>
+    <button dlgtype="cancel"/>
+    <button dlgtype="accept" id="acceptButton" label2="&acceptBtn.label;" accesskey2="&acceptBtn.accesskey;"/>
+  </hbox>
+</hbox>
 </dialog>

@@ -22,31 +22,43 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
-<!ENTITY dialog.title               "Add AutoProxy rule subscription">
+<!ENTITY welcome.title         "Welcome to AutoProxy">
+<!ENTITY subscribe.title       "Add AutoProxy Rule Subscription">
 
-<!ENTITY description.par1           "Thank you for installing AutoProxy. 
+<!ENTITY description.par1      "Thank you for installing AutoProxy. 
   This extension can help you using proxy automatically. However, effective
-  proxy management requires you to define a good set of rules. You can do it
-  yourself, or you can simply subscribe to rule lists others maintain for you.
-  It will still be possible to add your own rules or deactivate/remove
-  subscriptions whenever necessary.
+  proxy management requires a good set of rules. You can define it yourself,
+  or you can simply subscribe to rule lists others maintained for you.
 ">
 
-<!ENTITY description.par2           "You can choose one subscription from the
-  list of recommended subscriptions below (more subscriptions can be
-  added in AutoProxy Preferences later):
+<!ENTITY description.par2     "It will still be possible to add your own rules
+  or subscribe/remove subscriptions whenever necessary.
 ">
 
-<!ENTITY note                       "Note: A rule list is typically most
-  effective when applied to web sites from the region this rule list was created for.
+<!ENTITY description.par3     "Except proxy rules, you also need a proxy server.
+  AutoProxy has choosen GAppProxy as the default, if you don't use the default
+  proxy, you can change it to yourself at the bottom of this window.
 ">
 
-<!ENTITY homepage.label             "Home page">
+<!ENTITY description.par4     "You can choose one subscription from the
+  list of recommended subscriptions below:
+">
 
-<!ENTITY subscribe.label            "Subscribe">
-<!ENTITY subscribe.accesskey        "R">
-<!ENTITY other.label                "Add a different subscription">
-<!ENTITY other.accesskey            "f">
+<!ENTITY note                 "Note: A rule list is typically most
+  effective for people from the region this rule list was created for.
+">
 
-<!ENTITY full-list.url              "http://autoproxy.org/en/subscriptions">
-<!ENTITY full-list.label            "View all subscriptions">
+<!ENTITY homepage.label       "Home page">
+
+<!ENTITY full-list.label      "View all subscriptions">
+<!ENTITY full-list.url        "http://autoproxy.org/en/subscriptions">
+
+<!ENTITY other.label          "Add a Custom Subscription">
+<!ENTITY other.accesskey      "C">
+
+<!ENTITY defaultBtn.label     "Default Proxy: ">
+<!ENTITY defaultBtn.accesskey "P">
+<!ENTITY defaultBtn.custom    "Add a new proxy">
+
+<!ENTITY acceptBtn.label      "Subscribe">
+<!ENTITY acceptBtn.accesskey  "S">

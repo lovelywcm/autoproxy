@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is AutoProxy.
+   -
+   - The Initial Developer of the Original Code is
+   - Wang Congming.
+   - Portions created by the Initial Developer are Copyright (C) 2009
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://autoproxy/skin/editProxyServer.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://autoproxy/locale/editProxyServer.dtd">
+
+<dialog
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  buttons="accept,cancel"
+  title="&dialog.title;"
+  id="aupsettingProxyServer"
+  windowtype="aup:settingProxyServer"
+  onload="init()"
+  ondialogaccept="saveProxyServerSettings()">
+
+<script type="application/x-javascript;version=1.7" src="editProxyServer.js"/>
+
+<grid>
+  <rows>
+    <row id="discription">
+      <label value="&name.label;"/>
+      <label value="&host.label;"/>
+      <label value="&port.label;"/>
+      <hbox>
+        <label value="&http.label;"/>
+        <label value="&socks4.label;"/>
+        <label value="&socks5.label;"/>
+      </hbox>
+      <label value="&delete.label;"/>
+    </row>
+    <!-- Proxy configs will be added here by JS -->
+  </rows>
+</grid>
+<description id="warning" hidden="true"> &warning.text; </description>
+<description id="note" hidden="true"> &note.text; </description>
+<description id="tip" hidden="true"> &tip.text; </description>
+<menuseparator/>
+<hbox>
+  <hbox>
+    <button label="&addButton.label;" accesskey="&addButton.accesskey;" onclick="addNewRow()"/>
+    <button label="&delButton.label;" accesskey="&delButton.accesskey;" onclick="delSelectedRow()"/>
+  </hbox>
+  <hbox>
+    <button label="&resetButton.label;" accesskey="&resetButton.accesskey;" onclick="reset2Default()"/>
+  </hbox>
+  <hbox>
+    <button dlgtype="cancel"/>
+    <button dlgtype="accept"/>
+  </hbox>
+</hbox>
+</dialog>

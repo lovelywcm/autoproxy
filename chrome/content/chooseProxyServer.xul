@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is AutoProxy.
+   -
+   - The Initial Developer of the Original Code is
+   - Wang Congming.
+   - Portions created by the Initial Developer are Copyright (C) 2009
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://autoproxy/skin/chooseProxyServer.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://autoproxy/locale/chooseProxyServer.dtd">
+
+<dialog
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  buttons="accept,cancel"
+  title="&dialog.title;"
+  onload="init()"
+  ondialogaccept="saveChosen()">
+
+<script type="application/x-javascript;version=1.7" src="chooseProxyServer.js"/>
+
+<grid>
+  <rows>
+    <row id="description">
+      <label value="&groupName.label;"/>
+      <label value="&primary.label;" accesskey="&primary.accesskey;" control="globalPrimary"/>
+      <label value="&secondary.label;(?)" tooltiptext="&secondary.tip;"/>
+      <label value="&advance.label;"/>
+    </row>
+    <menuseparator/>
+    <row id="global">
+      <label value="&default.label;"/>
+      <menulist id="globalPrimary">
+        <menupopup>
+          <!-- menu items will be added here by JS -->
+        </menupopup>
+      </menulist>
+      <menulist disabled="true"/>
+      <checkbox disabled="true"/>
+    </row>
+    <checkbox label="&checkbox.label;" checked="true" disabled="true"/>
+    <description>Some of functions are still under development. ^_^</description>
+    <menuseparator/>
+    <!-- rule groups will be added here by JS -->
+  </rows>
+</grid>
+<menuseparator/>
+</dialog>

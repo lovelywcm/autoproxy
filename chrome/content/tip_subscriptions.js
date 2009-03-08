@@ -19,6 +19,7 @@
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
+ * Wang Congming Modified for AutoProxy.
  *
  * ***** END LICENSE BLOCK ***** */
 
@@ -27,16 +28,98 @@ let prefs = aup.prefs;
 
 let autoAdd;
 let result;
+let defaultLabel;
+let menupop;
+let proxies;
+let selectedId;
+let E = function(id) { return document.getElementById(id); };
+let cE = function(tag) { return document.createElementNS(
+        "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", tag); };
 
 function init()
 {
   autoAdd = !(window.arguments && window.arguments.length);
   result = (autoAdd ? {disabled: false, external: false, autoDownload: true} : window.arguments[0]);
-  document.getElementById("description-par1").hidden = !autoAdd;
+  E("description-par1").hidden = !autoAdd;
+  E("description-par3").hidden = !autoAdd;
+  if (!autoAdd) {
+    E("description-par2").style.visibility = "hidden";
+    E("defaultButton").style.visibility = "hidden";
+    E("acceptButton").label = E("acceptButton").getAttribute("label2");
+    E("acceptButton").setAttribute("accesskey", E("acceptButton").getAttribute("accesskey2"));
+  }
+  else{
+    E("aupTipSubscriptions").width = "600px";
+    document.title = E("aupTipSubscriptions").getAttribute("welcome");
+    defaultLabel = E("defaultButton").label;
+    menupop = E("defaultButton").firstChild;
+    createMenuItems();
+  }
 }
 
-function addSubscriptions() {
-  var group = document.getElementById("subscriptions");
+/**
+ * Create menu items for user to choose a default/global proxy.
+ * Re-create these items if user customed a new proxy.
+ */
+function createMenuItems()
+{
+  selectedId = 0;
+  proxies = prefs.customProxy.split("$");
+  if (proxies == "") proxies = prefs.defaultProxy.split("$");
+  E("defaultButton").label = defaultLabel + proxies[0].split(";")[0];
+
+  for(let i=0; i<proxies.length; i++) {
+    var mitem = cE("menuitem")
+    mitem.setAttribute("id", i);
+    mitem.setAttribute("type", "radio");
+    mitem.setAttribute("label", proxies[i].split(";")[0]);
+    mitem.setAttribute("onclick", "changeDefaultLabel(this)");
+    menupop.appendChild(mitem);
+  }
+
+  // user don't use listed proxy, add by himself.
+  var customItem = cE("menuitem");
+  customItem.setAttribute("id", "customItem");
+  customItem.setAttribute("label", E("defaultButton").getAttribute("customLabel"));
+  customItem.setAttribute("onclick", "customGlobalProxy()");
+  menupop.appendChild(customItem);
+}
+
+/**
+ * Click handler of "Add a new proxy" button item.
+ */
+function customGlobalProxy()
+{
+  openDialog("editProxyServer.xul", "_blank", "chrome,centerscreen,modal");
+  while ( menupop.firstChild ) menupop.removeChild(menupop.firstChild);
+  createMenuItems();
+}
+
+/**
+ * Change the "Default Proxy" button's label. for example:
+ * Default Proxy: GAppProxy --> Default Proxy: Tor
+ */
+function changeDefaultLabel(mitem)
+{
+  selectedId = parseInt(mitem.id);
+  E("defaultButton").label = defaultLabel + mitem.label;
+}
+
+/**
+ * function for accept button, save default proxy and subscribe.
+ */
+function subscribeAndSetDefault()
+{
+  if (autoAdd) {
+    var sP = proxies[selectedId];
+    if (prefs.globalProxy != sP) {
+      prefs.globalProxy = sP;
+      prefs.save();
+      aup.policy.readGlobalProxy();
+    }
+  }
+
+  var group = E("subscriptions");
   var selected = group.selectedItem;
   if (!selected)
     return;
@@ -50,7 +133,11 @@ function addSubscriptions() {
     aup.addSubscription(result.url, result.title, result.autoDownload, result.disabled);
 }
 
-function addOther() {
+/**
+ * Popup dialog for add a custom subscription.
+ */
+function addOther()
+{
   openDialog("subscription.xul", "_blank", "chrome,centerscreen,modal", null, result);
   if ("url" in result)
   {
@@ -60,7 +147,8 @@ function addOther() {
   }
 }
 
-function handleKeyPress(e) {
+function handleKeyPress(e)
+{
   switch (e.keyCode) {
     case e.DOM_VK_PAGE_UP:
     case e.DOM_VK_PAGE_DOWN:
@@ -77,56 +165,8 @@ function handleKeyPress(e) {
 
 function handleCommand(event)
 {
-  let scrollBox = document.getElementById("subscriptionsScrollbox")
-                          .boxObject
-                          .QueryInterface(Components.interfaces.nsIScrollBoxObject);
+  let scrollBox = document.getElementById("subscriptionsScrollbox").boxObject
+                     .QueryInterface(Components.interfaces.nsIScrollBoxObject);
   scrollBox.ensureElementIsVisible(event.target);
   scrollBox.ensureElementIsVisible(event.target.nextSibling);
-}
-
-function uninstallExtension(id)
-{
-  let extensionManager = Components.classes["@mozilla.org/extensions/manager;1"]
-                                   .getService(Components.interfaces.nsIExtensionManager);
-  if (extensionManager.getItemForID(id))
-  {
-    let location = extensionManager.getInstallLocation(id);
-    if (location && !location.canAccess)
-    {
-      // Cannot uninstall, need to disable
-      extensionManager.disableItem(id);
-    }
-    else
-    {
-      extensionManager.uninstallItem(id);
-    }
-  }
-}
-
-function isExtensionActive(id)
-{
-  let extensionManager = Components.classes["@mozilla.org/extensions/manager;1"]
-                                   .getService(Components.interfaces.nsIExtensionManager);
-
-  // First check whether the extension is installed
-  if (!extensionManager.getItemForID(id))
-    return false;
-
-  let ds = extensionManager.datasource;
-  let rdfService = Components.classes["@mozilla.org/rdf/rdf-service;1"]
-                             .getService(Components.interfaces.nsIRDFService);
-  let source = rdfService.GetResource("urn:mozilla:item:" + id);
-
-  // Check whether extension is disabled
-  let link = rdfService.GetResource("http://www.mozilla.org/2004/em-rdf#isDisabled");
-  let target = ds.GetTarget(source, link, true);
-  if (target instanceof Components.interfaces.nsIRDFLiteral && target.Value == "true")
-    return false;
-
-  // Check whether an operation is pending for the extension
-  link = rdfService.GetResource("http://www.mozilla.org/2004/em-rdf#opType");
-  if (ds.GetTarget(source, link, false))
-    return false;
-
-  return true;
 }

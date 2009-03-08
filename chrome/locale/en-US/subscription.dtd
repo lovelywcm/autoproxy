@@ -22,7 +22,7 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
-<!ENTITY dialog.title               "Edit subscription list">
+<!ENTITY dialog.title               "Edit subscription">
 <!ENTITY dialog.newtitle            "Add rule subscription">
 
 <!ENTITY new.description            "Please enter the web address or file containing a list of AutoProxy rules.">

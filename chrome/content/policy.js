@@ -19,11 +19,12 @@
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
+ * Wang Congming <lovelywcm@gmail.com> Modified for AutoProxy.
  *
  * ***** END LICENSE BLOCK ***** */
 
 /**
- * Content policy implementation, responsible for blocking things.
+ * Content policy implementation, responsible for proxying things.
  * This file is included from nsAutoProxy.js.
  */
 
@@ -34,31 +35,10 @@ if ("nsIEffectiveTLDService" in Components.interfaces)
                            .getService(Components.interfaces.nsIEffectiveTLDService);
 }
 
+var proxyService = Components.classes["@mozilla.org/network/protocol-proxy-service;1"]
+		    .getService(Components.interfaces.nsIProtocolProxyService);
+
 const ok = Components.interfaces.nsIContentPolicy.ACCEPT;
-
-var proxyEnabled = false;
-var autoProxy = 
-{
-  proxyService: Components.classes["@mozilla.org/network/protocol-proxy-service;1"].
-                          getService(Components.interfaces.nsIProtocolProxyService),
-
-  applyFilter: function(pS, uri, proxy)
-  {
-      return pS.newProxyInfo('http', '127.0.0.1', '8000', 0, 0, null);
-  },
-
-  goProxy: function()
-  {
-      this.proxyService.registerFilter(this, 0);
-      proxyEnabled = true;
-  },
-  
-  notProxy: function()
-  {
-      this.proxyService.unregisterFilter(this);
-      proxyEnabled = false;
-  }
-}
 
 var policy =
 {
@@ -84,8 +64,57 @@ var policy =
    */
   whitelistSchemes: null,
 
-  init: function() {
-    var types = ["OTHER", "SCRIPT", "IMAGE", "STYLESHEET", "OBJECT", "SUBDOCUMENT", "DOCUMENT", "XBL", "PING", "XMLHTTPREQUEST", "OBJECT_SUBREQUEST", "DTD", "MEDIA"];
+  /**
+   * Indicate whether the proxy is enabled or not.
+   */
+  proxyEnabled: false,
+
+  /**
+   * Array of Proxy Details, used by newProxyInfo() of applyFilter().
+   * example: ['Tor', '127.0.0.1', '9050', 'socks']. socks meanings socks5.
+   * Every time proxy changed, this array will be refreshed.
+   */
+  aupPDs: [],
+
+  /**
+   * Read global proxy from prefs. This function will be called at startup
+   * or every time user specified a different global proxy.
+   */
+  readGlobalProxy: function()
+  {
+    this.proxyEnabled = false;
+    proxyService.unregisterFilter(this);
+    this.aupPDs = prefs.globalProxy.split(";");
+    if (this.aupPDs[3] != "direct") {
+      if (this.aupPDs[1] == "") this.aupPDs[1] = "127.0.0.1";
+      if (this.aupPDs[3] == "") this.aupPDs[3] = "http";
+    }
+  },
+
+  applyFilter: function(pS, uri, proxy)
+  {
+    // type, host, port
+    return pS.newProxyInfo(this.aupPDs[3], this.aupPDs[1], this.aupPDs[2], 0, 0, null);
+  },
+
+  goProxy: function()
+  {
+    proxyService.registerFilter(this, 0);
+    this.proxyEnabled = true;
+  },
+
+  noProxy: function()
+  {
+    proxyService.unregisterFilter(this);
+    this.proxyEnabled = false;
+  },
+
+  init: function()
+  {
+    this.readGlobalProxy();
+
+    var types = ["OTHER", "SCRIPT", "IMAGE", "STYLESHEET", "OBJECT",
+		 "SUBDOCUMENT", "DOCUMENT", "XBL", "PING", "XMLHTTPREQUEST", "OBJECT_SUBREQUEST", "DTD", "MEDIA"];
 
     // type constant by type description and type description by type constant
     this.type = {};
@@ -101,7 +130,7 @@ var policy =
         this.localizedDescr[this.type[typeName]] = aup.getString("type_label_" + typeName.toLowerCase());
       }
     }
-  
+
     this.type.BACKGROUND = 0xFFFE;
     this.typeDescr[0xFFFE] = "BACKGROUND";
     this.localizedDescr[0xFFFE] = aup.getString("type_label_background");
@@ -146,7 +175,7 @@ var policy =
       contentType = this.type.BACKGROUND;
 
     // Fix type for objects misrepresented as frames or images
-    if (contentType != this.type.OBJECT && (node instanceof Components.interfaces.nsIDOMHTMLObjectElement || 
+    if (contentType != this.type.OBJECT && (node instanceof Components.interfaces.nsIDOMHTMLObjectElement ||
                                             node instanceof Components.interfaces.nsIDOMHTMLEmbedElement))
       contentType = this.type.OBJECT;
 
@@ -228,7 +257,7 @@ var policy =
         {
           mailWnd = mailWnd.wrappedJSObject;
         } catch(e) {}
-  
+
         if ("currentHeaderData" in mailWnd && "content-base" in mailWnd.currentHeaderData)
         {
           return this.isWhitelisted(mailWnd.currentHeaderData["content-base"].headerValue);
@@ -288,8 +317,8 @@ var policy =
       return ok;
 
     this.processNode(wnd, node, contentType, location) ?
-    proxyEnabled && autoProxy.notProxy() : proxyEnabled || autoProxy.goProxy();
-    
+    this.proxyEnabled && this.noProxy() : this.proxyEnabled || this.goProxy();
+
     return ok;
   },
 
@@ -307,7 +336,7 @@ var policy =
     for (var i = start; i < data.length; i++) {
       if (i - start >= 20) {
         // Allow events to process
-        createTimer(function() {policy.refilterWindowInternal(wnd, i)}, 0);
+        createTimer(function() {policy.refilterWindowInternal(wnd, i);}, 0);
         return;
       }
 
@@ -325,7 +354,7 @@ var policy =
 
   // Calls refilterWindowInternal delayed to allow events to process
   refilterWindow: function(wnd) {
-    createTimer(function() {policy.refilterWindowInternal(wnd, 0)}, 0);
+    createTimer(function() {policy.refilterWindowInternal(wnd, 0);}, 0);
   }
 };
 

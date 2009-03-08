@@ -1,0 +1,8 @@
+<!ENTITY dialog.title "S&apos;abonner à la règle AutoProxy">
+<!ENTITY note "NB : une liste des règles est en général plus efficace lorsqu&apos;elle est appliquée à des sites Web de la zone pour laquelle cette liste de règles a été créée.">
+<!ENTITY homepage.label "Page Web">
+<!ENTITY subscribe.label "S&apos;inscrire">
+<!ENTITY subscribe.accesskey "r">
+<!ENTITY other.accesskey "f">
+<!ENTITY full-list.url "http://autoproxy.org/en/subscriptions">
+<!ENTITY full-list.label "Voir toutes les inscriptions">

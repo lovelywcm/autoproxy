@@ -367,17 +367,7 @@ function aupShowSubscriptions()
   for each (let subscription in aup.filterStorage.subscriptions)
     if (subscription instanceof aup.DownloadableSubscription)
       return;
-
-  let browser = aupGetBrowser();
-  if ("addTab" in browser)
-  {
-    // We have a tabbrowser
-    browser.selectedTab = browser.addTab("chrome://autoproxy/content/tip_subscriptions.xul");
-  }
-  else
-  {
-	window.openDialog("chrome://autoproxy/content/tip_subscriptions.xul", "_blank", "chrome,centerscreen,resizable=no,dialog=no");
-  }
+  openDialog("chrome://autoproxy/content/tip_subscriptions.xul", "_blank", "chrome, centerscreen");
 }
 
 function aupFillTooltip(ev) {

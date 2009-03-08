@@ -58,8 +58,8 @@
 
   <description id="contributorsTitle" value="&contributors.label;"/>
   <vbox id="contributorsBox">
-
-    <spacer height="5"/>
+    <description value="myahoo - French translation"/>
+    <spacer height="15"/>
     <description value="Wladimir Palant - the Author of Adblock Plus"/>
     <description value="Blackdire - the zh-CN locale translator of Adblock Plus"/>
   </vbox>

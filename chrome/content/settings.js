@@ -19,6 +19,7 @@
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
+ * Wang Congming Modify for AutoProxy.
  *
  * ***** END LICENSE BLOCK ***** */
 
@@ -836,6 +837,22 @@ function editFilter(type) /**Boolean*/
     treeView.startEditor(false);
 
   return true;
+}
+
+/**
+ * Open the "Edit Proxy Server" dialog called by menu
+ */
+function editProxyServer()
+{
+  openDialog("editProxyServer.xul", "_blank", "chrome,centerscreen,modal");
+}
+
+/**
+ * Open the "Choose Proxy Server" dialog called by menu
+ */
+function chooseProxyServer()
+{
+  openDialog("chooseProxyServer.xul", "_blank", "chrome,centerscreen,modal");
 }
 
 /**

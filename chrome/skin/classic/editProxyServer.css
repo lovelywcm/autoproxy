@@ -1,0 +1,85 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is AutoProxy.
+ *
+ * The Initial Developer of the Original Code is
+ * Wang Congming.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+#discription {
+  font-weight: bold;
+}
+
+menuseparator {
+  margin-top: 10px;
+}
+
+textbox.proxyName {
+  width: 110px;
+}
+
+.proxyHost {
+  width: 120px;
+}
+
+.proxyPort {
+  width: 45px;
+}
+
+radiogroup > .proxyHttp {
+  margin-left: 10px;
+}
+
+radiogroup > .proxySocks4, radiogroup > .proxySocks5 {
+  margin-left: 21px;
+}
+
+.deleBox {
+  margin-left: 10px;
+}
+
+
+grid + menuseparator + hbox > hbox:first-child {
+  -moz-box-flex: 1;
+}
+
+grid + menuseparator + hbox > hbox:last-child {
+  -moz-box-flex: 1;
+  -moz-box-pack: end;
+}
+
+#note, #warning {
+  color: red;
+}
+
+#tip {
+  color: green;
+}
+
+#tip, #note, #warning {
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+description {
+  max-width: 450px;
+}

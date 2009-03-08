@@ -30,7 +30,6 @@ var subscriptions = aup.filterStorage.subscriptions;
 
 var curGlobalProxy = prefs.globalProxy;
 var proxies = prefs.customProxy.split("$");
-if (proxies == "") proxies = prefs.defaultProxy.split("$");
 
 let globalPrimary;
 
@@ -42,6 +41,7 @@ function init()
   // insert menu items to global primary proxy menu list
   globalPrimary = document.getElementById("globalPrimary");
   for each (let proxy in proxies) {
+    if (proxy == "") continue;
     var mitem = cE("menuitem");
     mitem.setAttribute("label", proxy.split(";")[0]);
     globalPrimary.firstChild.appendChild(mitem);

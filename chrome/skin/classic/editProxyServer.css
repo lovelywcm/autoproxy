@@ -54,7 +54,7 @@ radiogroup > .proxySocks4, radiogroup > .proxySocks5 {
 }
 
 .deleBox {
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 
@@ -65,4 +65,21 @@ grid + menuseparator + hbox > hbox:first-child {
 grid + menuseparator + hbox > hbox:last-child {
   -moz-box-flex: 1;
   -moz-box-pack: end;
+}
+
+#note, #warning {
+  color: red;
+}
+
+#tip {
+  color: green;
+}
+
+#tip, #note, #warning {
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+description {
+  max-width: 450px;
 }

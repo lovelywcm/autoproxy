@@ -85,8 +85,10 @@ var policy =
     this.proxyEnabled = false;
     proxyService.unregisterFilter(this);
     this.aupPDs = prefs.globalProxy.split(";");
-    if (this.aupPDs[1] == "") this.aupPDs[1] = "127.0.0.1";
-    if (this.aupPDs[3] == "") this.aupPDs[3] = "http";
+    if (this.aupPDs[3] != "direct") {
+      if (this.aupPDs[1] == "") this.aupPDs[1] = "127.0.0.1";
+      if (this.aupPDs[3] == "") this.aupPDs[3] = "http";
+    }
   },
 
   applyFilter: function(pS, uri, proxy)

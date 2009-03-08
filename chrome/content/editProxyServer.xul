@@ -43,19 +43,22 @@
 <grid>
   <rows>
     <row id="discription">
-      <label value="&name.label;" accesskey="&name.accesskey;" control="proxy0name"/>
-      <label value="&host.label;" accesskey="&host.accesskey;" control="proxy0host"/>
-      <label value="&port.label;" accesskey="&port.accesskey;" control="proxy0port"/>
+      <label value="&name.label;"/>
+      <label value="&host.label;"/>
+      <label value="&port.label;"/>
       <hbox>
-        <label value="&http.label;" accesskey="&http.accesskey;" control="proxy0http"/>
-        <label value="&socks4.label;" accesskey="&socks4.accesskey;" control="proxy0socks4"/>
-        <label value="&socks5.label;" accesskey="&socks5.accesskey;" control="proxy0socks5"/>
+        <label value="&http.label;"/>
+        <label value="&socks4.label;"/>
+        <label value="&socks5.label;"/>
       </hbox>
-      <label value="&delete.label;" accesskey="&delete.accesskey;" control="proxy0dele"/>
+      <label value="&delete.label;"/>
     </row>
     <!-- Proxy configs will be added here by JS -->
   </rows>
 </grid>
+<description id="warning" hidden="true"> &warning.text; </description>
+<description id="note" hidden="true"> &note.text; </description>
+<description id="tip" hidden="true"> &tip.text; </description>
 <menuseparator/>
 <hbox>
   <hbox>

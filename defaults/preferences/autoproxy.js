@@ -25,6 +25,6 @@ pref("extensions.autoproxy.composer_default", 2);
 pref("extensions.autoproxy.usingGlobalProxy", true);
 pref("extensions.autoproxy.globalProxy", "GAppProxy;;8000;");
 pref("extensions.autoproxy.proxyMode", "auto");
-pref("extensions.autoproxy.customProxy", "");
+pref("extensions.autoproxy.customProxy", "GAppProxy;;8000;$Tor;;9050;socks$JAP;;4001;$Your Freedom;;8080;$Wu Jie;;9666;$Free Gate;;8567;");
 pref("extensions.autoproxy.defaultProxy", "GAppProxy;;8000;$Tor;;9050;socks$JAP;;4001;$Your Freedom;;8080;$Wu Jie;;9666;$Free Gate;;8567;");
 pref("extensions.autoproxy@autoproxy.org.description", "chrome://autoproxy/locale/global.properties");

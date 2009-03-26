@@ -94,7 +94,7 @@ var policy =
   applyFilter: function(pS, uri, proxy)
   {
     // type, host, port
-    return pS.newProxyInfo(this.aupPDs[3], this.aupPDs[1], this.aupPDs[2], 0, 0, null);
+    return pS.newProxyInfo(this.aupPDs[3], this.aupPDs[1], this.aupPDs[2], 1, 0, null);
   },
 
   goProxy: function()

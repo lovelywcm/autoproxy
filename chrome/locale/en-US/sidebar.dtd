@@ -37,13 +37,13 @@
 <!ENTITY size.label               "Size">
 
 <!ENTITY noitems.label            "No proxyable items">
-<!ENTITY whitelisted.label        "Blacklisted page">
+<!ENTITY whitelisted.label        "No-proxy page">
 <!ENTITY notloaded.label          "AutoProxy hasn't been installed properly">
 
 <!ENTITY tooltip.address.label    "Address:">
 <!ENTITY tooltip.type.label       "Type:">
-<!ENTITY tooltip.type.blocked     "(proxyed)">
-<!ENTITY tooltip.type.whitelisted "(blacklisted)">
+<!ENTITY tooltip.type.blocked     "(Proxyed)">
+<!ENTITY tooltip.type.whitelisted "(Proxy prohibited, connect directly)">
 <!ENTITY tooltip.size.label       "Size:">
 <!ENTITY tooltip.filter.label     "Rule in effect:">
 <!ENTITY tooltip.filterSource.label "Rule source:">

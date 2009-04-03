@@ -93,7 +93,7 @@ var policy =
 
   applyFilter: function(pS, uri, proxy)
   {
-    // type, host, port
+    // type, host, port, network.proxy.socks_remote_dns=true, 0, null
     return pS.newProxyInfo(this.aupPDs[3], this.aupPDs[1], this.aupPDs[2], 1, 0, null);
   },
 
@@ -149,7 +149,7 @@ var policy =
    * @param location {nsIURI}
    * @return {Boolean} false if the node is blocked
    */
-  processNode: function(wnd, node, contentType, location) {
+  shouldProxy: function(wnd, node, contentType, location) {
     var topWnd = wnd.top;
     if (!topWnd || !topWnd.location || !topWnd.location.href)
       return true;
@@ -196,7 +196,7 @@ var policy =
     if (match)
       filterStorage.increaseHitCount(match);
 
-    return !match || match instanceof WhitelistFilter;
+    return match && !(match instanceof WhitelistFilter);
   },
 
   /**
@@ -316,8 +316,8 @@ var policy =
     if ( !this.isBlockableScheme(location) )
       return ok;
 
-    this.processNode(wnd, node, contentType, location) ?
-    this.proxyEnabled && this.noProxy() : this.proxyEnabled || this.goProxy();
+    this.shouldProxy(wnd, node, contentType, location) ?
+      this.proxyEnabled || this.goProxy() : this.proxyEnabled && this.noProxy();
 
     return ok;
   },
@@ -344,7 +344,7 @@ var policy =
         var nodes = data[i].nodes;
         data[i].nodes = [];
         for (var j = 0; j < nodes.length; j++) {
-          //this.processNode(wnd, nodes[j], data[i].type, makeURL(data[i].location));
+          //this.shouldProxy(wnd, nodes[j], data[i].type, makeURL(data[i].location));
         }
       }
     }

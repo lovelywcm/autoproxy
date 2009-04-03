@@ -58,7 +58,7 @@
 
   <description id="contributorsTitle" value="&contributors.label;"/>
   <vbox id="contributorsBox">
-    <description value="GuaiGuai@Blogtd.org - Logo designer"/>
+    <description value="blogtd@blogtd.org - Logo designer"/>
     <description value="myahoo - French translation"/>
     <spacer height="15"/>
     <description value="Wladimir Palant - the Author of Adblock Plus"/>

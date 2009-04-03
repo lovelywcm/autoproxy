@@ -11,7 +11,7 @@
 <!ENTITY context.object.label "代理该对象">
 <!ENTITY context.frame.label "代理该帧">
 <!ENTITY sidebar.title "当前页面可代理的资源">
-<!ENTITY settings.label "选项">
+<!ENTITY settings.label "首选项">
 <!ENTITY settings.accesskey "F">
 <!ENTITY opensidebar.label "打开可代理资源列表">
 <!ENTITY opensidebar.accesskey "B">

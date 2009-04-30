@@ -46,7 +46,7 @@ function aupInit() {
     aupPrefs.addListener(aupReloadPrefs);
 
     // Make sure whitelisting gets displayed after at most 2 seconds
-    setInterval(aupReloadPrefs, 2000);
+    window.setInterval(aupReloadPrefs, 2000);
     aupGetBrowser().addEventListener("select", aupReloadPrefs, false); 
 
     // Make sure we always configure keys but don't let them break anything
@@ -76,10 +76,10 @@ function aupInit() {
     aupPrefs.doneFirstRunActions = true;
 
     // Add aup icon to toolbar if necessary
-    setTimeout(aupInstallInToolbar, 0);
+    window.setTimeout(aupInstallInToolbar, 0);
 
     // Show subscriptions dialog if the user doesn't have any subscriptions yet
-    setTimeout(aupShowSubscriptions, 0);
+    window.setTimeout(aupShowSubscriptions, 0);
   }
 
   // Move toolbar button to a correct location in Mozilla/SeaMonkey
@@ -114,7 +114,7 @@ function aupInit() {
   copyMenu(document.getElementById("aup-toolbarbutton"));
   copyMenu(aupGetPaletteButton());
 
-  setTimeout(aupInitImageManagerHiding, 0);
+  window.setTimeout(aupInitImageManagerHiding, 0);
 }
 
 function aupUnload() {
@@ -727,5 +727,5 @@ function aupCheckContext() {
 // Bring up the settings dialog for the node the context menu was referring to
 function aupNode(data) {
   if (aup && data)
-    openDialog("chrome://autoproxy/content/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", aupGetBrowser().contentWindow, data);
+    window.openDialog("chrome://autoproxy/content/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", aupGetBrowser().contentWindow, data);
 }

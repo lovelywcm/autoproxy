@@ -44,7 +44,20 @@ let eventHandlers = [
   ["aup-tooltip", "popupshowing", aupFillTooltip],
   ["aup-status-popup", "popupshowing", aupFillPopup],
   ["aup-toolbar-popup", "popupshowing", aupFillPopup],
+  ["aup-command-togglesitewhitelist", "command", function() { toggleFilter(siteWhitelist); }],
+  ["aup-command-togglepagewhitelist", "command", function() { toggleFilter(pageWhitelist); }],
 ];
+
+/**
+ * Filter corresponding with "disable on site" menu item (set in aupFillPopup()).
+ * @type Filter
+ */
+let siteWhitelist = null;
+/**
+ * Filter corresponding with "disable on site" menu item (set in aupFillPopup()).
+ * @type Filter
+ */
+let pageWhitelist = null;
 
 /**
  * Timer triggering UI reinitialization in regular intervals.
@@ -176,33 +189,8 @@ function aupReloadPrefs() {
 
     if (state == "active")
     {
-      let location = null;
-      if ("currentHeaderData" in window && "content-base" in currentHeaderData)
-      {
-        // Thunderbird blog entry
-        location = currentHeaderData["content-base"].headerValue;
-      }
-      else if ("gDBView" in window)
-      {
-        // Thunderbird mail/newsgroup entry
-        try
-        {
-          var msgHdr = gDBView.hdrForFirstSelectedMessage;
-          var headerParser = Components.classes["@mozilla.org/messenger/headerparser;1"]
-                                      .getService(Components.interfaces.nsIMsgHeaderParser);
-          var emailAddress = headerParser.extractHeaderAddressMailboxes(null, msgHdr.author);
-          if (emailAddress)
-            location = 'mailto:' + emailAddress.replace(/^[\s"]+/, "").replace(/[\s"]+$/, "").replace(' ', '%20');
-        }
-        catch(e) {}
-      }
-      else
-      {
-        // Firefox web page
-        location = aupGetBrowser().contentWindow.location.href;
-      }
-
-      if (location && aup.policy.isWhitelisted(location))
+      let location = getCurrentLocation();
+      if (location && aup.policy.isWhitelisted(location.spec))
         state = "whitelisted";
     }
   }
@@ -477,6 +465,39 @@ function aupFillTooltip(event) {
   }
 }
 
+/**
+ * Retrieves the current location of the browser (might return null on failure).
+ */
+function getCurrentLocation() /**nsIURI*/
+{
+  if ("currentHeaderData" in window && "content-base" in currentHeaderData)
+  {
+    // Thunderbird blog entry
+    return aup.unwrapURL(window.currentHeaderData["content-base"].headerValue);
+  }
+  else if ("gDBView" in window)
+  {
+    // Thunderbird mail/newsgroup entry
+    try
+    {
+      let msgHdr = gDBView.hdrForFirstSelectedMessage;
+      let headerParser = Components.classes["@mozilla.org/messenger/headerparser;1"]
+                                   .getService(Components.interfaces.nsIMsgHeaderParser);
+      let emailAddress = headerParser.extractHeaderAddressMailboxes(null, msgHdr.author);
+      return "mailto:" + emailAddress.replace(/^[\s"]+/, "").replace(/[\s"]+$/, "").replace(/\s/g, "%20");
+    }
+    catch(e)
+    {
+      return null;
+    }
+  }
+  else
+  {
+    // Regular browser
+    return aup.unwrapURL(aupGetBrowser().contentWindow.location.href);
+  }
+}
+
 // Fills the context menu on the status bar
 function aupFillPopup(event) {
   let popup = event.target;
@@ -498,68 +519,50 @@ function aupFillPopup(event) {
 
   var whitelistItemSite = elements.whitelistsite;
   var whitelistItemPage = elements.whitelistpage;
+  whitelistItemSite.hidden = whitelistItemPage.hidden = true;
+
   var whitelistSeparator = whitelistItemPage.nextSibling;
   while (whitelistSeparator.nodeType != whitelistSeparator.ELEMENT_NODE)
     whitelistSeparator = whitelistSeparator.nextSibling;
 
-  var location = null;
-  var site = null;
-  if ("currentHeaderData" in window && "content-base" in currentHeaderData) {
-    // Thunderbird blog entry
-    location = aup.unwrapURL(currentHeaderData["content-base"].headerValue);
-  }
-  else if ("gDBView" in window) {
-    // Thunderbird mail/newsgroup entry
-    try {
-      var msgHdr = gDBView.hdrForFirstSelectedMessage;
-      var headerParser = Components.classes["@mozilla.org/messenger/headerparser;1"]
-                                  .getService(Components.interfaces.nsIMsgHeaderParser);
-      site = headerParser.extractHeaderAddressMailboxes(null, msgHdr.author);
-      if (site)
-        site = site.replace(/^[\s"]+/, "").replace(/[\s"]+$/, "");
-    }
-    catch(e) {
-      site = null;
-    }
+  let location = getCurrentLocation();
+  if (location && aup.policy.isBlockableScheme(location))
+  {
+    let host = null;
+    try
+    {
+      host = location.host;
+    } catch (e) {}
 
-    if (site) {
-      whitelistItemSite.pattern = "@@|mailto:" + site.replace(' ', '%20') + "|";
-      whitelistItemSite.setAttribute("checked", aupHasFilter(whitelistItemSite.pattern));
-      whitelistItemSite.setAttribute("label", whitelistItemSite.getAttribute("labeltempl").replace(/--/, site));
-    }
-  }
-  else {
-    // Firefox web page
-    location = aup.unwrapURL(aupGetBrowser().contentWindow.location.href);
-  }
-
-  if (!site && location) {
-    if (aup.policy.isBlockableScheme(location)) {
+    if (host)
+    {
       let ending = "|";
+      if (location instanceof Components.interfaces.nsIURL && location.ref)
+        location.ref = "";
       if (location instanceof Components.interfaces.nsIURL && location.query)
       {
         location.query = "";
         ending = "?";
       }
 
-      let url = location.spec;
-      let host = location.host;
-      site = url.replace(/^([^\/]+\/\/[^\/]+\/).*/, "$1");
-
-      whitelistItemSite.pattern = "@@|" + site;
-      whitelistItemSite.setAttribute("checked", aupHasFilter(whitelistItemSite.pattern));
+      siteWhitelist = aup.Filter.fromText("@@|" + location.prePath + "/");
+      whitelistItemSite.setAttribute("checked", isUserDefinedFilter(siteWhitelist));
       whitelistItemSite.setAttribute("label", whitelistItemSite.getAttribute("labeltempl").replace(/--/, host));
+      whitelistItemSite.hidden = false;
 
-      whitelistItemPage.pattern = "@@|" + url + ending;
-      whitelistItemPage.setAttribute("checked", aupHasFilter(whitelistItemPage.pattern));
+      pageWhitelist = aup.Filter.fromText("@@|" + location.spec + ending);
+      whitelistItemPage.setAttribute("checked", isUserDefinedFilter(pageWhitelist));
+      whitelistItemPage.hidden = false;
     }
     else
-      location = null;
+    {
+      siteWhitelist = aup.Filter.fromText("@@|" + location.spec + "|");
+      whitelistItemSite.setAttribute("checked", isUserDefinedFilter(siteWhitelist));
+      whitelistItemSite.setAttribute("label", whitelistItemSite.getAttribute("labeltempl").replace(/--/, location.spec.replace(/^mailto:/, "")));
+      whitelistItemSite.hidden = false;
+    }
   }
-
-  whitelistItemSite.hidden = !site;
-  whitelistItemPage.hidden = !location;
-  whitelistSeparator.hidden = !site && !location;
+  whitelistSeparator.hidden = whitelistItemSite.hidden && whitelistItemPage.hidden;
 
   elements.enabled.setAttribute("checked", aupPrefs.enabled);
   elements.showintoolbar.setAttribute("checked", aupPrefs.showintoolbar);
@@ -617,18 +620,13 @@ function aupToggleSidebar() {
 }
 
 /**
- * Checks whether the specified user-defined filter exists
+ * Checks whether the specified filter exists as a user-defined filter in the list.
  *
  * @param {String} filter   text representation of the filter
  */
-function aupHasFilter(filter)
+function isUserDefinedFilter(/**Filter*/ filter)  /**Boolean*/
 {
-  filter = aup.Filter.fromText(filter);
-  for each (let subscription in aup.filterStorage.subscriptions)
-    if (subscription instanceof aup.SpecialSubscription && subscription.filters.indexOf(filter) >= 0)
-      return true;
-
-  return false;
+  return filter.subscriptions.some(function(subscription) { return subscription instanceof aup.SpecialSubscription; });
 }
 
 // Toggles the value of a boolean pref
@@ -640,15 +638,16 @@ function aupTogglePref(pref) {
   aupPrefs.save();
 }
 
-// Inserts or removes the specified pattern into/from the list
-function aupTogglePattern(text, insert) {
-  if (!aup)
-    return;
-
-  if (insert)
-    aup.addPatterns([text], 1);
+/**
+ * If the given filter is already in user's list, removes it from the list. Otherwise adds it.
+ */
+function toggleFilter(/**Filter*/ filter)
+{
+  if (isUserDefinedFilter(filter))
+    aup.filterStorage.removeFilter(filter);
   else
-    aup.removePatterns([text], 1);
+    aup.filterStorage.addFilter(filter);
+  aup.filterStorage.saveToDisk();
 
   // Make sure to display whitelisting immediately
   aupReloadPrefs();

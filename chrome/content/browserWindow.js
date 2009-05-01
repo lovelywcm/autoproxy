@@ -44,8 +44,15 @@ let eventHandlers = [
   ["aup-tooltip", "popupshowing", aupFillTooltip],
   ["aup-status-popup", "popupshowing", aupFillPopup],
   ["aup-toolbar-popup", "popupshowing", aupFillPopup],
+  ["aup-command-settings", "command", function() { aup.openSettingsDialog(); }],
+  ["aup-command-sidebar", "command", aupToggleSidebar],
   ["aup-command-togglesitewhitelist", "command", function() { toggleFilter(siteWhitelist); }],
   ["aup-command-togglepagewhitelist", "command", function() { toggleFilter(pageWhitelist); }],
+  ["aup-command-toggleobjtabs", "command", function() { aupTogglePref("frameobjects"); }],
+  ["aup-command-togglecollapse", "command", function() { aupTogglePref("fastcollapse"); }],
+  ["aup-command-toggleshowintoolbar", "command", function() { aupTogglePref("showintoolbar"); }],
+  ["aup-command-toggleshowinstatusbar", "command", function() { aupTogglePref("showinstatusbar"); }],
+  ["aup-command-enable", "command", function() { aupTogglePref("enabled"); }]
 ];
 
 /**

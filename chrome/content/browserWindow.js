@@ -190,7 +190,8 @@ function aupInit() {
 
 function aupUnload() {
   aupPrefs.removeListener(aupReloadPrefs);
-  aupGetBrowser().removeEventListener("select", aupReloadPrefs, false); 
+  aupGetBrowser().removeEventListener("select", aupReloadPrefs, false);
+  prefReloadTimer.cancel();
 }
 
 function aupGetBrowser() {
@@ -624,9 +625,6 @@ function aupIsSidebarOpen() {
 }
 
 function aupToggleSidebar() {
-  if (!aup)
-    return;
-
   if (aupDetachedSidebar && !aupDetachedSidebar.closed)
     aupDetachedSidebar.close();
   else {
@@ -657,9 +655,6 @@ function isUserDefinedFilter(/**Filter*/ filter)  /**Boolean*/
 
 // Toggles the value of a boolean pref
 function aupTogglePref(pref) {
-  if (!aup)
-    return;
-
   aupPrefs[pref] = !aupPrefs[pref];
   aupPrefs.save();
 }

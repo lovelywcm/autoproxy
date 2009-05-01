@@ -65,15 +65,16 @@
   </popupset>
   <keyset id="aup-keyset"/>
   <commandset id="aup-commandset">
-    <command id="aup-command-settings"/>
-    <command id="aup-command-sidebar"/>
+    <!-- Dummy oncommand attributes are work-arounds for bug 371900 -->
+    <command id="aup-command-settings" oncommand="//"/>
+    <command id="aup-command-sidebar" oncommand="//"/>
     <command id="aup-command-togglesitewhitelist"/>
     <command id="aup-command-togglepagewhitelist"/>
     <command id="aup-command-toggleobjtabs"/>
     <command id="aup-command-togglecollapse"/>
     <command id="aup-command-toggleshowintoolbar"/>
     <command id="aup-command-toggleshowinstatusbar"/>
-    <command id="aup-command-enable"/>
+    <command id="aup-command-enable" oncommand="//"/>
   </commandset>
 
   <statusbarpanel id="aup-status" disabled="true" context="aup-status-popup">

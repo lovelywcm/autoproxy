@@ -52,7 +52,10 @@ let eventHandlers = [
   ["aup-command-togglecollapse", "command", function() { aupTogglePref("fastcollapse"); }],
   ["aup-command-toggleshowintoolbar", "command", function() { aupTogglePref("showintoolbar"); }],
   ["aup-command-toggleshowinstatusbar", "command", function() { aupTogglePref("showinstatusbar"); }],
-  ["aup-command-enable", "command", function() { aupTogglePref("enabled"); }]
+  ["aup-command-enable", "command", function() { aupTogglePref("enabled"); }],
+  ["aup-status", "click", aupClickHandler],
+  ["aup-toolbarbutton", "command", function(event) { if (event.eventPhase == event.AT_TARGET) aupCommandHandler(event); }],
+  ["aup-toolbarbutton", "click", function(event) { if (event.eventPhase == event.AT_TARGET && event.button == 1) aupTogglePref("enabled"); }]
 ];
 
 /**

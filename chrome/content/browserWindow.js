@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Wladimir Palant.
- * Portions created by the Initial Developer are Copyright (C) 2006-2008
+ * Portions created by the Initial Developer are Copyright (C) 2006-2009
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -46,6 +46,12 @@ let eventHandlers = [
   ["aup-toolbar-popup", "popupshowing", aupFillPopup],
 ];
 
+/**
+ * Timer triggering UI reinitialization in regular intervals.
+ * @type nsITimer
+ */
+let prefReloadTimer = null;
+
 aupInit();
 
 function E(id)
@@ -70,7 +76,9 @@ function aupInit() {
     aupPrefs.addListener(aupReloadPrefs);
 
     // Make sure whitelisting gets displayed after at most 2 seconds
-    window.setInterval(aupReloadPrefs, 2000);
+    prefReloadTimer = aup.createTimer(aupReloadPrefs, 2000);
+    prefReloadTimer.type = prefReloadTimer.TYPE_REPEATING_SLACK;
+
     aupGetBrowser().addEventListener("select", aupReloadPrefs, false); 
 
     // Make sure we always configure keys but don't let them break anything
@@ -100,10 +108,10 @@ function aupInit() {
     aupPrefs.doneFirstRunActions = true;
 
     // Add aup icon to toolbar if necessary
-    window.setTimeout(aupInstallInToolbar, 0);
+    aup.createTimer(aupInstallInToolbar, 0);
 
     // Show subscriptions dialog if the user doesn't have any subscriptions yet
-    window.setTimeout(aupShowSubscriptions, 0);
+    aup.createTimer(aupShowSubscriptions, 0);
   }
 
   // Move toolbar button to a correct location in Mozilla/SeaMonkey
@@ -138,7 +146,7 @@ function aupInit() {
   copyMenu(E("aup-toolbarbutton"));
   copyMenu(aupGetPaletteButton());
 
-  window.setTimeout(aupInitImageManagerHiding, 0);
+  aup.createTimer(aupInitImageManagerHiding, 0);
 }
 
 function aupUnload() {

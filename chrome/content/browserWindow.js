@@ -55,7 +55,10 @@ let eventHandlers = [
   ["aup-command-enable", "command", function() { aupTogglePref("enabled"); }],
   ["aup-status", "click", aupClickHandler],
   ["aup-toolbarbutton", "command", function(event) { if (event.eventPhase == event.AT_TARGET) aupCommandHandler(event); }],
-  ["aup-toolbarbutton", "click", function(event) { if (event.eventPhase == event.AT_TARGET && event.button == 1) aupTogglePref("enabled"); }]
+  ["aup-toolbarbutton", "click", function(event) { if (event.eventPhase == event.AT_TARGET && event.button == 1) aupTogglePref("enabled"); }],
+  ["aup-image-menuitem", "command", function() { aupNode(backgroundData || nodeData); }],
+  ["aup-object-menuitem", "command", function() { aupNode(nodeData); }],
+  ["aup-frame-menuitem", "command", function() { aupNode(frameData); }]
 ];
 
 /**
@@ -68,6 +71,19 @@ let siteWhitelist = null;
  * @type Filter
  */
 let pageWhitelist = null;
+
+/**
+ * Data associated with the node currently under mouse pointer (set in aupCheckContext()).
+ */
+let nodeData = null;
+/**
+ * Data associated with the background image currently under mouse pointer (set in aupCheckContext()).
+ */
+let backgroundData = null;
+/**
+ * Data associated with the frame currently under mouse pointer (set in aupCheckContext()).
+ */
+let frameData = null;
 
 /**
  * Timer triggering UI reinitialization in regular intervals.
@@ -703,8 +719,8 @@ function aupCheckContext() {
   var target = document.popupNode;
 
   var nodeType = null;
-  contextMenu.aupBgData = null;
-  contextMenu.aupFrameData = null;
+  backgroundData = null;
+  frameData = null;
   if (aup && target) {
     // Lookup the node in our stored data
     var data = aup.getDataForNode(target);
@@ -713,7 +729,7 @@ function aupCheckContext() {
       targetNode = data[0];
       data = data[1];
     }
-    contextMenu.aupData = data;
+    nodeData = data;
     if (data && !data.filter)
       nodeType = data.typeDescr;
 
@@ -721,24 +737,24 @@ function aupCheckContext() {
     var wndData = (wnd ? aup.getDataForWindow(wnd) : null);
 
     if (wnd.frameElement)
-      contextMenu.aupFrameData = aup.getDataForNode(wnd.frameElement, true);
-    if (contextMenu.aupFrameData)
-      contextMenu.aupFrameData = contextMenu.aupFrameData[1];
-    if (contextMenu.aupFrameData && contextMenu.aupFrameData.filter)
-      contextMenu.aupFrameData = null;
+       frameData = aup.getDataForNode(wnd.frameElement, true);
+    if (frameData)
+      frameData = frameData[1];
+    if (frameData && frameData.filter)
+      frameData = null;
 
     if (nodeType != "IMAGE") {
       // Look for a background image
       var imageNode = target;
-      while (imageNode && !contextMenu.aupBgData) {
+      while (imageNode && !backgroundData) {
         if (imageNode.nodeType == imageNode.ELEMENT_NODE) {
           var bgImage = null;
           var style = wnd.getComputedStyle(imageNode, "");
           bgImage = aupImageStyle(style, "background-image") || aupImageStyle(style, "list-style-image");
           if (bgImage) {
-            contextMenu.aupBgData = wndData.getLocation(aup.policy.type.BACKGROUND, bgImage);
-            if (contextMenu.aupBgData && contextMenu.aupBgData.filter)
-              contextMenu.aupBgData = null;
+            backgroundData = wndData.getLocation(aup.policy.type.BACKGROUND, bgImage);
+            if (backgroundData && backgroundData.filter)
+              backgroundData = null;
           }
         }
 
@@ -757,9 +773,9 @@ function aupCheckContext() {
     }
   }
 
-  E("aup-image-menuitem").hidden = (nodeType != "IMAGE" && contextMenu.aupBgData == null);
+  E("aup-image-menuitem").hidden = (nodeType != "IMAGE" && backgroundData == null);
   E("aup-object-menuitem").hidden = (nodeType != "OBJECT");
-  E("aup-frame-menuitem").hidden = (contextMenu.aupFrameData == null);
+  E("aup-frame-menuitem").hidden = (frameData == null);
 }
 
 // Bring up the settings dialog for the node the context menu was referring to

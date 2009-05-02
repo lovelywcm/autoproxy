@@ -69,7 +69,7 @@ function init() {
       parent.document.getElementById("detached-keyset").appendChild(parent.document.importNode(sidebarKey, true));
     }
   }
-  window.__defineGetter__("content", function() {return mainWin.aupGetBrowser().contentWindow;});
+  window.__defineGetter__("content", function() {return aup.getBrowserInWindow(mainWin).contentWindow;});
 
   if (aup) {
     // Install item listener
@@ -104,7 +104,7 @@ function init() {
     }
 
     // Install a handler for tab changes
-    mainWin.aupGetBrowser().addEventListener("select", handleTabChange, false);
+    aup.getBrowserInWindow(mainWin).addEventListener("select", handleTabChange, false);
   }
 }
 
@@ -123,7 +123,7 @@ function cleanUp() {
   aup.filterStorage.removeFilterObserver(reloadDisabledFilters);
   aup.filterStorage.removeSubscriptionObserver(reloadDisabledFilters);
 
-  mainWin.aupGetBrowser().removeEventListener("select", handleTabChange, false);
+  aup.getBrowserInWindow(mainWin).removeEventListener("select", handleTabChange, false);
   mainWin.removeEventListener("unload", mainUnload, false);
 }
 

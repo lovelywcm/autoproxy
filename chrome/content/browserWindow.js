@@ -118,7 +118,7 @@ function aupInit() {
     prefReloadTimer = aup.createTimer(aupReloadPrefs, 2000);
     prefReloadTimer.type = prefReloadTimer.TYPE_REPEATING_SLACK;
 
-    aupGetBrowser().addEventListener("select", aupReloadPrefs, false); 
+    aup.getBrowserInWindow(window).addEventListener("select", aupReloadPrefs, false);
 
     // Make sure we always configure keys but don't let them break anything
     try {
@@ -190,17 +190,8 @@ function aupInit() {
 
 function aupUnload() {
   aupPrefs.removeListener(aupReloadPrefs);
-  aupGetBrowser().removeEventListener("select", aupReloadPrefs, false);
+  aup.getBrowserInWindow(window).removeEventListener("select", aupReloadPrefs, false);
   prefReloadTimer.cancel();
-}
-
-function aupGetBrowser() {
-  if ("getBrowser" in window)
-    return window.getBrowser();
-  else if ("messageContent" in window)
-    return window.messageContent;
-  else
-    return E("frame_main_pane") || E("browser_content");
 }
 
 function aupReloadPrefs() {
@@ -444,7 +435,7 @@ function aupFillTooltip(event) {
   E("aup-tooltip-blocked-label").hidden = (state != "active");
   E("aup-tooltip-blocked").hidden = (state != "active");
   if (state == "active") {
-    var data = aup.getDataForWindow(aupGetBrowser().contentWindow);
+    var data = aup.getDataForWindow(aup.getBrowserInWindow(window).contentWindow);
     var locations = data.getAllLocations();
 
     var blocked = 0;
@@ -521,7 +512,7 @@ function getCurrentLocation() /**nsIURI*/
   else
   {
     // Regular browser
-    return aup.unwrapURL(aupGetBrowser().contentWindow.location.href);
+    return aup.unwrapURL(aup.getBrowserInWindow(window).contentWindow.location.href);
   }
 }
 
@@ -776,5 +767,5 @@ function aupCheckContext() {
 // Bring up the settings dialog for the node the context menu was referring to
 function aupNode(data) {
   if (aup && data)
-    window.openDialog("chrome://autoproxy/content/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", aupGetBrowser().contentWindow, data);
+    window.openDialog("chrome://autoproxy/content/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", aup.getBrowserInWindow(window).contentWindow, data);
 }

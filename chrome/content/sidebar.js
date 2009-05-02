@@ -497,7 +497,7 @@ function detach() {
   var position = ",left="+boxObject.screenX+",top="+boxObject.screenY+",outerWidth="+boxObject.width+",outerHeight="+boxObject.height;
 
   // Close sidebar and open detached window
-  mainWin.aupToggleSidebar();
+  mainWin.document.getElementById("aup-command-sidebar").doCommand();
   mainWin.aupDetachedSidebar = mainWin.openDialog("chrome://autoproxy/content/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no"+position);
 
   // Save setting
@@ -518,7 +518,7 @@ function reattach() {
 
   // Open sidebar in window
   mainWin.aupDetachedSidebar = null;
-  mainWin.aupToggleSidebar();
+  mainWin.document.getElementById("aup-command-sidebar").doCommand();
   parent.close();
 }
 

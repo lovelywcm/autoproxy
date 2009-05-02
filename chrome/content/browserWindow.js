@@ -31,7 +31,6 @@ try {
 } catch (e) {}
 
 var aupPrefs = aup ? aup.prefs : {enabled: false};
-var aupDetachedSidebar = null;
 var aupOldShowInToolbar = aupPrefs.showintoolbar;
 var aupHideImageManager;
 
@@ -99,8 +98,8 @@ function E(id)
 }
 
 function aupInit() {
-
   // Process preferences
+  window.aupDetachedSidebar = null;
   aupReloadPrefs();
   if (aup) {
     // Register event listeners
@@ -608,7 +607,7 @@ function aupCheckToolbarContext(event) {
 
 function aupIsSidebarOpen() {
   // Test whether detached sidebar window is open
-  if (aupDetachedSidebar && !aupDetachedSidebar.closed)
+  if (window.aupDetachedSidebar && !window.aupDetachedSidebar.closed)
     return true;
 
   var sidebar = E("aup-sidebar");
@@ -616,8 +615,8 @@ function aupIsSidebarOpen() {
 }
 
 function aupToggleSidebar() {
-  if (aupDetachedSidebar && !aupDetachedSidebar.closed)
-    aupDetachedSidebar.close();
+  if (window.aupDetachedSidebar && !window.aupDetachedSidebar.closed)
+    window.aupDetachedSidebar.close();
   else {
     var sidebar = E("aup-sidebar");
     if (sidebar && (!aupPrefs.detachsidebar || !sidebar.hidden)) {
@@ -626,7 +625,7 @@ function aupToggleSidebar() {
       sidebar.hidden = !sidebar.hidden;
     }
     else
-      aupDetachedSidebar = window.openDialog("chrome://autoproxy/content/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no,width=600,height=300");
+      window.aupDetachedSidebar = window.openDialog("chrome://autoproxy/content/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no,width=600,height=300");
   }
 
   let menuItem = E("aup-blockableitems");

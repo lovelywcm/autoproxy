@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Wladimir Palant.
- * Portions created by the Initial Developer are Copyright (C) 2006-2008
+ * Portions created by the Initial Developer are Copyright (C) 2006-2009
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -357,7 +357,7 @@ function getSubscriptionDescription(subscription)
     status += aup.getString("subscription_status_lastdownload_inprogress");
   else
   {
-    status += (subscription.lastDownload > 0 ? new Date(subscription.lastDownload * 1000).toLocaleString() : aup.getString("subscription_status_lastdownload_unknown"));
+    status += (subscription.lastDownload > 0 ? new Date(subscription.lastDownload * 1000).toLocaleFormat("%x %X") : abp.getString("subscription_status_lastdownload_unknown"));
     if (subscription instanceof aup.DownloadableSubscription && subscription.downloadStatus)
     {
       try {
@@ -807,7 +807,7 @@ function onSubscriptionChange(/**String*/ action, /**Array of Subscription*/ sub
     }
   }
 
-  // Date.toLocaleString() doesn't handle Unicode properly if called directly from XPCOM (bug 441370)
+  // Date.toLocaleFormat() doesn't handle Unicode properly if called directly from XPCOM (bug 441370)
   setTimeout(function()
   {
     for each (let subscription in subscriptions)
@@ -1496,7 +1496,7 @@ let treeView = {
         if (col == "col-hitcount")
           return filter.hitCount;
         else
-          return (filter.lastHit ? new Date(filter.lastHit).toLocaleString() : null);
+          return (filter.lastHit ? new Date(filter.lastHit).toLocaleFormat("%x %X") : null);
       }
       else
         return null;

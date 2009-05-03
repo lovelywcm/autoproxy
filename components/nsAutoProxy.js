@@ -425,12 +425,19 @@ const aup =
                     windowMediator.getMostRecentWindow("emusic:window");
     function tryWindowMethod(method, parameters)
     {
-      if (!currentWindow)
+      let obj = currentWindow;
+      if (currentWindow && /^browser\.(.*)/.test(method))
+      {
+        method = RegExp.$1;
+        obj = abp.getBrowserInWindow(currentWindow);
+      }
+
+      if (!obj)
         return false;
 
       try
       {
-        currentWindow[method].apply(currentWindow, parameters);
+        obj[method].apply(obj, parameters);
       }
       catch(e)
       {
@@ -445,6 +452,8 @@ const aup =
     }
 
     if (tryWindowMethod("delayedOpenTab", [url]))
+      return;
+    if (tryWindowMethod("browser.addTab", [url, null, null, true]))
       return;
     if (tryWindowMethod("openUILinkIn", [url, "tab"]))
       return;

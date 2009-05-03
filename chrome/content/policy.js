@@ -183,7 +183,7 @@ var policy =
 
     var objTab = null;
     let docDomain = this.getHostname(wnd.location.href);
-    let thirdParty = true;
+    let thirdParty = this.isThirdParty(location, docDomain);
 
     if (!match && prefs.enabled) {
       match = whitelistMatcher.matchesAny(locationText, this.typeDescr[contentType] || "", docDomain, thirdParty);
@@ -205,7 +205,6 @@ var policy =
    * @return {Boolean}
    */
   isBlockableScheme: function(location) {
-
     return !(location.scheme in this.whitelistSchemes);
   },
 
@@ -302,10 +301,7 @@ var policy =
                      .getInterface(Components.interfaces.nsIWebNavigation)
                      .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
                      .itemType;
-    if (wndType != Components.interfaces.nsIDocShellTreeItem.typeContent &&
-        wndType != Components.interfaces.nsIDocShellTreeItem.typeChrome  &&
-      !(location.scheme == "chrome" && location.host == "global" && /auphit:(\d+)#/.test(location.path))
-    )
+    if (wndType != Components.interfaces.nsIDocShellTreeItem.typeContent && !(location.scheme == "chrome" && location.host == "global" && /auphit:(\d+)\b/.test(location.path)))
       return ok;
 
     // Interpret unknown types as "other"

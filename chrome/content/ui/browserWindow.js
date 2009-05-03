@@ -257,12 +257,7 @@ function aupReloadPrefs() {
       currentlyShowingInToolbar = prefs.showintoolbar;
     }
 
-    element.removeAttribute("deactivated");
-    element.removeAttribute("whitelisted");
-    if (state == "whitelisted")
-      element.setAttribute("whitelisted", "true");
-    else if (state == "disabled")
-      element.setAttribute("deactivated", "true");
+    element.setAttribute("aupstate", state);
   };
 
   var status = E("aup-status");

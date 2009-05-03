@@ -40,7 +40,7 @@
     <tooltip id="aup-tooltip" orient="vertical">
       <description id="aup-tooltip-action" hidden="true"/>
       <label id="aup-tooltip-status-label" value="&status.tooltip;"/>
-      <description id="aup-tooltip-status" value="&notloaded.tooltip;"/>
+      <description id="aup-tooltip-status"/>
       <label id="aup-tooltip-blocked-label" value="&blocked.tooltip;" hidden="true"/>
       <description id="aup-tooltip-blocked" hidden="true"/>
       <label id="aup-tooltip-filters-label" value="&filters.tooltip;" hidden="true"/>
@@ -77,12 +77,12 @@
     <command id="aup-command-enable" oncommand="//"/>
   </commandset>
 
-  <statusbarpanel id="aup-status" disabled="true" context="aup-status-popup">
+  <statusbarpanel id="aup-status" context="aup-status-popup">
     <image tooltip="aup-tooltip"/>
-    <label value="&notloaded.label;" tooltip="aup-tooltip"/>
+    <label tooltip="aup-tooltip"/>
   </statusbarpanel>
 
-  <toolbarbutton id="aup-toolbarbutton" disabled="true" label="&toolbarbutton.label;"
+  <toolbarbutton id="aup-toolbarbutton" label="&toolbarbutton.label;"
       oncommand="if (event.target == this) aupCommandHandler(event)"
       onclick="if (event.target == this &amp;&amp; event.button == 1) aupTogglePref('enabled')"
       tooltip="aup-tooltip" context="aup-status-popup">

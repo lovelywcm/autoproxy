@@ -24,19 +24,19 @@
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-#aup-status:not([disabled="true"]) *
+#aup-status *
 {
   cursor: pointer;
 }
-#aup-status:not([disabled="true"]):hover
+#aup-status:hover
 {
   text-decoration: underline;
 }
-#aup-status[deactivated]
+#aup-status[aupstate="disabled"]
 {
   color: #999999;
 }
-#aup-status[whitelisted]
+#aup-status[aupstate="whitelisted"]
 {
   color: #008000;
 }
@@ -50,21 +50,15 @@ toolbar[iconsize="small"] #aup-toolbarbutton,
   list-style-image: url("aup-status-16.png");
   -moz-image-region: rect(0px, 16px, 16px, 0px);
 }
-toolbar[iconsize="small"] #aup-toolbarbutton[deactivated],
-#PersonalToolbar #aup-toolbarbutton[deactivated],
-#aup-status[deactivated] image {
+toolbar[iconsize="small"] #aup-toolbarbutton[aupstate="disabled"],
+#PersonalToolbar #aup-toolbarbutton[aupstate="disabled"],
+#aup-status[aupstate="disabled"] image {
   -moz-image-region: rect(16px, 16px, 32px, 0px);
 }
-toolbar[iconsize="small"] #aup-toolbarbutton[whitelisted],
-#PersonalToolbar #aup-toolbarbutton[whitelisted],
-#aup-status[whitelisted] image {
-  -moz-image-region: rect(0px, 16px, 16px, 0px);
-  /*-moz-image-region: rect(32px, 16px, 48px, 0px);*/
-}
-toolbar[iconsize="small"] #aup-toolbarbutton[disabled="true"],
-#PersonalToolbar #aup-toolbarbutton[disabled="true"],
-#aup-status[disabled="true"] image {
-  -moz-image-region: rect(48px, 16px, 64px, 0px);
+toolbar[iconsize="small"] #aup-toolbarbutton[aupstate="whitelisted"],
+#PersonalToolbar #aup-toolbarbutton[aupstate="whitelisted"],
+#aup-status[aupstate="whitelisted"] image {
+  -moz-image-region: rect(32px, 16px, 48px, 0px);
 }
 
 #aup-toolbar-popup {
@@ -84,15 +78,12 @@ menuitem[default="true"] {
   -moz-image-region: rect(0px, 24px, 24px, 0px);
   width: auto;
 }
-#aup-toolbarbutton[deactivated] {
+#aup-toolbarbutton[aupstate="disabled"] {
   -moz-image-region: rect(24px, 24px, 48px, 0px);
 }
-#aup-toolbarbutton[whitelisted] {
+#aup-toolbarbutton[aupstate="whitelisted"] {
   -moz-image-region: rect(0px, 24px, 24px, 0px);
 /*  -moz-image-region: rect(48px, 24px, 72px, 0px);*/
-}
-#aup-toolbarbutton[disabled="true"] {
-  -moz-image-region: rect(72px, 24px, 96px, 0px);
 }
 
 #aup-tooltip {

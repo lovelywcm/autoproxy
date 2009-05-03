@@ -296,14 +296,6 @@ var policy =
 
     var location = unwrapURL(contentLocation);
 
-    // Only block in content windows (Gecko 1.8 compatibility)
-    var wndType = wnd.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                     .getInterface(Components.interfaces.nsIWebNavigation)
-                     .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-                     .itemType;
-    if (wndType != Components.interfaces.nsIDocShellTreeItem.typeContent && !(location.scheme == "chrome" && location.host == "global" && /auphit:(\d+)\b/.test(location.path)))
-      return ok;
-
     // Interpret unknown types as "other"
     if (!(contentType in this.typeDescr))
       contentType = this.type.OTHER;

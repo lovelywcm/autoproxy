@@ -1224,7 +1224,7 @@ function showTreeTooltip(/**Event*/ event) /**Boolean*/
   treeView.boxObject.getCellAt(event.clientX, event.clientY, row, col, childElement);
 
   let [subscription, filter] = treeView.getRowInfo(row.value);
-  if (filter instanceof aup.RegExpFilter && !filter.shortcut && col.value && col.value.id == "col-slow")
+  if (row.value && col.value && col.value.id == "col-slow" && treeView.getCellText(row.value, col.value))
   {
     E("tree-tooltip").setAttribute("label", aup.getString("filter_regexp_tooltip"));
     return true;
@@ -1283,8 +1283,8 @@ function compareText(/**Filter*/ filter1, /**Filter*/ filter2)
  */
 function compareSlow(/**Filter*/ filter1, /**Filter*/ filter2)
 {
-  let isSlow1 = (filter1 instanceof abp.RegExpFilter && !filter1.shortcut ? 1 : 0);
-  let isSlow2 = (filter2 instanceof abp.RegExpFilter && !filter2.shortcut ? 1 : 0);
+  let isSlow1 = (filter1 instanceof aup.RegExpFilter && !filter1.disabled && !filter1.shortcut ? 1 : 0);
+  let isSlow2 = (filter2 instanceof aup.RegExpFilter && !filter2.disabled && !filter2.shortcut ? 1 : 0);
   return isSlow1 - isSlow2;
 }
 
@@ -1482,7 +1482,7 @@ let treeView = {
       if (col == "col-filter")
         return filter.text;
       else if (col == "col-slow")
-        return (filter instanceof abp.RegExpFilter && !filter.shortcut ? "!" : null);
+        return (filter instanceof aup.RegExpFilter && !filter.shortcut && !filter.disabled && !subscription.disabled ? "!" : null);
       else if (filter instanceof aup.ActiveFilter)
       {
         if (col == "col-hitcount")

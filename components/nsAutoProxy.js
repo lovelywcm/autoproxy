@@ -429,7 +429,7 @@ const aup =
       if (currentWindow && /^browser\.(.*)/.test(method))
       {
         method = RegExp.$1;
-        obj = abp.getBrowserInWindow(currentWindow);
+        obj = aup.getBrowserInWindow(currentWindow);
       }
 
       if (!obj)

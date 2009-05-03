@@ -357,7 +357,7 @@ function getSubscriptionDescription(subscription)
     status += aup.getString("subscription_status_lastdownload_inprogress");
   else
   {
-    status += (subscription.lastDownload > 0 ? new Date(subscription.lastDownload * 1000).toLocaleFormat("%x %X") : abp.getString("subscription_status_lastdownload_unknown"));
+    status += (subscription.lastDownload > 0 ? new Date(subscription.lastDownload * 1000).toLocaleFormat("%x %X") : aup.getString("subscription_status_lastdownload_unknown"));
     if (subscription instanceof aup.DownloadableSubscription && subscription.downloadStatus)
     {
       try {

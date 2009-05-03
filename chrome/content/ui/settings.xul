@@ -188,7 +188,7 @@
         <menuitem id="faqLink" label="&faq.label;" accesskey="&faq.accesskey;" oncommand="aup.loadInBrowser('&faq.url;')"/>
         <menuitem id="filtersLink" label="&filterdoc.label;" accesskey="&filterdoc.accesskey;" oncommand="aup.loadInBrowser('&filterdoc.url;')"/>
         <menuseparator/>
-        <menuitem id="aboutAbp" label="&about.label;..." accesskey="&about.accesskey;" oncommand="openAbout()"/>
+        <menuitem id="aboutAup" label="&about.label;..." accesskey="&about.accesskey;" oncommand="openAbout()"/>
       </menupopup>
     </menu>
   </menubar>
@@ -210,7 +210,7 @@
         <splitter class="tree-splitter"/>
         <treecol id="col-enabled" label="&enabled.column;" flex="0" persist="width ordinal sortDirection hidden"/>
         <splitter class="tree-splitter"/>
-        <treecol id="col-hitcount" label="&hitcount.column;" flex="0" minwidth="60" persist="width ordinal sortDirection hidden"/>
+        <treecol id="col-hitcount" label="&hitcount.column;" flex="0" persist="width ordinal sortDirection hidden"/>
         <splitter class="tree-splitter"/>
         <treecol id="col-lasthit" label="&lasthit.column;" hidden="true" flex="4" persist="width ordinal sortDirection hidden"/>
       </treecols>

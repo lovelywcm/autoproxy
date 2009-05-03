@@ -23,25 +23,12 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-let aup = null;
-try {
-  aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
-
-  if (!aup.prefs.initialized)
-    aup = null;
-} catch(e) {}
-
-let prefs, filterStorage, synchronizer, dragService;
-if (aup)
-{
-  prefs = aup.prefs;
-  filterStorage = aup.filterStorage;
-  synchronizer = aup.synchronizer;
-  dragService = Components.classes["@mozilla.org/widget/dragservice;1"]
-                          .getService(Components.interfaces.nsIDragService);
-}
-else
-  window.close();   // Extension manager opened us without checking whether we are installed properly
+let aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
+let prefs = aup.prefs;
+let filterStorage = aup.filterStorage;
+let synchronizer = aup.synchronizer;
+let dragService = Components.classes["@mozilla.org/widget/dragservice;1"]
+                            .getService(Components.interfaces.nsIDragService);
 
 const altMask = 2;
 const ctrlMask = 4;

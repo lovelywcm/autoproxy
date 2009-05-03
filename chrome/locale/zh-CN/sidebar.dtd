@@ -10,7 +10,6 @@
 <!ENTITY size.label "大小">
 <!ENTITY noitems.label "没有可代理的项目">
 <!ENTITY whitelisted.label "禁止使用代理的项目">
-<!ENTITY notloaded.label "AutoProxy 安装出错">
 <!ENTITY tooltip.address.label "地址：">
 <!ENTITY tooltip.type.label "类型：">
 <!ENTITY tooltip.type.blocked "(已代理)">

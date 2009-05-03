@@ -55,18 +55,12 @@ let eventHandlers = [
 /**
  * AutoProxy component (if available)
  */
-let aup = null;
-try {
-  aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
-
-  if (!aup.prefs.initialized)
-    aup = null;
-} catch (e) {}
+let aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
 
 /**
  * AutoProxy preferences object
  */
-let prefs = aup ? aup.prefs : {enabled: false};
+let prefs = aup.prefs;
 
 /**
  * Stores the current value of showintoolbar preference (to detect changes).
@@ -114,34 +108,33 @@ function aupInit() {
   // Process preferences
   window.aupDetachedSidebar = null;
   aupReloadPrefs();
-  if (aup) {
-    // Register event listeners
-    window.addEventListener("unload", aupUnload, false);
-    for each (let [id, event, handler] in eventHandlers)
-    {
-      let element = E(id);
-      if (element)
-        element.addEventListener(event, handler, false);
-    }
 
-    prefs.addListener(aupReloadPrefs);
-
-    // Make sure whitelisting gets displayed after at most 2 seconds
-    prefReloadTimer = aup.createTimer(aupReloadPrefs, 2000);
-    prefReloadTimer.type = prefReloadTimer.TYPE_REPEATING_SLACK;
-
-    let browser = aup.getBrowserInWindow(window);
-    browser.addEventListener("select", aupReloadPrefs, false);
-    browser.addEventListener("click", handleLinkClick, true);
-
-    // Make sure we always configure keys but don't let them break anything
-    try {
-      // Configure keys
-      for (var key in prefs)
-        if (key.match(/(.*)_key$/))
-          aupConfigureKey(RegExp.$1, prefs[key]);
-    } catch(e) {}
+  // Register event listeners
+  window.addEventListener("unload", aupUnload, false);
+  for each (let [id, event, handler] in eventHandlers)
+  {
+    let element = E(id);
+    if (element)
+      element.addEventListener(event, handler, false);
   }
+
+  prefs.addListener(aupReloadPrefs);
+
+  // Make sure whitelisting gets displayed after at most 2 seconds
+  prefReloadTimer = aup.createTimer(aupReloadPrefs, 2000);
+  prefReloadTimer.type = prefReloadTimer.TYPE_REPEATING_SLACK;
+  
+  let browser = aup.getBrowserInWindow(window);
+  browser.addEventListener("select", aupReloadPrefs, false);
+  browser.addEventListener("click", handleLinkClick, true);
+
+  // Make sure we always configure keys but don't let them break anything
+  try {
+    // Configure keys
+    for (var key in prefs)
+      if (key.match(/(.*)_key$/))
+        aupConfigureKey(RegExp.$1, prefs[key]);
+  } catch(e) {}
 
   // Install context menu handler
   var contextMenu = E("contentAreaContextMenu") || E("messagePaneContext") || E("popup_content");
@@ -155,7 +148,7 @@ function aupInit() {
   }
 
   // First run actions
-  if (aup && !("doneFirstRunActions" in prefs) && aup.versionComparator.compare(prefs.lastVersion, "0.0") <= 0)
+  if (!("doneFirstRunActions" in prefs) && aup.versionComparator.compare(prefs.lastVersion, "0.0") <= 0)
   {
     // Don't repeat first run actions if new window is opened
     prefs.doneFirstRunActions = true;
@@ -209,22 +202,14 @@ function aupUnload() {
 }
 
 function aupReloadPrefs() {
-  var label;
-  var state = null;
-  if (aup) {
-    if (prefs.enabled)
-      state = "active";
-    else
-      state = "disabled";
+  var state = (prefs.enabled ? "active" : "disabled");
+  var label = aup.getString("status_" + state + "_label");
 
-    label = aup.getString("status_" + state + "_label");
-
-    if (state == "active")
-    {
-      let location = getCurrentLocation();
-      if (location && aup.policy.isWhitelisted(location.spec))
-        state = "whitelisted";
-    }
+  if (state == "active")
+  {
+    let location = getCurrentLocation();
+    if (location && aup.policy.isWhitelisted(location.spec))
+      state = "whitelisted";
   }
 
   var tooltip = E("aup-tooltip");
@@ -235,27 +220,23 @@ function aupReloadPrefs() {
     if (!element)
       return;
 
-    if (aup) {
-      element.removeAttribute("disabled");
+    if (element.tagName == "statusbarpanel" || element.tagName == "vbox") {
+      element.hidden = !prefs.showinstatusbar;
 
-      if (element.tagName == "statusbarpanel" || element.tagName == "vbox") {
-        element.hidden = !prefs.showinstatusbar;
-
-        var labelElement = element.getElementsByTagName("label")[0];
-        labelElement.setAttribute("value", label);
-      }
-      else
-        element.hidden = !prefs.showintoolbar;
-
-      // HACKHACK: Show status bar icon in SeaMonkey Mail and Prism instead of toolbar icon
-      if (element.hidden && (element.tagName == "statusbarpanel" || element.tagName == "vbox") && (E("msgToolbar") || window.location.host == "webrunner"));
-        element.hidden = !prefs.showintoolbar;
-
-      if (currentlyShowingInToolbar != prefs.showintoolbar)
-        aupInstallInToolbar();
-
-      currentlyShowingInToolbar = prefs.showintoolbar;
+      var labelElement = element.getElementsByTagName("label")[0];
+      labelElement.setAttribute("value", label);
     }
+    else
+      element.hidden = !prefs.showintoolbar;
+
+    // HACKHACK: Show status bar icon in SeaMonkey Mail and Prism instead of toolbar icon
+    if (element.hidden && (element.tagName == "statusbarpanel" || element.tagName == "vbox") && (E("msgToolbar") || window.location.host == "webrunner"))
+      element.hidden = !prefs.showintoolbar;
+
+    if (currentlyShowingInToolbar != prefs.showintoolbar)
+      aupInstallInToolbar();
+
+    currentlyShowingInToolbar = prefs.showintoolbar;
 
     element.setAttribute("aupstate", state);
   };
@@ -764,7 +745,7 @@ function aupCheckContext() {
   var nodeType = null;
   backgroundData = null;
   frameData = null;
-  if (aup && target) {
+  if (target) {
     // Lookup the node in our stored data
     var data = aup.getDataForNode(target);
     var targetNode = null;
@@ -823,6 +804,6 @@ function aupCheckContext() {
 
 // Bring up the settings dialog for the node the context menu was referring to
 function aupNode(data) {
-  if (aup && data)
+  if (data)
     window.openDialog("chrome://autoproxy/content/ui/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", aup.getBrowserInWindow(window).contentWindow, data);
 }

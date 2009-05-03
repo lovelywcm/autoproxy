@@ -22,14 +22,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-const aup_CONTRACTID = "@mozilla.org/autoproxy;1";
-const aup_CID = Components.ID("{7FCE727A-028D-11DE-9E0F-298E56D89593}");
-const aup_PROT_CONTRACTID = "@mozilla.org/network/protocol;1?name=aup";
-const aup_PROT_CID = Components.ID("{8A6417BC-028D-11DE-B190-998E56D89593}");
-const locales = [
-  "{{LOCALE}}",
-  null
-];
+Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
 const loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
                          .getService(Components.interfaces.mozIJSSubScriptLoader);
@@ -37,100 +30,8 @@ const ioService = Components.classes["@mozilla.org/network/io-service;1"]
                             .getService(Components.interfaces.nsIIOService);
 
 /*
- * Module object
- */
-
-const module = {
-  registerSelf: function(compMgr, fileSpec, location, type)
-  {
-    compMgr = compMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar);
-    compMgr.registerFactoryLocation(aup_CID, 
-                    "AutoProxy content policy",
-                    aup_CONTRACTID,
-                    fileSpec, location, type);
-    compMgr.registerFactoryLocation(aup_PROT_CID,
-                    "aup protocol handler",
-                    aup_PROT_CONTRACTID,
-                    fileSpec, location, type);
-
-    // Need to delete category before removing, nsIContentPolicies in Gecko 1.9 listens to
-    // category changes
-    var catman = Components.classes["@mozilla.org/categorymanager;1"]
-                           .getService(Components.interfaces.nsICategoryManager);
-    catman.deleteCategoryEntry("content-policy", aup_CONTRACTID, true);
-    catman.addCategoryEntry("content-policy", aup_CONTRACTID,
-              aup_CONTRACTID, true, true);
-  },
-
-  unregisterSelf: function(compMgr, fileSpec, location)
-  {
-    compMgr = compMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar);
-
-    compMgr.unregisterFactoryLocation(aup_CID, fileSpec);
-    compMgr.unregisterFactoryLocation(aup_PROT_CID, fileSpec);
-    var catman = Components.classes["@mozilla.org/categorymanager;1"]
-                           .getService(Components.interfaces.nsICategoryManager);
-    catman.deleteCategoryEntry("content-policy", aup_CONTRACTID, true);
-  },
-
-  getClassObject: function(compMgr, cid, iid)
-  {
-    if (!cid.equals(aup_CID) && !cid.equals(aup_PROT_CID))
-      throw Components.results.NS_ERROR_NO_INTERFACE;
-
-    if (!iid.equals(Components.interfaces.nsIFactory))
-      throw Components.results.NS_ERROR_NOT_IMPLEMENTED;
-
-    return factory;
-  },
-
-  canUnload: function(compMgr)
-  {
-    return true;
-  }
-};
-
-function NSGetModule(comMgr, fileSpec)
-{
-  return module;
-}
-
-/*
- * Factory object
- */
-
-var initialized = false;
-const factory = {
-  // nsIFactory interface implementation
-  createInstance: function(outer, iid)
-  {
-    if (outer != null)
-      throw Components.results.NS_ERROR_NO_AGGREGATION;
-
-    if (!initialized)
-      init();
-
-    return aup.QueryInterface(iid);
-  },
-
-  // nsISupports interface implementation
-  QueryInterface: function(iid)
-  {
-    if (iid.equals(Components.interfaces.nsISupports) ||
-        iid.equals(Components.interfaces.nsIFactory))
-      return this;
-
-    if (!iid.equals(Components.interfaces.nsIClassInfo))
-      dump("AutoProxy: factory.QI to an unknown interface: " + iid + "\n");
-
-    throw Components.results.NS_ERROR_NO_INTERFACE;
-  }
-}
-
-/*
  * Constants / Globals
  */
-
 const Node = Components.interfaces.nsIDOMNode;
 const Element = Components.interfaces.nsIDOMElement;
 const Window = Components.interfaces.nsIDOMWindow;
@@ -153,28 +54,37 @@ catch(e)
 /*
  * Content policy class definition
  */
-
 const aup =
 {
+  classDescription: "AutoProxy component",
+  classID: Components.ID("{7FCE727A-028D-11DE-9E0F-298E56D89593}"),
+  contractID: "@mozilla.org/autoproxy;1",
+  _xpcom_factory: {
+    initialized: false,
+    createInstance: function(outer, iid)
+    {
+      if (outer)
+        throw Components.results.NS_ERROR_NO_AGGREGATION;
+
+      if (!this.initialized)
+        init();
+      this.initialized = true;
+
+      return aup.QueryInterface(iid);
+    }
+  },
+  _xpcom_categories: [{category: "content-policy"}],
+
   //
   // nsISupports interface implementation
   //
-
   QueryInterface: function(iid)
   {
     if (iid.equals(Components.interfaces.nsIContentPolicy))
       return policy;
 
-    if (iid.equals(Components.interfaces.nsIProtocolHandler))
-      return protocol;
-
     if (iid.equals(Components.interfaces.nsISupports))
       return this;
-
-    if (!iid.equals(Components.interfaces.nsIClassInfo) &&
-        !iid.equals(Components.interfaces.nsISecurityCheckedComponent) &&
-        !iid.equals(Components.interfaces.nsIDOMWindow))
-      dump("AutoProxy: aup.QI to an unknown interface: " + iid + "\n");
 
     throw Components.results.NS_ERROR_NO_INTERFACE;
   },
@@ -501,6 +411,13 @@ const aup =
 aup.wrappedJSObject = aup;
 
 /*
+ * Module declaration
+ */
+function AUPComponent() {}
+AUPComponent.prototype = aup;
+var NSGetModule = XPCOMUtils.generateNSGetModule([AUPComponent]);
+
+/*
  * Core Routines
  */
 
@@ -519,7 +436,6 @@ function init()
   loader.loadSubScript('chrome://autoproxy/content/filterStorage.js');
   loader.loadSubScript('chrome://autoproxy/content/matcher.js');
   loader.loadSubScript('chrome://autoproxy/content/filterListener.js');
-  loader.loadSubScript('chrome://autoproxy/content/protocol.js');
   loader.loadSubScript('chrome://autoproxy/content/policy.js');
   loader.loadSubScript('chrome://autoproxy/content/data.js');
   loader.loadSubScript('chrome://autoproxy/content/prefs.js');

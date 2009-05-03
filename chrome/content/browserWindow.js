@@ -130,7 +130,9 @@ function aupInit() {
     prefReloadTimer = aup.createTimer(aupReloadPrefs, 2000);
     prefReloadTimer.type = prefReloadTimer.TYPE_REPEATING_SLACK;
 
-    aup.getBrowserInWindow(window).addEventListener("select", aupReloadPrefs, false);
+    let browser = aup.getBrowserInWindow(window);
+    browser.addEventListener("select", aupReloadPrefs, false);
+    browser.addEventListener("click", handleLinkClick, true);
 
     // Make sure we always configure keys but don't let them break anything
     try {
@@ -343,6 +345,52 @@ function aupConfigureKey(key, value) {
     element.setAttribute("modifiers", modifiers.join(","));
 
     E("aup-keyset").appendChild(element);
+  }
+}
+
+/**
+ * Handles browser clicks to intercept clicks on aup: links.
+ */
+function handleLinkClick(/**Event*/ event)
+{
+  // Ignore right-clicks
+  if (event.button == 2)
+    return;
+
+  let link = event.target;
+  while (link && !(link instanceof Components.interfaces.nsIDOMNSHTMLAnchorElement))
+    link = link.parentNode;
+
+  if (link && /^aup:\/*subscribe\/*\?(.*)/i.test(link.href))
+  {
+    event.preventDefault();
+    event.stopPropagation();
+
+    let unescape = Components.classes["@mozilla.org/intl/texttosuburi;1"]
+                             .getService(Components.interfaces.nsITextToSubURI);
+
+    let params = RegExp.$1.split('&');
+    let title = null;
+    let url = null;
+    for each (let param in params)
+    {
+      let parts = param.split("=", 2);
+      if (parts.length == 2 && parts[0] == 'title')
+        title = decodeURIComponent(parts[1]);
+      if (parts.length == 2 && parts[0] == 'location')
+        url = decodeURIComponent(parts[1]);
+    }
+
+    if (url && /\S/.test(url))
+    {
+      if (!title || !/\S/.test(title))
+        title = url;
+
+      var subscription = {url: url, title: title, disabled: false, external: false, autoDownload: true};
+
+      window.openDialog("chrome://autoproxy/content/subscription.xul", "_blank",
+                         "chrome,centerscreen,modal", subscription);
+    }
   }
 }
 

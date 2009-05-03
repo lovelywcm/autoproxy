@@ -100,12 +100,6 @@ var prefs = {
   },
 
   init: function() {
-
-    // Try to fix selected locale in Mozilla/SeaMonkey
-    strings = stringService.createBundle("chrome://autoproxy/locale/global.properties");
-    fixPackageLocale();
-    strings = stringService.createBundle("chrome://autoproxy/locale/global.properties");
-
     // Initialize prefs list
     var defaultBranch = prefService.getDefaultBranch(prefRoot);
     var defaultPrefs = defaultBranch.getChildList("", {});

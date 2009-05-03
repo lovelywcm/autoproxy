@@ -15,7 +15,6 @@ my @must_differ = (
   ['aup:settings:sort.none.accesskey', 'aup:settings:filter.accesskey', 'aup:settings:slow.accesskey', 'aup:settings:enabled.accesskey', 'aup:settings:hitcount.accesskey', 'aup:settings:lasthit.accesskey', 'aup:settings:sort.ascending.accesskey', 'aup:settings:sort.descending.accesskey'],
   ['aup:settings:enable.accesskey', 'aup:settings:showintoolbar.accesskey', 'aup:settings:showinstatusbar.accesskey', 'aup:settings:objecttabs.accesskey'],
   ['aup:settings:gettingStarted.accesskey', 'aup:settings:faq.accesskey', 'aup:settings:filterdoc.accesskey', 'aup:settings:about.accesskey'],
-  ['aup:findbar:next.accesskey', 'aup:findbar:previous.accesskey', 'aup:findbar:highlight.accesskey'],
   ['aup:subscription:location.accesskey', 'aup:subscription:title.accesskey', 'aup:subscription:autodownload.accesskey', 'aup:subscription:enabled.accesskey'],
   ['aup:composer:filter.accesskey', 'aup:composer:preferences.accesskey', 'aup:composer:type.filter.accesskey', 'aup:composer:type.whitelist.accesskey', 'aup:composer:custom.pattern.accesskey', 'aup:composer:anchor.start.accesskey', 'aup:composer:anchor.end.accesskey', 'aup:composer:domainRestriction.accesskey', 'aup:composer:firstParty.accesskey', 'aup:composer:thirdParty.accesskey', 'aup:composer:matchCase.accesskey'],
 );

@@ -388,7 +388,7 @@ function handleLinkClick(/**Event*/ event)
 
       var subscription = {url: url, title: title, disabled: false, external: false, autoDownload: true};
 
-      window.openDialog("chrome://autoproxy/content/subscription.xul", "_blank",
+      window.openDialog("chrome://autoproxy/content/ui/subscription.xul", "_blank",
                          "chrome,centerscreen,modal", subscription);
     }
   }
@@ -465,7 +465,7 @@ function aupShowSubscriptions()
   for each (let subscription in aup.filterStorage.subscriptions)
     if (subscription instanceof aup.DownloadableSubscription)
       return;
-  window.openDialog("chrome://autoproxy/content/tip_subscriptions.xul", "_blank", "chrome,centerscreen,resizable,dialog=no");
+  window.openDialog("chrome://autoproxy/content/ui/tip_subscriptions.xul", "_blank", "chrome,centerscreen,resizable,dialog=no");
 }
 
 function aupFillTooltip(event) {
@@ -682,11 +682,11 @@ function aupToggleSidebar() {
     var sidebar = E("aup-sidebar");
     if (sidebar && (!prefs.detachsidebar || !sidebar.hidden)) {
       E("aup-sidebar-splitter").hidden = !sidebar.hidden;
-      E("aup-sidebar-browser").setAttribute("src", sidebar.hidden ? "chrome://autoproxy/content/sidebar.xul" : "about:blank");
+      E("aup-sidebar-browser").setAttribute("src", sidebar.hidden ? "chrome://autoproxy/content/ui/sidebar.xul" : "about:blank");
       sidebar.hidden = !sidebar.hidden;
     }
     else
-      window.aupDetachedSidebar = window.openDialog("chrome://autoproxy/content/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no,width=600,height=300");
+      window.aupDetachedSidebar = window.openDialog("chrome://autoproxy/content/ui/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no,width=600,height=300");
   }
 
   let menuItem = E("aup-blockableitems");
@@ -827,5 +827,5 @@ function aupCheckContext() {
 // Bring up the settings dialog for the node the context menu was referring to
 function aupNode(data) {
   if (aup && data)
-    window.openDialog("chrome://autoproxy/content/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", aup.getBrowserInWindow(window).contentWindow, data);
+    window.openDialog("chrome://autoproxy/content/ui/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", aup.getBrowserInWindow(window).contentWindow, data);
 }

@@ -28,7 +28,6 @@ try {
 
   if (aup.prefs.initialized) {
     var prefs = aup.prefs;
-    var flasher = aup.flasher;
     var DataContainer = aup.DataContainer;
   }
   else
@@ -405,7 +404,7 @@ function doBlock() {
   if (filter && filter instanceof aup.WhitelistFilter)
     return;
 
-  openDialog("chrome://autoproxy/content/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", window.content, item);
+  openDialog("chrome://autoproxy/content/ui/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", window.content, item);
 }
 
 function editFilter() {
@@ -498,7 +497,7 @@ function detach() {
 
   // Close sidebar and open detached window
   mainWin.document.getElementById("aup-command-sidebar").doCommand();
-  mainWin.aupDetachedSidebar = mainWin.openDialog("chrome://autoproxy/content/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no"+position);
+  mainWin.aupDetachedSidebar = mainWin.openDialog("chrome://autoproxy/content/ui/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no"+position);
 
   // Save setting
   prefs.detachsidebar = true;

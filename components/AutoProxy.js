@@ -316,7 +316,7 @@ const aup =
     }
     else
     {
-      dlg = windowWatcher.openWindow(null, "chrome://autoproxy/content/settings.xul", "_blank", "chrome,centerscreen,resizable,dialog=no", null);
+      dlg = windowWatcher.openWindow(null, "chrome://autoproxy/content/ui/settings.xul", "_blank", "chrome,centerscreen,resizable,dialog=no", null);
       dlg.addEventListener("post-load", func, false);
     }
   },
@@ -440,7 +440,6 @@ function init()
   loader.loadSubScript('chrome://autoproxy/content/data.js');
   loader.loadSubScript('chrome://autoproxy/content/prefs.js');
   loader.loadSubScript('chrome://autoproxy/content/synchronizer.js');
-  loader.loadSubScript('chrome://autoproxy/content/flasher.js');
   
   timeLine.log("init() done");
 }

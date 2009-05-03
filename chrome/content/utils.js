@@ -88,7 +88,7 @@ aup.makeURL = makeURL;
 function generateClickHandler(wnd, data) {
   return function(event) {
     event.preventDefault();
-    wnd.openDialog("chrome://autoproxy/content/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", wnd, data); 
+    wnd.openDialog("chrome://autoproxy/content/ui/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", wnd, data); 
   }
 }
 

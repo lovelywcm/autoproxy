@@ -94,8 +94,8 @@
   
   <!-- Front End Integration Hooks (used by Extension Manager)-->
   <em:iconURL>chrome://autoproxy/skin/autoproxy.png</em:iconURL>
-  <em:aboutURL>chrome://autoproxy/content/about.xul</em:aboutURL>
-  <em:optionsURL>chrome://autoproxy/content/settings.xul</em:optionsURL>
+  <em:aboutURL>chrome://autoproxy/content/ui/about.xul</em:aboutURL>
+  <em:optionsURL>chrome://autoproxy/content/ui/settings.xul</em:optionsURL>
   
   <!-- Update-->
   <em:updateURL>http://autoproxy.mozdev.org/update.rdf</em:updateURL>

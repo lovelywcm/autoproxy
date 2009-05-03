@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Wladimir Palant.
- * Portions created by the Initial Developer are Copyright (C) 2006-2008
+ * Portions created by the Initial Developer are Copyright (C) 2006-2009
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -28,12 +28,8 @@
  * This file is included from nsAutoProxy.js.
  */
 
-var effectiveTLD = null;
-if ("nsIEffectiveTLDService" in Components.interfaces)
-{
-  effectiveTLD = Components.classes["@mozilla.org/network/effective-tld-service;1"]
-                           .getService(Components.interfaces.nsIEffectiveTLDService);
-}
+var effectiveTLD = Components.classes["@mozilla.org/network/effective-tld-service;1"]
+                             .getService(Components.interfaces.nsIEffectiveTLDService);
 
 var proxyService = Components.classes["@mozilla.org/network/protocol-proxy-service;1"]
 		    .getService(Components.interfaces.nsIProtocolProxyService);
@@ -279,6 +275,24 @@ var policy =
       return this.isWhitelisted(wnd.location.href);
     }
     return null;
+  },
+
+  /**
+   * Checks whether the location's origin is different from document's origin.
+   */
+  isThirdParty: function(/**nsIURI*/location, /**String*/ docDomain) /**Boolean*/
+  {
+    if (!location || !docDomain)
+      return true;
+    try
+    {
+      return effectiveTLD.getBaseDomain(location) != effectiveTLD.getBaseDomainFromHost(docDomain);
+    }
+    catch (e)
+    {
+      // EffectiveTLDService throws on IP addresses
+      return location.host != docDomain;
+    }
   },
 
   // nsIContentPolicy interface implementation

@@ -20,18 +20,10 @@
  *
  * Contributor(s):
  *
+ * Wang Congming <lovelywcm@gmail.com> modified for AutoProxy.
+ *
  * ***** END LICENSE BLOCK ***** */
 
-var aup = null;
-try {
-  aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
-
-  if (!aup.prefs.initialized)
-    aup = null;
-} catch (e) {}
-
-var aupPrefs = aup ? aup.prefs : {enabled: false};
-var aupOldShowInToolbar = aupPrefs.showintoolbar;
 var aupHideImageManager;
 
 /**
@@ -59,6 +51,27 @@ let eventHandlers = [
   ["aup-object-menuitem", "command", function() { aupNode(nodeData); }],
   ["aup-frame-menuitem", "command", function() { aupNode(frameData); }]
 ];
+
+/**
+ * AutoProxy component (if available)
+ */
+let aup = null;
+try {
+  aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
+
+  if (!aup.prefs.initialized)
+    aup = null;
+} catch (e) {}
+
+/**
+ * AutoProxy preferences object
+ */
+let prefs = aup ? aup.prefs : {enabled: false};
+
+/**
+ * Stores the current value of showintoolbar preference (to detect changes).
+ */
+let currentlyShowingInToolbar = prefs.showintoolbar;
 
 /**
  * Filter corresponding with "disable on site" menu item (set in aupFillPopup()).
@@ -111,7 +124,7 @@ function aupInit() {
         element.addEventListener(event, handler, false);
     }
 
-    aupPrefs.addListener(aupReloadPrefs);
+    prefs.addListener(aupReloadPrefs);
 
     // Make sure whitelisting gets displayed after at most 2 seconds
     prefReloadTimer = aup.createTimer(aupReloadPrefs, 2000);
@@ -122,9 +135,9 @@ function aupInit() {
     // Make sure we always configure keys but don't let them break anything
     try {
       // Configure keys
-      for (var key in aupPrefs)
+      for (var key in prefs)
         if (key.match(/(.*)_key$/))
-          aupConfigureKey(RegExp.$1, aupPrefs[key]);
+          aupConfigureKey(RegExp.$1, prefs[key]);
     } catch(e) {}
   }
 
@@ -140,10 +153,10 @@ function aupInit() {
   }
 
   // First run actions
-  if (aup && !("doneFirstRunActions" in aupPrefs) && aup.versionComparator.compare(aupPrefs.lastVersion, "0.0") <= 0)
+  if (aup && !("doneFirstRunActions" in prefs) && aup.versionComparator.compare(prefs.lastVersion, "0.0") <= 0)
   {
     // Don't repeat first run actions if new window is opened
-    aupPrefs.doneFirstRunActions = true;
+    prefs.doneFirstRunActions = true;
 
     // Add aup icon to toolbar if necessary
     aup.createTimer(aupInstallInToolbar, 0);
@@ -188,7 +201,7 @@ function aupInit() {
 }
 
 function aupUnload() {
-  aupPrefs.removeListener(aupReloadPrefs);
+  prefs.removeListener(aupReloadPrefs);
   aup.getBrowserInWindow(window).removeEventListener("select", aupReloadPrefs, false);
   prefReloadTimer.cancel();
 }
@@ -197,7 +210,7 @@ function aupReloadPrefs() {
   var label;
   var state = null;
   if (aup) {
-    if (aupPrefs.enabled)
+    if (prefs.enabled)
       state = "active";
     else
       state = "disabled";
@@ -224,22 +237,22 @@ function aupReloadPrefs() {
       element.removeAttribute("disabled");
 
       if (element.tagName == "statusbarpanel" || element.tagName == "vbox") {
-        element.hidden = !aupPrefs.showinstatusbar;
+        element.hidden = !prefs.showinstatusbar;
 
         var labelElement = element.getElementsByTagName("label")[0];
         labelElement.setAttribute("value", label);
       }
       else
-        element.hidden = !aupPrefs.showintoolbar;
+        element.hidden = !prefs.showintoolbar;
 
       // HACKHACK: Show status bar icon in SeaMonkey Mail and Prism instead of toolbar icon
       if (element.hidden && (element.tagName == "statusbarpanel" || element.tagName == "vbox") && (E("msgToolbar") || window.location.host == "webrunner"));
-        element.hidden = !aupPrefs.showintoolbar;
+        element.hidden = !prefs.showintoolbar;
 
-      if (aupOldShowInToolbar != aupPrefs.showintoolbar)
+      if (currentlyShowingInToolbar != prefs.showintoolbar)
         aupInstallInToolbar();
 
-      aupOldShowInToolbar = aupPrefs.showintoolbar;
+      currentlyShowingInToolbar = prefs.showintoolbar;
     }
 
     element.removeAttribute("deactivated");
@@ -252,7 +265,7 @@ function aupReloadPrefs() {
 
   var status = E("aup-status");
   updateElement(status);
-  if (aupPrefs.defaultstatusbaraction == 0)
+  if (prefs.defaultstatusbaraction == 0)
     status.setAttribute("popup", status.getAttribute("context"));
   else
     status.removeAttribute("popup");
@@ -260,7 +273,7 @@ function aupReloadPrefs() {
   var button = E("aup-toolbarbutton");
   updateElement(button);
   if (button) {
-    if (button.hasAttribute("context") && aupPrefs.defaulttoolbaraction == 0)
+    if (button.hasAttribute("context") && prefs.defaulttoolbaraction == 0)
     {
       button.setAttribute("popup", button.getAttribute("context"));
       button.removeAttribute("type");
@@ -277,7 +290,7 @@ function aupInitImageManagerHiding() {
     return;
 
   aupHideImageManager = false;
-  if (aupPrefs.hideimagemanager && "@mozilla.org/permissionmanager;1" in Components.classes) {
+  if (prefs.hideimagemanager && "@mozilla.org/permissionmanager;1" in Components.classes) {
     try {
       aupHideImageManager = true;
       var permissionManager = Components.classes["@mozilla.org/permissionmanager;1"]
@@ -417,7 +430,7 @@ function aupFillTooltip(event) {
   aupReloadPrefs();
 
   var type = (document.tooltipNode && document.tooltipNode.id == "aup-toolbarbutton" ? "toolbar" : "statusbar");
-  var action = parseInt(aupPrefs["default" + type + "action"]);
+  var action = parseInt(prefs["default" + type + "action"]);
   if (isNaN(action))
     action = -1;
 
@@ -581,11 +594,11 @@ function aupFillPopup(event) {
   }
   whitelistSeparator.hidden = whitelistItemSite.hidden && whitelistItemPage.hidden;
 
-  elements.enabled.setAttribute("checked", aupPrefs.enabled);
-  elements.showintoolbar.setAttribute("checked", aupPrefs.showintoolbar);
-  elements.showinstatusbar.setAttribute("checked", aupPrefs.showinstatusbar);
+  elements.enabled.setAttribute("checked", prefs.enabled);
+  elements.showintoolbar.setAttribute("checked", prefs.showintoolbar);
+  elements.showinstatusbar.setAttribute("checked", prefs.showinstatusbar);
 
-  var defAction = (popup.tagName == "menupopup" || document.popupNode.id == "aup-toolbarbutton" ? aupPrefs.defaulttoolbaraction : aupPrefs.defaultstatusbaraction);
+  var defAction = (popup.tagName == "menupopup" || document.popupNode.id == "aup-toolbarbutton" ? prefs.defaulttoolbaraction : prefs.defaultstatusbaraction);
   elements.opensidebar.setAttribute("default", defAction == 1);
   elements.closesidebar.setAttribute("default", defAction == 1);
   elements.settings.setAttribute("default", defAction == 2);
@@ -619,7 +632,7 @@ function aupToggleSidebar() {
     window.aupDetachedSidebar.close();
   else {
     var sidebar = E("aup-sidebar");
-    if (sidebar && (!aupPrefs.detachsidebar || !sidebar.hidden)) {
+    if (sidebar && (!prefs.detachsidebar || !sidebar.hidden)) {
       E("aup-sidebar-splitter").hidden = !sidebar.hidden;
       E("aup-sidebar-browser").setAttribute("src", sidebar.hidden ? "chrome://autoproxy/content/sidebar.xul" : "about:blank");
       sidebar.hidden = !sidebar.hidden;
@@ -645,8 +658,8 @@ function isUserDefinedFilter(/**Filter*/ filter)  /**Boolean*/
 
 // Toggles the value of a boolean pref
 function aupTogglePref(pref) {
-  aupPrefs[pref] = !aupPrefs[pref];
-  aupPrefs.save();
+  prefs[pref] = !prefs[pref];
+  prefs.save();
 }
 
 /**
@@ -667,16 +680,16 @@ function toggleFilter(/**Filter*/ filter)
 // Handle clicks on the statusbar panel
 function aupClickHandler(e) {
   if (e.button == 0)
-    aupExecuteAction(aupPrefs.defaultstatusbaraction);
+    aupExecuteAction(prefs.defaultstatusbaraction);
   else if (e.button == 1)
     aupTogglePref("enabled");
 }
 
 function aupCommandHandler(e) {
-  if (aupPrefs.defaulttoolbaraction == 0)
+  if (prefs.defaulttoolbaraction == 0)
     e.target.open = true;
   else
-    aupExecuteAction(aupPrefs.defaulttoolbaraction);
+    aupExecuteAction(prefs.defaulttoolbaraction);
 }
 
 // Executes default action for statusbar/toolbar by its number

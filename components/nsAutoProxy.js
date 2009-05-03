@@ -22,8 +22,6 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-const aup_PACKAGE = "/autoproxy.mozdev.org"; 
-const aup_EXTENSION_ID = "autoproxy@autoproxy.org";
 const aup_CONTRACTID = "@mozilla.org/autoproxy;1";
 const aup_CID = Components.ID("{7FCE727A-028D-11DE-9E0F-298E56D89593}");
 const aup_PROT_CONTRACTID = "@mozilla.org/network/protocol;1?name=aup";

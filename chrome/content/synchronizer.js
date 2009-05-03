@@ -24,7 +24,7 @@
 
 /*
  * Manages synchronization of filter subscriptions.
- * This file is included from nsAutoProxy.js.
+ * This file is included from AutoProxy.js.
  */
 
 var XMLHttpRequest = Components.Constructor("@mozilla.org/xmlextras/xmlhttprequest;1", "nsIJSXMLHttpRequest");

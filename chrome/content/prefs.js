@@ -24,7 +24,7 @@
 
 /*
  * Manages AutoProxy preferences.
- * This file is included from nsAutoProxy.js.
+ * This file is included from AutoProxy.js.
  */
 
 const prefRoot = "extensions.autoproxy.";

@@ -24,7 +24,7 @@
 
 /*
  * Utility functions and classes.
- * This file is included from nsAutoProxy.js.
+ * This file is included from AutoProxy.js.
  */
 
 // String service

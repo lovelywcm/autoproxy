@@ -24,7 +24,7 @@
 
 /*
  * Draws a blinking border for a list of matching nodes.
- * This file is included from nsAutoProxy.js.
+ * This file is included from AutoProxy.js.
  */
 
 var flasher = {

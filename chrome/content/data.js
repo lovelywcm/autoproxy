@@ -24,7 +24,7 @@
 
 /*
  * Stores AutoProxy data to be attached to a window.
- * This file is included from nsAutoProxy.js.
+ * This file is included from AutoProxy.js.
  */
 
 var dataSeed = Math.random();    // Make sure our properties have randomized names

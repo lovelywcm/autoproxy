@@ -25,7 +25,7 @@
 
 /**
  * Content policy implementation, responsible for proxying things.
- * This file is included from nsAutoProxy.js.
+ * This file is included from AutoProxy.js.
  */
 
 var effectiveTLD = Components.classes["@mozilla.org/network/effective-tld-service;1"]

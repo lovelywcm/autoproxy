@@ -24,7 +24,7 @@
 
 /*
  * Matcher class implementing matching addresses against a list of filters.
- * This file is included from nsAutoProxy.js.
+ * This file is included from AutoProxy.js.
  */
 
 /**

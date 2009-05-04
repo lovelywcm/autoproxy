@@ -83,8 +83,6 @@
   </statusbarpanel>
 
   <toolbarbutton id="aup-toolbarbutton" label="&toolbarbutton.label;"
-      oncommand="if (event.target == this) aupCommandHandler(event)"
-      onclick="if (event.target == this &amp;&amp; event.button == 1) aupTogglePref('enabled')"
       tooltip="aup-tooltip" context="aup-status-popup">
     <menupopup id="aup-toolbar-popup"/>
   </toolbarbutton>

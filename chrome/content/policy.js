@@ -138,17 +138,17 @@ var policy =
   },
 
   /**
-   * Checks whether a node should be blocked
+   * Checks whether a node should be proxyed
    * @param wnd {nsIDOMWindow}
    * @param node {nsIDOMElement}
    * @param contentType {String}
    * @param location {nsIURI}
-   * @return {Boolean} false if the node is blocked
+   * @return {Boolean} true if the node should be proxyed
    */
   shouldProxy: function(wnd, node, contentType, location) {
     var topWnd = wnd.top;
     if (!topWnd || !topWnd.location || !topWnd.location.href)
-      return true;
+      return false;
 
     var match = null;
     var locationText = location.spec;
@@ -158,7 +158,7 @@ var policy =
       if (match)
       {
         filterStorage.increaseHitCount(match);
-        return true;
+        return false;
       }
     }
 

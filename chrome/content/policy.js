@@ -87,14 +87,19 @@ var policy =
     }
   },
 
+  //
+  // nsIProtocolProxyFilter implementation
+  //
   applyFilter: function(pS, uri, proxy)
   {
-    // type, host, port, network.proxy.socks_remote_dns=true, 0, null
+    // type, host, port, network.proxy.socks_remote_dns=true,
+    // failoverTimeout=0, failoverProxy=null
     return pS.newProxyInfo(this.aupPDs[3], this.aupPDs[1], this.aupPDs[2], 1, 0, null);
   },
 
   goProxy: function()
   {
+    // nsIProtocolProxyFilter, position(this proxy in proxy list)=0
     proxyService.registerFilter(this, 0);
     this.proxyEnabled = true;
   },

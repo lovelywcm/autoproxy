@@ -84,14 +84,6 @@ function makeURL(url) {
 }
 aup.makeURL = makeURL;
 
-// Generates a click handler for object tabs
-function generateClickHandler(wnd, data) {
-  return function(event) {
-    event.preventDefault();
-    wnd.openDialog("chrome://autoproxy/content/ui/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", wnd, data); 
-  }
-}
-
 // Sets a timeout, comparable to the usual setTimeout function
 function createTimer(callback, delay) {
   var timer = Components.classes["@mozilla.org/timer;1"];

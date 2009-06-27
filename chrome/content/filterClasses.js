@@ -422,6 +422,7 @@ RegExpFilter.fromText = function(text)
     regexp = text.replace(/\*+/g, "*")        // remove multiple wildcards
                  .replace(/(\W)/g, "\\$1")    // escape special symbols
                  .replace(/\\\*/g, ".*")      // replace wildcards by .*
+                 .replace(/^\\\|\\\|/, "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?") // process extended anchor at expression start
                  .replace(/^\\\|/, "^")       // process anchor at expression start
                  .replace(/\\\|$/, "$")       // process anchor at expression end
                  .replace(/^(\.\*)/,"")       // remove leading wildcards

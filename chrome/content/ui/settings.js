@@ -552,22 +552,14 @@ function exportList()
           let filterVersion;
           if (filter instanceof aup.RegExpFilter)
           {
-            if (filter.includeDomains != null || filter.excludeDomains != null)
-              filterVersion = "1.0.1";
-            else if (filter.thirdParty != null)
-              filterVersion = "1.0";
-            else if (filter.collapse != null)
-              filterVersion = "0.7.5";
-            else if (aup.Filter.optionsRegExp.test(filter.text))
-              filterVersion = "0.7.1";
-            else if (/^(?:@@)?\|/.test(filter.text) || /\|$/.test(filter.text))
-              filterVersion = "0.6.1.2";
+            if (/^(?:@@)?\|\|/.test(filter.text) || /\^/.test(filter.text))
+              filterVersion = "0.3";
             else
               filterVersion = "0";
           }
           else
             filterVersion = "0";
-          
+
           // Adjust version requirements of the complete filter set
           if (filterVersion != "0" && aup.versionComparator.compare(minVersion, filterVersion) < 0)
             minVersion = filterVersion;
@@ -575,13 +567,7 @@ function exportList()
       }
     }
 
-    if (minVersion != "0")
-    {
-      if (aup.versionComparator.compare(minVersion, "0.7.1") >= 0)
-        list[0] = "[AutoProxy " + minVersion + "]";
-      else
-        list[0] = "(AutoProxy " + minVersion + " or higher required) " + list[0];
-    }
+    if (minVersion != "0")  list[0] = "[AutoProxy " + minVersion + "]";
 
     list.push("");
 

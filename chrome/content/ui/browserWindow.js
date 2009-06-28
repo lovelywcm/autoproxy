@@ -92,10 +92,10 @@ let backgroundData = null;
 let frameData = null;
 
 /**
- * Timer triggering UI reinitialization in regular intervals.
- * @type nsITimer
+ * Progress listener detecting location changes and triggering status updates.
+ * @type nsIWebProgress
  */
-let prefReloadTimer = null;
+let progressListener = null;
 
 aupInit();
 
@@ -119,14 +119,21 @@ function aupInit() {
   }
 
   prefs.addListener(aupReloadPrefs);
+  aup.filterStorage.addFilterObserver(aupReloadPrefs);
+  aup.filterStorage.addSubscriptionObserver(aupReloadPrefs);
 
-  // Make sure whitelisting gets displayed after at most 2 seconds
-  prefReloadTimer = aup.createTimer(aupReloadPrefs, 2000);
-  prefReloadTimer.type = prefReloadTimer.TYPE_REPEATING_SLACK;
-  
   let browser = aup.getBrowserInWindow(window);
-  browser.addEventListener("select", aupReloadPrefs, false);
   browser.addEventListener("click", handleLinkClick, true);
+
+  let dummy = function() {};
+  let progressListener = {
+    onLocationChange: aupReloadPrefs,
+    onProgressChange: dummy,
+    onSecurityChange: dummy,
+    onStateChange: dummy,
+    onStatusChange: dummy
+  };
+  browser.addProgressListener(progressListener);
 
   // Make sure we always configure keys but don't let them break anything
   try {
@@ -195,10 +202,12 @@ function aupInit() {
   aup.createTimer(aupInitImageManagerHiding, 0);
 }
 
-function aupUnload() {
+function aupUnload()
+{
   prefs.removeListener(aupReloadPrefs);
-  aup.getBrowserInWindow(window).removeEventListener("select", aupReloadPrefs, false);
-  prefReloadTimer.cancel();
+  aup.filterStorage.removeFilterObserver(aupReloadPrefs);
+  aup.filterStorage.removeSubscriptionObserver(aupReloadPrefs);
+  aup.getBrowserInWindow(window).removeProgressListener(progressListener);
 }
 
 function aupReloadPrefs() {
@@ -451,8 +460,6 @@ function aupFillTooltip(event) {
     return;
   }
 
-  aupReloadPrefs();
-
   var type = (document.tooltipNode && document.tooltipNode.id == "aup-toolbarbutton" ? "toolbar" : "statusbar");
   var action = parseInt(prefs["default" + type + "action"]);
   if (isNaN(action))
@@ -696,9 +703,6 @@ function toggleFilter(/**Filter*/ filter)
   else
     aup.filterStorage.addFilter(filter);
   aup.filterStorage.saveToDisk();
-
-  // Make sure to display whitelisting immediately
-  aupReloadPrefs();
 }
 
 // Handle clicks on the statusbar panel

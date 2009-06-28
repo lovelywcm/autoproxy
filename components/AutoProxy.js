@@ -24,13 +24,6 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
-
-const loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
-                         .getService(Components.interfaces.mozIJSSubScriptLoader);
-const ioService = Components.classes["@mozilla.org/network/io-service;1"]
-                            .getService(Components.interfaces.nsIIOService);
-
 /*
  * Constants / Globals
  */
@@ -40,24 +33,26 @@ const Ci = Components.interfaces;
 const Cr = Components.results;
 const Cu = Components.utils;
 
-const Node = Components.interfaces.nsIDOMNode;
-const Element = Components.interfaces.nsIDOMElement;
-const Window = Components.interfaces.nsIDOMWindow;
-const ImageLoadingContent = Components.interfaces.nsIImageLoadingContent;
+const Node = Ci.nsIDOMNode;
+const Element = Ci.nsIDOMElement;
+const Window = Ci.nsIDOMWindow;
+const ImageLoadingContent = Ci.nsIImageLoadingContent;
 
-var windowMediator = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-                               .getService(Components.interfaces.nsIWindowMediator);
-var windowWatcher= Components.classes["@mozilla.org/embedcomp/window-watcher;1"]
-                             .getService(Components.interfaces.nsIWindowWatcher);
+const loader = Cc["@mozilla.org/moz/jssubscript-loader;1"].getService(Ci.mozIJSSubScriptLoader);
+const ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
+const versionComparator = Cc["@mozilla.org/xpcom/version-comparator;1"].createInstance(Ci.nsIVersionComparator);
+var windowMediator = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
+var windowWatcher= Cc["@mozilla.org/embedcomp/window-watcher;1"].getService(Ci.nsIWindowWatcher);
 try
 {
-  var headerParser = Components.classes["@mozilla.org/messenger/headerparser;1"]
-                               .getService(Components.interfaces.nsIMsgHeaderParser);
+  var headerParser = Cclasses["@mozilla.org/messenger/headerparser;1"].getService(Ci.nsIMsgHeaderParser);
 }
 catch(e)
 {
   headerParser = null;
 }
+
+Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
 /**
  * Application startup/shutdown observer, triggers init()/shutdown() methods in aup object.
@@ -103,10 +98,10 @@ const aup =
     createInstance: function(outer, iid)
     {
       if (outer)
-        throw Components.results.NS_ERROR_NO_AGGREGATION;
+        throw Cr.NS_ERROR_NO_AGGREGATION;
 
       if (!aup.initialized)
-        throw Components.results.NS_ERROR_FAILURE;
+        throw Cr.NS_ERROR_FAILURE;
 
       return aup.QueryInterface(iid);
     }
@@ -121,13 +116,13 @@ const aup =
     // Note: do not use |this| in this method! It is being used in the
     // content policy component as well.
 
-    if (iid.equals(Components.interfaces.nsIContentPolicy) || iid.equals(Components.interfaces.nsIChannelEventSink))
+    if (iid.equals(Ci.nsIContentPolicy) || iid.equals(Ci.nsIChannelEventSink))
       return policy;
 
-    if (iid.equals(Components.interfaces.nsISupports))
+    if (iid.equals(Ci.nsISupports))
       return aup;
 
-    throw Components.results.NS_ERROR_NO_INTERFACE;
+    throw Cr.NS_ERROR_NO_INTERFACE;
   },
 
   //
@@ -297,6 +292,12 @@ const aup =
   initialized: false,
 
   /**
+   * Version comparator instance.
+   * @type nsIVersionComparator
+   */
+  versionComparator: versionComparator,
+
+  /**
    * Initializes the component, called on application startup.
    */
   init: function()
@@ -306,9 +307,6 @@ const aup =
     if (this.initialized)
       return;
     this.initialized = true;
-
-    this.versionComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
-                                       .createInstance(Components.interfaces.nsIVersionComparator);
 
     loader.loadSubScript('chrome://autoproxy/content/utils.js');
     loader.loadSubScript('chrome://autoproxy/content/filterClasses.js');
@@ -460,8 +458,7 @@ const aup =
     if (tryWindowMethod("loadURI", [url]))
       return;
 
-    var protocolService = Components.classes["@mozilla.org/uriloader/external-protocol-service;1"]
-                                    .getService(Components.interfaces.nsIExternalProtocolService);
+    var protocolService = Cc["@mozilla.org/uriloader/external-protocol-service;1"].getService(Ci.nsIExternalProtocolService);
     protocolService.loadURI(makeURL(url), null);
   },
 

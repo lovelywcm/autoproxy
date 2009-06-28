@@ -35,6 +35,7 @@
 <!ENTITY filter.label             "Rule">
 <!ENTITY state.label              "State">
 <!ENTITY size.label               "Size">
+<!ENTITY docDomain.label          "Document source">
 
 <!ENTITY noitems.label            "No proxyable items">
 <!ENTITY whitelisted.label        "No-proxy page">
@@ -44,6 +45,7 @@
 <!ENTITY tooltip.type.blocked     "(Proxyed)">
 <!ENTITY tooltip.type.whitelisted "(Proxy prohibited, connect directly)">
 <!ENTITY tooltip.size.label       "Size:">
+<!ENTITY tooltip.docDomain.label  "Document source:">
 <!ENTITY tooltip.filter.label     "Rule in effect:">
 <!ENTITY tooltip.filterSource.label "Rule source:">
 

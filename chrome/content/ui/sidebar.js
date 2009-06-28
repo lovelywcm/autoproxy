@@ -391,7 +391,7 @@ function doBlock() {
     return;
 
   var filter = null;
-  if ("filter" in item)
+  if ("filter" in item && item.filter && !item.filter.disabled)
     filter = item.filter;
 
   if (filter && filter instanceof aup.WhitelistFilter)

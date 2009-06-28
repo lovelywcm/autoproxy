@@ -15,22 +15,28 @@
  *
  * The Initial Developer of the Original Code is
  * Wladimir Palant.
- * Portions created by the Initial Developer are Copyright (C) 2006-2008
+ * Portions created by the Initial Developer are Copyright (C) 2006-2009
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  *
  * ***** END LICENSE BLOCK ***** */
 
-window.addEventListener("load", function()
-{
-  // Abuse sandboxes so get an execution context for our code
-  let sandbox = new Components.utils.Sandbox(window);
-  sandbox.window = window;
-  sandbox.document = document;
+const Cc = Components.classes;
+const Ci = Components.interfaces;
+const Cr = Components.results;
+const Cu = Components.utils;
 
-  let loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
-                         .getService(Components.interfaces.mozIJSSubScriptLoader)
-  loader.loadSubScript("chrome://autoproxy/content/ui/utils.js", sandbox);
-  loader.loadSubScript("chrome://autoproxy/content/ui/browserWindow.js", sandbox);
-}, false);
+const aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
+const prefs = aup.prefs;
+const filterStorage = aup.filterStorage;
+const synchronizer = aup.synchronizer;
+
+/**
+ * Shortcut for document.getElementById(id)
+ */
+function E(id)
+{
+  return document.getElementById(id);
+}
+

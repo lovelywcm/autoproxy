@@ -22,8 +22,6 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-var aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
-
 function fillInVersion() {
   var versionField = document.getElementById("version");
   versionField.value = aup.getInstalledVersion();

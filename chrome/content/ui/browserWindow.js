@@ -53,16 +53,6 @@ let eventHandlers = [
 ];
 
 /**
- * AutoProxy component (if available)
- */
-let aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
-
-/**
- * AutoProxy preferences object
- */
-let prefs = aup.prefs;
-
-/**
  * Stores the current value of showintoolbar preference (to detect changes).
  */
 let currentlyShowingInToolbar = prefs.showintoolbar;
@@ -99,11 +89,6 @@ let progressListener = null;
 
 aupInit();
 
-function E(id)
-{
-  return document.getElementById(id);
-}
-
 function aupInit() {
   // Process preferences
   window.aupDetachedSidebar = null;
@@ -119,8 +104,8 @@ function aupInit() {
   }
 
   prefs.addListener(aupReloadPrefs);
-  aup.filterStorage.addFilterObserver(aupReloadPrefs);
-  aup.filterStorage.addSubscriptionObserver(aupReloadPrefs);
+  filterStorage.addFilterObserver(aupReloadPrefs);
+  filterStorage.addSubscriptionObserver(aupReloadPrefs);
 
   let browser = aup.getBrowserInWindow(window);
   browser.addEventListener("click", handleLinkClick, true);
@@ -205,8 +190,8 @@ function aupInit() {
 function aupUnload()
 {
   prefs.removeListener(aupReloadPrefs);
-  aup.filterStorage.removeFilterObserver(aupReloadPrefs);
-  aup.filterStorage.removeSubscriptionObserver(aupReloadPrefs);
+  filterStorage.removeFilterObserver(aupReloadPrefs);
+  filterStorage.removeSubscriptionObserver(aupReloadPrefs);
   aup.getBrowserInWindow(window).removeProgressListener(progressListener);
 }
 
@@ -447,7 +432,7 @@ function aupInstallInToolbar() {
 function aupShowSubscriptions()
 {
   // Look for existing subscriptions
-  for each (let subscription in aup.filterStorage.subscriptions)
+  for each (let subscription in filterStorage.subscriptions)
     if (subscription instanceof aup.DownloadableSubscription)
       return;
   window.openDialog("chrome://autoproxy/content/ui/tip_subscriptions.xul", "_blank", "chrome,centerscreen,resizable,dialog=no");
@@ -699,10 +684,10 @@ function aupTogglePref(pref) {
 function toggleFilter(/**Filter*/ filter)
 {
   if (isUserDefinedFilter(filter))
-    aup.filterStorage.removeFilter(filter);
+    filterStorage.removeFilter(filter);
   else
-    aup.filterStorage.addFilter(filter);
-  aup.filterStorage.saveToDisk();
+    filterStorage.addFilter(filter);
+  filterStorage.saveToDisk();
 }
 
 // Handle clicks on the statusbar panel

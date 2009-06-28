@@ -23,9 +23,6 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-let aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
-let prefs = aup.prefs;
-
 let autoAdd;
 let result;
 let defaultLabel;

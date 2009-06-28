@@ -22,9 +22,6 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-var aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
-var prefs = aup.prefs;
-
 var subscription = null;
 var result = null;
 var autoAdd = false;

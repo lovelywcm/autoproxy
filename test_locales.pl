@@ -21,6 +21,7 @@ my @must_differ = (
 
 my @must_equal = (
   ['aup:overlay:opensidebar.accesskey', 'aup:overlay:closesidebar.accesskey'],
+  ['aup:composer:anchor.start.accesskey', 'aup:composer:anchor.start.flexible.accesskey'],
 );
 
 my %keepAccessKeys = map {$_ => $_} (

@@ -585,7 +585,7 @@ function aupFillPopup(event) {
     let host = null;
     try
     {
-      host = location.host;
+      host = location.host.replace(/^www\./, "");
     } catch (e) {}
 
     if (host)
@@ -599,12 +599,12 @@ function aupFillPopup(event) {
         ending = "?";
       }
 
-      siteWhitelist = aup.Filter.fromText("@@|" + location.prePath + "/");
+      siteWhitelist = aup.Filter.fromText("@@||" + host + "^$document");
       whitelistItemSite.setAttribute("checked", isUserDefinedFilter(siteWhitelist));
       whitelistItemSite.setAttribute("label", whitelistItemSite.getAttribute("labeltempl").replace(/--/, host));
       whitelistItemSite.hidden = false;
 
-      pageWhitelist = aup.Filter.fromText("@@|" + location.spec + ending);
+      pageWhitelist = aup.Filter.fromText("@@|" + location.spec + ending + "$document");
       whitelistItemPage.setAttribute("checked", isUserDefinedFilter(pageWhitelist));
       whitelistItemPage.hidden = false;
     }

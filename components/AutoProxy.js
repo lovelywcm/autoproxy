@@ -20,6 +20,8 @@
  *
  * Contributor(s):
  *
+ * Wang Congming <lovelywcm@gmail.com> modified for AutoProxy.
+ *
  * ***** END LICENSE BLOCK ***** */
 
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
@@ -32,6 +34,12 @@ const ioService = Components.classes["@mozilla.org/network/io-service;1"]
 /*
  * Constants / Globals
  */
+
+const Cc = Components.classes;
+const Ci = Components.interfaces;
+const Cr = Components.results;
+const Cu = Components.utils;
+
 const Node = Components.interfaces.nsIDOMNode;
 const Element = Components.interfaces.nsIDOMElement;
 const Window = Components.interfaces.nsIDOMWindow;
@@ -51,6 +59,38 @@ catch(e)
   headerParser = null;
 }
 
+/**
+ * Application startup/shutdown observer, triggers init()/shutdown() methods in aup object.
+ */
+function Initializer() {}
+Initializer.prototype =
+{
+  classDescription: "AutoProxy initializer",
+  contractID: "@autoproxy.org/aup/startup;1",
+  classID: Components.ID("{6b6b24d0-63c3-11de-8a39-0800200c9a66}"),
+  _xpcom_categories: [{ category: "app-startup", service: true }],
+
+  QueryInterface: XPCOMUtils.generateQI([Ci.nsIObserver, Ci.nsISupportsWeakReference]),
+
+  observe: function(subject, topic, data)
+  {
+    switch (topic)
+    {
+      case "app-startup":
+        let observerService = Cc["@mozilla.org/observer-service;1"].getService(Ci.nsIObserverService);
+        observerService.addObserver(this, "profile-after-change", true);
+        observerService.addObserver(this, "profile-before-change", true);
+        break;
+      case "profile-after-change":
+        aup.init();
+        break;
+      case "profile-before-change":
+        aup.shutdown();
+        break;
+    }
+  }
+};
+
 /*
  * Content policy class definition
  */
@@ -60,17 +100,13 @@ const aup =
   classID: Components.ID("{7FCE727A-028D-11DE-9E0F-298E56D89593}"),
   contractID: "@mozilla.org/autoproxy;1",
   _xpcom_factory: {
-    initialized: false,
     createInstance: function(outer, iid)
     {
       if (outer)
         throw Components.results.NS_ERROR_NO_AGGREGATION;
 
-      if (!this.initialized)
-      {
-        this.initialized = true;
-        init();
-      }
+      if (!aup.initialized)
+        throw Components.results.NS_ERROR_FAILURE;
 
       return aup.QueryInterface(iid);
     }
@@ -255,6 +291,57 @@ const aup =
   //
 
   /**
+   * Will be set to true if init() was called already.
+   * @type Boolean
+   */
+  initialized: false,
+
+  /**
+   * Initializes the component, called on application startup.
+   */
+  init: function()
+  {
+    timeLine.log("aup.init() called");
+
+    if (this.initialized)
+      return;
+    this.initialized = true;
+
+    this.versionComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
+                                       .createInstance(Components.interfaces.nsIVersionComparator);
+
+    loader.loadSubScript('chrome://autoproxy/content/utils.js');
+    loader.loadSubScript('chrome://autoproxy/content/filterClasses.js');
+    loader.loadSubScript('chrome://autoproxy/content/subscriptionClasses.js');
+    loader.loadSubScript('chrome://autoproxy/content/filterStorage.js');
+    loader.loadSubScript('chrome://autoproxy/content/matcher.js');
+    loader.loadSubScript('chrome://autoproxy/content/filterListener.js');
+    loader.loadSubScript('chrome://autoproxy/content/policy.js');
+    loader.loadSubScript('chrome://autoproxy/content/data.js');
+    loader.loadSubScript('chrome://autoproxy/content/prefs.js');
+    loader.loadSubScript('chrome://autoproxy/content/synchronizer.js');
+
+    timeLine.log("calling prefs.init()");
+    prefs.init();
+
+    timeLine.log("calling filterStore.loadFromDisk()");
+    filterStorage.loadFromDisk();
+
+    timeLine.log("calling policy.init()");
+    policy.init();
+
+    timeLine.log("aup.init() done");
+  },
+
+  /**
+   * Saves all unsaved changes, called on application shutdown.
+   */
+  shutdown: function()
+  {
+    filterStorage.saveToDisk();
+  },
+
+  /**
    * Adds a new subscription to the list or changes the parameters of
    * an existing filter subscription.
    */
@@ -420,33 +507,11 @@ aup.wrappedJSObject = aup;
  */
 function AUPComponent() {}
 AUPComponent.prototype = aup;
-var NSGetModule = XPCOMUtils.generateNSGetModule([AUPComponent]);
+var NSGetModule = XPCOMUtils.generateNSGetModule([Initializer, AUPComponent]);
 
 /*
  * Core Routines
  */
-
-// Initialization and registration
-function init()
-{
-  timeLine.log("init() called");
-
-  aup.versionComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
-                                    .createInstance(Components.interfaces.nsIVersionComparator);
-
-  loader.loadSubScript('chrome://autoproxy/content/utils.js');
-  loader.loadSubScript('chrome://autoproxy/content/filterClasses.js');
-  loader.loadSubScript('chrome://autoproxy/content/subscriptionClasses.js');
-  loader.loadSubScript('chrome://autoproxy/content/filterStorage.js');
-  loader.loadSubScript('chrome://autoproxy/content/matcher.js');
-  loader.loadSubScript('chrome://autoproxy/content/filterListener.js');
-  loader.loadSubScript('chrome://autoproxy/content/policy.js');
-  loader.loadSubScript('chrome://autoproxy/content/data.js');
-  loader.loadSubScript('chrome://autoproxy/content/prefs.js');
-  loader.loadSubScript('chrome://autoproxy/content/synchronizer.js');
-  
-  timeLine.log("init() done");
-}
 
 /**
  * Time logging module, used to measure startup time of AutoProxy (development builds only).

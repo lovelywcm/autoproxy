@@ -23,12 +23,13 @@
 #     $./sendGFWList.sh "say something about this edit"
 # Note:
 #   1: You can use "git" to show, diff, log...what's you want;
-#   2: "gfwlist.txt" is a fake file, do NOT commit "list.txt" to svn server;
-#   3: Do NOT use any unicode character in the list, there is a known bug.
-###############################################################################
+#   2: Do NOT commit "list.txt" to svn server (it won't by default);
+#   3: Do NOT use any unicode character in the list, there is a known bug;
+#   4: Do NOT "svn update", run this script to update / commit at any time.
+################################################################################
 
 # dependence
-for cmd in sed date base64 gawk svn git
+for cmd in sed date base64 gawk svn git perl
 do
   which $cmd &> /dev/null;
   if [ $? -ne 0 ]; then
@@ -74,7 +75,7 @@ if [ "$convertedLog" != "" ]; then
 
   # log format: author1:"message1"; author2:"message2"...
   base64 -d gfwlist.txt > list.txt &&
-  git commit -a -m "$convertedLog" &&
+  git commit -a -m "$convertedLog"; 
 
   # apply local modification
   if [ -s temp.patch ]; then git apply temp.patch; fi &&

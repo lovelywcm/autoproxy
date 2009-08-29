@@ -40,11 +40,13 @@ var policy =
    * @type Object
    */
   type: null,
+
   /**
    * Map of content type names by their identifiers (reverse of type map).
    * @type Object
    */
   typeDescr: null,
+
   /**
    * Map of localized content type names by their identifiers.
    * @type Object
@@ -179,7 +181,6 @@ var policy =
 
     var data = DataContainer.getDataForWindow(wnd);
 
-    var objTab = null;
     let docDomain = this.getHostname(wnd.location.href);
     let thirdParty = this.isThirdParty(location, docDomain);
 
@@ -190,7 +191,7 @@ var policy =
     }
 
     // Store node data
-    var nodeData = data.addNode(topWnd, node, contentType, docDomain, thirdParty, locationText, match, objTab);
+    var nodeData = data.addNode(topWnd, node, contentType, docDomain, thirdParty, locationText, match);
     if (match)
       filterStorage.increaseHitCount(match);
 

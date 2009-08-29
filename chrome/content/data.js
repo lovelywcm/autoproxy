@@ -118,7 +118,7 @@ DataContainer.prototype = {
     if (!this.detached)
       DataContainer.notifyListeners(topWnd, "refresh", this);
   },
-  addNode: function(topWnd, node, contentType, docDomain, thirdParty, location, filter, objTab) {
+  addNode: function(topWnd, node, contentType, docDomain, thirdParty, location, filter) {
     // If we had this node already, remove it from the list first
     this.removeNode(node);
 
@@ -147,11 +147,6 @@ DataContainer.prototype = {
         DataContainer.notifyListeners(topWnd, "add", this.topContainer, this.locations[key]);
     }
     node["aupLocation" + dataSeed] = this.urls[location] = this.locations[key];
-
-    if (typeof objTab != "undefined" && objTab) {
-      this.locations[key].nodes.push(objTab);
-      objTab["aupLocation" + dataSeed] = this.locations[key];
-    }
 
     return this.locations[key];
   },

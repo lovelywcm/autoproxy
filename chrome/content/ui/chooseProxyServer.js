@@ -28,7 +28,7 @@ var aup = Components.classes["@mozilla.org/autoproxy;1"]
 var prefs = aup.prefs;
 var subscriptions = aup.filterStorage.subscriptions;
 
-var curGlobalProxy = prefs.globalProxy;
+var curDefaultProxy = prefs.defaultProxy;
 var proxies = prefs.customProxy.split("$");
 if (proxies == "") proxies = prefs.knownProxy.split("$");
 
@@ -46,7 +46,7 @@ function init()
     var mitem = cE("menuitem");
     mitem.setAttribute("label", proxy.split(";")[0]);
     globalPrimary.firstChild.appendChild(mitem);
-    if (proxy == curGlobalProxy) globalPrimary.selectedItem = mitem;
+    if (proxy == curDefaultProxy) globalPrimary.selectedItem = mitem;
   }
 
   // one row per group
@@ -78,9 +78,9 @@ function init()
 function saveChosen()
 {
   var selectedProxy = proxies[globalPrimary.selectedIndex];
-  if ( selectedProxy != curGlobalProxy ) {
-    prefs.globalProxy = selectedProxy;
+  if ( selectedProxy != curDefaultProxy ) {
+    prefs.defaultProxy = selectedProxy;
     prefs.save();
-    aup.policy.readGlobalProxy();
+    aup.policy.readDefaultProxy();
   }
 }

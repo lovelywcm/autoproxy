@@ -73,11 +73,11 @@ var policy =
    * Read global proxy from prefs. This function will be called at startup
    * or every time user specified a different global proxy.
    */
-  readGlobalProxy: function()
+  readDefaultProxy: function()
   {
     this.proxyEnabled = false;
     proxyService.unregisterFilter(this);
-    this.aupPDs = prefs.globalProxy.split(";");
+    this.aupPDs = prefs.defaultProxy.split(";");
     if (this.aupPDs[3] != "direct") {
       if (this.aupPDs[1] == "") this.aupPDs[1] = "127.0.0.1";
       if (this.aupPDs[3] == "") this.aupPDs[3] = "http";
@@ -109,7 +109,7 @@ var policy =
 
   init: function()
   {
-    this.readGlobalProxy();
+    this.readDefaultProxy();
 
     var types = ["OTHER", "SCRIPT", "IMAGE", "STYLESHEET", "OBJECT", "SUBDOCUMENT",
       "DOCUMENT", "XBL", "PING", "XMLHTTPREQUEST", "OBJECT_SUBREQUEST", "DTD", "FONT", "MEDIA"];

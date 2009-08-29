@@ -28,7 +28,7 @@ var aup = Components.classes["@mozilla.org/autoproxy;1"]
 var prefs = aup.prefs;
 var proxies = prefs.customProxy.split("$");
 if (proxies == "") proxies = prefs.knownProxy.split("$");
-var globalProxy = prefs.globalProxy;
+var defaultProxy = prefs.defaultProxy;
 
 let rows;
 let gE = function(a) { return document.getElementById(a); };
@@ -157,7 +157,7 @@ function delSelectedRow()
     if (temp.selected) pDs += "socks4";
     else if (temp.nextSibling.selected) pDs += "socks";
 
-    if ( pDs.replace(/127\.0\.0\.1/,"") == globalProxy ) {
+    if ( pDs.replace(/127\.0\.0\.1/,"") == defaultProxy ) {
       hide("note"); break;
     }
   }
@@ -186,15 +186,15 @@ function reset2Default()
   window.sizeToContent();
   window.centerWindowOnScreen();
 
-  globalProxy = prefs.knownProxy.split("$")[0];
+  defaultProxy = prefs.knownProxy.split("$")[0];
 }
 
 function saveProxyServerSettings()
 {
   var pconfig = "";
-  var matchedGlobalProxy = "";
+  var matchedDefaultProxy = "";
   // reset2Default()
-  prefs.globalProxy = globalProxy;
+  prefs.defaultProxy = defaultProxy;
 
   for (let row=rows.firstChild.nextSibling; row; row=row.nextSibling) {
     var temp = "";
@@ -228,8 +228,8 @@ function saveProxyServerSettings()
 
     // original global proxy may be modified or deleted.
     // if a proxy has the same name or configuration as it, copy the proxy.
-    if ( multiIndex(globalProxy, matchedGlobalProxy) <= 0 )
-      if ( multiIndex(globalProxy, temp) >= 0 ) matchedGlobalProxy = temp;
+    if ( multiIndex(defaultProxy, matchedDefaultProxy) <= 0 )
+      if ( multiIndex(defaultProxy, temp) >= 0 ) matchedDefaultProxy = temp;
 
     pconfig += temp;
     pconfig += "$";
@@ -239,16 +239,16 @@ function saveProxyServerSettings()
     // remove the last "$" symbol
     pconfig = pconfig.replace(/\$$/, "");
 
-    switch (multiIndex(globalProxy, matchedGlobalProxy)) {
+    switch (multiIndex(defaultProxy, matchedDefaultProxy)) {
       // not modified, pass.
       case 2: break;
 
       // original global proxy is null or has been removed,
       // choose the first proxy in proxy list as new global proxy.
-      case -1: matchedGlobalProxy = pconfig.split("$")[0];
+      case -1: matchedDefaultProxy = pconfig.split("$")[0];
 
       // else: modified, but some infomation kept.
-      default: prefs.globalProxy = matchedGlobalProxy;
+      default: prefs.defaultProxy = matchedDefaultProxy;
     }
     // we had proxy now, go to work.
     if (prefs.customProxy == "") prefs.enabled = true;
@@ -256,12 +256,12 @@ function saveProxyServerSettings()
   else {
     // all proxies removed, stop working.
     prefs.enabled = false;
-    prefs.globalProxy = "noProxy;;;direct";
+    prefs.defaultProxy = "noProxy;;;direct";
   }
 
   prefs.customProxy = pconfig;
   prefs.save();
-  aup.policy.readGlobalProxy();
+  aup.policy.readDefaultProxy();
 }
 
 /**

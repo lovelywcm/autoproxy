@@ -78,14 +78,14 @@ function createMenuItems()
   var customItem = cE("menuitem");
   customItem.setAttribute("id", "customItem");
   customItem.setAttribute("label", E("defaultButton").getAttribute("customLabel"));
-  customItem.setAttribute("onclick", "customGlobalProxy()");
+  customItem.setAttribute("onclick", "customDefaultProxy()");
   menupop.appendChild(customItem);
 }
 
 /**
  * Click handler of "Add a new proxy" button item.
  */
-function customGlobalProxy()
+function customDefaultProxy()
 {
   openDialog("editProxyServer.xul", "_blank", "chrome,centerscreen,modal");
   while ( menupop.firstChild ) menupop.removeChild(menupop.firstChild);
@@ -109,10 +109,10 @@ function subscribeAndSetDefault()
 {
   if (autoAdd) {
     var sP = proxies[selectedId];
-    if (prefs.globalProxy != sP) {
-      prefs.globalProxy = sP;
+    if (prefs.defaultProxy != sP) {
+      prefs.defaultProxy = sP;
       prefs.save();
-      aup.policy.readGlobalProxy();
+      aup.policy.readDefaultProxy();
     }
   }
 

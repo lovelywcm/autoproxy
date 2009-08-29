@@ -27,6 +27,7 @@ var aup = Components.classes["@mozilla.org/autoproxy;1"]
                           .createInstance().wrappedJSObject;
 var prefs = aup.prefs;
 var proxies = prefs.customProxy.split("$");
+if (proxies == "") proxies = prefs.defaultProxy.split("$");
 var globalProxy = prefs.globalProxy;
 
 let rows;

@@ -30,6 +30,7 @@ var subscriptions = aup.filterStorage.subscriptions;
 
 var curGlobalProxy = prefs.globalProxy;
 var proxies = prefs.customProxy.split("$");
+if (proxies == "") proxies = prefs.defaultProxy.split("$");
 
 let globalPrimary;
 

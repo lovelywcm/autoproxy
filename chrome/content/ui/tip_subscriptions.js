@@ -62,7 +62,7 @@ function createMenuItems()
 {
   selectedId = 0;
   proxies = prefs.customProxy.split("$");
-  if (proxies == "") proxies = prefs.defaultProxy.split("$");
+  if (proxies == "") proxies = prefs.knownProxy.split("$");
   E("defaultButton").label = defaultLabel + proxies[0].split(";")[0];
 
   for(let i=0; i<proxies.length; i++) {

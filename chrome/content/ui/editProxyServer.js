@@ -42,15 +42,15 @@ function init()
     if (proxies[i] == "") continue;
     createBlankRow();
 
-    var pconfig = proxies[i].split(";");
-    pconfig[1] = pconfig[1] || "127.0.0.1";
+    var pConfig = proxies[i].split(";");
+    pConfig[1] = pConfig[1] || "127.0.0.1";
     var pDs = rows.lastChild.firstChild; // proxyDetails -> proxyName
 
     for (var j = 0; j <= 2; j++, pDs = pDs.nextSibling)
-                  pDs.setAttribute( "value", pconfig[j] ); //name, host, port
+                  pDs.setAttribute( "value", pConfig[j] ); //name, host, port
 
     pDs = pDs.firstChild; // pDs -> http
-    switch (pconfig[3]) {
+    switch (pConfig[3]) {
       case "socks4": { pDs = pDs.nextSibling; break; }
       case "socks": { pDs = pDs.nextSibling.nextSibling; break; }
     }
@@ -142,7 +142,7 @@ function delSelectedRow()
     else hide("warning");
   }
 
-  // check whether global proxy has been removed.
+  // check whether default proxy has been removed.
   // it may be modified before delete, so do a new loop.
   show("note");
   for (row=rows.firstChild.nextSibling; row; row=row.nextSibling) {
@@ -191,7 +191,7 @@ function reset2Default()
 
 function saveProxyServerSettings()
 {
-  var pconfig = "";
+  var pConfig = "";
   var matchedDefaultProxy = "";
   // reset2Default()
   prefs.defaultProxy = defaultProxy;
@@ -203,9 +203,9 @@ function saveProxyServerSettings()
       // duplicate proxy name or unnamed, rename it.
       if (i==0) {
         if ( pDs.value == "" ) pDs.value = "Unnamed";
-        if ( pconfig.indexOf(pDs.value) != -1 ) {
+        if ( pConfig.indexOf(pDs.value) != -1 ) {
           var j=2;
-          while ( pconfig.indexOf(pDs.value + j.toString()) != -1 ) j++;
+          while ( pConfig.indexOf(pDs.value + j.toString()) != -1 ) j++;
           pDs.value += j.toString();
         }
       }
@@ -226,40 +226,37 @@ function saveProxyServerSettings()
     // 127.0.0.1 is default
     temp = temp.replace(/127\.0\.0\.1/, "");
 
-    // original global proxy may be modified or deleted.
+    // original default proxy may be modified or deleted.
     // if a proxy has the same name or configuration as it, copy the proxy.
     if ( multiIndex(defaultProxy, matchedDefaultProxy) <= 0 )
       if ( multiIndex(defaultProxy, temp) >= 0 ) matchedDefaultProxy = temp;
 
-    pconfig += temp;
-    pconfig += "$";
+    pConfig += temp;
+    pConfig += "$";
   }
 
-  if (pconfig) {
+  if (pConfig) {
     // remove the last "$" symbol
-    pconfig = pconfig.replace(/\$$/, "");
+    pConfig = pConfig.replace(/\$$/, "");
 
     switch (multiIndex(defaultProxy, matchedDefaultProxy)) {
       // not modified, pass.
       case 2: break;
 
-      // original global proxy is null or has been removed,
-      // choose the first proxy in proxy list as new global proxy.
-      case -1: matchedDefaultProxy = pconfig.split("$")[0];
+      // original default proxy is null or has been removed,
+      // choose the first proxy in proxy list as new default proxy.
+      case -1: matchedDefaultProxy = pConfig.split("$")[0];
 
       // else: modified, but some infomation kept.
       default: prefs.defaultProxy = matchedDefaultProxy;
     }
-    // we had proxy now, go to work.
-    if (prefs.customProxy == "") prefs.enabled = true;
   }
   else {
-    // all proxies removed, stop working.
-    prefs.enabled = false;
-    prefs.defaultProxy = "noProxy;;;direct";
+    // all proxies removed, restore to default.
+    prefs.defaultProxy = "";
   }
 
-  prefs.customProxy = pconfig;
+  prefs.customProxy = pConfig;
   prefs.save();
   aup.policy.readDefaultProxy();
 }

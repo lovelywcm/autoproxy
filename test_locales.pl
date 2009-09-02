@@ -35,7 +35,7 @@ my @ignoreUntranslated = (
   qr/\.url$/,
   quotemeta("aup:about:caption.title"),
   quotemeta("aup:about:version.title"),
-  quotemeta("aup:global:status_active_label"),
+  quotemeta("aup:global:status_auto_label"),
   quotemeta("aup:global:type_label_document"),
   quotemeta("aup:global:type_label_dtd"),
   quotemeta("aup:global:type_label_ping"),

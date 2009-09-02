@@ -1,7 +1,6 @@
 // For description of these values see http://autoproxy.org/en/preferences
 
 pref("extensions.autoproxy.currentVersion", "0.0");
-pref("extensions.autoproxy.enabled", true);
 pref("extensions.autoproxy.showintoolbar", true);
 pref("extensions.autoproxy.showinstatusbar", false);
 pref("extensions.autoproxy.detachsidebar", false);
@@ -22,7 +21,7 @@ pref("extensions.autoproxy.subscriptions_fallbackurl", "http://autoproxy.org/get
 pref("extensions.autoproxy.subscriptions_fallbackerrors", 5);
 pref("extensions.autoproxy.savestats", true);
 pref("extensions.autoproxy.composer_default", 2);
-pref("extensions.autoproxy.defaultProxy", "GAppProxy;;8000;");
+pref("extensions.autoproxy.defaultProxy", "");
 pref("extensions.autoproxy.proxyMode", "auto");
 pref("extensions.autoproxy.customProxy", "");
 pref("extensions.autoproxy.knownProxy", "Free Gate;;8580;$GAppProxy;;8000;$GPass;;8000;$JAP;;4001;$Puff;;1984;$sshgfw;;7070;socks$Tor;;9050;socks$Wu Jie;;9666;$Your Freedom;;8080;");

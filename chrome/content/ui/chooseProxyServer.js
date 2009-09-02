@@ -28,7 +28,8 @@ var aup = Components.classes["@mozilla.org/autoproxy;1"]
 var prefs = aup.prefs;
 var subscriptions = aup.filterStorage.subscriptions;
 
-var curDefaultProxy = prefs.defaultProxy;
+var curDefaultProxy = prefs.defaultProxy || prefs.knownProxy.split("$")[0];
+
 var proxies = prefs.customProxy.split("$");
 if (proxies == "") proxies = prefs.knownProxy.split("$");
 

@@ -35,7 +35,8 @@
 
 <overlay id="aup-overlay-general" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/x-javascript;version=1.7" src="overlay.js"/>  
-  
+  <script type="application/x-javascript;version=1.7" src="utils.js"/>
+
   <popupset id="aup-popupset">
     <tooltip id="aup-tooltip" orient="vertical">
       <description id="aup-tooltip-action" hidden="true"/>
@@ -47,6 +48,10 @@
       <vbox id="aup-tooltip-filters" hidden="true"/>
     </tooltip>
     <popup id="aup-status-popup">
+      <menuitem id="aup-status-modeauto" label="&mode.auto.label;" accesskey="&mode.auto.accesskey;" type="radio" command="aup-command-modeauto"/>
+      <menuitem id="aup-status-modeglobal" label="&mode.global.label;" accesskey="&mode.global.accesskey;" type="radio" command="aup-command-modeglobal"/>
+      <menuitem id="aup-status-modedisabled" label="&mode.disabled.label;" accesskey="&mode.disabled.accesskey;" type="radio" command="aup-command-modedisabled"/>
+      <menuseparator/>
       <menuitem id="aup-status-opensidebar" label="&opensidebar.label;" accesskey="&opensidebar.accesskey;" key="aup-key-sidebar" command="aup-command-sidebar"/>
       <menuitem id="aup-status-closesidebar" label="&closesidebar.label;" accesskey="&closesidebar.accesskey;" key="aup-key-sidebar" command="aup-command-sidebar"/>
       <menuitem id="aup-status-settings" label="&settings.label;..." accesskey="&settings.accesskey;" key="aup-key-settings" command="aup-command-settings"/>
@@ -54,27 +59,23 @@
       <menuitem id="aup-status-whitelistsite" labeltempl="&whitelist.site.label;" type="checkbox" command="aup-command-togglesitewhitelist"/>
       <menuitem id="aup-status-whitelistpage" label="&whitelist.page.label;" type="checkbox" command="aup-command-togglepagewhitelist"/>
       <menuseparator/>
-      <menu id="aup-status-options" label="&options.label;" accesskey="&options.accesskey;">
-        <menupopup id="aup-status-options-popup">
-          <menuitem id="aup-status-showintoolbar" label="&showintoolbar.label;" accesskey="&showintoolbar.accesskey;" type="checkbox" command="aup-command-toggleshowintoolbar"/>
-          <menuitem id="aup-status-showinstatusbar" label="&showinstatusbar.label;" accesskey="&showinstatusbar.accesskey;" type="checkbox" command="aup-command-toggleshowinstatusbar"/>
-        </menupopup>
-      </menu>
-      <menuitem id="aup-status-enabled" label="&enable.label;" accesskey="&enable.accesskey;" type="checkbox" key="aup-key-enable" command="aup-command-enable"/>
+      <menuitem id="aup-status-showintoolbar" label="&showintoolbar.label;" accesskey="&showintoolbar.accesskey;" type="checkbox" command="aup-command-toggleshowintoolbar"/>
+      <menuitem id="aup-status-showinstatusbar" label="&showinstatusbar.label;" accesskey="&showinstatusbar.accesskey;" type="checkbox" command="aup-command-toggleshowinstatusbar"/>
     </popup>
   </popupset>
   <keyset id="aup-keyset"/>
   <commandset id="aup-commandset">
+    <command id="aup-command-modeauto"/>
+    <command id="aup-command-modeglobal"/>
+    <command id="aup-command-modedisabled"/>
     <!-- Dummy oncommand attributes are work-arounds for bug 371900 -->
     <command id="aup-command-settings" oncommand="//"/>
     <command id="aup-command-sidebar" oncommand="//"/>
     <command id="aup-command-togglesitewhitelist"/>
     <command id="aup-command-togglepagewhitelist"/>
-    <command id="aup-command-toggleobjtabs"/>
-    <command id="aup-command-togglecollapse"/>
     <command id="aup-command-toggleshowintoolbar"/>
+
     <command id="aup-command-toggleshowinstatusbar"/>
-    <command id="aup-command-enable" oncommand="//"/>
   </commandset>
 
   <statusbarpanel id="aup-status" context="aup-status-popup">

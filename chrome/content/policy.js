@@ -72,14 +72,14 @@ var policy =
   aupPDs: [],
 
   /**
-   * Read global proxy from prefs. This function will be called at startup
-   * or every time user specified a different global proxy.
+   * Read default proxy from prefs. This function will be called at startup
+   * and every time user specified a different default proxy.
    */
   readDefaultProxy: function()
   {
     this.proxyEnabled = false;
     proxyService.unregisterFilter(this);
-    this.aupPDs = prefs.defaultProxy.split(";");
+    this.aupPDs = ( prefs.defaultProxy || prefs.knownProxy.split("$")[0] ).split(";");
     if (this.aupPDs[3] != "direct") {
       if (this.aupPDs[1] == "") this.aupPDs[1] = "127.0.0.1";
       if (this.aupPDs[3] == "") this.aupPDs[3] = "http";
@@ -149,14 +149,14 @@ var policy =
    * @param location {nsIURI}
    * @return {Boolean} true if the node should be proxyed
    */
-  shouldProxy: function(wnd, node, contentType, location) {
+  autoDetecting: function(wnd, node, contentType, location) {
     var topWnd = wnd.top;
     if (!topWnd || !topWnd.location || !topWnd.location.href)
       return false;
 
     var match = null;
     var locationText = location.spec;
-    if (!match && prefs.enabled)
+    if (!match)
     {
       match = this.isWindowWhitelisted(topWnd);
       if (match)
@@ -184,7 +184,7 @@ var policy =
     let docDomain = this.getHostname(wnd.location.href);
     let thirdParty = this.isThirdParty(location, docDomain);
 
-    if (!match && prefs.enabled) {
+    if (!match) {
       match = whitelistMatcher.matchesAny(locationText, this.typeDescr[contentType] || "", docDomain, thirdParty);
       if (match == null)
         match = blacklistMatcher.matchesAny(locationText, this.typeDescr[contentType] || "", docDomain, thirdParty);
@@ -344,8 +344,17 @@ var policy =
   // nsIChannelEventSink interface implementation
   //
 
+
+
+
+
+
+
+
   onChannelRedirect: function(oldChannel, newChannel, flags)
   {
+    return;
+ /*
     try {
       let oldLocation = null;
       let newLocation = null;
@@ -389,7 +398,15 @@ var policy =
       // We shouldn't throw exceptions here - this will prevent the redirect.
       dump("AutoProxy: Unexpected error in policy.onChannelRedirect: " + e + "\n");
     }
+*/
   },
+
+
+
+
+
+
+
 
   // Reapplies filters to all nodes of the window
   refilterWindowInternal: function(wnd, start) {

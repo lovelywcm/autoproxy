@@ -147,7 +147,7 @@ function init() {
 
   updatePatternSelection();
 
-  document.getElementById("disabledWarning").hidden = aup.prefs.enabled;
+  document.getElementById("disabledWarning").hidden = true;
 }
 
 function updateFilter()
@@ -335,9 +335,11 @@ function openPreferences() {
 }
 
 function doEnable() {
+/*
   aup.prefs.enabled = true;
   aup.prefs.save();
   E("disabledWarning").hidden = true;
+*/
 }
 
 /**

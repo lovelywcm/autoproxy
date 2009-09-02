@@ -47,8 +47,12 @@
 <!ENTITY sort.descending.accesskey "Z">
 <!ENTITY options.label "选项">
 <!ENTITY options.accesskey "O">
-<!ENTITY enable.label "启用 AutoProxy">
-<!ENTITY enable.accesskey "N">
+<!ENTITY mode.auto.label                 "自动模式">
+<!ENTITY mode.auto.accesskey             "A">
+<!ENTITY mode.global.label               "全局模式">
+<!ENTITY mode.global.accesskey           "G">
+<!ENTITY mode.disabled.label             "禁用 AutoProxy">
+<!ENTITY mode.disabled.accesskey         "D">
 <!ENTITY showintoolbar.label "在工具栏显示">
 <!ENTITY showintoolbar.accesskey "B">
 <!ENTITY showinstatusbar.label "在状态栏显示">

@@ -32,11 +32,11 @@
 {
   text-decoration: underline;
 }
-#aup-status[aupstate="disabled"]
+#aup-status[proxyMode="disabled"]
 {
   color: #999999;
 }
-#aup-status[aupstate="whitelisted"]
+#aup-status[proxyMode="global"]
 {
   color: #008000;
 }
@@ -50,15 +50,15 @@ toolbar[iconsize="small"] #aup-toolbarbutton,
   list-style-image: url("aup-status-16.png");
   -moz-image-region: rect(0px, 16px, 16px, 0px);
 }
-toolbar[iconsize="small"] #aup-toolbarbutton[aupstate="disabled"],
-#PersonalToolbar #aup-toolbarbutton[aupstate="disabled"],
-#aup-status[aupstate="disabled"] image {
+toolbar[iconsize="small"] #aup-toolbarbutton[proxyMode="disabled"],
+#PersonalToolbar #aup-toolbarbutton[proxyMode="disabled"],
+#aup-status[proxyMode="disabled"] image {
   -moz-image-region: rect(16px, 16px, 32px, 0px);
 }
-toolbar[iconsize="small"] #aup-toolbarbutton[aupstate="whitelisted"],
-#PersonalToolbar #aup-toolbarbutton[aupstate="whitelisted"],
-#aup-status[aupstate="whitelisted"] image {
-  -moz-image-region: rect(16px, 16px, 32px, 0px);
+toolbar[iconsize="small"] #aup-toolbarbutton[proxyMode="global"],
+#PersonalToolbar #aup-toolbarbutton[proxyMode="global"],
+#aup-status[proxyMode="global"] image {
+  -moz-image-region: rect(32px, 16px, 48px, 0px);
 }
 
 #aup-toolbar-popup {
@@ -78,12 +78,11 @@ menuitem[default="true"] {
   -moz-image-region: rect(0px, 24px, 24px, 0px);
   width: auto;
 }
-#aup-toolbarbutton[aupstate="disabled"] {
+#aup-toolbarbutton[proxyMode="disabled"] {
   -moz-image-region: rect(24px, 24px, 48px, 0px);
 }
-#aup-toolbarbutton[aupstate="whitelisted"] {
-  -moz-image-region: rect(24px, 24px, 48px, 0px);
-/*  -moz-image-region: rect(48px, 24px, 72px, 0px);*/
+#aup-toolbarbutton[proxyMode="global"] {
+  -moz-image-region: rect(48px, 24px, 72px, 0px);
 }
 
 #aup-tooltip {

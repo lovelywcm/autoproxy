@@ -80,8 +80,12 @@
 <!ENTITY options.label                   "Options">
 <!ENTITY options.accesskey               "O">
 
-<!ENTITY enable.label                    "Enable AutoProxy">
-<!ENTITY enable.accesskey                "N">
+<!ENTITY mode.auto.label                 "Automatic Mode">
+<!ENTITY mode.auto.accesskey             "A">
+<!ENTITY mode.global.label               "Global Mode">
+<!ENTITY mode.global.accesskey           "G">
+<!ENTITY mode.disabled.label             "Disable AutoProxy">
+<!ENTITY mode.disabled.accesskey         "D">
 <!ENTITY showintoolbar.label             "Show in toolbar">
 <!ENTITY showintoolbar.accesskey         "B">
 <!ENTITY showinstatusbar.label           "Show in status bar">

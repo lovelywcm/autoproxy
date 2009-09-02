@@ -39,14 +39,17 @@ let eventHandlers = [
   ["aup-command-sidebar", "command", aupToggleSidebar],
   ["aup-command-togglesitewhitelist", "command", function() { toggleFilter(siteWhitelist); }],
   ["aup-command-togglepagewhitelist", "command", function() { toggleFilter(pageWhitelist); }],
-  ["aup-command-toggleobjtabs", "command", function() { aupTogglePref("frameobjects"); }],
-  ["aup-command-togglecollapse", "command", function() { aupTogglePref("fastcollapse"); }],
   ["aup-command-toggleshowintoolbar", "command", function() { aupTogglePref("showintoolbar"); }],
   ["aup-command-toggleshowinstatusbar", "command", function() { aupTogglePref("showinstatusbar"); }],
-  ["aup-command-enable", "command", function() { aupTogglePref("enabled"); }],
+  ["aup-command-modeauto", "command", function() { switchToMode('auto'); }],
+  ["aup-command-modeglobal", "command", function() { switchToMode('global'); }],
+  ["aup-command-modedisabled", "command", function() { switchToMode('disabled'); }],
   ["aup-status", "click", aupClickHandler],
   ["aup-toolbarbutton", "command", function(event) { if (event.eventPhase == event.AT_TARGET) aupCommandHandler(event); }],
-  ["aup-toolbarbutton", "click", function(event) { if (event.eventPhase == event.AT_TARGET && event.button == 1) aupTogglePref("enabled"); }],
+
+  // TODO: ?
+  //["aup-toolbarbutton", "click", function(event) { if (event.eventPhase == event.AT_TARGET && event.button == 1) aupTogglePref("enabled"); }],
+
   ["aup-image-menuitem", "command", function() { aupNode(backgroundData || nodeData); }],
   ["aup-object-menuitem", "command", function() { aupNode(nodeData); }],
   ["aup-frame-menuitem", "command", function() { aupNode(frameData); }]
@@ -132,7 +135,7 @@ function aupInit() {
   var contextMenu = E("contentAreaContextMenu") || E("messagePaneContext") || E("popup_content");
   if (contextMenu) {
     contextMenu.addEventListener("popupshowing", aupCheckContext, false);
-  
+
     // Make sure our context menu items are at the bottom
     contextMenu.appendChild(E("aup-frame-menuitem"));
     contextMenu.appendChild(E("aup-object-menuitem"));
@@ -196,15 +199,8 @@ function aupUnload()
 }
 
 function aupReloadPrefs() {
-  var state = (prefs.enabled ? "active" : "disabled");
+  var state = prefs.proxyMode;
   var label = aup.getString("status_" + state + "_label");
-
-  if (state == "active")
-  {
-    let location = getCurrentLocation();
-    if (location && aup.policy.isWhitelisted(location.spec))
-      state = "whitelisted";
-  }
 
   var tooltip = E("aup-tooltip");
   if (state && tooltip)
@@ -232,7 +228,7 @@ function aupReloadPrefs() {
 
     currentlyShowingInToolbar = prefs.showintoolbar;
 
-    element.setAttribute("aupstate", state);
+    element.setAttribute("proxyMode", state);
   };
 
   var status = E("aup-status");
@@ -255,6 +251,12 @@ function aupReloadPrefs() {
   }
 
   updateElement(aupGetPaletteButton());
+
+  // Overwrite shouldProxy(), so that within this func don't need an extra judgement.
+  // shouldProxy() runs frequently(every network request), a little performance improve?
+  if ( state == "global" ) policy.shouldProxy = function() { return true };
+  else if ( state == "disabled" ) policy.shouldProxy = function() { return false };
+  else policy.shouldProxy = policy.autoDetecting;
 }
 
 function aupInitImageManagerHiding() {
@@ -331,7 +333,7 @@ function handleLinkClick(/**Event*/ event)
   while (link && !(link instanceof Components.interfaces.nsIDOMNSHTMLAnchorElement))
     link = link.parentNode;
 
-  if (link && /^aup:\/*subscribe\/*\?(.*)/i.test(link.href))
+  if (link && /^aup:\/*subscribe\/*\?(.*)/i.test(link.href)) /* */
   {
     event.preventDefault();
     event.stopPropagation();
@@ -460,9 +462,9 @@ function aupFillTooltip(event) {
   statusDescr.setAttribute("value", aup.getString(state + "_tooltip"));
 
   var activeFilters = [];
-  E("aup-tooltip-blocked-label").hidden = (state != "active");
-  E("aup-tooltip-blocked").hidden = (state != "active");
-  if (state == "active") {
+  E("aup-tooltip-blocked-label").hidden = (state != "auto");
+  E("aup-tooltip-blocked").hidden = (state != "auto");
+  if (state == "auto") {
     var data = aup.getDataForWindow(aup.getBrowserInWindow(window).contentWindow);
     var locations = data.getAllLocations();
 
@@ -572,7 +574,7 @@ function aupFillPopup(event) {
     whitelistSeparator = whitelistSeparator.nextSibling;
 
   let location = getCurrentLocation();
-  if (location && aup.policy.isBlockableScheme(location))
+  if (location && policy.isBlockableScheme(location))
   {
     let host = null;
     try
@@ -610,7 +612,6 @@ function aupFillPopup(event) {
   }
   whitelistSeparator.hidden = whitelistItemSite.hidden && whitelistItemPage.hidden;
 
-  elements.enabled.setAttribute("checked", prefs.enabled);
   elements.showintoolbar.setAttribute("checked", prefs.showintoolbar);
   elements.showinstatusbar.setAttribute("checked", prefs.showinstatusbar);
 
@@ -618,7 +619,10 @@ function aupFillPopup(event) {
   elements.opensidebar.setAttribute("default", defAction == 1);
   elements.closesidebar.setAttribute("default", defAction == 1);
   elements.settings.setAttribute("default", defAction == 2);
-  elements.enabled.setAttribute("default", defAction == 3);
+
+  elements.modeauto.setAttribute("checked", "auto" == prefs.proxyMode);
+  elements.modeglobal.setAttribute("checked", "global" == prefs.proxyMode);
+  elements.modedisabled.setAttribute("checked", "disabled" == prefs.proxyMode);
 }
 
 // Only show context menu on toolbar button in vertical toolbars
@@ -694,8 +698,10 @@ function toggleFilter(/**Filter*/ filter)
 function aupClickHandler(e) {
   if (e.button == 0)
     aupExecuteAction(prefs.defaultstatusbaraction);
-  else if (e.button == 1)
-    aupTogglePref("enabled");
+
+  // TODO: switch proxy mode: auto, global, disabled
+  //else if (e.button == 1)
+  //  aupTogglePref("enabled");
 }
 
 function aupCommandHandler(e) {
@@ -711,8 +717,10 @@ function aupExecuteAction(action) {
     aupToggleSidebar();
   else if (action == 2)
     aup.openSettingsDialog();
-  else if (action == 3)
-    aupTogglePref("enabled");
+
+  // TODO: switch proxy mode: auto, global, disable
+  //else if (action == 3)
+  //  aupTogglePref("enabled");
 }
 
 // Retrieves the image URL for the specified style property
@@ -765,7 +773,7 @@ function aupCheckContext() {
           var style = wnd.getComputedStyle(imageNode, "");
           bgImage = aupImageStyle(style, "background-image") || aupImageStyle(style, "list-style-image");
           if (bgImage) {
-            backgroundData = wndData.getLocation(aup.policy.type.BACKGROUND, bgImage);
+            backgroundData = wndData.getLocation(policy.type.BACKGROUND, bgImage);
             if (backgroundData && backgroundData.filter)
               backgroundData = null;
           }

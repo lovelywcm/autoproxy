@@ -20,6 +20,8 @@
  *
  * Contributor(s):
  *
+ * Wang Congming <lovelywcm@gmail.com> modified for AutoProxy.
+ *
  * ***** END LICENSE BLOCK ***** */
 
 const Cc = Components.classes;
@@ -29,6 +31,7 @@ const Cu = Components.utils;
 
 const aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
 const prefs = aup.prefs;
+const policy = aup.policy;
 const filterStorage = aup.filterStorage;
 const synchronizer = aup.synchronizer;
 
@@ -40,3 +43,14 @@ function E(id)
   return document.getElementById(id);
 }
 
+/**
+ * Switch to specified proxy mode.
+ * Will be used by:
+ *   settings.xul
+ *   overlayGeneral.xul + browserWindow.js
+ */
+function switchToMode(mode)
+{
+  prefs.proxyMode = mode;
+  prefs.save();
+}

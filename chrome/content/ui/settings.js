@@ -19,7 +19,7 @@
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
- * Wang Congming Modify for AutoProxy.
+ * Wang Congming <lovelywcm@gmail.com> Modified for AutoProxy.
  *
  * ***** END LICENSE BLOCK ***** */
 
@@ -1091,7 +1091,9 @@ function setSortOrder(order)
  */
 function fillOptionsPopup()
 {
-  E("aup-enabled").setAttribute("checked", prefs.enabled);
+  E("mode-auto").setAttribute("checked", "auto" == prefs.proxyMode);
+  E("mode-global").setAttribute("checked", "global" == prefs.proxyMode);
+  E("mode-disabled").setAttribute("checked", "disabled" == prefs.proxyMode);
   E("showintoolbar").setAttribute("checked", prefs.showintoolbar);
   E("showinstatusbar").setAttribute("checked", prefs.showinstatusbar);
 }

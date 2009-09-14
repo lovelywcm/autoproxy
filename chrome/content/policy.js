@@ -150,21 +150,8 @@ var policy =
    * @return {Boolean} true if the node should be proxyed
    */
   autoDetecting: function(wnd, node, contentType, location) {
-    var topWnd = wnd.top;
-    if (!topWnd || !topWnd.location || !topWnd.location.href)
-      return false;
-
     var match = null;
     var locationText = location.spec;
-    if (!match)
-    {
-      match = this.isWindowWhitelisted(topWnd);
-      if (match)
-      {
-        filterStorage.increaseHitCount(match);
-        return false;
-      }
-    }
 
     // Data loaded by plugins should be attached to the document
     if ((contentType == this.type.OTHER || contentType == this.type.OBJECT_SUBREQUEST) && node instanceof Element)
@@ -191,7 +178,7 @@ var policy =
     }
 
     // Store node data
-    var nodeData = data.addNode(topWnd, node, contentType, docDomain, thirdParty, locationText, match);
+    var nodeData = data.addNode(wnd.top, node, contentType, docDomain, thirdParty, locationText, match);
     if (match)
       filterStorage.increaseHitCount(match);
 
@@ -229,55 +216,6 @@ var policy =
    */
   isWhitelisted: function(url) {
     return whitelistMatcher.matchesAny(url, "DOCUMENT", this.getHostname(url), false);
-  },
-
-  /**
-   * Checks whether the page loaded in a window is whitelisted.
-   * @param wnd {nsIDOMWindow}
-   * @return {Boolean}
-   */
-  isWindowWhitelisted: function(wnd)
-  {
-    if ("name" in wnd && wnd.name == "messagepane")
-    {
-      // Thunderbird branch
-      try
-      {
-        let mailWnd = wnd.QueryInterface(Ci.nsIInterfaceRequestor)
-                         .getInterface(Ci.nsIWebNavigation)
-                         .QueryInterface(Ci.nsIDocShellTreeItem)
-                         .rootTreeItem
-                         .QueryInterface(Ci.nsIInterfaceRequestor)
-                         .getInterface(Ci.nsIDOMWindow);
-
-        // Typically we get a wrapped mail window here, need to unwrap
-        try
-        {
-          mailWnd = mailWnd.wrappedJSObject;
-        } catch(e) {}
-
-        if ("currentHeaderData" in mailWnd && "content-base" in mailWnd.currentHeaderData)
-        {
-          return this.isWhitelisted(mailWnd.currentHeaderData["content-base"].headerValue);
-        }
-        else if ("gDBView" in mailWnd)
-        {
-          let msgHdr = mailWnd.gDBView.hdrForFirstSelectedMessage;
-          let emailAddress = headerParser.extractHeaderAddressMailboxes(null, msgHdr.author);
-          if (emailAddress)
-          {
-            emailAddress = 'mailto:' + emailAddress.replace(/^[\s"]+/, "").replace(/[\s"]+$/, "").replace(/\s/g, '%20');
-            return this.isWhitelisted(emailAddress);
-          }
-        }
-      } catch(e) {}
-    }
-    else
-    {
-      // Firefox branch
-      return this.isWhitelisted(wnd.location.href);
-    }
-    return null;
   },
 
   /**

@@ -625,7 +625,6 @@ var treeView = {
 
     this.boxObject = boxObject;
     this.itemsDummy = boxObject.treeBody.getAttribute("noitemslabel");
-    this.whitelistDummy = boxObject.treeBody.getAttribute("whitelistedlabel");
 
     var stringAtoms = ["col-address", "col-type", "col-filter", "col-state", "col-size", "col-docDomain", "state-regular", "state-filtered", "state-whitelisted", "state-hidden"];
     var boolAtoms = ["selected", "dummy", "filter-disabled"];
@@ -642,7 +641,6 @@ var treeView = {
     }
 
     this.itemsDummyTooltip = aup.getString("no_blocking_suggestions");
-    this.whitelistDummyTooltip = aup.getString("whitelisted_page");
 
     // Check current sort direction
     var cols = document.getElementsByTagName("treecol");
@@ -719,11 +717,10 @@ var treeView = {
         return "";
 
       if (col == "filter") {
-        var filter = aup.policy.isWindowWhitelisted(window.content);
-        return filter ? filter.text : "";
+        return "";
       }
 
-      return (aup.policy.isWindowWhitelisted(window.content) ? this.whitelistDummy : this.itemsDummy);
+      return this.itemsDummy;
     }
   },
 
@@ -761,8 +758,6 @@ var treeView = {
       properties.AppendElement(this.atoms["dummy-true"]);
 
       state = "state-filtered";
-      if (this.data && aup.policy.isWindowWhitelisted(window.content))
-        state = "state-whitelisted";
     }
     properties.AppendElement(this.atoms[state]);
   },
@@ -845,9 +840,7 @@ var treeView = {
   sortProc: null,
   resortTimeout: null,
   itemsDummy: null,
-  whitelistDummy: null,
   itemsDummyTooltip: null,
-  whitelistDummyTooltip: null,
 
   sortProcs: {
     address: sortByAddress,
@@ -1023,11 +1016,7 @@ var treeView = {
     if (!this.data || this.data.length)
       return null;
 
-    var filter = aup.policy.isWindowWhitelisted(window.content);
-    if (filter)
-      return {tooltip: this.whitelistDummyTooltip, filter: filter};
-    else
-      return {tooltip: this.itemsDummyTooltip};
+    return {tooltip: this.itemsDummyTooltip};
   },
 
   selectItem: function(item) {

@@ -258,7 +258,6 @@ function saveProxyServerSettings()
 
   prefs.customProxy = pConfig;
   prefs.save();
-  aup.policy.readDefaultProxy();
 }
 
 /**

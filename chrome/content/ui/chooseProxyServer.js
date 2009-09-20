@@ -82,6 +82,5 @@ function saveChosen()
   if ( selectedProxy != curDefaultProxy ) {
     prefs.defaultProxy = selectedProxy;
     prefs.save();
-    aup.policy.readDefaultProxy();
   }
 }

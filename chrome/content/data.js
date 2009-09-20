@@ -110,6 +110,7 @@ DataContainer.prototype = {
     if (!this.detached)
       DataContainer.notifyListeners(topWnd, "refresh", this);
   },
+
   unregisterSubdocument: function(topWnd, data) {
     for (var i = 0; i < this.subdocs.length; i++)
       if (this.subdocs[i] == data)
@@ -118,6 +119,7 @@ DataContainer.prototype = {
     if (!this.detached)
       DataContainer.notifyListeners(topWnd, "refresh", this);
   },
+
   addNode: function(topWnd, node, contentType, docDomain, thirdParty, location, filter) {
     // If we had this node already, remove it from the list first
     this.removeNode(node);
@@ -173,6 +175,7 @@ DataContainer.prototype = {
 
     return null;
   },
+
   getAllLocations: function(results) {
     if (typeof results == "undefined")
       results = [];
@@ -225,7 +228,7 @@ DataContainer.listeners = [];
 DataContainer.addListener = function(handler) {
   DataContainer.listeners.push(handler);
 };
-  
+
 // Removes a handler
 DataContainer.removeListener = function(handler) {
   for (var i = 0; i < DataContainer.listeners.length; i++)

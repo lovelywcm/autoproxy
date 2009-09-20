@@ -45,9 +45,6 @@ function E(id)
 
 /**
  * Switch to specified proxy mode.
- * Will be used by:
- *   settings.xul
- *   overlayGeneral.xul + browserWindow.js
  */
 function switchToMode(mode)
 {

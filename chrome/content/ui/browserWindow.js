@@ -252,11 +252,20 @@ function aupReloadPrefs() {
 
   updateElement(aupGetPaletteButton());
 
-  // Overwrite shouldProxy(), so that within this func don't need an extra judgement.
-  // shouldProxy() runs frequently(every network request), a little performance improve?
-  if ( state == "global" ) policy.shouldProxy = function() { return true };
-  else if ( state == "disabled" ) policy.shouldProxy = function() { return false };
-  else policy.shouldProxy = policy.autoDetecting;
+  // Register / Unregister proxy filter & refresh shouldProxy() for specified mode.
+  if ( state == "disabled" ) policy.noProxy();
+  else {
+    if ( state == "global" ) policy.shouldProxy = function() { return true };
+    else policy.shouldProxy = policy.autoMatching;
+    policy.goProxy();
+  }
+
+  // Refresh defaultProxy
+  policy.aupPDs = ( prefs.defaultProxy || prefs.knownProxy.split("$")[0] ).split(";");
+  if (policy.aupPDs[3] != "direct") {
+    if (policy.aupPDs[1] == "") policy.aupPDs[1] = "127.0.0.1";
+    if (policy.aupPDs[3] == "") policy.aupPDs[3] = "http";
+  }
 }
 
 function aupInitImageManagerHiding() {
@@ -574,7 +583,7 @@ function aupFillPopup(event) {
     whitelistSeparator = whitelistSeparator.nextSibling;
 
   let location = getCurrentLocation();
-  if (location && policy.isBlockableScheme(location))
+  if (location && policy.isProxyableScheme(location))
   {
     let host = null;
     try

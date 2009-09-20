@@ -54,65 +54,56 @@ var policy =
   localizedDescr: null,
 
   /**
-   * Map containing all schemes that should be ignored by content policy.
+   * Map containing all schemes that can be proxyed.
    * @type Object
    */
-  whitelistSchemes: null,
-
-  /**
-   * Indicate whether the proxy is enabled or not.
-   */
-  proxyEnabled: false,
+  proxyableSchemes: null,
 
   /**
    * Array of Proxy Details, used by newProxyInfo() of applyFilter().
    * example: ['Tor', '127.0.0.1', '9050', 'socks']. socks meanings socks5.
-   * Every time proxy changed, this array will be refreshed.
+   * Every time prefs.defaultProxy changed, this array refreshed.
    */
   aupPDs: [],
 
   /**
-   * Read default proxy from prefs. This function will be called at startup
-   * and every time user specified a different default proxy.
+   * Assigned in shouldLoad() & used by autoMatching().
+   * Since autoMatching is called by applyFilter,
+   * but we can't get such information within applyFilter(?).
+   *
+   * TODO: shouldLoad won't be called for 30x redirection and extentions' http
+   * requests, error (Wnd/Node/... won't be refreshed) in these two situations
+   * though it's not so serious.
    */
-  readDefaultProxy: function()
-  {
-    this.proxyEnabled = false;
-    proxyService.unregisterFilter(this);
-    this.aupPDs = ( prefs.defaultProxy || prefs.knownProxy.split("$")[0] ).split(";");
-    if (this.aupPDs[3] != "direct") {
-      if (this.aupPDs[1] == "") this.aupPDs[1] = "127.0.0.1";
-      if (this.aupPDs[3] == "") this.aupPDs[3] = "http";
-    }
-  },
+  Wnd: null,
+  Node: null,
+  ContentType: "",
 
   //
   // nsIProtocolProxyFilter implementation
   //
   applyFilter: function(pS, uri, proxy)
   {
-    // type, host, port, network.proxy.socks_remote_dns=true,
-    // failoverTimeout=0, failoverProxy=null
-    return pS.newProxyInfo(this.aupPDs[3], this.aupPDs[1], this.aupPDs[2], 1, 0, null);
+    this.shouldProxy(uri) ?
+      proxy = pS.newProxyInfo(this.aupPDs[3], this.aupPDs[1], this.aupPDs[2], 1, 0, null):
+      proxy = pS.newProxyInfo("direct", "", -1, 0, 0, null);
+      // newProxyInfo(type, host, port, socks_remote_dns, failoverTimeout, failoverProxy);
+    return proxy;
   },
 
   goProxy: function()
   {
-    // nsIProtocolProxyFilter, position(this proxy in proxy list)=0
+    this.noProxy();
     proxyService.registerFilter(this, 0);
-    this.proxyEnabled = true;
   },
 
   noProxy: function()
   {
     proxyService.unregisterFilter(this);
-    this.proxyEnabled = false;
   },
 
   init: function()
   {
-    this.readDefaultProxy();
-
     var types = ["OTHER", "SCRIPT", "IMAGE", "STYLESHEET", "OBJECT", "SUBDOCUMENT",
       "DOCUMENT", "XBL", "PING", "XMLHTTPREQUEST", "OBJECT_SUBREQUEST", "DTD", "FONT", "MEDIA"];
 
@@ -135,22 +126,22 @@ var policy =
     this.typeDescr[0xFFFE] = "BACKGROUND";
     this.localizedDescr[0xFFFE] = aup.getString("type_label_background");
 
-    // whitelisted URL schemes
-    this.whitelistSchemes = {};
-    for each (var scheme in prefs.whitelistschemes.toLowerCase().split(" "))
-      this.whitelistSchemes[scheme] = true;
+    // Proxyable URL schemes
+    this.proxyableSchemes = {};
+    for each (var scheme in prefs.proxyableSchemes.toLowerCase().split(" "))
+      this.proxyableSchemes[scheme] = true;
   },
 
   /**
-   * Checks whether a node should be proxyed
+   * Checks whether a node should be proxyed according to rules
    * @param wnd {nsIDOMWindow}
    * @param node {nsIDOMElement}
    * @param contentType {String}
    * @param location {nsIURI}
    * @return {Boolean} true if the node should be proxyed
    */
-  autoDetecting: function(wnd, node, contentType, location) {
-    var match = null;
+  autoMatching: function(location) {
+    var match=null, wnd=this.Wnd, node=this.Node, contentType=this.ContentType;
     var locationText = location.spec;
 
     // Data loaded by plugins should be attached to the document
@@ -162,7 +153,7 @@ var policy =
       contentType = this.type.BACKGROUND;
 
     // Fix type for objects misrepresented as frames or images
-    if (contentType != this.type.OBJECT && (node instanceof Ci.nsIDOMHTMLObjectElement || 
+    if (contentType != this.type.OBJECT && (node instanceof Ci.nsIDOMHTMLObjectElement ||
                                             node instanceof Ci.nsIDOMHTMLEmbedElement ))
       contentType = this.type.OBJECT;
 
@@ -171,11 +162,9 @@ var policy =
     let docDomain = this.getHostname(wnd.location.href);
     let thirdParty = this.isThirdParty(location, docDomain);
 
-    if (!match) {
-      match = whitelistMatcher.matchesAny(locationText, this.typeDescr[contentType] || "", docDomain, thirdParty);
-      if (match == null)
-        match = blacklistMatcher.matchesAny(locationText, this.typeDescr[contentType] || "", docDomain, thirdParty);
-    }
+    match = whitelistMatcher.matchesAny(locationText, this.typeDescr[contentType] || "", docDomain, thirdParty);
+    if (match == null)
+      match = blacklistMatcher.matchesAny(locationText, this.typeDescr[contentType] || "", docDomain, thirdParty);
 
     // Store node data
     var nodeData = data.addNode(wnd.top, node, contentType, docDomain, thirdParty, locationText, match);
@@ -186,12 +175,12 @@ var policy =
   },
 
   /**
-   * Checks whether the location's scheme is blockable.
+   * Checks whether the location's scheme is proxyable.
    * @param location  {nsIURI}
    * @return {Boolean}
    */
-  isBlockableScheme: function(location) {
-    return !(location.scheme in this.whitelistSchemes);
+  isProxyableScheme: function(location) {
+    return location.scheme in this.proxyableSchemes;
   },
 
   /**
@@ -207,15 +196,6 @@ var policy =
     {
       return null;
     }
-  },
-
-  /**
-   * Checks whether a page is whitelisted.
-   * @param url {String}
-   * @return {Boolean}
-   */
-  isWhitelisted: function(url) {
-    return whitelistMatcher.matchesAny(url, "DOCUMENT", this.getHostname(url), false);
   },
 
   /**
@@ -245,50 +225,24 @@ var policy =
   //
   // nsIContentPolicy interface implementation
   //
+  shouldLoad: function(contentType, location, requestOrigin, node, mimeTypeGuess, extra) {
+    if ( this.isProxyableScheme(location) ) {
+      var wnd = getWindow(node);
 
-  shouldLoad: function(contentType, contentLocation, requestOrigin, node, mimeTypeGuess, extra) {
-    // return unless we are initialized
-    if (!this.whitelistSchemes)
-      return ok;
+      // Interpret unknown types as "other"
+      if ( !(contentType in this.typeDescr) ) contentType = this.type.OTHER;
 
-    if (!node)
-      return ok;
+      this.Wnd = wnd;
+      this.Node = node;
+      this.ContentType = contentType;
+    }
 
-    var wnd = getWindow(node);
-    if (!wnd)
-      return ok;
-
-    var location = unwrapURL(contentLocation);
-
-    // Interpret unknown types as "other"
-    if (!(contentType in this.typeDescr))
-      contentType = this.type.OTHER;
-
-    // if it's not a blockable type or a whitelisted scheme, use the usual policy
-    if ( !this.isBlockableScheme(location) )
-      return ok;
-
-    this.shouldProxy(wnd, node, contentType, location) ?
-      this.proxyEnabled || this.goProxy() : this.proxyEnabled && this.noProxy();
-
-    return ok;
-  },
-
-  shouldProcess: function(contentType, contentLocation, requestOrigin, insecNode, mimeType, extra) {
     return ok;
   },
 
   //
   // nsIChannelEventSink interface implementation
   //
-
-
-
-
-
-
-
-
   onChannelRedirect: function(oldChannel, newChannel, flags)
   {
     return;
@@ -341,10 +295,9 @@ var policy =
 
 
 
-
-
-
-
+/*
+  below 2 functions can be removed after removing of composer
+*/
 
   // Reapplies filters to all nodes of the window
   refilterWindowInternal: function(wnd, start) {

@@ -15,7 +15,7 @@ pref("extensions.autoproxy.previewimages", true);
 pref("extensions.autoproxy.patternsfile", "autoproxy/patterns.ini");
 pref("extensions.autoproxy.patternsbackups", 5);
 pref("extensions.autoproxy.patternsbackupinterval", 24);
-pref("extensions.autoproxy.whitelistschemes", "about chrome file irc mailto news resource snews x-jsd addbook cid imap mailbox nntp pop data javascript moz-icon");
+pref("extensions.autoproxy.proxyableSchemes", "http https ftp");
 pref("extensions.autoproxy.hideimagemanager", true);
 pref("extensions.autoproxy.subscriptions_fallbackurl", "http://autoproxy.org/getSubscription?url=%s");
 pref("extensions.autoproxy.subscriptions_fallbackerrors", 5);

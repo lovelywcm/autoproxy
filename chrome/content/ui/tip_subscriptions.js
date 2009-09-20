@@ -112,7 +112,6 @@ function subscribeAndSetDefault()
     if (prefs.defaultProxy != sP) {
       prefs.defaultProxy = sP;
       prefs.save();
-      aup.policy.readDefaultProxy();
     }
   }
 

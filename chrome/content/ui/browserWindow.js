@@ -26,6 +26,8 @@
 
 var aupHideImageManager;
 
+var proxyService = Cc["@mozilla.org/network/protocol-proxy-service;1"].getService(Ci.nsIProtocolProxyService);
+
 /**
  * List of event handers to be registered. For each event handler the element ID,
  * event and the actual event handler are listed.
@@ -253,19 +255,24 @@ function aupReloadPrefs() {
   updateElement(aupGetPaletteButton());
 
   // Register / Unregister proxy filter & refresh shouldProxy() for specified mode.
-  if ( state == "disabled" ) policy.noProxy();
+  if ( state == "disabled" ) proxyService.unregisterFilter(policy);
   else {
     if ( state == "global" ) policy.shouldProxy = function() { return true };
     else policy.shouldProxy = policy.autoMatching;
-    policy.goProxy();
+
+    proxyService.unregisterFilter(policy);
+    proxyService.registerFilter(policy, 0);
   }
 
   // Refresh defaultProxy
-  policy.aupPDs = ( prefs.defaultProxy || prefs.knownProxy.split("$")[0] ).split(";");
-  if (policy.aupPDs[3] != "direct") {
-    if (policy.aupPDs[1] == "") policy.aupPDs[1] = "127.0.0.1";
-    if (policy.aupPDs[3] == "") policy.aupPDs[3] = "http";
+  // dPDs: default Proxy Details
+  var dPDs = ( prefs.defaultProxy || prefs.knownProxy.split("$")[0] ).split(";");
+  if ( dPDs[3] != "direct" ) {
+    if ( dPDs[1] == "" ) dPDs[1] = "127.0.0.1";
+    if ( dPDs[3] == "" ) dPDs[3] = "http";
   }
+  // newProxyInfo(type, host, port, socks_remote_dns, failoverTimeout, failoverProxy);
+  policy.defaultProxy = proxyService.newProxyInfo(dPDs[3], dPDs[1], dPDs[2], 1, 0, null);
 }
 
 function aupInitImageManagerHiding() {

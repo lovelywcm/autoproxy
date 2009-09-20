@@ -29,7 +29,6 @@
  */
 
 var effectiveTLD = Cc["@mozilla.org/network/effective-tld-service;1"].getService(Ci.nsIEffectiveTLDService);
-var proxyService = Cc["@mozilla.org/network/protocol-proxy-service;1"].getService(Ci.nsIProtocolProxyService);
 
 const ok = Ci.nsIContentPolicy.ACCEPT;
 
@@ -60,11 +59,11 @@ var policy =
   proxyableSchemes: null,
 
   /**
-   * Array of Proxy Details, used by newProxyInfo() of applyFilter().
-   * example: ['Tor', '127.0.0.1', '9050', 'socks']. socks meanings socks5.
-   * Every time prefs.defaultProxy changed, this array refreshed.
+   * nsIProxyInfo
    */
-  aupPDs: [],
+  defaultProxy: null,
+
+  shouldProxy: function(){},
 
   /**
    * Assigned in shouldLoad() & used by autoMatching().
@@ -84,22 +83,8 @@ var policy =
   //
   applyFilter: function(pS, uri, proxy)
   {
-    this.shouldProxy(uri) ?
-      proxy = pS.newProxyInfo(this.aupPDs[3], this.aupPDs[1], this.aupPDs[2], 1, 0, null):
-      proxy = pS.newProxyInfo("direct", "", -1, 0, 0, null);
-      // newProxyInfo(type, host, port, socks_remote_dns, failoverTimeout, failoverProxy);
-    return proxy;
-  },
-
-  goProxy: function()
-  {
-    this.noProxy();
-    proxyService.registerFilter(this, 0);
-  },
-
-  noProxy: function()
-  {
-    proxyService.unregisterFilter(this);
+    if ( !uri.schemeIs("feed") && this.shouldProxy(uri) ) return this.defaultProxy;
+    return pS.newProxyInfo("direct", "", -1, 0, 0, null);
   },
 
   init: function()

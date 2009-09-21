@@ -69,23 +69,11 @@ var policy =
    * Assigned in shouldLoad() & used by autoMatching().
    * Since autoMatching is called by applyFilter,
    * but we can't get such information within applyFilter(?).
-   *
-   * TODO: shouldLoad won't be called for 30x redirection and extentions' http
-   * requests, error (Wnd/Node/... won't be refreshed) in these two situations
-   * though it's not so serious.
    */
-  Wnd: null,
-  Node: null,
-  ContentType: "",
-
-  //
-  // nsIProtocolProxyFilter implementation
-  //
-  applyFilter: function(pS, uri, proxy)
-  {
-    if ( !uri.schemeIs("feed") && this.shouldProxy(uri) ) return this.defaultProxy;
-    return pS.newProxyInfo("direct", "", -1, 0, 0, null);
-  },
+  Wnd: null,        // nsIDOMWindow
+  Node: null,       // nsIDOMElement
+  ContentType: "",  // String
+  ContentURI: null, // nsIURI
 
   init: function()
   {
@@ -117,42 +105,58 @@ var policy =
       this.proxyableSchemes[scheme] = true;
   },
 
+  //
+  // nsIProtocolProxyFilter implementation
+  //
+  applyFilter: function(pS, uri, proxy)
+  {
+    if ( !uri.schemeIs("feed") && this.shouldProxy(uri) ) return this.defaultProxy;
+    return pS.newProxyInfo("direct", "", -1, 0, 0, null);
+  },
+
   /**
    * Checks whether a node should be proxyed according to rules
-   * @param wnd {nsIDOMWindow}
-   * @param node {nsIDOMElement}
-   * @param contentType {String}
    * @param location {nsIURI}
    * @return {Boolean} true if the node should be proxyed
    */
   autoMatching: function(location) {
-    var match=null, wnd=this.Wnd, node=this.Node, contentType=this.ContentType;
+    var match = null, docDomain, thirdParty;
+    var wnd = this.Wnd, node = this.Node, contentType = this.ContentType || 3;
     var locationText = location.spec;
 
-    // Data loaded by plugins should be attached to the document
-    if ((contentType == this.type.OTHER || contentType == this.type.OBJECT_SUBREQUEST) && node instanceof Element)
-      node = node.ownerDocument;
+    try {
+      // Data loaded by plugins should be attached to the document
+      if ((contentType == this.type.OTHER || contentType == this.type.OBJECT_SUBREQUEST) && node instanceof Element)
+        node = node.ownerDocument;
 
-    // Fix type for background images
-    if (contentType == this.type.IMAGE && node.nodeType == Node.DOCUMENT_NODE)
-      contentType = this.type.BACKGROUND;
+      // Fix type for background images
+      if (contentType == this.type.IMAGE && node.nodeType == Node.DOCUMENT_NODE)
+        contentType = this.type.BACKGROUND;
 
-    // Fix type for objects misrepresented as frames or images
-    if (contentType != this.type.OBJECT && (node instanceof Ci.nsIDOMHTMLObjectElement ||
-                                            node instanceof Ci.nsIDOMHTMLEmbedElement ))
-      contentType = this.type.OBJECT;
+      // Fix type for objects misrepresented as frames or images
+      if (contentType != this.type.OBJECT && (node instanceof Ci.nsIDOMHTMLObjectElement ||
+                                              node instanceof Ci.nsIDOMHTMLEmbedElement ))
+        contentType = this.type.OBJECT;
 
-    var data = DataContainer.getDataForWindow(wnd);
-
-    let docDomain = this.getHostname(wnd.location.href);
-    let thirdParty = this.isThirdParty(location, docDomain);
+      docDomain = this.getHostname(wnd.location.href);
+      thirdParty = this.isThirdParty(location, docDomain);
+    }
+    catch (e) {}
 
     match = whitelistMatcher.matchesAny(locationText, this.typeDescr[contentType] || "", docDomain, thirdParty);
     if (match == null)
       match = blacklistMatcher.matchesAny(locationText, this.typeDescr[contentType] || "", docDomain, thirdParty);
 
-    // Store node data
-    var nodeData = data.addNode(wnd.top, node, contentType, docDomain, thirdParty, locationText, match);
+    // Store node data.
+    // Skip this step if the request is established by a Firefox extension
+    //   * no sidebar window can be used to display extension's http request;
+    //   * shouldLoad() doesn't check extension's request, any way to do this?
+    //     * just like onChannelRedirect() did for 301/302 redirection.
+    if ( location == this.ContentURI ) {
+      var data = DataContainer.getDataForWindow(wnd);
+      data.addNode(wnd.top, node, contentType, docDomain, thirdParty, locationText, match);
+    }
+
     if (match)
       filterStorage.increaseHitCount(match);
 
@@ -212,16 +216,14 @@ var policy =
   //
   shouldLoad: function(contentType, location, requestOrigin, node, mimeTypeGuess, extra) {
     if ( this.isProxyableScheme(location) ) {
-      var wnd = getWindow(node);
-
       // Interpret unknown types as "other"
       if ( !(contentType in this.typeDescr) ) contentType = this.type.OTHER;
 
-      this.Wnd = wnd;
+      this.Wnd = getWindow(node);
       this.Node = node;
       this.ContentType = contentType;
+      this.ContentURI = unwrapURL(location)
     }
-
     return ok;
   },
 
@@ -230,20 +232,7 @@ var policy =
   //
   onChannelRedirect: function(oldChannel, newChannel, flags)
   {
-    return;
- /*
     try {
-      let oldLocation = null;
-      let newLocation = null;
-      try {
-        oldLocation = oldChannel.originalURI.spec;
-        newLocation = newChannel.URI.spec;
-      }
-      catch(e2) {}
-
-      if (!oldLocation || !newLocation || oldLocation == newLocation)
-        return;
-
       // Look for the request both in the origin window and in its parent (for frames)
       let contexts = [getRequestWindow(newChannel)];
       if (!contexts[0])
@@ -257,25 +246,26 @@ var policy =
         // Did we record the original request in its own window?
         let data = DataContainer.getDataForWindow(context, true);
         if (data)
-          info = data.getURLInfo(oldLocation);
+          info = data.getURLInfo(oldChannel.originalURI.spec);
 
         if (info)
         {
           let node = (info.nodes.length ? info.nodes[info.nodes.length - 1] : context.document);
-          // HACK: NS_BINDING_ABORTED would be proper error code to throw but this will show up in error console (bug 287107)
-          if (!this.processNode(context, node, info.type, newChannel.URI))
-            throw Cr.NS_BASE_STREAM_WOULD_BLOCK;
-          else
-            return;
+
+          this.Wnd = context;
+          this.Node = node;
+          this.ContentType = info.type;
+          this.ContentURI = newChannel.URI;
+
+          return;
         }
       }
     }
     catch (e if (e != Cr.NS_BASE_STREAM_WOULD_BLOCK))
     {
       // We shouldn't throw exceptions here - this will prevent the redirect.
-      dump("AutoProxy: Unexpected error in policy.onChannelRedirect: " + e + "\n");
+      dump("\nAutoProxy: Unexpected error in policy.onChannelRedirect: " + e + "\n");
     }
-*/
   },
 
 

@@ -259,16 +259,6 @@ function aupReloadPrefs() {
 
   updateElement(aupGetPaletteButton());
 
-  // Register / Unregister proxy filter & refresh shouldProxy() for specified mode.
-  if ( state == "disabled" ) proxyService.unregisterFilter(policy);
-  else {
-    if ( state == "global" ) policy.shouldProxy = function() { return true };
-    else policy.shouldProxy = policy.autoMatching;
-
-    proxyService.unregisterFilter(policy);
-    proxyService.registerFilter(policy, 0);
-  }
-
   // Refresh defaultProxy
   // dPDs: default Proxy Details
   var dPDs = ( prefs.defaultProxy || prefs.knownProxy.split("$")[0] ).split(";");
@@ -278,6 +268,16 @@ function aupReloadPrefs() {
   }
   // newProxyInfo(type, host, port, socks_remote_dns, failoverTimeout, failoverProxy);
   policy.defaultProxy = proxyService.newProxyInfo(dPDs[3], dPDs[1], dPDs[2], 1, 0, null);
+
+  // Register / Unregister proxy filter & refresh shouldProxy() for specified mode.
+  if ( state == "disabled" ) proxyService.unregisterFilter(policy);
+  else {
+    if ( state == "global" ) policy.shouldProxy = function() { return true };
+    else policy.shouldProxy = policy.autoMatching;
+
+    proxyService.unregisterFilter(policy);
+    proxyService.registerFilter(policy, 0);
+  }
 }
 
 function aupInitImageManagerHiding() {

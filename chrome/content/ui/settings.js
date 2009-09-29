@@ -396,9 +396,9 @@ function getDefaultDir()
   }
   catch (e)
   {
-    // No default download location. Default to desktop. 
-    let fileLocator = Cc["@mozilla.org/file/directory_service;1"].getService(Cinterfaces.nsIProperties);
-  
+    // No default download location. Default to desktop.
+    let fileLocator = Cc["@mozilla.org/file/directory_service;1"].getService(Ci.nsIProperties);
+
     return fileLocator.get("Desk", Ci.nsILocalFile);
   }
 }

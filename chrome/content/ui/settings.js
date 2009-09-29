@@ -450,7 +450,7 @@ function importList()
       lines.push(aup.normalizeFilter(line.value));
     stream.close();
 
-    if (/\[AutoProxy\s+\d\.\d\.\d\]/i.test(lines[0]))
+    if (/\[AutoProxy\d\.\d\.\d\]/i.test(lines[0]))
     {
       let minVersion = RegExp.$1;
       let warning = "";
@@ -532,7 +532,7 @@ function exportList()
     saveDefaultDir(picker.file.parent.QueryInterface(Ci.nsILocalFile));
     let lineBreak = aup.getLineBreak();
 
-    let list = ["[AutoProxy]"];
+    let list = [""];
     let minVersion = "0";
     for each (let subscription in treeView.subscriptions)
     {
@@ -548,24 +548,19 @@ function exportList()
 
           // Find version requirements of this filter
           let filterVersion;
-          if (filter instanceof aup.RegExpFilter)
-          {
-            if (/^(?:@@)?\|\|/.test(filter.text) || /\^/.test(filter.text))
-              filterVersion = "0.3";
-            else
-              filterVersion = "0";
-          }
+          if (/^(?:@@)?\|\|/.test(filter.text) || /\^/.test(filter.text))
+            filterVersion = "0.3.0";
           else
-            filterVersion = "0";
+            filterVersion = "0.1.0";
 
           // Adjust version requirements of the complete filter set
-          if (filterVersion != "0" && aup.versionComparator.compare(minVersion, filterVersion) < 0)
+          if ( aup.versionComparator.compare(minVersion, filterVersion) < 0 )
             minVersion = filterVersion;
         }
       }
     }
 
-    if (minVersion != "0")  list[0] = "[AutoProxy " + minVersion + "]";
+    list[0] = "[AutoProxy " + minVersion + "]";
 
     list.push("");
 

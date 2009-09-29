@@ -285,15 +285,14 @@ function aupInitImageManagerHiding() {
     return;
 
   aupHideImageManager = false;
-  if (prefs.hideimagemanager && "@mozilla.org/permissionmanager;1" in Components.classes) {
+  if (prefs.hideimagemanager && "@mozilla.org/permissionmanager;1" in Cc) {
     try {
       aupHideImageManager = true;
-      var permissionManager = Components.classes["@mozilla.org/permissionmanager;1"]
-                                        .getService(Components.interfaces.nsIPermissionManager);
+      var permissionManager = Cc["@mozilla.org/permissionmanager;1"].getService(Ci.nsIPermissionManager);
       var enumerator = permissionManager.enumerator;
       while (aupHideImageManager && enumerator.hasMoreElements()) {
-        var item = enumerator.getNext().QueryInterface(Components.interfaces.nsIPermission);
-        if (item.type == "image" && item.capability == Components.interfaces.nsIPermissionManager.DENY_ACTION)
+        var item = enumerator.getNext().QueryInterface(Ci.nsIPermission);
+        if (item.type == "image" && item.capability == Ci.nsIPermissionManager.DENY_ACTION)
           aupHideImageManager = false;
       }
     } catch(e) {}
@@ -323,7 +322,7 @@ function aupConfigureKey(key, value) {
       modifiers.push(parts[i].toLowerCase());
     else if (parts[i].length == 1)
       keychar = parts[i];
-    else if ("DOM_VK_" + parts[i].toUpperCase() in Components.interfaces.nsIDOMKeyEvent)
+    else if ("DOM_VK_" + parts[i].toUpperCase() in Ci.nsIDOMKeyEvent)
       keycode = "VK_" + parts[i].toUpperCase();
   }
 
@@ -351,7 +350,7 @@ function handleLinkClick(/**Event*/ event)
     return;
 
   let link = event.target;
-  while (link && !(link instanceof Components.interfaces.nsIDOMNSHTMLAnchorElement))
+  while (link && !(link instanceof Ci.nsIDOMNSHTMLAnchorElement))
     link = link.parentNode;
 
   if (link && /^aup:\/*subscribe\/*\?(.*)/i.test(link.href)) /* */
@@ -359,8 +358,7 @@ function handleLinkClick(/**Event*/ event)
     event.preventDefault();
     event.stopPropagation();
 
-    let unescape = Components.classes["@mozilla.org/intl/texttosuburi;1"]
-                             .getService(Components.interfaces.nsITextToSubURI);
+    let unescape = Cc["@mozilla.org/intl/texttosuburi;1"].getService(Ci.nsITextToSubURI);
 
     let params = RegExp.$1.split('&');
     let title = null;
@@ -429,13 +427,12 @@ function aupInstallInToolbar() {
 
       if (override) {
         try {
-          var rdf = Components.classes["@mozilla.org/rdf/rdf-service;1"]
-                              .getService(Components.interfaces.nsIRDFService);
+          var rdf = Cc["@mozilla.org/rdf/rdf-service;1"].getService(Ci.nsIRDFService);
           var localstore = rdf.GetDataSource("rdf:local-store");
           var resource = rdf.GetResource(override);
           var arc = rdf.GetResource("currentset");
           var target = localstore.GetTarget(resource, arc, true);
-          var currentSet = (target ? target.QueryInterface(Components.interfaces.nsIRDFLiteral).Value : E('mail-bar').getAttribute("defaultset"));
+          var currentSet = (target ? target.QueryInterface(Ci.nsIRDFLiteral).Value : E('mail-bar').getAttribute("defaultset"));
 
           if (/\bbutton-junk\b/.test(currentSet))
             currentSet = currentSet.replace(/\bbutton-junk\b/, "aup-toolbarbutton,button-junk");
@@ -550,8 +547,7 @@ function getCurrentLocation() /**nsIURI*/
     try
     {
       let msgHdr = gDBView.hdrForFirstSelectedMessage;
-      let headerParser = Components.classes["@mozilla.org/messenger/headerparser;1"]
-                                   .getService(Components.interfaces.nsIMsgHeaderParser);
+      let headerParser = Cc["@mozilla.org/messenger/headerparser;1"].getService(Ci.nsIMsgHeaderParser);
       let emailAddress = headerParser.extractHeaderAddressMailboxes(null, msgHdr.author);
       return "mailto:" + emailAddress.replace(/^[\s"]+/, "").replace(/[\s"]+$/, "").replace(/\s/g, "%20");
     }
@@ -606,9 +602,9 @@ function aupFillPopup(event) {
     if (host)
     {
       let ending = "|";
-      if (location instanceof Components.interfaces.nsIURL && location.ref)
+      if (location instanceof Ci.nsIURL && location.ref)
         location.ref = "";
-      if (location instanceof Components.interfaces.nsIURL && location.query)
+      if (location instanceof Ci.nsIURL && location.query)
       {
         location.query = "";
         ending = "?";
@@ -747,9 +743,9 @@ function aupExecuteAction(action) {
 // Retrieves the image URL for the specified style property
 function aupImageStyle(computedStyle, property) {
   var value = computedStyle.getPropertyCSSValue(property);
-  if (value instanceof Components.interfaces.nsIDOMCSSValueList && value.length >= 1)
+  if (value instanceof Ci.nsIDOMCSSValueList && value.length >= 1)
     value = value[0];
-  if (value instanceof Components.interfaces.nsIDOMCSSPrimitiveValue && value.primitiveType == Components.interfaces.nsIDOMCSSPrimitiveValue.CSS_URI)
+  if (value instanceof Ci.nsIDOMCSSPrimitiveValue && value.primitiveType == Ci.nsIDOMCSSPrimitiveValue.CSS_URI)
     return aup.unwrapURL(value.getStringValue()).spec;
 
   return null;

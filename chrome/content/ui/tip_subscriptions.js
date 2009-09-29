@@ -161,8 +161,7 @@ function handleKeyPress(e)
 
 function handleCommand(event)
 {
-  let scrollBox = document.getElementById("subscriptionsScrollbox").boxObject
-                     .QueryInterface(Components.interfaces.nsIScrollBoxObject);
+  let scrollBox = document.getElementById("subscriptionsScrollbox").boxObject.QueryInterface(Ci.nsIScrollBoxObject);
   scrollBox.ensureElementIsVisible(event.target);
   scrollBox.ensureElementIsVisible(event.target.nextSibling);
 }

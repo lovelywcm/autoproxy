@@ -23,8 +23,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-let dragService = Components.classes["@mozilla.org/widget/dragservice;1"]
-                            .getService(Components.interfaces.nsIDragService);
+let dragService = Cc["@mozilla.org/widget/dragservice;1"].getService(Ci.nsIDragService);
 
 const altMask = 2;
 const ctrlMask = 4;
@@ -32,12 +31,11 @@ const metaMask = 8;
 
 let accelMask = ctrlMask;
 try {
-  let prefService = Components.classes["@mozilla.org/preferences-service;1"]
-                              .getService(Components.interfaces.nsIPrefBranch);
+  let prefService = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch);
   let accelKey = prefService.getIntPref("ui.key.accelKey");
-  if (accelKey == Components.interfaces.nsIDOMKeyEvent.DOM_VK_META)
+  if (accelKey == Ci.nsIDOMKeyEvent.DOM_VK_META)
     accelMask = metaMask;
-  else if (accelKey == Components.interfaces.nsIDOMKeyEvent.DOM_VK_ALT)
+  else if (accelKey == Ci.nsIDOMKeyEvent.DOM_VK_ALT)
     accelMask = altMask;
 } catch(e) {}
 
@@ -70,11 +68,7 @@ function init()
   applyBtn.hidden = false;
 
   // Convert menubar into toolbar on Mac OS X
-  let isMac = false;
-  if ("nsIXULRuntime" in  Components.interfaces)
-    isMac = (Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime).OS == "Darwin");
-  else
-    isMac = /mac/i.test(window.navigator.oscpu);
+  let isMac = (Cc["@mozilla.org/xre/app-info;1"].getService(Ci.nsIXULRuntime).OS == "Darwin");
   if (isMac)
   {
     function copyAttributes(from, to)
@@ -398,15 +392,14 @@ function getDefaultDir()
   // Copied from Firefox: getTargetFile() in contentAreaUtils.js
   try
   {
-    return prefService.getComplexValue("browser.download.lastDir", Components.interfaces.nsILocalFile);
+    return prefService.getComplexValue("browser.download.lastDir", Ci.nsILocalFile);
   }
   catch (e)
   {
     // No default download location. Default to desktop. 
-    let fileLocator = Components.classes["@mozilla.org/file/directory_service;1"]
-                                .getService(Components.interfaces.nsIProperties);
+    let fileLocator = Cc["@mozilla.org/file/directory_service;1"].getService(Cinterfaces.nsIProperties);
   
-    return fileLocator.get("Desk", Components.interfaces.nsILocalFile);
+    return fileLocator.get("Desk", Ci.nsILocalFile);
   }
 }
 
@@ -421,7 +414,7 @@ function saveDefaultDir(dir)
   // Copied from Firefox: getTargetFile() in contentAreaUtils.js
   try
   {
-    prefService.setComplexValue("browser.download.lastDir", Components.interfaces.nsILocalFile, dir);
+    prefService.setComplexValue("browser.download.lastDir", Ci.nsILocalFile, dir);
   } catch(e) {};
 }
 
@@ -430,8 +423,7 @@ function saveDefaultDir(dir)
  */
 function importList()
 {
-  let picker = Components.classes["@mozilla.org/filepicker;1"]
-                     .createInstance(Components.interfaces.nsIFilePicker);
+  let picker = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
   picker.init(window, aup.getString("import_filters_title"), picker.modeOpen);
   picker.appendFilters(picker.filterText);
   picker.appendFilters(picker.filterAll);
@@ -442,15 +434,13 @@ function importList()
 
   if (picker.show() != picker.returnCancel)
   {
-    saveDefaultDir(picker.file.parent.QueryInterface(Components.interfaces.nsILocalFile));
-    let fileStream = Components.classes["@mozilla.org/network/file-input-stream;1"]
-                               .createInstance(Components.interfaces.nsIFileInputStream);
+    saveDefaultDir(picker.file.parent.QueryInterface(Ci.nsILocalFile));
+    let fileStream = Cc["@mozilla.org/network/file-input-stream;1"].createInstance(Ci.nsIFileInputStream);
     fileStream.init(picker.file, 0x01, 0444, 0);
 
-    let stream = Components.classes["@mozilla.org/intl/converter-input-stream;1"]
-                           .createInstance(Components.interfaces.nsIConverterInputStream);
-    stream.init(fileStream, "UTF-8", 16384, Components.interfaces.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
-    stream = stream.QueryInterface(Components.interfaces.nsIUnicharLineInputStream);
+    let stream = Cc["@mozilla.org/intl/converter-input-stream;1"].createInstance(Ci.nsIConverterInputStream);
+    stream.init(fileStream, "UTF-8", 16384, Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
+    stream = stream.QueryInterface(Ci.nsIUnicharLineInputStream);
 
     let lines = [];
     let line = {value: null};
@@ -467,8 +457,7 @@ function importList()
       if (minVersion && aup.versionComparator.compare(minVersion, aup.getInstalledVersion()) > 0)
         warning = aup.getString("import_filters_wrong_version").replace(/--/, minVersion) + "\n\n";
 
-      let promptService = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
-                                    .getService(Components.interfaces.nsIPromptService);
+      let promptService = Cc["@mozilla.org/embedcomp/prompt-service;1"].getService(Ci.nsIPromptService);
       let flags = promptService.BUTTON_TITLE_IS_STRING * promptService.BUTTON_POS_0 +
                   promptService.BUTTON_TITLE_CANCEL * promptService.BUTTON_POS_1 +
                   promptService.BUTTON_TITLE_IS_STRING * promptService.BUTTON_POS_2;
@@ -528,7 +517,7 @@ function exportList()
   if (!treeView.hasUserFilters())
     return;
 
-  let picker = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
+  let picker = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
   picker.init(window, aup.getString("export_filters_title"), picker.modeSave);
   picker.defaultExtension = ".txt";
   picker.appendFilters(picker.filterText);
@@ -540,7 +529,7 @@ function exportList()
 
   if (picker.show() != picker.returnCancel)
   {
-    saveDefaultDir(picker.file.parent.QueryInterface(Components.interfaces.nsILocalFile));
+    saveDefaultDir(picker.file.parent.QueryInterface(Ci.nsILocalFile));
     let lineBreak = aup.getLineBreak();
 
     let list = ["[AutoProxy]"];
@@ -587,13 +576,11 @@ function exportList()
 
     try
     {
-      let fileStream = Components.classes["@mozilla.org/network/file-output-stream;1"]
-                                 .createInstance(Components.interfaces.nsIFileOutputStream);
+      let fileStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream);
       fileStream.init(picker.file, 0x02 | 0x08 | 0x20, 0644, 0);
 
-      let stream = Components.classes["@mozilla.org/intl/converter-output-stream;1"]
-                             .createInstance(Components.interfaces.nsIConverterOutputStream);
-      stream.init(fileStream, "UTF-8", 16384, Components.interfaces.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
+      let stream = Cc["@mozilla.org/intl/converter-output-stream;1"].createInstance(Ci.nsIConverterOutputStream);
+      stream.init(fileStream, "UTF-8", 16384, Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
 
       stream.writeString(list.join(lineBreak));
   
@@ -952,8 +939,7 @@ function copyToClipboard()
   if (!selected.length)
     return;
 
-  let clipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"]
-                                  .getService(Components.interfaces.nsIClipboardHelper);
+  let clipboardHelper = Cc["@mozilla.org/widget/clipboardhelper;1"].getService(Ci.nsIClipboardHelper);
   let lineBreak = aup.getLineBreak();
   clipboardHelper.copyString(selected.map(function(filter)
   {
@@ -965,10 +951,8 @@ function copyToClipboard()
  * Pastes text as list of filters from clipboard
  */
 function pasteFromClipboard() {
-  let clipboard = Components.classes["@mozilla.org/widget/clipboard;1"]
-                            .getService(Components.interfaces.nsIClipboard);
-  let transferable = Components.classes["@mozilla.org/widget/transferable;1"]
-                               .createInstance(Components.interfaces.nsITransferable);
+  let clipboard = Cc["@mozilla.org/widget/clipboard;1"].getService(Ci.nsIClipboard);
+  let transferable = Cc["@mozilla.org/widget/transferable;1"].createInstance(Ci.nsITransferable);
   transferable.addDataFlavor("text/unicode");
 
   try {
@@ -982,7 +966,7 @@ function pasteFromClipboard() {
   transferable.getTransferData("text/unicode", data, {});
 
   try {
-    data = data.value.QueryInterface(Components.interfaces.nsISupportsString).data;
+    data = data.value.QueryInterface(Ci.nsISupportsString).data;
   }
   catch (e) {
     return;
@@ -1164,8 +1148,7 @@ function fillContext()
   E("context-movegroupup").setAttribute("disabled", !selectedSubscription || treeView.isFirstSubscription(selectedSubscription));
   E("context-movegroupdown").setAttribute("disabled", !selectedSubscription || treeView.isLastSubscription(selectedSubscription));
 
-  let clipboard = Components.classes["@mozilla.org/widget/clipboard;1"]
-                            .getService(Components.interfaces.nsIClipboard);
+  let clipboard = Cc["@mozilla.org/widget/clipboard;1"].getService(Ci.nsIClipboard);
 
   let hasFlavour = clipboard.hasDataMatchingFlavors(["text/unicode"], 1, clipboard.kGlobalClipboard);
 
@@ -1360,7 +1343,7 @@ function createSortFunction(cmpFunc, fallbackFunc, desc)
   }
 }
 
-const nsITreeView = Components.interfaces.nsITreeView;
+const nsITreeView = Ci.nsITreeView;
 
 /**
  * nsITreeView implementation used for the filters list.
@@ -1372,10 +1355,9 @@ let treeView = {
   //
 
   QueryInterface: function(uuid) {
-    if (!uuid.equals(Components.interfaces.nsISupports) &&
-        !uuid.equals(Components.interfaces.nsITreeView))
+    if ( !uuid.equals(Ci.nsISupports) && !uuid.equals(Ci.nsITreeView))
     {
-      throw Components.results.NS_ERROR_NO_INTERFACE;
+      throw Cr.NS_ERROR_NO_INTERFACE;
     }
   
     return this;
@@ -1394,8 +1376,7 @@ let treeView = {
 
     let stringAtoms = ["col-filter", "col-enabled", "col-hitcount", "col-lasthit", "type-comment", "type-filterlist", "type-whitelist", "type-invalid"];
     let boolAtoms = ["selected", "dummy", "subscription", "description", "filter", "filter-regexp", "subscription-special", "subscription-external", "subscription-autoDownload", "subscription-disabled", "subscription-upgradeRequired", "subscription-dummy", "filter-disabled"];
-    let atomService = Components.classes["@mozilla.org/atom-service;1"]
-                                .getService(Components.interfaces.nsIAtomService);
+    let atomService = Cc["@mozilla.org/atom-service;1"].getService(Ci.nsIAtomService);
 
     this.atoms = {};
     for each (let atom in stringAtoms)
@@ -2461,12 +2442,9 @@ let treeView = {
     if (!(filter instanceof aup.Filter))
       filter = null;
 
-    let array = Components.classes["@mozilla.org/supports-array;1"]
-                          .createInstance(Components.interfaces.nsISupportsArray);
-    let transferable = Components.classes["@mozilla.org/widget/transferable;1"]
-                                 .createInstance(Components.interfaces.nsITransferable);
-    let data = Components.classes["@mozilla.org/supports-string;1"]
-                         .createInstance(Components.interfaces.nsISupportsString);
+    let array = Cc["@mozilla.org/supports-array;1"].createInstance(Ci.nsISupportsArray);
+    let transferable = Cc["@mozilla.org/widget/transferable;1"].createInstance(Ci.nsITransferable);
+    let data = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
     if (filter instanceof aup.Filter)
       data.data = filter.text;
     else
@@ -2474,8 +2452,7 @@ let treeView = {
     transferable.setTransferData("text/unicode", data, data.data.length * 2);
     array.AppendElement(transferable);
 
-    let region = Components.classes["@mozilla.org/gfx/region;1"]
-                           .createInstance(Components.interfaces.nsIScriptableRegion);
+    let region = Cc["@mozilla.org/gfx/region;1"].createInstance(Ci.nsIScriptableRegion);
     region.init();
     let x = {};
     let y = {};
@@ -2794,7 +2771,7 @@ let treeView = {
       found = match[2] || match[4] || match[0];
 
     if (!found)
-      return Components.interfaces.nsITypeAheadFind.FIND_NOTFOUND;
+      return Ci.nsITypeAheadFind.FIND_NOTFOUND;
 
     let [subscription, offset] = found;
     let row = this.getSubscriptionRow(subscription);
@@ -2807,11 +2784,11 @@ let treeView = {
     this.boxObject.ensureRowIsVisible(row + offset);
 
     if (direction < 0 && found != match[2])
-      return Components.interfaces.nsITypeAheadFind.FIND_WRAPPED;
+      return Ci.nsITypeAheadFind.FIND_WRAPPED;
     if ((direction > 0 && found != match[3]) || (direction == 0 && found == match[1]))
-      return Components.interfaces.nsITypeAheadFind.FIND_WRAPPED;
+      return Ci.nsITypeAheadFind.FIND_WRAPPED;
 
-    return Components.interfaces.nsITypeAheadFind.FIND_FOUND;
+    return Ci.nsITypeAheadFind.FIND_FOUND;
   },
 
   //

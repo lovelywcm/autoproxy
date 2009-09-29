@@ -120,11 +120,12 @@ var policy =
    * @return {Boolean} true if the node should be proxyed
    */
   autoMatching: function(location) {
-    var match = null, docDomain, thirdParty;
-    var wnd = this.Wnd, node = this.Node, contentType = this.ContentType || 3;
-    var locationText = location.spec;
+    var match = null, docDomain = "extension", thirdParty = false, contentType = 3;
+    var wnd, node, locationText = location.spec;
 
-    try {
+    if ( location == this.ContentURI ) {
+      wnd = this.Wnd; node = this.Node; contentType = this.ContentType;
+
       // Data loaded by plugins should be attached to the document
       if ((contentType == this.type.OTHER || contentType == this.type.OBJECT_SUBREQUEST) && node instanceof Element)
         node = node.ownerDocument;
@@ -141,7 +142,6 @@ var policy =
       docDomain = this.getHostname(wnd.location.href);
       thirdParty = this.isThirdParty(location, docDomain);
     }
-    catch (e) {}
 
     match = whitelistMatcher.matchesAny(locationText, this.typeDescr[contentType] || "", docDomain, thirdParty);
     if (match == null)
@@ -157,8 +157,12 @@ var policy =
       data.addNode(wnd.top, node, contentType, docDomain, thirdParty, locationText, match);
     }
 
+    /*
+     * bug found here, result in crash.
+     *
     if (match)
       filterStorage.increaseHitCount(match);
+    */
 
     return match && !(match instanceof WhitelistFilter);
   },
@@ -222,7 +226,7 @@ var policy =
       this.Wnd = getWindow(node);
       this.Node = node;
       this.ContentType = contentType;
-      this.ContentURI = unwrapURL(location)
+      this.ContentURI = unwrapURL(location);
     }
     return ok;
   },

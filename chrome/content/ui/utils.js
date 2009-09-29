@@ -24,6 +24,11 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+const Cc = Components.classes;
+const Ci = Components.interfaces;
+const Cr = Components.results;
+const Cu = Components.utils;
+
 const aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
 const prefs = aup.prefs;
 const policy = aup.policy;

@@ -44,8 +44,7 @@
 <!ENTITY opensidebar.accesskey  "B">
 <!ENTITY closesidebar.label     "Close proxyable items">
 <!ENTITY closesidebar.accesskey "B">
-<!ENTITY whitelist.site.label   "Disable on --">
-<!ENTITY whitelist.page.label   "Disable on this page only">
+<!ENTITY whitelist.site.label   "Disable proxy on --">
 
 <!ENTITY objecttab.title        "Proxy">
 <!ENTITY objecttab.tooltip      "Click here to proxy this object with AutoProxy">

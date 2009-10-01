@@ -57,7 +57,6 @@
       <menuitem id="aup-status-settings" label="&settings.label;..." accesskey="&settings.accesskey;" key="aup-key-settings" command="aup-command-settings"/>
       <menuseparator id="aup-status-whitelist-sep"/>
       <menuitem id="aup-status-whitelistsite" labeltempl="&whitelist.site.label;" type="checkbox" command="aup-command-togglesitewhitelist"/>
-      <menuitem id="aup-status-whitelistpage" label="&whitelist.page.label;" type="checkbox" command="aup-command-togglepagewhitelist"/>
       <menuseparator/>
       <menuitem id="aup-status-showintoolbar" label="&showintoolbar.label;" accesskey="&showintoolbar.accesskey;" type="checkbox" command="aup-command-toggleshowintoolbar"/>
       <menuitem id="aup-status-showinstatusbar" label="&showinstatusbar.label;" accesskey="&showinstatusbar.accesskey;" type="checkbox" command="aup-command-toggleshowinstatusbar"/>
@@ -72,7 +71,6 @@
     <command id="aup-command-settings" oncommand="//"/>
     <command id="aup-command-sidebar" oncommand="//"/>
     <command id="aup-command-togglesitewhitelist"/>
-    <command id="aup-command-togglepagewhitelist"/>
     <command id="aup-command-toggleshowintoolbar"/>
 
     <command id="aup-command-toggleshowinstatusbar"/>

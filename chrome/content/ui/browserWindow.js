@@ -40,7 +40,6 @@ let eventHandlers = [
   ["aup-command-settings", "command", function() { aup.openSettingsDialog(); }],
   ["aup-command-sidebar", "command", aupToggleSidebar],
   ["aup-command-togglesitewhitelist", "command", function() { toggleFilter(siteWhitelist); }],
-  ["aup-command-togglepagewhitelist", "command", function() { toggleFilter(pageWhitelist); }],
   ["aup-command-toggleshowintoolbar", "command", function() { aupTogglePref("showintoolbar"); }],
   ["aup-command-toggleshowinstatusbar", "command", function() { aupTogglePref("showinstatusbar"); }],
   ["aup-command-modeauto", "command", function() { switchToMode('auto'); }],
@@ -67,11 +66,6 @@ let currentlyShowingInToolbar = prefs.showintoolbar;
  * @type Filter
  */
 let siteWhitelist = null;
-/**
- * Filter corresponding with "disable on site" menu item (set in aupFillPopup()).
- * @type Filter
- */
-let pageWhitelist = null;
 
 /**
  * Data associated with the node currently under mouse pointer (set in aupCheckContext()).
@@ -578,10 +572,9 @@ function aupFillPopup(event) {
   elements.closesidebar.hidden = !sidebarOpen;
 
   var whitelistItemSite = elements.whitelistsite;
-  var whitelistItemPage = elements.whitelistpage;
-  whitelistItemSite.hidden = whitelistItemPage.hidden = true;
+  whitelistItemSite.hidden = true;
 
-  var whitelistSeparator = whitelistItemPage.nextSibling;
+  var whitelistSeparator = whitelistItemSite.nextSibling;
   while (whitelistSeparator.nodeType != whitelistSeparator.ELEMENT_NODE)
     whitelistSeparator = whitelistSeparator.nextSibling;
 
@@ -609,10 +602,6 @@ function aupFillPopup(event) {
       whitelistItemSite.setAttribute("checked", isUserDefinedFilter(siteWhitelist));
       whitelistItemSite.setAttribute("label", whitelistItemSite.getAttribute("labeltempl").replace(/--/, host));
       whitelistItemSite.hidden = false;
-
-      pageWhitelist = aup.Filter.fromText("@@|" + location.spec + ending + "$document");
-      whitelistItemPage.setAttribute("checked", isUserDefinedFilter(pageWhitelist));
-      whitelistItemPage.hidden = false;
     }
     else
     {
@@ -622,7 +611,7 @@ function aupFillPopup(event) {
       whitelistItemSite.hidden = false;
     }
   }
-  whitelistSeparator.hidden = whitelistItemSite.hidden && whitelistItemPage.hidden;
+  whitelistSeparator.hidden = whitelistItemSite.hidden;
 
   elements.showintoolbar.setAttribute("checked", prefs.showintoolbar);
   elements.showinstatusbar.setAttribute("checked", prefs.showinstatusbar);

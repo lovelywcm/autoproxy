@@ -15,7 +15,6 @@
 <!ENTITY opensidebar.accesskey "B">
 <!ENTITY closesidebar.label "关闭可代理资源列表">
 <!ENTITY closesidebar.accesskey "B">
-<!ENTITY whitelist.site.label "在 -- 禁用">
-<!ENTITY whitelist.page.label "仅在本页禁用">
+<!ENTITY whitelist.site.label "在 -- 禁用代理">
 <!ENTITY objecttab.title "代理">
 <!ENTITY objecttab.tooltip "点击使用 AutoProxy 来代理">

@@ -231,6 +231,10 @@ var policy =
     return ok;
   },
 
+  shouldProcess: function(contentType, contentLocation, requestOrigin, insecNode, mimeType, extra) {
+    return ok;
+  },
+
   //
   // nsIChannelEventSink interface implementation
   //

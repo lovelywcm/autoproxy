@@ -50,10 +50,6 @@ let eventHandlers = [
 
   // TODO: ?
   //["aup-toolbarbutton", "click", function(event) { if (event.eventPhase == event.AT_TARGET && event.button == 1) aupTogglePref("enabled"); }],
-
-  ["aup-image-menuitem", "command", function() { aupNode(backgroundData || nodeData); }],
-  ["aup-object-menuitem", "command", function() { aupNode(nodeData); }],
-  ["aup-frame-menuitem", "command", function() { aupNode(frameData); }]
 ];
 
 /**
@@ -66,19 +62,6 @@ let currentlyShowingInToolbar = prefs.showintoolbar;
  * @type Filter
  */
 let siteWhitelist = null;
-
-/**
- * Data associated with the node currently under mouse pointer (set in aupCheckContext()).
- */
-let nodeData = null;
-/**
- * Data associated with the background image currently under mouse pointer (set in aupCheckContext()).
- */
-let backgroundData = null;
-/**
- * Data associated with the frame currently under mouse pointer (set in aupCheckContext()).
- */
-let frameData = null;
 
 /**
  * Progress listener detecting location changes and triggering status updates.
@@ -126,17 +109,6 @@ function aupInit() {
       if (key.match(/(.*)_key$/))
         aupConfigureKey(RegExp.$1, prefs[key]);
   } catch(e) {}
-
-  // Install context menu handler
-  var contextMenu = E("contentAreaContextMenu") || E("messagePaneContext") || E("popup_content");
-  if (contextMenu) {
-    contextMenu.addEventListener("popupshowing", aupCheckContext, false);
-
-    // Make sure our context menu items are at the bottom
-    contextMenu.appendChild(E("aup-frame-menuitem"));
-    contextMenu.appendChild(E("aup-object-menuitem"));
-    contextMenu.appendChild(E("aup-image-menuitem"));
-  }
 
   // First run actions
   if (!("doneFirstRunActions" in prefs) && aup.versionComparator.compare(prefs.lastVersion, "0.0") <= 0)
@@ -731,75 +703,4 @@ function aupImageStyle(computedStyle, property) {
     return aup.unwrapURL(value.getStringValue()).spec;
 
   return null;
-}
-
-// Hides the unnecessary context menu items on display
-function aupCheckContext() {
-  var contextMenu = E("contentAreaContextMenu") || E("messagePaneContext") || E("popup_content");
-  var target = document.popupNode;
-
-  var nodeType = null;
-  backgroundData = null;
-  frameData = null;
-  if (target) {
-    // Lookup the node in our stored data
-    var data = aup.getDataForNode(target);
-    var targetNode = null;
-    if (data) {
-      targetNode = data[0];
-      data = data[1];
-    }
-    nodeData = data;
-    if (data && !data.filter)
-      nodeType = data.typeDescr;
-
-    var wnd = (target ? target.ownerDocument.defaultView : null);
-    var wndData = (wnd ? aup.getDataForWindow(wnd) : null);
-
-    if (wnd.frameElement)
-       frameData = aup.getDataForNode(wnd.frameElement, true);
-    if (frameData)
-      frameData = frameData[1];
-    if (frameData && frameData.filter)
-      frameData = null;
-
-    if (nodeType != "IMAGE") {
-      // Look for a background image
-      var imageNode = target;
-      while (imageNode && !backgroundData) {
-        if (imageNode.nodeType == imageNode.ELEMENT_NODE) {
-          var bgImage = null;
-          var style = wnd.getComputedStyle(imageNode, "");
-          bgImage = aupImageStyle(style, "background-image") || aupImageStyle(style, "list-style-image");
-          if (bgImage) {
-            backgroundData = wndData.getLocation(policy.type.BACKGROUND, bgImage);
-            if (backgroundData && backgroundData.filter)
-              backgroundData = null;
-          }
-        }
-
-        imageNode = imageNode.parentNode;
-      }
-    }
-
-    // Hide "Block Images from ..." if hideimagemanager pref is true and the image manager isn't already blocking something
-    var imgManagerContext = E("context-blockimage");
-    if (imgManagerContext) {
-      if (typeof aupHideImageManager == "undefined")
-        aupInitImageManagerHiding();
-
-      // Don't use "hidden" attribute - it might be overridden by the default popupshowing handler
-      imgManagerContext.style.display = (aupHideImageManager ? "none" : "");
-    }
-  }
-
-  E("aup-image-menuitem").hidden = (nodeType != "IMAGE" && backgroundData == null);
-  E("aup-object-menuitem").hidden = (nodeType != "OBJECT");
-  E("aup-frame-menuitem").hidden = (frameData == null);
-}
-
-// Bring up the settings dialog for the node the context menu was referring to
-function aupNode(data) {
-  if (data)
-    window.openDialog("chrome://autoproxy/content/ui/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", aup.getBrowserInWindow(window).contentWindow, data);
 }

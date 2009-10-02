@@ -76,13 +76,6 @@
     <menuitem id="aup-blockableitems" insertafter="viewSidebarMenuMenu"/>
   </menupopup>
 
-  <!-- Context menu -->
-  <popup id="contentAreaContextMenu">
-    <menuitem id="aup-image-menuitem"/>
-    <menuitem id="aup-object-menuitem"/>
-    <menuitem id="aup-frame-menuitem"/>
-  </popup>
-
   <!-- Fake sidebar -->
   <vbox id="appcontent">
     <splitter id="aup-sidebar-splitter"/>

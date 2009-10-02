@@ -92,11 +92,6 @@
   <!-- View menu -->
   <menuitem id="aup-blockableitems" label="&view.blockableItems.label;" type="checkbox" autocheck="false" key="aup-key-sidebar" command="aup-command-sidebar"/>
 
-  <!-- Context menu -->
-  <menuitem id="aup-image-menuitem" label="&context.image.label;..."/>
-  <menuitem id="aup-object-menuitem" label="&context.object.label;..."/>
-  <menuitem id="aup-frame-menuitem" label="&context.frame.label;..."/>
-
   <!-- Fake sidebar -->
   <splitter id="aup-sidebar-splitter" hidden="true"/>
   <vbox id="aup-sidebar" height="200" width="200" hidden="true" persist="height width">

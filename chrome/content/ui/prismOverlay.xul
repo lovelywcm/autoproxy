@@ -44,13 +44,6 @@
     <menuitem id="aup-menuitem" insertbefore="menuitem_console"/>
   </menupopup>
 
-  <!-- Context menu -->
-  <menupopup id="popup_content"> 
-    <menuitem id="aup-image-menuitem"/>
-    <menuitem id="aup-object-menuitem"/>
-    <menuitem id="aup-frame-menuitem"/>
-  </menupopup>
-
   <!-- Fake sidebar -->
   <vbox id="box_content">
     <splitter id="aup-sidebar-splitter"/>

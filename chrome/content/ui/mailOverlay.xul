@@ -51,13 +51,6 @@
     <menuitem id="aup-menuitem" insertafter="downloadmgr,javaScriptConsole"/>
   </menupopup>
 
-  <!-- Context menu -->
-  <popup id="messagePaneContext">
-    <menuitem id="aup-image-menuitem"/>
-    <menuitem id="aup-object-menuitem"/>
-    <menuitem id="aup-frame-menuitem"/>
-  </popup>
-
   <!-- Fake sidebar -->
   <vbox id="messagepanebox">
     <splitter id="aup-sidebar-splitter"/>

@@ -251,10 +251,8 @@ function aupReloadPrefs() {
   // Refresh defaultProxy
   // dPDs: default Proxy Details
   var dPDs = ( prefs.defaultProxy || prefs.knownProxy.split("$")[0] ).split(";");
-  if ( dPDs[3] != "direct" ) {
-    if ( dPDs[1] == "" ) dPDs[1] = "127.0.0.1";
-    if ( dPDs[3] == "" ) dPDs[3] = "http";
-  }
+  if ( dPDs[1] == "" ) dPDs[1] = "127.0.0.1";
+  if ( dPDs[3] == "" ) dPDs[3] = "http";
   // newProxyInfo(type, host, port, socks_remote_dns, failoverTimeout, failoverProxy);
   policy.defaultProxy = proxyService.newProxyInfo(dPDs[3], dPDs[1], dPDs[2], 1, 0, null);
 

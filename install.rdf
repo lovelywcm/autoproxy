@@ -4,13 +4,13 @@
     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 
   <Description about="urn:mozilla:install-manifest">
-  
+
   <em:id>autoproxy@autoproxy.org</em:id>
   <em:version>{{VERSION}}</em:version>
-  
+
   <!-- Target Application this extension can install into, 
     with minimum and maximum supported versions. --> 
-  
+
   <!-- FireFox -->
   <em:targetApplication>
     <Description>
@@ -19,7 +19,7 @@
     <em:maxVersion>3.7a1pre</em:maxVersion>
     </Description>
   </em:targetApplication>
-  
+
   <!-- SeaMonkey -->
   <em:targetApplication>
     <Description>
@@ -28,7 +28,7 @@
     <em:maxVersion>2.0b1</em:maxVersion>
     </Description>
   </em:targetApplication>
-  
+
   <!-- Thunderbird -->
   <em:targetApplication>
     <Description>
@@ -91,12 +91,12 @@
   <em:description>GFW was yesterday!</em:description>
   <em:creator>WCM</em:creator>
   <em:homepageURL>http://autoproxy.org/</em:homepageURL>
-  
+
   <!-- Front End Integration Hooks (used by Extension Manager)-->
   <em:iconURL>chrome://autoproxy/skin/autoproxy.png</em:iconURL>
   <em:aboutURL>chrome://autoproxy/content/ui/about.xul</em:aboutURL>
   <em:optionsURL>chrome://autoproxy/content/ui/settings.xul</em:optionsURL>
-  
+
   <!-- Update-->
   <em:updateURL>http://autoproxy.mozdev.org/update.rdf</em:updateURL>
   <em:updateKey>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDa90iwPXBxB+12fTnfdk5Wc6Th

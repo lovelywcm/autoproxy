@@ -186,7 +186,7 @@ function reset2Default()
   window.sizeToContent();
   window.centerWindowOnScreen();
 
-  defaultProxy = prefs.knownProxy.split("$")[0];
+  defaultProxy = prefs.knownProxy.split("$")[6];
 }
 
 function saveProxyServerSettings()

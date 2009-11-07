@@ -62,6 +62,7 @@ var policy =
    * nsIProxyInfo
    */
   defaultProxy: null,
+  fallBackProxy: null,
 
   shouldProxy: function(){},
 
@@ -110,8 +111,9 @@ var policy =
   //
   applyFilter: function(pS, uri, proxy)
   {
-    if ( !uri.schemeIs("feed") && this.shouldProxy(uri) ) return this.defaultProxy;
-    return pS.newProxyInfo("direct", "", -1, 0, 0, null);
+    if (uri.schemeIs("feed")) return pS.newProxyInfo("direct", "", -1, 0, 0, null);
+    if (this.shouldProxy(uri)) return this.defaultProxy;
+    return this.fallBackProxy;
   },
 
   /**

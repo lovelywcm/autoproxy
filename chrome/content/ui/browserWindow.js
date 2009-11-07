@@ -219,13 +219,18 @@ function aupReloadPrefs() {
 
   updateElement(aupGetPaletteButton());
 
-  // Refresh defaultProxy
-  // dPDs: default Proxy Details
+  // Refresh defaultProxy, dPDs: default Proxy Details
   var dPDs = ( prefs.defaultProxy || prefs.knownProxy.split("$")[0] ).split(";");
   if ( dPDs[1] == "" ) dPDs[1] = "127.0.0.1";
   if ( dPDs[3] == "" ) dPDs[3] = "http";
   // newProxyInfo(type, host, port, socks_remote_dns, failoverTimeout, failoverProxy);
   policy.defaultProxy = proxyService.newProxyInfo(dPDs[3], dPDs[1], dPDs[2], 1, 0, null);
+
+  // Refresh fallBackProxy(fBP)
+  var fBP = prefs.fallBackProxy.split(";");
+  if ( fBP[1] == "" ) fBP[1] = "127.0.0.1";
+  if ( fBP[3] == "" ) fBP[3] = "http";
+  policy.fallBackProxy = proxyService.newProxyInfo(fBP[3], fBP[1], fBP[2], 1, 0, null);
 
   // Register / Unregister proxy filter & refresh shouldProxy() for specified mode.
   if ( state == "disabled" ) proxyService.unregisterFilter(policy);

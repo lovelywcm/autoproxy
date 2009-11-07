@@ -1,0 +1,14 @@
+<!ENTITY dialog.title "Editar subscripción">
+<!ENTITY dialog.newtitle "Añadir subscripción de reglas">
+<!ENTITY new.description "Por favor, introduce la dirección web o el archivo que contenga una lista de reglas de AutoProxy.">
+<!ENTITY edit.description "La lista de reglas para esta subscripción se descargará de la dirección indicada.">
+<!ENTITY external.description "Esta es una subscripción de reglas externa; su lista de reglas se actualizará por la extensión que haya creado esta subscripción.">
+<!ENTITY autodownload.description "Si has elegido &quot;Actualizar automáticamente&quot;, esta localización se comprobará diariamente en busca de actualizaciones. Aún con esta opción desactivada todavía puedes actualizar manualmente desde el menú contextual de subscripción.">
+<!ENTITY location.label "Localización de la lista de reglas:">
+<!ENTITY location.accesskey "L">
+<!ENTITY title.label "Título de la subscripción:">
+<!ENTITY title.accesskey "T">
+<!ENTITY autodownload.label "Actualizar automáticamente">
+<!ENTITY autodownload.accesskey "P">
+<!ENTITY enabled.label "Activar reglas">
+<!ENTITY enabled.accesskey "N">

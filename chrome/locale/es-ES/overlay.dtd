@@ -1,0 +1,23 @@
+<!ENTITY notloaded.label "No cargado">
+<!ENTITY notloaded.tooltip "Los componentes de Autoproxy no han podido cargarse, quizás no se instaló correctamente.">
+<!ENTITY status.tooltip "Estado:">
+<!ENTITY blocked.tooltip "Elementos pasados por proxy en esta página:">
+<!ENTITY filters.tooltip "Reglas más activas:">
+<!ENTITY menuitem.label "Preferencias de AutoProxy">
+<!ENTITY menuitem.accesskey "B">
+<!ENTITY toolbarbutton.label "AutoProxy">
+<!ENTITY view.blockableItems.label "AutoProxy: Elementos pasables por Proxy">
+<!ENTITY context.image.label "Imagen Proxy">
+<!ENTITY context.object.label "Objeto Proxy">
+<!ENTITY context.frame.label "Marco Proxy">
+<!ENTITY sidebar.title "Elementos pasables por proxy en la página actual">
+<!ENTITY settings.label "Preferencias">
+<!ENTITY settings.accesskey "F">
+<!ENTITY opensidebar.label "Abrir elementos pasables por proxy">
+<!ENTITY opensidebar.accesskey "B">
+<!ENTITY closesidebar.label "Cerrar elementos pasables por proxy">
+<!ENTITY closesidebar.accesskey "B">
+<!ENTITY whitelist.site.label "Desactivar en --">
+<!ENTITY whitelist.page.label "Desactivar sólo en esta página">
+<!ENTITY objecttab.title "Proxy">
+<!ENTITY objecttab.tooltip "Pincha aquí para pasar por proxy este objeto con AutoProxy">

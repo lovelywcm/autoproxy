@@ -1,0 +1,17 @@
+<!ENTITY dialog.title "Editar Servidor Proxy">
+<!ENTITY name.label "Dale un nombre:">
+<!ENTITY name.accesskey "N">
+<!ENTITY host.label "Dirección del Proxy:">
+<!ENTITY host.accesskey "H">
+<!ENTITY port.label "Puerto:">
+<!ENTITY port.accesskey "P">
+<!ENTITY type.label "Tipo de Proxy:">
+<!ENTITY type.accesskey "T">
+<!ENTITY http.label "http">
+<!ENTITY http.accesskey "t">
+<!ENTITY socks4.label "socks4">
+<!ENTITY socks4.accesskey "4">
+<!ENTITY socks5.label "socks5">
+<!ENTITY socks5.accesskey "5">
+<!ENTITY delete.label "Borrar">
+<!ENTITY delete.accesskey "D">

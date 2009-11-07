@@ -55,15 +55,21 @@
   <description id="homepage" value="&homepage.url;" onclick="aup.loadInBrowser(this.getAttribute('value'))"/>
 
   <description id="authorTitle" value="&author.label;"/>
-  <description id="author" value="WCM: lovelywcm@gmail.com"/>
+  <description id="author" value="WCM @ Twitter, lovelywcm@Gmail.com"/>
 
   <description id="contributorsTitle" value="&contributors.label;"/>
   <vbox id="contributorsBox">
-    <description value="blogtd@blogtd.org - Logo designer"/>
-    <description value="myahoo - French translation"/>
+    <description value="Wladimir Palant - The Author of Adblock Plus"/>
     <spacer height="15"/>
-    <description value="Wladimir Palant - the Author of Adblock Plus"/>
-    <description value="Blackdire - the zh-CN locale translator of Adblock Plus"/>
+    <description value="blogtd@blogtd.org - Logo designer"/>
+    <description value="@easthero - The first tweet &amp; blog report about AutoProxy"/>
+    <description value="@jimmy_xu_wrk - @AutoProxy Twitter &amp; gfwList maintainer"/>
+    <description value="@Ratoo - @AutoProxy Twitter account &amp; gfwList maintainer"/>
+    <spacer height="15"/>
+    <description value="Blackdire - Simplified Chinese translation of Adblock Plus"/>
+    <description value="Edgard Dias Magalhaes - Brazilian Portuguese translation"/>
+    <description value="myahoo - French translation"/>
+    <description value="Omi - Spanish translation"/>
   </vbox>
 </groupbox>
 

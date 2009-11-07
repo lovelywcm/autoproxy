@@ -1,0 +1,15 @@
+<!ENTITY subscribe.title "Adicionar assinatura de regras do AutoProxy">
+<!ENTITY description.par1 "Obrigado por instalar o AutoProxy. Esta extensão o ajudará a usar automaticamente o proxy. Entretanto, o gerenciamento efetivo do proxy requer um bom conjunto de regras. Você pode defini-las você mesmo, ou pode simplesmente aderir a outras listas de regras mantidas por você.">
+<!ENTITY description.par2 "Ainda é possível acrescentar suas próprias regras ou assinar/remover assinaturas quando necessário.">
+<!ENTITY description.par3 "Além das regras de proxy, você precisa definir um servidor de proxy. AutoProxy escolheu como padrão o GAppProxy. Se você não quer usar o proxy padrão, você pode mudá-lo abaixo nesta página.">
+<!ENTITY description.par4 "Você pode escolher uma assinatura na lista de assinaturas recomendadas abaixo:">
+<!ENTITY note "Aviso: uma lista de regras é comumente mais efetiva para pessoas da região para a qual a lista foi criada.">
+<!ENTITY homepage.label "Homepage">
+<!ENTITY full-list.label "Exibir todas as assinaturas">
+<!ENTITY full-list.url "http://autoproxy.org/en/subscriptions">
+<!ENTITY other.label "Acrescentar um assinatura padrão">
+<!ENTITY other.accesskey "C">
+<!ENTITY defaultBtn.label "Proxy padrão:">
+<!ENTITY defaultBtn.accesskey "P">
+<!ENTITY acceptBtn.label "Assinar">
+<!ENTITY acceptBtn.accesskey "S">

@@ -1,0 +1,87 @@
+<!ENTITY dialog.title "Preferencias de AutoProxy">
+<!ENTITY filters.label "Regla Proxy">
+<!ENTITY filters.accesskey "R">
+<!ENTITY add.label "Añadir regla">
+<!ENTITY add.accesskey "A">
+<!ENTITY addsubscription.label "Añadir subscripción de regla">
+<!ENTITY addsubscription.accesskey "S">
+<!ENTITY synchsubscriptions.label "Actualizar todas las subscripciones">
+<!ENTITY synchsubscriptions.accesskey "D">
+<!ENTITY import.label "Importar reglas">
+<!ENTITY import.accesskey "M">
+<!ENTITY export.label "Exportar reglas personalizadas">
+<!ENTITY export.accesskey "X">
+<!ENTITY clearall.label "Eliminar todas las reglas personalizadas">
+<!ENTITY clearall.accesskey "L">
+<!ENTITY resethitcounts.label "Reiniciar estadísticas">
+<!ENTITY resethitcounts.accesskey "R">
+<!ENTITY proxies.label "Servidor Proxy">
+<!ENTITY proxies.accesskey "S">
+<!ENTITY editproxies.label "Editar servidor proxy">
+<!ENTITY editproxies.accesskey "E">
+<!ENTITY edit.label "Editar">
+<!ENTITY edit.accesskey "E">
+<!ENTITY cut.label "Cortar">
+<!ENTITY cut.accesskey "T">
+<!ENTITY copy.label "Copiar">
+<!ENTITY copy.accesskey "C">
+<!ENTITY paste.label "Pegar">
+<!ENTITY paste.accesskey "P">
+<!ENTITY remove.label "Eliminar">
+<!ENTITY remove.accesskey "D">
+<!ENTITY menu.find.label "Buscar">
+<!ENTITY menu.find.accesskey "F">
+<!ENTITY menu.findagain.label "Buscar de nuevo">
+<!ENTITY menu.findagain.accesskey "G">
+<!ENTITY view.label "Vista">
+<!ENTITY view.accesskey "V">
+<!ENTITY sort.label "Ordenar por">
+<!ENTITY sort.accesskey "S">
+<!ENTITY sort.none.label "Desordenado">
+<!ENTITY sort.none.accesskey "U">
+<!ENTITY sort.ascending.label "Ordenación de A &gt; Z">
+<!ENTITY sort.ascending.accesskey "A">
+<!ENTITY sort.descending.label "Ordenación Z &gt; A">
+<!ENTITY sort.descending.accesskey "Z">
+<!ENTITY options.label "Opciones">
+<!ENTITY options.accesskey "O">
+<!ENTITY enable.label "Activar AutoProxy">
+<!ENTITY enable.accesskey "N">
+<!ENTITY showintoolbar.label "Mostrar en la barra de tareas">
+<!ENTITY showintoolbar.accesskey "B">
+<!ENTITY showinstatusbar.label "Mostrar en la barra de estado">
+<!ENTITY showinstatusbar.accesskey "S">
+<!ENTITY help.label "Ayuda">
+<!ENTITY help.accesskey "H">
+<!ENTITY gettingStarted.label "Comenzando">
+<!ENTITY gettingStarted.accesskey "s">
+<!ENTITY gettingStarted.url "http://autoproxy.org/en/getting_started">
+<!ENTITY faq.label "FAQ - Preguntas y Respuestas Frecuentes">
+<!ENTITY faq.accesskey "F">
+<!ENTITY faq.url "http://autoproxy.org/en/faq">
+<!ENTITY filterdoc.label "Escribiendo reglas en AutoProxy">
+<!ENTITY filterdoc.accesskey "R">
+<!ENTITY filterdoc.url "http://autoproxy.org/en/rules">
+<!ENTITY about.label "Acerca de AutoProxy">
+<!ENTITY about.accesskey "B">
+<!ENTITY description "Las siguientes reglas determinan que direcciones pasarán o no por un proxy:">
+<!ENTITY filter.column "Reglas">
+<!ENTITY filter.accesskey "F">
+<!ENTITY enabled.column "Activado">
+<!ENTITY enabled.accesskey "n">
+<!ENTITY hitcount.column "Aciertos">
+<!ENTITY hitcount.accesskey "H">
+<!ENTITY lasthit.column "Último acierto">
+<!ENTITY lasthit.accesskey "L">
+<!ENTITY context.edit.label "Editar regla">
+<!ENTITY context.resethitcount.label "Reiniciar contador estadístico para la regla">
+<!ENTITY context.synchsubscription.label "Actualizar la subscripción ahora">
+<!ENTITY context.editsubscription.label "Editar subscripción">
+<!ENTITY context.moveup.label "Subir regla">
+<!ENTITY context.movedown.label "Bajar regla">
+<!ENTITY context.movegroupup.label "Subir grupo">
+<!ENTITY context.movegroupdown.label "Bajar grupo">
+<!ENTITY context.enable.label "Activar">
+<!ENTITY context.disable.label "Desactivar">
+<!ENTITY apply.label "Aplicar">
+<!ENTITY apply.accesskey "P">

@@ -46,7 +46,7 @@ let eventHandlers = [
   ["aup-command-modeglobal", "command", function() { switchToMode('global'); }],
   ["aup-command-modedisabled", "command", function() { switchToMode('disabled'); }],
   ["aup-status", "click", aupClickHandler],
-  ["aup-toolbarbutton", "command", function(event) { if (event.eventPhase == event.AT_TARGET) aupCommandHandler(event); }],
+  ["aup-toolbarbutton", "command", function(event) { if (event.eventPhase == event.AT_TARGET) aupCommandHandler(event); }]
 
   // TODO: ?
   //["aup-toolbarbutton", "click", function(event) { if (event.eventPhase == event.AT_TARGET && event.button == 1) aupTogglePref("enabled"); }],
@@ -231,7 +231,7 @@ function aupReloadPrefs() {
   // Register / Unregister proxy filter & refresh shouldProxy() for specified mode.
   if ( state == "disabled" ) proxyService.unregisterFilter(policy);
   else {
-    if ( state == "global" ) policy.shouldProxy = function() { return true };
+    if ( state == "global" ) policy.shouldProxy = function() { return true; };
     else policy.shouldProxy = policy.autoMatching;
 
     proxyService.unregisterFilter(policy);
@@ -551,33 +551,13 @@ function aupFillPopup(event) {
   let location = getCurrentLocation();
   if (location && policy.isProxyableScheme(location))
   {
-    let host = null;
-    try
-    {
-      host = location.host.replace(/^www\./, "");
-    } catch (e) {}
+    let host = location.host.replace(/^www\./, "");
 
     if (host)
     {
-      let ending = "|";
-      if (location instanceof Ci.nsIURL && location.ref)
-        location.ref = "";
-      if (location instanceof Ci.nsIURL && location.query)
-      {
-        location.query = "";
-        ending = "?";
-      }
-
       siteWhitelist = aup.Filter.fromText("@@||" + host + "^$document");
       whitelistItemSite.setAttribute("checked", isUserDefinedFilter(siteWhitelist));
       whitelistItemSite.setAttribute("label", whitelistItemSite.getAttribute("labeltempl").replace(/--/, host));
-      whitelistItemSite.hidden = false;
-    }
-    else
-    {
-      siteWhitelist = aup.Filter.fromText("@@|" + location.spec + "|");
-      whitelistItemSite.setAttribute("checked", isUserDefinedFilter(siteWhitelist));
-      whitelistItemSite.setAttribute("label", whitelistItemSite.getAttribute("labeltempl").replace(/--/, location.spec.replace(/^mailto:/, "")));
       whitelistItemSite.hidden = false;
     }
   }

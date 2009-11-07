@@ -19,8 +19,7 @@
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
- *
- * Wang Congming <lovelywcm@gmail.com> modified for AutoProxy.
+ * 2009: Wang Congming <lovelywcm@gmail.com> modified for AutoProxy.
  *
  * ***** END LICENSE BLOCK ***** */
 

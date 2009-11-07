@@ -21,9 +21,9 @@ pref("extensions.autoproxy.subscriptions_fallbackurl", "http://autoproxy.org/get
 pref("extensions.autoproxy.subscriptions_fallbackerrors", 5);
 pref("extensions.autoproxy.savestats", true);
 pref("extensions.autoproxy.composer_default", 2);
-pref("extensions.autoproxy.defaultProxy", "");
+pref("extensions.autoproxy.defaultProxy", "Tor;;9050;socks");
 pref("extensions.autoproxy.proxyMode", "auto");
 pref("extensions.autoproxy.customProxy", "");
-pref("extensions.autoproxy.knownProxy", "Free Gate;;8580;$GAppProxy;;8000;$GPass;;8000;$JAP;;4001;$Puff;;1984;$sshgfw;;7070;socks$Tor;;9050;socks$Wu Jie;;9666;$Your Freedom;;8080;");
+pref("extensions.autoproxy.knownProxy", "Free Gate;;8580;$GAppProxy;;8000;$GPass;;8000;$JAP;;4001;$Puff;;1984;$ssh -D;;7070;socks$Tor;;9050;socks$Wu Jie;;9666;$Your Freedom;;8080;");
 pref("extensions.autoproxy@autoproxy.org.description", "chrome://autoproxy/locale/global.properties");
 

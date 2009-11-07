@@ -55,24 +55,29 @@ function init()
 }
 
 /**
- * Create menu items for user to choose a default/global proxy.
+ * Create menu items for user to choose a default proxy.
  * Re-create these items if user customed a new proxy.
  */
 function createMenuItems()
 {
   selectedId = 0;
+
   proxies = prefs.customProxy.split("$");
   if (proxies == "") proxies = prefs.knownProxy.split("$");
-  E("defaultButton").label = defaultLabel + proxies[0].split(";")[0];
-
   for(let i=0; i<proxies.length; i++) {
     var mitem = cE("menuitem")
     mitem.setAttribute("id", i);
     mitem.setAttribute("type", "radio");
     mitem.setAttribute("label", proxies[i].split(";")[0]);
     mitem.setAttribute("onclick", "changeDefaultLabel(this)");
+    if (proxies[i] == prefs.defaultProxy) {
+      selectedId = i;
+      mitem.setAttribute("checked", true);
+    }
     menupop.appendChild(mitem);
   }
+
+  E("defaultButton").label = defaultLabel + proxies[selectedId].split(";")[0];
 
   // user don't use listed proxy, add by himself.
   var customItem = cE("menuitem");
@@ -83,7 +88,7 @@ function createMenuItems()
 }
 
 /**
- * Click handler of "Add a new proxy" button item.
+ * Click handler of "Add a new proxy" button.
  */
 function customDefaultProxy()
 {
@@ -94,7 +99,7 @@ function customDefaultProxy()
 
 /**
  * Change the "Default Proxy" button's label. for example:
- * Default Proxy: GAppProxy --> Default Proxy: Tor
+ * Default Proxy: Tor --> Default Proxy: GAppProxy
  */
 function changeDefaultLabel(mitem)
 {
@@ -108,11 +113,8 @@ function changeDefaultLabel(mitem)
 function subscribeAndSetDefault()
 {
   if (autoAdd) {
-    var sP = proxies[selectedId];
-    if (prefs.defaultProxy != sP) {
-      prefs.defaultProxy = sP;
-      prefs.save();
-    }
+    prefs.defaultProxy = proxies[selectedId];
+    prefs.save();
   }
 
   var group = E("subscriptions");

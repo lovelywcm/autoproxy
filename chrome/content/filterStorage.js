@@ -297,7 +297,7 @@ var filterStorage =
 
     filter.hitCount++;
     filter.lastHit = Date.now();
-    this.triggerFilterObservers("hit", [filter]);
+    //this.triggerFilterObservers("hit", [filter]);
   },
 
   /**

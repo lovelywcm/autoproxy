@@ -161,10 +161,10 @@ var policy =
 
     /*
      * bug found here, result in crash.
-     *
+     */
     if (match)
       filterStorage.increaseHitCount(match);
-    */
+
 
     return match && !(match instanceof WhitelistFilter);
   },

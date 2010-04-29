@@ -108,7 +108,8 @@ var prefs = {
   // Loads a pref and stores it as a property of the object
   loadPref: function(pref) {
     try {
-      this[pref[0]] = this.branch["get" + pref[1] + "Pref"](pref[0]);
+      if(["customProxy","fallBackProxy","defaultProxy"].indexOf(pref[0])>-1) this[pref[0]] = unescape(this.branch["get" + pref[1] + "Pref"](pref[0]));
+      else this[pref[0]] = this.branch["get" + pref[1] + "Pref"](pref[0]);
     }
     catch (e) {
       // Use default value
@@ -119,7 +120,8 @@ var prefs = {
   // Saves a property of the object into the corresponding pref
   savePref: function(pref) {
     try {
-      this.branch["set" + pref[1] + "Pref"](pref[0], this[pref[0]]);
+      if(["customProxy","fallBackProxy","defaultProxy"].indexOf(pref[0])>-1) this.branch["set" + pref[1] + "Pref"](pref[0], escape(this[pref[0]]));
+      else this.branch["set" + pref[1] + "Pref"](pref[0], this[pref[0]]);
     }
     catch (e) {}
   },

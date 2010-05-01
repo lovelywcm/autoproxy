@@ -7,16 +7,16 @@
         <!-- Each li is a different version of the same add-on -->
         <RDF:li>
           <RDF:Description>
-            <em:version>0.2.1</em:version> <!-- This is the version number of the add-on -->
+            <em:version>0.3.0b4</em:version> <!-- This is the version number of the add-on -->
 
             <!-- Firefox -->
             <em:targetApplication>
               <RDF:Description>
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-                <em:minVersion>2.0</em:minVersion>
-                <em:maxVersion>3.6a1pre</em:maxVersion>
+                <em:minVersion>3.0.9</em:minVersion>
+                <em:maxVersion>3.7a5pre</em:maxVersion>
                 <em:updateLink>http://autoproxy.mozdev.org/latest.xpi</em:updateLink>
-                <em:updateHash>sha1:d33dd6b96159e8f0900983ef67b53a7eab81513b</em:updateHash>
+                <em:updateHash>sha1:03f7b46e5a042491dffc08022360cb4ba7efc9d1</em:updateHash>
                 <em:updateInfoURL>http://autoproxy.mozdev.org/whatsnew.xhtml</em:updateInfoURL>
               </RDF:Description>
             </em:targetApplication>

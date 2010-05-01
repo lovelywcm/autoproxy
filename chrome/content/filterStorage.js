@@ -297,7 +297,14 @@ var filterStorage =
 
     filter.hitCount++;
     filter.lastHit = Date.now();
-    //this.triggerFilterObservers("hit", [filter]);
+
+    /**
+     * this trigger will result in crash mainly because of (surmise):
+     *   aupReloadPrefs @ browserWindow.js
+     * disable this trigger impacts upon some features, but not a big problem:
+     *   onFilterChange @ settings.js
+     */
+    // this.triggerFilterObservers("hit", [filter]);
   },
 
   /**

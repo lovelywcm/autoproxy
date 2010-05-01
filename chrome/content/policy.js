@@ -159,12 +159,8 @@ var policy =
       data.addNode(wnd.top, node, contentType, docDomain, thirdParty, locationText, match);
     }
 
-    /*
-     * bug found here, result in crash.
-     */
     if (match)
       filterStorage.increaseHitCount(match);
-
 
     return match && !(match instanceof WhitelistFilter);
   },

@@ -52,6 +52,8 @@
       <menuitem id="aup-status-modeglobal" label="&mode.global.label;" accesskey="&mode.global.accesskey;" type="radio" command="aup-command-modeglobal"/>
       <menuitem id="aup-status-modedisabled" label="&mode.disabled.label;" accesskey="&mode.disabled.accesskey;" type="radio" command="aup-command-modedisabled"/>
       <menuseparator/>
+      <menu label="&switchProxy.label;" id="aup-status-switchProxy"/>
+      <menuseparator/>
       <menuitem id="aup-status-opensidebar" label="&opensidebar.label;" accesskey="&opensidebar.accesskey;" key="aup-key-sidebar" command="aup-command-sidebar"/>
       <menuitem id="aup-status-closesidebar" label="&closesidebar.label;" accesskey="&closesidebar.accesskey;" key="aup-key-sidebar" command="aup-command-sidebar"/>
       <menuitem id="aup-status-settings" label="&settings.label;..." accesskey="&settings.accesskey;" key="aup-key-settings" command="aup-command-settings"/>

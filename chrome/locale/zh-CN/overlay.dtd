@@ -18,3 +18,4 @@
 <!ENTITY whitelist.site.label "在 -- 禁用代理">
 <!ENTITY objecttab.title "代理">
 <!ENTITY objecttab.tooltip "点击使用 AutoProxy 来代理">
+<!ENTITY switchProxy.label "选择默认代理">

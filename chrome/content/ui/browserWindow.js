@@ -246,6 +246,15 @@ function aupReloadPrefs() {
     proxyService.unregisterFilter(policy);
     proxyService.registerFilter(policy, 0);
   }
+
+    aup.proxyMapString = {};
+    var proxies = prefs.customProxy.split("$");
+    if (proxies == "") proxies = prefs.knownProxy.split("$");
+    for each (let proxy in proxies) {
+        if (proxy == "") continue;
+        var list = proxy.split(";");
+        aup.proxyMapString[list[0]] = proxy;
+    }
 }
 
 function aupInitImageManagerHiding() {
@@ -588,6 +597,31 @@ function aupFillPopup(event) {
   elements.modeauto.setAttribute("checked", "auto" == prefs.proxyMode);
   elements.modeglobal.setAttribute("checked", "global" == prefs.proxyMode);
   elements.modedisabled.setAttribute("checked", "disabled" == prefs.proxyMode);
+
+    var menu = null;
+    if (popup.id == "aup-toolbar-popup")
+        menu = E("aup-toolbar-switchProxy");
+    else if (popup.id = "aup-status-popup")
+        menu = E("aup-status-switchProxy");
+    else return;
+    var popup = document.createElement("menupopup");
+    popup.id = "options-switchProxy";
+    if (menu.children.length == 1)
+        menu.removeChild(menu.children[0]);
+    menu.appendChild(popup);
+
+    for (var p in aup.proxyMapString)
+    {
+        var item = document.createElement('menuitem');
+        item.setAttribute('type', 'radio');
+        item.setAttribute('label', p);
+        item.setAttribute('value', p);
+        item.setAttribute('name', 'radioGroup-switchProxy');
+        item.addEventListener("command", switchDefaultProxy, false);
+        if (prefs.defaultProxy.split(';')[0] == p)
+            item.setAttribute('checked', true);
+        popup.appendChild(item);
+    }
 }
 
 // Only show context menu on toolbar button in vertical toolbars
@@ -697,4 +731,19 @@ function aupImageStyle(computedStyle, property) {
     return aup.unwrapURL(value.getStringValue()).spec;
 
   return null;
+}
+
+/**
+ * change default proxy
+ * @param event
+ */
+function switchDefaultProxy(event)
+{
+    var value = event.target.value;
+    if(prefs.defaultProxy.split(";")[0]!=value)
+    {
+        prefs.defaultProxy = aup.proxyMapString[value];
+        prefs.save();
+    }
+
 }

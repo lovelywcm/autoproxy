@@ -77,10 +77,6 @@ treechildren::-moz-tree-cell-text(col-filter, filter-true, type-whitelist, selec
   color: #008000;
 }
 
-treechildren::-moz-tree-cell-text(col-filter, filter-true, type-elemhide, selected-false) {
-  color: #000080;
-}
-
 treechildren::-moz-tree-cell-text(col-filter, filter-false, subscription-upgradeRequired-true, selected-false) {
   color: #FF0000;
 }

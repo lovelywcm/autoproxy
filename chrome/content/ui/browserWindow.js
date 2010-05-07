@@ -45,6 +45,7 @@ let eventHandlers = [
   ["aup-command-modeglobal", "command", function() { switchToMode('global'); }],
   ["aup-command-modedisabled", "command", function() { switchToMode('disabled'); }],
   ["aup-status", "click", aupClickHandler],
+  ["aup-toolbarbutton", "click", function(event){if(event.button==1)aupClickHandler(event)}],
   ["aup-toolbarbutton", "command", function(event) { if (event.eventPhase == event.AT_TARGET) aupCommandHandler(event); }]
 
   // TODO: ?

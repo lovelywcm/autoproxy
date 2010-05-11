@@ -451,8 +451,13 @@ function aupFillTooltip(event) {
   E("aup-tooltip-blocked-label").hidden = (state != "auto");
   E("aup-tooltip-blocked").hidden = (state != "auto");
   if (state == "auto") {
+    var locations = [];
+    var rootData = aup.getDataForWindow(window);
+    var rootCurrentData = rootData.getLocation(6,aup.getBrowserInWindow(window).currentURI.spec);
+    if(rootCurrentData)
+        locations.push(rootCurrentData);
     var data = aup.getDataForWindow(aup.getBrowserInWindow(window).contentWindow);
-    var locations = data.getAllLocations();
+    data.getAllLocations(locations);
 
     var blocked = 0;
     var filterCount = {__proto__: null};

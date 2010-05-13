@@ -42,6 +42,8 @@
       <description id="aup-tooltip-action" hidden="true"/>
       <label id="aup-tooltip-status-label" value="&status.tooltip;"/>
       <description id="aup-tooltip-status"/>
+      <label id="aup-tooltip-proxy-label" value="&defaultProxy.tooltip;"/>
+      <description id="aup-tooltip-proxy"/>
       <label id="aup-tooltip-blocked-label" value="&blocked.tooltip;" hidden="true"/>
       <description id="aup-tooltip-blocked" hidden="true"/>
       <label id="aup-tooltip-filters-label" value="&filters.tooltip;" hidden="true"/>

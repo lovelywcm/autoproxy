@@ -23,6 +23,7 @@
    - ***** END LICENSE BLOCK ***** -->
 
 <!ENTITY status.tooltip         "Status:">
+<!ENTITY defaultProxy.tooltip         "Default proxy:">
 <!ENTITY blocked.tooltip        "Proxyed items on this page:">
 <!ENTITY filters.tooltip        "Most active rules:">
 

@@ -409,13 +409,15 @@ function aupFillTooltip(event) {
     action = -1;
 
   var actionDescr = E("aup-tooltip-action");
-  actionDescr.hidden = (action < 0 || action > 3);
+  actionDescr.hidden = (action < 0 || action > 5);
   if (!actionDescr.hidden)
     actionDescr.setAttribute("value", aup.getString("action" + action + "_tooltip"));
 
   var state = event.target.getAttribute("curstate");
   var statusDescr = E("aup-tooltip-status");
   statusDescr.setAttribute("value", aup.getString(state + "_tooltip"));
+  var proxyDescr = E("aup-tooltip-proxy");
+  proxyDescr.setAttribute("value", prefs.defaultProxy.split(";")[0]);
 
   var activeFilters = [];
   E("aup-tooltip-blocked-label").hidden = (state != "auto");

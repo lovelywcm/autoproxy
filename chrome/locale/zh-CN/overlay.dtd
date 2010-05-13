@@ -1,4 +1,5 @@
 <!ENTITY status.tooltip "状态:">
+<!ENTITY defaultProxy.tooltip "默认代理:">
 <!ENTITY blocked.tooltip "本页已使用代理的项目:">
 <!ENTITY filters.tooltip "最活跃的代理规则:">
 <!ENTITY menuitem.label "AutoProxy 首选项">

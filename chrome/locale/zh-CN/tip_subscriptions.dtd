@@ -14,3 +14,4 @@
 <!ENTITY defaultBtn.custom "自定义">
 <!ENTITY acceptBtn.label "订阅">
 <!ENTITY acceptBtn.accesskey "S">
+<!ENTITY welcome.title         "Welcome to AutoProxy">

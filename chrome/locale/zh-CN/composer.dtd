@@ -37,3 +37,5 @@
 <!ENTITY types.label "：">
 <!ENTITY selectAllTypes.label "全选">
 <!ENTITY unselectAllTypes.label "全不选">
+<!ENTITY anchor.start.flexible.label      "at the beginning of the domain name">
+<!ENTITY anchor.start.flexible.accesskey  "g">

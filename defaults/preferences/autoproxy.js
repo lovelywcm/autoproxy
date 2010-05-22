@@ -30,4 +30,4 @@ pref("extensions.autoproxy.proxyMode", "auto");
 pref("extensions.autoproxy.defaultProxyforAll", true);
 
 pref("extensions.autoproxy@autoproxy.org.description", "chrome://autoproxy/locale/global.properties");
-
+pref("extensions.autoproxy.middleClick_global",true);

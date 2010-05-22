@@ -255,6 +255,10 @@ function aupReloadPrefs() {
         var list = proxy.split(";");
         aup.proxyMapString[list[0]] = proxy;
     }
+
+    if (prefs.middleClick_global)
+        aup.middleClick = ["auto","global","disabled"];
+    else aup.middleClick = ["auto","disabled"];
 }
 
 function aupInitImageManagerHiding() {
@@ -696,10 +700,19 @@ function toggleFilter(/**Filter*/ filter)
 // Handle clicks on the statusbar panel
 function aupClickHandler(e) {
   if (e.button == 0)
-    aupExecuteAction(prefs.defaultstatusbaraction);
+    aupExecuteAction(prefs.defaultstatusbaraction,e);
 
   // TODO: switch proxy mode: auto, global, disabled
-  //else if (e.button == 1)
+  else if (e.button == 1){
+      let index = aup.middleClick.indexOf(prefs.proxyMode);
+      if (index > -1)
+      {
+          prefs.proxyMode = aup.middleClick[(index + 1) % aup.middleClick.length]
+      } else {
+          prefs.proxyMode = aup.middleClick[0]
+      }
+      prefs.save();
+  }
   //  aupTogglePref("enabled");
 }
 
@@ -707,19 +720,57 @@ function aupCommandHandler(e) {
   if (prefs.defaulttoolbaraction == 0)
     e.target.open = true;
   else
-    aupExecuteAction(prefs.defaulttoolbaraction);
+    aupExecuteAction(prefs.defaulttoolbaraction,e);
 }
 
 // Executes default action for statusbar/toolbar by its number
-function aupExecuteAction(action) {
-  if (action == 1)
-    aupToggleSidebar();
-  else if (action == 2)
-    aup.openSettingsDialog();
-
+function aupExecuteAction(action,e) {
   // TODO: switch proxy mode: auto, global, disable
   //else if (action == 3)
   //  aupTogglePref("enabled");
+
+    switch (action)
+    {
+        case 0:
+            aupFillPopup(e);
+            break;
+        case 1://proxyable items
+            aupToggleSidebar();
+            break;
+        case 2://preference
+            aup.openSettingsDialog();
+            break;
+        case 3://quick add
+            break;
+        case 4://cycle default proxy
+            break;
+        case 5://default proxy menu
+            let popup = document.getElementById("aup-popup-switchProxy");
+            let length = popup.children.length;
+            for (let l = 0; l < length; l++)
+            {
+                popup.removeChild(popup.lastChild);
+            }
+            for (let p in aup.proxyMapString)
+            {
+                let item = document.createElement('menuitem');
+                item.setAttribute('type', 'radio');
+                item.setAttribute('label', p);
+                item.setAttribute('value', p);
+                item.setAttribute('name', 'radioGroup-switchProxy');
+                item.addEventListener("command", switchDefaultProxy, false);
+                if (prefs.defaultProxy.split(';')[0] == p)
+                    item.setAttribute('checked', true);
+                popup.appendChild(item);
+            }
+            if(e.screenX&&e.screenY)
+                popup.openPopupAtScreen(e.screenX, e.screenY, false);
+            else
+                popup.openPopupAtScreen(e.target.boxObject.screenX, e.target.boxObject.screenY, false);
+            break;
+        default:
+            break;
+    }
 }
 
 // Retrieves the image URL for the specified style property

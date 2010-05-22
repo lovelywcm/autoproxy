@@ -185,26 +185,25 @@
         <menuitem id="showinstatusbar" label="&showinstatusbar.label;" accesskey="&showinstatusbar.accesskey;" type="checkbox" oncommand="togglePref('showinstatusbar')"/>
         <menuseparator/>
         <menu label="&changeStatusClickBehaviour.label;">
-            <menupopup onpopupshowing="fillClickBehaviourPopup(event)" id="fuck">
-                <menuitem name="changeStatusClickBehaviour" label="&changeClickBehaviour_context;" oncommand="changeClickBehaver(0)" type="radio"/>
-                <menuitem name="changeStatusClickBehaviour" label="&changeClickBehaviour_proxyable;" oncommand="changeClickBehaver(1)" type="radio"/>
-                <menuitem name="changeStatusClickBehaviour" label="&changeClickBehaviour_preference;" oncommand="changeClickBehaver(2)" type="radio"/>
-                <menuitem name="changeStatusClickBehaviour" label="&changeClickBehaviour_quickAdd;" oncommand="changeClickBehaver(3)" type="radio"/>
-                <menuitem name="changeStatusClickBehaviour" label="&changeClickBehaviour_cycleProxy;" oncommand="changeClickBehaver(4)" type="radio"/>
-                <menuitem name="changeStatusClickBehaviour" label="&changeClickBehaviour_proxyMenu;" oncommand="changeClickBehaver(5)" type="radio"/>
-            </menupopup>
+          <menupopup onpopupshowing="fillClickBehaviourPopup(event)">
+            <menuitem name="changeStatusClickBehaviour" label="&changeClickBehaviour_context;" oncommand="changeClickBehaver(0)" type="radio"/>
+            <menuitem name="changeStatusClickBehaviour" label="&changeClickBehaviour_proxyable;" oncommand="changeClickBehaver(1)" type="radio"/>
+            <menuitem name="changeStatusClickBehaviour" label="&changeClickBehaviour_preference;" oncommand="changeClickBehaver(2)" type="radio"/>
+            <menuitem name="changeStatusClickBehaviour" label="&changeClickBehaviour_quickAdd;" oncommand="changeClickBehaver(3)" type="radio"/>
+            <menuitem name="changeStatusClickBehaviour" label="&changeClickBehaviour_cycleProxy;" oncommand="changeClickBehaver(4)" type="radio"/>
+            <menuitem name="changeStatusClickBehaviour" label="&changeClickBehaviour_proxyMenu;" oncommand="changeClickBehaver(5)" type="radio"/>
+          </menupopup>
         </menu>
         <menu label="&changeToolbarClickBehaviour.label;">
-            <menupopup onpopupshowing="fillClickBehaviourPopup(event,true)">
-                <menuitem name="changeToolbarClickBehaviour" label="&changeClickBehaviour_context;" oncommand="changeClickBehaver(0,true)" type="radio"/>
-                <menuitem name="changeToolbarClickBehaviour" label="&changeClickBehaviour_proxyable;" oncommand="changeClickBehaver(1,true)" type="radio"/>
-                <menuitem name="changeToolbarClickBehaviour" label="&changeClickBehaviour_preference;" oncommand="changeClickBehaver(2,true)" type="radio"/>
-                <menuitem name="changeToolbarClickBehaviour" label="&changeClickBehaviour_quickAdd;" oncommand="changeClickBehaver(3,true)" type="radio"/>
-                <menuitem name="changeToolbarClickBehaviour" label="&changeClickBehaviour_cycleProxy;" oncommand="changeClickBehaver(4,true)" type="radio"/>
-                <menuitem name="changeToolbarClickBehaviour" label="&changeClickBehaviour_proxyMenu;" oncommand="changeClickBehaver(5,true)" type="radio"/>
-            </menupopup>
+          <menupopup onpopupshowing="fillClickBehaviourPopup(event, true)">
+            <menuitem name="changeToolbarClickBehaviour" label="&changeClickBehaviour_context;" oncommand="changeClickBehaver(0,true)" type="radio"/>
+            <menuitem name="changeToolbarClickBehaviour" label="&changeClickBehaviour_proxyable;" oncommand="changeClickBehaver(1,true)" type="radio"/>
+            <menuitem name="changeToolbarClickBehaviour" label="&changeClickBehaviour_preference;" oncommand="changeClickBehaver(2,true)" type="radio"/>
+            <menuitem name="changeToolbarClickBehaviour" label="&changeClickBehaviour_quickAdd;" oncommand="changeClickBehaver(3,true)" type="radio"/>
+            <menuitem name="changeToolbarClickBehaviour" label="&changeClickBehaviour_cycleProxy;" oncommand="changeClickBehaver(4,true)" type="radio"/>
+            <menuitem name="changeToolbarClickBehaviour" label="&changeClickBehaviour_proxyMenu;" oncommand="changeClickBehaver(5,true)" type="radio"/>
+          </menupopup>
         </menu>
-
       </menupopup>
     </menu>
     <menu id="help-menu" label="&help.label;" accesskey="&help.accesskey;">

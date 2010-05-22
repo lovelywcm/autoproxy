@@ -8,6 +8,7 @@ pref("extensions.autoproxy.detachsidebar", false);
 pref("extensions.autoproxy.enable_key", "");
 pref("extensions.autoproxy.flash_scrolltoitem", true);
 pref("extensions.autoproxy.hideimagemanager", true);
+pref("extensions.autoproxy.middleClick_global", true);
 pref("extensions.autoproxy.patternsbackupinterval", 24);
 pref("extensions.autoproxy.patternsbackups", 5);
 pref("extensions.autoproxy.patternsfile", "autoproxy/patterns.ini");
@@ -30,4 +31,3 @@ pref("extensions.autoproxy.proxyMode", "auto");
 pref("extensions.autoproxy.defaultProxyforAll", true);
 
 pref("extensions.autoproxy@autoproxy.org.description", "chrome://autoproxy/locale/global.properties");
-pref("extensions.autoproxy.middleClick_global",true);

@@ -129,9 +129,8 @@ function defaultProxyforAll(init)
 
   // not implemented, temporarily disable them
   var menulists = document.getElementsByTagName('menulist');
-  for ( var i in menulists)
-    if ( i!=0 && i!=menulists.length-3 )
-      menulists[i].setAttribute('disabled', true);
+  for (var i=1; i<menulists.length; i++)
+    if (i != menulists.length-3) menulists[i].setAttribute('disabled', true);
 }
 
 function save()

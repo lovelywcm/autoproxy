@@ -133,11 +133,11 @@
 <!ENTITY apply.label                     "Apply">
 <!ENTITY apply.accesskey                 "P">
 
-<!ENTITY changeStatusClickBehaviour.label "Click status icon behaviour">
+<!ENTITY changeStatusClickBehaviour.label  "Click status icon behaviour">
 <!ENTITY changeToolbarClickBehaviour.label "Click toolbar icon behaviour">
-<!ENTITY changeClickBehaviour_context "Context menu">
-<!ENTITY changeClickBehaviour_proxyMenu "Proxy menu">
-<!ENTITY changeClickBehaviour_cycleProxy "Proxy Cycle">
-<!ENTITY changeClickBehaviour_quickAdd "Quick add filter">
-<!ENTITY changeClickBehaviour_preference "Preference">
-<!ENTITY changeClickBehaviour_proxyable "Proxyable items">
+<!ENTITY changeClickBehaviour_context      "Context menu">
+<!ENTITY changeClickBehaviour_proxyMenu    "Proxy menu">
+<!ENTITY changeClickBehaviour_cycleProxy   "Proxy Cycle">
+<!ENTITY changeClickBehaviour_quickAdd     "Quick add filter">
+<!ENTITY changeClickBehaviour_preference   "Preference">
+<!ENTITY changeClickBehaviour_proxyable    "Proxyable items">

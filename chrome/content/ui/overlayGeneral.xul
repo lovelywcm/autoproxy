@@ -63,11 +63,10 @@
       <menuitem id="aup-status-showintoolbar" label="&showintoolbar.label;" accesskey="&showintoolbar.accesskey;" type="checkbox" command="aup-command-toggleshowintoolbar"/>
       <menuitem id="aup-status-showinstatusbar" label="&showinstatusbar.label;" accesskey="&showinstatusbar.accesskey;" type="checkbox" command="aup-command-toggleshowinstatusbar"/>
     </popup>
-      <popup id="aup-popup-switchProxy">
-      </popup>
-      <tooltip id="showCurrentProxy" orient="horizontal">
-            <label value="&showCurrentProxy.label;"/>
-            <label id="showCurrentProxyValue"/>
+    <popup id="aup-popup-switchProxy"></popup>
+    <tooltip id="showCurrentProxy" orient="horizontal">
+      <label value="&showCurrentProxy.label;"/>
+      <label id="showCurrentProxyValue"/>
     </tooltip>
   </popupset>
   <keyset id="aup-keyset"/>

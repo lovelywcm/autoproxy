@@ -45,11 +45,8 @@ let eventHandlers = [
   ["aup-command-modeglobal", "command", function() { switchToMode('global'); }],
   ["aup-command-modedisabled", "command", function() { switchToMode('disabled'); }],
   ["aup-status", "click", aupClickHandler],
-  ["aup-toolbarbutton", "click", function(event){if(event.button==1)aupClickHandler(event)}],
+  ["aup-toolbarbutton", "click", function(event) { if (event.button==1) aupClickHandler(event) }],
   ["aup-toolbarbutton", "command", function(event) { if (event.eventPhase == event.AT_TARGET) aupCommandHandler(event); }]
-
-  // TODO: ?
-  //["aup-toolbarbutton", "click", function(event) { if (event.eventPhase == event.AT_TARGET && event.button == 1) aupTogglePref("enabled"); }],
 ];
 
 /**
@@ -248,20 +245,20 @@ function aupReloadPrefs() {
     proxyService.registerFilter(policy, 0);
   }
 
-    aup.proxyMapString = {};
-    aup.proxyNameArray=[];
-    var proxies = prefs.customProxy.split("$");
-    if (proxies == "") proxies = prefs.knownProxy.split("$");
-    for each (let proxy in proxies) {
-        if (proxy == "") continue;
-        var list = proxy.split(";");
-        aup.proxyMapString[list[0]] = proxy;
-        aup.proxyNameArray.push(list[0]);
-    }
+  aup.proxyMapString = {};
+  aup.proxyNameArray = [];
+  var proxies = prefs.customProxy.split("$");
+  if (proxies == "") proxies = prefs.knownProxy.split("$");
+  for each (let proxy in proxies) {
+    if (proxy == "") continue;
+    var list = proxy.split(";");
+    aup.proxyMapString[list[0]] = proxy;
+    aup.proxyNameArray.push(list[0]);
+  }
 
-    if (prefs.middleClick_global)
-        aup.middleClick = ["auto","global","disabled"];
-    else aup.middleClick = ["auto","disabled"];
+  if (prefs.middleClick_global)
+    aup.middleClick = ["auto","global","disabled"];
+  else aup.middleClick = ["auto","disabled"];
 }
 
 function aupInitImageManagerHiding() {
@@ -469,10 +466,9 @@ function aupFillTooltip(event) {
   if (state == "auto") {
     var locations = [];
     var rootData = aup.getDataForWindow(window);
-    var rootCurrentData = rootData.getLocation(6,aup.getBrowserInWindow(window).currentURI.spec);
-    if(rootCurrentData)
-        locations.push(rootCurrentData);
-    var data = aup.getDataForWindow(aup.getBrowserInWindow(window).contentWindow);
+    var rootCurrentData = rootData.getLocation(6, aup.getBrowserInWindow(window).currentURI.spec);
+    if (rootCurrentData) locations.push(rootCurrentData);
+    var data = aup.getDataForWindow( aup.getBrowserInWindow(window).contentWindow );
     data.getAllLocations(locations);
 
     var blocked = 0;
@@ -605,30 +601,28 @@ function aupFillPopup(event) {
   elements.modeglobal.setAttribute("checked", "global" == prefs.proxyMode);
   elements.modedisabled.setAttribute("checked", "disabled" == prefs.proxyMode);
 
-    var menu = null;
-    if (popup.id == "aup-toolbar-popup")
-        menu = E("aup-toolbar-switchProxy");
-    else if (popup.id == "aup-status-popup")
-        menu = E("aup-status-switchProxy");
-    else return;
-    var popup = document.createElement("menupopup");
-    popup.id = "options-switchProxy";
-    if (menu.children.length == 1)
-        menu.removeChild(menu.children[0]);
-    menu.appendChild(popup);
+  var menu = null;
+  if (popup.id == "aup-toolbar-popup")
+    menu = E("aup-toolbar-switchProxy");
+  else if (popup.id == "aup-status-popup")
+    menu = E("aup-status-switchProxy");
+  else return;
 
-    for (var p in aup.proxyMapString)
-    {
-        var item = document.createElement('menuitem');
-        item.setAttribute('type', 'radio');
-        item.setAttribute('label', p);
-        item.setAttribute('value', p);
-        item.setAttribute('name', 'radioGroup-switchProxy');
-        item.addEventListener("command", switchDefaultProxy, false);
-        if (prefs.defaultProxy.split(';')[0] == p)
-            item.setAttribute('checked', true);
-        popup.appendChild(item);
-    }
+  var popup = document.createElement("menupopup");
+  popup.id = "options-switchProxy";
+  if (menu.children.length == 1) menu.removeChild(menu.children[0]);
+  menu.appendChild(popup);
+
+  for (var p in aup.proxyMapString) {
+    var item = document.createElement('menuitem');
+    item.setAttribute('type', 'radio');
+    item.setAttribute('label', p);
+    item.setAttribute('value', p);
+    item.setAttribute('name', 'radioGroup-switchProxy');
+    item.addEventListener("command", switchDefaultProxy, false);
+    if (prefs.defaultProxy.split(';')[0] == p) item.setAttribute('checked', true);
+    popup.appendChild(item);
+  }
 }
 
 // Only show context menu on toolbar button in vertical toolbars
@@ -701,96 +695,82 @@ function toggleFilter(/**Filter*/ filter)
 }
 
 // Handle clicks on the statusbar panel
-function aupClickHandler(e) {
+function aupClickHandler(e)
+{
   if (e.button == 0)
     aupExecuteAction(prefs.defaultstatusbaraction,e);
-
-  // TODO: switch proxy mode: auto, global, disabled
-  else if (e.button == 1){
-      let index = aup.middleClick.indexOf(prefs.proxyMode);
-      prefs.proxyMode = aup.middleClick[(index + 1) % aup.middleClick.length];
-      prefs.save();
+  else if (e.button == 1) {
+    let index = aup.middleClick.indexOf(prefs.proxyMode);
+    prefs.proxyMode = aup.middleClick[ (index + 1) % aup.middleClick.length ];
+    prefs.save();
   }
-  //  aupTogglePref("enabled");
 }
 
-function aupCommandHandler(e) {
+function aupCommandHandler(e)
+{
   if (prefs.defaulttoolbaraction == 0)
     e.target.open = true;
   else
-    aupExecuteAction(prefs.defaulttoolbaraction,e);
+    aupExecuteAction(prefs.defaulttoolbaraction, e);
 }
 
 // Executes default action for statusbar/toolbar by its number
-function aupExecuteAction(action,e) {
-  // TODO: switch proxy mode: auto, global, disable
-  //else if (action == 3)
-  //  aupTogglePref("enabled");
-
-    switch (action)
-    {
-        case 0:
-            aupFillPopup(e);
-            break;
-        case 1://proxyable items
-            aupToggleSidebar();
-            break;
-        case 2://preference
-            aup.openSettingsDialog();
-            break;
-        case 3://quick add
-            break;
-        case 4://cycle default proxy
-            if (aup.proxyTipTimer)aup.proxyTipTimer.cancel();
-            var defaultProxy = prefs.defaultProxy.split(";")[0];
-            var index = aup.proxyNameArray.indexOf(defaultProxy);
-            var newIndex = (index + 1) % aup.proxyNameArray.length;
-            prefs.defaultProxy = aup.proxyMapString[aup.proxyNameArray[newIndex]];
-            prefs.save();
-            //show tooltip
-            let tooltip = E("showCurrentProxy");
-            let tooltipLabel = E("showCurrentProxyValue");
-            tooltipLabel.value = aup.proxyNameArray[newIndex];
-            if (e.screenX && e.screenY)
-                tooltip.openPopupAtScreen(e.screenX, e.screenY, false);
-            else
-                tooltip.openPopupAtScreen(e.target.boxObject.screenX, e.target.boxObject.screenY, false);
-            aup.proxyTipTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-            aup.proxyTipTimer.initWithCallback({notify:function() {
-                tooltip.hidePopup();
-            }}, 2500, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
-            break;
-        case 5://default proxy menu
-            let popup = document.getElementById("aup-popup-switchProxy");
-            let length = popup.children.length;
-            for (let l = 0; l < length; l++)
-            {
-                popup.removeChild(popup.lastChild);
-            }
-            for (let p in aup.proxyMapString)
-            {
-                let item = document.createElement('menuitem');
-                item.setAttribute('type', 'radio');
-                item.setAttribute('label', p);
-                item.setAttribute('value', p);
-                item.setAttribute('name', 'radioGroup-switchProxy');
-                item.addEventListener("command", switchDefaultProxy, false);
-                if (prefs.defaultProxy.split(';')[0] == p)
-                    item.setAttribute('checked', true);
-                popup.appendChild(item);
-            }
-            if(e.screenX&&e.screenY)
-                popup.openPopupAtScreen(e.screenX, e.screenY, false);
-            else
-                popup.openPopupAtScreen(e.target.boxObject.screenX, e.target.boxObject.screenY, false);
-            break;
-        default:
-            break;
-    }
+function aupExecuteAction(action, e)
+{
+  switch (action) {
+    case 0:
+      aupFillPopup(e);
+      break;
+    case 1: //proxyable items
+      aupToggleSidebar();
+      break;
+    case 2: //preference
+      aup.openSettingsDialog();
+      break;
+    case 3: //quick add
+      break;
+    case 4: //cycle default proxy
+      if (aup.proxyTipTimer) aup.proxyTipTimer.cancel();
+      var defaultProxy = prefs.defaultProxy.split(";")[0];
+      var index = aup.proxyNameArray.indexOf(defaultProxy);
+      var newIndex = (index + 1) % aup.proxyNameArray.length;
+      prefs.defaultProxy = aup.proxyMapString[aup.proxyNameArray[newIndex]];
+      prefs.save();
+      //show tooltip
+      let tooltip = E("showCurrentProxy");
+      let tooltipLabel = E("showCurrentProxyValue");
+      tooltipLabel.value = aup.proxyNameArray[newIndex];
+      if (e.screenX && e.screenY)
+        tooltip.openPopupAtScreen(e.screenX, e.screenY, false);
+      else
+        tooltip.openPopupAtScreen(e.target.boxObject.screenX, e.target.boxObject.screenY, false);
+      aup.proxyTipTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
+      aup.proxyTipTimer.initWithCallback( {notify:function(){tooltip.hidePopup();}}, 2500, Components.interfaces.nsITimer.TYPE_ONE_SHOT );
+      break;
+    case 5: //default proxy menu
+      let popup = document.getElementById("aup-popup-switchProxy");
+      while (popup.firstChild) popup.removeChild(popup.lastChild);
+      for (let p in aup.proxyMapString) {
+        let item = document.createElement('menuitem');
+        item.setAttribute('type', 'radio');
+        item.setAttribute('label', p);
+        item.setAttribute('value', p);
+        item.setAttribute('name', 'radioGroup-switchProxy');
+        item.addEventListener("command", switchDefaultProxy, false);
+        if (prefs.defaultProxy.split(';')[0] == p) item.setAttribute('checked', true);
+        popup.appendChild(item);
+      }
+      if(e.screenX&&e.screenY) popup.openPopupAtScreen(e.screenX, e.screenY, false);
+      else popup.openPopupAtScreen(e.target.boxObject.screenX, e.target.boxObject.screenY, false);
+      break;
+    default:
+      break;
+  }
 }
 
 // Retrieves the image URL for the specified style property
-function aupImageStyle(computedStyle, property) {
+function aupImageStyle(computedStyle, property)
+{
   var value = computedStyle.getPropertyCSSValue(property);
   if (value instanceof Ci.nsIDOMCSSValueList && value.length >= 1)
     value = value[0];
@@ -800,17 +780,11 @@ function aupImageStyle(computedStyle, property) {
   return null;
 }
 
-/**
- * change default proxy
- * @param event
- */
 function switchDefaultProxy(event)
 {
-    var value = event.target.value;
-    if(prefs.defaultProxy.split(";")[0]!=value)
-    {
-        prefs.defaultProxy = aup.proxyMapString[value];
-        prefs.save();
-    }
-
+  var value = event.target.value;
+  if ( prefs.defaultProxy.split(";")[0] != value ) {
+    prefs.defaultProxy = aup.proxyMapString[value];
+    prefs.save();
+  }
 }

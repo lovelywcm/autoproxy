@@ -2,8 +2,8 @@
 
 pref("extensions.autoproxy.composer_default", 2);
 pref("extensions.autoproxy.currentVersion", "0.0");
-pref("extensions.autoproxy.defaultstatusbaraction", 2);
-pref("extensions.autoproxy.defaulttoolbaraction", 2);
+pref("extensions.autoproxy.defaultstatusbaraction", 4);
+pref("extensions.autoproxy.defaulttoolbaraction", 4);
 pref("extensions.autoproxy.detachsidebar", false);
 pref("extensions.autoproxy.enable_key", "");
 pref("extensions.autoproxy.flash_scrolltoitem", true);

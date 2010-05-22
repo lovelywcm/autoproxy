@@ -29,5 +29,5 @@
 <!ENTITY context.copy.label "复制项目地址">
 <!ENTITY context.copyFilter.label "复制规则">
 <!ENTITY context.selectAll.label "全选">
-<!ENTITY docDomain.label          "Document source">
-<!ENTITY tooltip.docDomain.label  "Document source:">
+<!ENTITY docDomain.label          "引用来源">
+<!ENTITY tooltip.docDomain.label  "引用来源：">

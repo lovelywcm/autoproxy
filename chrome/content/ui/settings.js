@@ -2995,3 +2995,25 @@ let treeView = {
     this.editorDummyInit = (save ? "" : text);
   }
 };
+
+
+
+function changeClickBehaver(action,isToobar)
+{
+    if (!isToobar) {
+        if (prefs.defaultstatusbaraction == action)return;
+        prefs.defaultstatusbaraction = action;
+    }
+    else {
+        if (prefs.defaulttoolbaraction == action)return;
+        prefs.defaulttoolbaraction = action;
+    }
+    prefs.save();
+}
+
+function fillClickBehaviourPopup(e,isToolbar)
+{
+    var value = isToolbar?prefs.defaulttoolbaraction:prefs.defaultstatusbaraction;
+    e.target.children[value].setAttribute("checked",true);
+
+}

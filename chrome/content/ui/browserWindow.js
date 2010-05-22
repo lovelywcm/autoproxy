@@ -248,12 +248,14 @@ function aupReloadPrefs() {
   }
 
     aup.proxyMapString = {};
+    aup.proxyNameArray=[];
     var proxies = prefs.customProxy.split("$");
     if (proxies == "") proxies = prefs.knownProxy.split("$");
     for each (let proxy in proxies) {
         if (proxy == "") continue;
         var list = proxy.split(";");
         aup.proxyMapString[list[0]] = proxy;
+        aup.proxyNameArray.push(list[0]);
     }
 
     if (prefs.middleClick_global)
@@ -705,12 +707,7 @@ function aupClickHandler(e) {
   // TODO: switch proxy mode: auto, global, disabled
   else if (e.button == 1){
       let index = aup.middleClick.indexOf(prefs.proxyMode);
-      if (index > -1)
-      {
-          prefs.proxyMode = aup.middleClick[(index + 1) % aup.middleClick.length]
-      } else {
-          prefs.proxyMode = aup.middleClick[0]
-      }
+      prefs.proxyMode = aup.middleClick[(index + 1) % aup.middleClick.length];
       prefs.save();
   }
   //  aupTogglePref("enabled");
@@ -743,6 +740,24 @@ function aupExecuteAction(action,e) {
         case 3://quick add
             break;
         case 4://cycle default proxy
+            if (aup.proxyTipTimer)aup.proxyTipTimer.cancel();
+            var defaultProxy = prefs.defaultProxy.split(";")[0];
+            var index = aup.proxyNameArray.indexOf(defaultProxy);
+            var newIndex = (index + 1) % aup.proxyNameArray.length;
+            prefs.defaultProxy = aup.proxyMapString[aup.proxyNameArray[newIndex]];
+            prefs.save();
+            //show tooltip
+            let tooltip = E("showCurrentProxy");
+            let tooltipLabel = E("showCurrentProxyValue");
+            tooltipLabel.value = aup.proxyNameArray[newIndex];
+            if (e.screenX && e.screenY)
+                tooltip.openPopupAtScreen(e.screenX, e.screenY, false);
+            else
+                tooltip.openPopupAtScreen(e.target.boxObject.screenX, e.target.boxObject.screenY, false);
+            aup.proxyTipTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
+            aup.proxyTipTimer.initWithCallback({notify:function() {
+                tooltip.hidePopup();
+            }}, 2500, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
             break;
         case 5://default proxy menu
             let popup = document.getElementById("aup-popup-switchProxy");

@@ -19,3 +19,4 @@
 <!ENTITY objecttab.title "代理">
 <!ENTITY objecttab.tooltip "点击使用 AutoProxy 来代理">
 <!ENTITY switchProxy.label "选择默认代理">
+<!ENTITY showCurrentProxy.label "切换默认代理为:">

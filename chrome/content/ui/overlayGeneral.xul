@@ -65,6 +65,10 @@
     </popup>
       <popup id="aup-popup-switchProxy">
       </popup>
+      <tooltip id="showCurrentProxy" orient="horizontal">
+            <label value="&showCurrentProxy.label;"/>
+            <label id="showCurrentProxyValue"/>
+    </tooltip>
   </popupset>
   <keyset id="aup-keyset"/>
   <commandset id="aup-commandset">

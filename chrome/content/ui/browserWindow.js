@@ -608,7 +608,7 @@ function aupFillPopup(event) {
     var menu = null;
     if (popup.id == "aup-toolbar-popup")
         menu = E("aup-toolbar-switchProxy");
-    else if (popup.id = "aup-status-popup")
+    else if (popup.id == "aup-status-popup")
         menu = E("aup-status-switchProxy");
     else return;
     var popup = document.createElement("menupopup");

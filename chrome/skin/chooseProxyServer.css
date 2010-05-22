@@ -14,8 +14,9 @@
  * The Original Code is AutoProxy.
  *
  * The Initial Developer of the Original Code is
- * Wang Congming.
- * Portions created by the Initial Developer are Copyright (C) 2009
+ * Wang Congming <lovelywcm@gmail.com>.
+ *
+ * Portions created by the Initial Developer are Copyright (C) 2009-2010
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -25,22 +26,10 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 @namespace html url("http://www.w3.org/1999/xhtml");
 
-row > label:first-child {
+#defaultProxy > label {
   text-align: right;
 }
 
 #description {
   font-weight: bold;
-}
-
-row:not(:first-child) > label:first-child {
-  padding-top: 8px;
-}
-
-row > checkbox {
-  padding-left: 10px;;
-}
-
-row + checkbox {
-  text-align: left;
 }

@@ -25,17 +25,12 @@
 
 <!ENTITY dialog.title      "Choose Proxy Server for Different Rule Groups">
 
-<!ENTITY groupName.label   "Group name">
+<!ENTITY default.label     "Default Proxy">
 
-<!ENTITY primary.label     "Primary proxy">
-<!ENTITY primary.accesskey "P">
+<!ENTITY checkbox.label    "Use default proxy for all rule groups">
 
-<!ENTITY secondary.label   "Secondary proxy">
-<!ENTITY secondary.tip     "If the primary proxy failed, AutoProxy will try to request another time using the secondary proxy.">
+<!ENTITY http.label        "HTTP Proxy">
 
-<!ENTITY advance.label     "Advance">
+<!ENTITY https.label       "HTTPS Proxy">
 
-<!ENTITY default.label     "Default">
-
-<!ENTITY checkbox.label    "Use same settings for all rule groups">
-
+<!ENTITY ftp.label         "FTP/Gopher Proxy">

@@ -19,7 +19,7 @@
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
- * 2009: Wang Congming <lovelywcm@gmail.com> modified for AutoProxy.
+ * 2009-2010: Wang Congming <lovelywcm@gmail.com> modified for AutoProxy.
  *
  * ***** END LICENSE BLOCK ***** */
 
@@ -220,17 +220,22 @@ function aupReloadPrefs() {
   updateElement(aupGetPaletteButton());
 
   // Refresh defaultProxy, dPDs: default Proxy Details
-  var dPDs = ( prefs.defaultProxy || prefs.knownProxy.split("$")[0] ).split(";");
+  var dPDs = ( prefs.defaultProxy || prefs.customProxy.split("$")[0] ||
+                                    prefs.knownProxy.split("$")[0] ).split(";");
   if ( dPDs[1] == "" ) dPDs[1] = "127.0.0.1";
   if ( dPDs[3] == "" ) dPDs[3] = "http";
   // newProxyInfo(type, host, port, socks_remote_dns, failoverTimeout, failoverProxy);
   policy.defaultProxy = proxyService.newProxyInfo(dPDs[3], dPDs[1], dPDs[2], 1, 0, null);
 
   // Refresh fallBackProxy(fBP)
-  var fBP = prefs.fallBackProxy.split(";");
-  if ( fBP[1] == "" ) fBP[1] = "127.0.0.1";
-  if ( fBP[3] == "" ) fBP[3] = "http";
-  policy.fallBackProxy = proxyService.newProxyInfo(fBP[3], fBP[1], fBP[2], 1, 0, null);
+  var fBP = prefs.fallBackProxy;
+  if ( fBP == "" ) policy.fallBackProxy = policy.defaultProxy;
+  else {
+    fBP = fBP.split(";");
+    if ( fBP[1] == "" ) fBP[1] = "127.0.0.1";
+    if ( fBP[3] == "" ) fBP[3] = "http";
+    policy.fallBackProxy = proxyService.newProxyInfo(fBP[3], fBP[1], fBP[2], 1, 0, null);
+  }
 
   // Register / Unregister proxy filter & refresh shouldProxy() for specified mode.
   if ( state == "disabled" ) proxyService.unregisterFilter(policy);

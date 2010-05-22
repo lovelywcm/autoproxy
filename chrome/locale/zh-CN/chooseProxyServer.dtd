@@ -25,17 +25,12 @@
 
 <!ENTITY dialog.title      "选择各个规则组各自使用的代理">
 
-<!ENTITY groupName.label   "规则组的名称">
+<!ENTITY default.label     "默认代理">
 
-<!ENTITY primary.label     "主代理">
-<!ENTITY primary.accesskey "P">
+<!ENTITY checkbox.label    "所有的规则匹配时均使用默认代理">
 
-<!ENTITY secondary.label   "辅助代理">
-<!ENTITY secondary.tip     "如果主代理失败了，AutoProxy 会自动使用辅助代理再次尝试。">
+<!ENTITY http.label        "HTTP 代理">
 
-<!ENTITY advance.label     "高级">
+<!ENTITY https.label       "HTTPS 代理">
 
-<!ENTITY default.label     "默认">
-
-<!ENTITY checkbox.label    "所有的规则组使用相同的设置">
-
+<!ENTITY ftp.label         "FTP/Gopher 代理">

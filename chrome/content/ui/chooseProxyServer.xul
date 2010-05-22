@@ -18,7 +18,7 @@
    - The Initial Developer of the Original Code is
    - Wang Congming <lovelywcm@gmail.com>.
    -
-   - Portions created by the Initial Developer are Copyright (C) 2009
+   - Portions created by the Initial Developer are Copyright (C) 2009-2010
    - the Initial Developer. All Rights Reserved.
    -
    - Contributor(s):
@@ -35,34 +35,36 @@
   buttons="accept,cancel"
   title="&dialog.title;"
   onload="init()"
-  ondialogaccept="saveChosen()">
+  ondialogaccept="save()">
 
 <script type="application/x-javascript;version=1.7" src="chooseProxyServer.js"/>
 
 <grid>
   <rows>
-    <row id="description">
-      <label value="&groupName.label;"/>
-      <label value="&primary.label;" accesskey="&primary.accesskey;" control="globalPrimary"/>
-      <label value="&secondary.label;(?)" tooltiptext="&secondary.tip;"/>
-      <label value="&advance.label;"/>
-    </row>
-    <menuseparator/>
-    <row id="global">
+
+    <row id="defaultProxy">
       <label value="&default.label;"/>
-      <menulist id="globalPrimary">
-        <menupopup>
-          <!-- menu items will be added here by JS -->
-        </menupopup>
-      </menulist>
-      <menulist disabled="true"/>
-      <checkbox disabled="true"/>
+      <!-- menu list will be append here by JS -->
     </row>
-    <checkbox label="&checkbox.label;" checked="true" disabled="true"/>
-    <description>Some of functions are still under development. ^_^</description>
+    <checkbox label="&checkbox.label;" oncommand="defaultProxyforAll()"/>
     <menuseparator/>
-    <!-- rule groups will be added here by JS -->
+
+    <row id="description">
+      <label value=""/>
+      <label value="&http.label;"/>
+      <label value="&https.label;"/>
+      <label value="&ftp.label;"/>
+    </row>
+
+    <!-- rule groups will be append here by JS -->
+    <menuseparator id="groupSeparator"/>
+
+    <row id="fallbackProxy">
+      <label value="内置组：无规则匹配时"/>
+      <!--3 menu lists (for http, https, ftp) will be append here by JS -->
+    </row>
+    <menuseparator/>
+
   </rows>
 </grid>
-<menuseparator/>
 </dialog>

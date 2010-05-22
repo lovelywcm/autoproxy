@@ -27,6 +27,7 @@ pref("extensions.autoproxy.fallBackProxy", ";;;direct");
 pref("extensions.autoproxy.knownProxy", "Free Gate;;8580;$GAppProxy;;8000;$GPass;;8000;$JAP;;4001;$Puff;;1984;$ssh -D;;7070;socks$Tor;;9050;socks$Wu Jie;;9666;$Your Freedom;;8080;");
 pref("extensions.autoproxy.proxyableSchemes", "http https ftp");
 pref("extensions.autoproxy.proxyMode", "auto");
+pref("extensions.autoproxy.defaultProxyforAll", true);
 
 pref("extensions.autoproxy@autoproxy.org.description", "chrome://autoproxy/locale/global.properties");
 

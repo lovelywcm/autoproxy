@@ -16,7 +16,7 @@
  * The Initial Developer of the Original Code is
  * Wang Congming <lovelywcm@gmail.com>.
  *
- * Portions created by the Initial Developer are Copyright (C) 2009
+ * Portions created by the Initial Developer are Copyright (C) 2009-2010
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -26,61 +26,129 @@
 var aup = Components.classes["@mozilla.org/autoproxy;1"]
                           .createInstance().wrappedJSObject;
 var prefs = aup.prefs;
-var subscriptions = aup.filterStorage.subscriptions;
+var proxies = (prefs.customProxy || prefs.knownProxy).split("$");
 
-var curDefaultProxy = prefs.defaultProxy || prefs.knownProxy.split("$")[0];
-
-var proxies = prefs.customProxy.split("$");
-if (proxies == "") proxies = prefs.knownProxy.split("$");
-
-let globalPrimary;
-
-let cE = function(tag) { return document.createElementNS(
-		 "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", tag); };
+var gE = function(id) { return document.getElementById(id); };
+var cE = function(tag) { return document.createElementNS(
+       "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", tag); };
 
 function init()
 {
-  // insert menu items to global primary proxy menu list
-  globalPrimary = document.getElementById("globalPrimary");
-  for each (let proxy in proxies) {
-    if (proxy == "") continue;
-    var mitem = cE("menuitem");
-    mitem.setAttribute("label", proxy.split(";")[0]);
-    globalPrimary.firstChild.appendChild(mitem);
-    if (proxy == curDefaultProxy) globalPrimary.selectedItem = mitem;
+  // row for setting default proxy
+  var defaultProxy = prefs.defaultProxy || prefs.customProxy.split('$')[0] ||
+                                            prefs.knownProxy.split('$')[0];
+  menu.newList( gE('defaultProxy'), defaultProxy, true);
+
+  // one row per rule group
+  var rows = document.getElementsByTagName('rows')[0];
+  for each (let subscription in aup.filterStorage.subscriptions) {
+    if ( subscription.url == '~il~' || subscription.url == '~wl~' ) continue;
+    var row = cE('row');
+    var groupName = cE('label');
+    row.appendChild(groupName);
+    rows.insertBefore( row, gE('groupSeparator') );
+
+    groupName.setAttribute('value',
+      (subscription instanceof aup.RegularSubscription ?
+                          aup.getString('subscription_description') : '自定义：')
+      + subscription.title
+    );
+
+    // for http, https and ftp proxy, we need 3 menu lists per row
+    // Parameter given to menu.newList() is to mark this munu item as selected
+    // dummy, to be implemented
+    menu.newList( row, '默认代理' );
+    menu.newList( row, '默认代理' );
+    menu.newList( row, '默认代理' );
   }
 
-  // one row per group
-  var rows = document.getElementsByTagName("rows")[0];
-  for each (let subscription in subscriptions) {
-    if ( subscription.url != "~il~" && subscription.url != "~wl~" ) {
-      var row = cE("row");
-      var label = cE("label");
-      var primaryBtn = cE("menulist");
-      var SecondaryBtn = cE("menulist");
-      var checkbox = cE("checkbox");
-      label.setAttribute("value", subscription.title);
+  // row for setting fallback proxy
+  menu.newList( gE('fallbackProxy'), prefs.fallBackProxy );
+  // dummy, to be implemented
+  menu.newList( gE('fallbackProxy'), '直接连接' );
+  menu.newList( gE('fallbackProxy'), '直接连接' );
 
-      // still under development
-      label.setAttribute("disabled", "true");
-      primaryBtn.setAttribute("disabled", "true");
-      SecondaryBtn.setAttribute("disabled", "true");
-      checkbox.setAttribute("disabled", "true");
+  defaultProxyforAll(true);
+}
 
-      row.appendChild(label);
-      row.appendChild(primaryBtn);
-      row.appendChild(SecondaryBtn);
-      row.appendChild(checkbox);
-      rows.appendChild(row);
-    }
+var menu =
+{
+  menuList: null,
+
+  selectedProxy: null,
+
+  /**
+   * Create a menu list with several menu items:
+   *   "default proxy" item
+   *    ....
+   *    several items according to how many proxies
+   *    ...
+   *   "direct connect" item
+   *
+   * @param node {DOM node}: which node should this new menu list append to
+   * @param selectedProxy {string}: menu item with this proxy name will be marked as selected
+   * @param isDefaultProxyPopup {boolean}: if true, "default proxy" menu item won't be created
+   */
+  newList: function(node, selectedProxy, isDefaultProxyPopup)
+  {
+    this.selectedProxy = ! selectedProxy ? '默认代理' :
+      ! selectedProxy.split(';')[0] ? "直接连接" : selectedProxy.split(';')[0];
+
+    this.menuList = cE('menulist');
+    this.menuList.appendChild( cE('menupopup') );
+    node.appendChild( this.menuList );
+
+    if (!isDefaultProxyPopup) this.newItem('默认代理');
+    for each (let proxy in proxies) this.newItem(proxy.split(';')[0]);
+    this.newItem('直接连接');
+  },
+
+  /**
+   * Create a new menu item (and mark it as selected if necessary) for menu list
+   */
+  newItem: function(proxyName)
+  {
+    var menuItem = cE('menuitem');
+    menuItem.setAttribute('label', proxyName);
+    this.menuList.firstChild.appendChild(menuItem);
+
+    if (proxyName == this.selectedProxy) this.menuList.selectedItem = menuItem;
   }
 }
 
-function saveChosen()
+function defaultProxyforAll(init)
 {
-  var selectedProxy = proxies[globalPrimary.selectedIndex];
-  if ( selectedProxy != curDefaultProxy ) {
-    prefs.defaultProxy = selectedProxy;
-    prefs.save();
-  }
+  if (!init) prefs.defaultProxyforAll = ! prefs.defaultProxyforAll;
+
+  var checkbox = document.getElementsByTagName('checkbox')[0];
+  checkbox.setAttribute('checked', prefs.defaultProxyforAll);
+
+  for ( var row=gE('description'); row!=gE('groupSeparator'); row=row.nextSibling )
+    for ( var node=row.firstChild; node; node=node.nextSibling )
+      node.setAttribute('disabled', prefs.defaultProxyforAll);
+
+  // not implemented, temporarily disable them
+  var menulists = document.getElementsByTagName('menulist');
+  for ( var i in menulists)
+    if ( i!=0 && i!=menulists.length-3 )
+      menulists[i].setAttribute('disabled', true);
+}
+
+function save()
+{
+  // TODO: rename prefs.fallBackProxy to prefs.fallbackProxy
+  // TODO: init a proxy map at shartup, store proxy name(but not config) to defaultProxy & fallbackProxy
+  // TODO: if ( customProxy == knownProxy ) customProxy = "";
+  // TODO: new class: proxy
+  // TODO: ";" & "$" is not allowed in proxy name
+  // TODO: i18n
+
+  prefs.defaultProxy = proxies[ gE('defaultProxy').lastChild.selectedIndex ] || ';;;direct';
+
+  var fallbackId = gE('fallbackProxy').firstChild.nextSibling.selectedIndex;
+  if ( fallbackId == 0 ) prefs.fallBackProxy = '';
+  else prefs.fallBackProxy = proxies[ fallbackId-1 ] || ';;;direct';
+
+  // other configs are ignored, not implemented yet
+  prefs.save();
 }

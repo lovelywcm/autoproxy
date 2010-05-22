@@ -257,7 +257,7 @@ function fillInTooltip(e) {
 
   var showPreview = prefs.previewimages && !("tooltip" in item);
   showPreview = showPreview && (item.typeDescr == "IMAGE" || item.typeDescr == "BACKGROUND");
-  showPreview = showPreview && (!item.filter || item.filter instanceof aup.WhitelistFilter);
+//  showPreview = showPreview && (!item.filter || item.filter instanceof aup.WhitelistFilter);
   if (showPreview) {
     // Check whether image is in cache (stolen from ImgLikeOpera)
     if (!cacheSession) {

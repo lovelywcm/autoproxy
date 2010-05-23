@@ -27,7 +27,6 @@ let autoAdd;
 let result;
 let defaultLabel;
 let menupop;
-let proxies;
 let selectedId;
 let E = function(id) { return document.getElementById(id); };
 let cE = function(tag) { return document.createElementNS(
@@ -60,24 +59,19 @@ function init()
  */
 function createMenuItems()
 {
-  selectedId = 0;
+  selectedId = prefs.defaultProxy;
 
-  proxies = prefs.customProxy.split("$");
-  if (proxies == "") proxies = prefs.knownProxy.split("$");
-  for(let i=0; i<proxies.length; i++) {
+  for (let i in proxy.getName) {
     var mitem = cE("menuitem")
     mitem.setAttribute("id", i);
     mitem.setAttribute("type", "radio");
-    mitem.setAttribute("label", proxies[i].split(";")[0]);
+    mitem.setAttribute("label", proxy.getName[i]);
     mitem.setAttribute("onclick", "changeDefaultLabel(this)");
-    if (proxies[i] == prefs.defaultProxy) {
-      selectedId = i;
-      mitem.setAttribute("checked", true);
-    }
+    if (i == prefs.defaultProxy) mitem.setAttribute("checked", true);
     menupop.appendChild(mitem);
   }
 
-  E("defaultButton").label = defaultLabel + proxies[selectedId].split(";")[0];
+  E("defaultButton").label = defaultLabel + proxy.nameOfDefaultProxy;
 
   // user don't use listed proxy, add by himself.
   var customItem = cE("menuitem");
@@ -113,7 +107,7 @@ function changeDefaultLabel(mitem)
 function subscribeAndSetDefault()
 {
   if (autoAdd) {
-    prefs.defaultProxy = proxies[selectedId];
+    prefs.defaultProxy = selectedId;
     prefs.save();
   }
 

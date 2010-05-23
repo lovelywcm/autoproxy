@@ -62,10 +62,11 @@
   <vbox id="contributorsBox">
     <description value="Wladimir Palant - The Author of Adblock Plus"/>
     <spacer height="15"/>
+    <description value="slimx - Co-developer"/>
     <description value="blogtd@blogtd.org - Logo designer"/>
-    <description value="@easthero - The first tweet &amp; blog report about AutoProxy"/>
-    <description value="@jimmy_xu_wrk - @AutoProxy Twitter &amp; gfwList maintainer"/>
-    <description value="@Ratoo - @AutoProxy Twitter account &amp; gfwList maintainer"/>
+    <description value="easthero - The first tweet &amp; blog report about AutoProxy"/>
+    <description value="jimmy_xu_wrk - @AutoProxy Twitter &amp; gfwList maintainer"/>
+    <description value="Ratoo - @AutoProxy Twitter account &amp; gfwList maintainer"/>
     <spacer height="15"/>
     <description value="Blackdire - Simplified Chinese translation of Adblock Plus"/>
     <description value="Edgard Dias Magalhaes - Brazilian Portuguese translation"/>

@@ -26,7 +26,7 @@
 var aup = Components.classes["@mozilla.org/autoproxy;1"]
                           .createInstance().wrappedJSObject;
 var prefs = aup.prefs;
-var proxies = (prefs.customProxy || prefs.knownProxy).split("$");
+var proxy = aup.proxy;
 
 var gE = function(id) { return document.getElementById(id); };
 var cE = function(tag) { return document.createElementNS(
@@ -35,9 +35,7 @@ var cE = function(tag) { return document.createElementNS(
 function init()
 {
   // row for setting default proxy
-  var defaultProxy = prefs.defaultProxy || prefs.customProxy.split('$')[0] ||
-                                            prefs.knownProxy.split('$')[0];
-  menu.newList( gE('defaultProxy'), defaultProxy, true);
+  menu.newList( gE('defaultProxy'), prefs.defaultProxy, true );
 
   // one row per rule group
   var rows = document.getElementsByTagName('rows')[0];
@@ -57,16 +55,16 @@ function init()
     // for http, https and ftp proxy, we need 3 menu lists per row
     // Parameter given to menu.newList() is to mark this munu item as selected
     // dummy, to be implemented
-    menu.newList( row, '默认代理' );
-    menu.newList( row, '默认代理' );
-    menu.newList( row, '默认代理' );
+    menu.newList( row, proxy.server.length );
+    menu.newList( row, proxy.server.length );
+    menu.newList( row, proxy.server.length );
   }
 
   // row for setting fallback proxy
-  menu.newList( gE('fallbackProxy'), prefs.fallBackProxy );
+  menu.newList( gE('fallbackProxy'), prefs.fallbackProxy );
   // dummy, to be implemented
-  menu.newList( gE('fallbackProxy'), '直接连接' );
-  menu.newList( gE('fallbackProxy'), '直接连接' );
+  menu.newList( gE('fallbackProxy'), 0 );
+  menu.newList( gE('fallbackProxy'), 0 );
 
   defaultProxyforAll(true);
 }
@@ -75,44 +73,38 @@ var menu =
 {
   menuList: null,
 
-  selectedProxy: null,
-
   /**
    * Create a menu list with several menu items:
-   *   "default proxy" item
+   *   "direct connect" item
    *    ....
    *    several items according to how many proxies
    *    ...
-   *   "direct connect" item
+   *   "default proxy" item
    *
    * @param node {DOM node}: which node should this new menu list append to
-   * @param selectedProxy {string}: menu item with this proxy name will be marked as selected
+   * @param index {int}: which menu item should be selected by default
    * @param isDefaultProxyPopup {boolean}: if true, "default proxy" menu item won't be created
    */
-  newList: function(node, selectedProxy, isDefaultProxyPopup)
+  newList: function(node, index, isDefaultProxyPopup)
   {
-    this.selectedProxy = ! selectedProxy ? '默认代理' :
-      ! selectedProxy.split(';')[0] ? "直接连接" : selectedProxy.split(';')[0];
-
     this.menuList = cE('menulist');
     this.menuList.appendChild( cE('menupopup') );
     node.appendChild( this.menuList );
 
+    proxy.getName.forEach(this.newItem);
     if (!isDefaultProxyPopup) this.newItem('默认代理');
-    for each (let proxy in proxies) this.newItem(proxy.split(';')[0]);
-    this.newItem('直接连接');
+
+    this.menuList.selectedIndex = index;
   },
 
   /**
-   * Create a new menu item (and mark it as selected if necessary) for menu list
+   * Create a new menu item for this.menuList
    */
   newItem: function(proxyName)
   {
     var menuItem = cE('menuitem');
     menuItem.setAttribute('label', proxyName);
     this.menuList.firstChild.appendChild(menuItem);
-
-    if (proxyName == this.selectedProxy) this.menuList.selectedItem = menuItem;
   }
 }
 
@@ -135,18 +127,11 @@ function defaultProxyforAll(init)
 
 function save()
 {
-  // TODO: rename prefs.fallBackProxy to prefs.fallbackProxy
-  // TODO: init a proxy map at shartup, store proxy name(but not config) to defaultProxy & fallbackProxy
-  // TODO: if ( customProxy == knownProxy ) customProxy = "";
-  // TODO: new class: proxy
-  // TODO: ";" & "$" is not allowed in proxy name
-  // TODO: i18n
-
-  prefs.defaultProxy = proxies[ gE('defaultProxy').lastChild.selectedIndex ] || ';;;direct';
+  prefs.defaultProxy = gE('defaultProxy').lastChild.selectedIndex;
 
   var fallbackId = gE('fallbackProxy').firstChild.nextSibling.selectedIndex;
-  if ( fallbackId == 0 ) prefs.fallBackProxy = '';
-  else prefs.fallBackProxy = proxies[ fallbackId-1 ] || ';;;direct';
+  if ( fallbackId == proxy.server.length ) fallbackId = -1;
+  prefs.fallbackProxy = fallbackId;
 
   // other configs are ignored, not implemented yet
   prefs.save();

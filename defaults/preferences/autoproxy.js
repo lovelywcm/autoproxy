@@ -23,10 +23,9 @@ pref("extensions.autoproxy.subscriptions_fallbackurl", "http://autoproxy.org/get
 pref("extensions.autoproxy.synchronizationinterval", 24);
 
 pref("extensions.autoproxy.customProxy", "");
-pref("extensions.autoproxy.defaultProxy", "Tor;;9050;socks");
-pref("extensions.autoproxy.fallBackProxy", ";;;direct");
+pref("extensions.autoproxy.defaultProxy", 9);
+pref("extensions.autoproxy.fallbackProxy", 0);
 pref("extensions.autoproxy.knownProxy", "Free Gate;;8580;$GAppProxy;;8000;$GPass;;8000;$JAP;;4001;$Mr.Zhang;;2010;$Puff;;1984;$ssh -D;;7070;socks$Toonel;;8080;$Tor;;9050;socks$Wu Jie;;9666;$Your Freedom;;8080;");
-pref("extensions.autoproxy.proxyableSchemes", "http https ftp");
 pref("extensions.autoproxy.proxyMode", "auto");
 pref("extensions.autoproxy.defaultProxyforAll", true);
 

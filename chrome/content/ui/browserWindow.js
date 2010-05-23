@@ -25,8 +25,6 @@
 
 var aupHideImageManager;
 
-var proxyService = Cc["@mozilla.org/network/protocol-proxy-service;1"].getService(Ci.nsIProtocolProxyService);
-
 /**
  * List of event handers to be registered. For each event handler the element ID,
  * event and the actual event handler are listed.
@@ -217,48 +215,7 @@ function aupReloadPrefs() {
 
   updateElement(aupGetPaletteButton());
 
-  // Refresh defaultProxy, dPDs: default Proxy Details
-  var dPDs = ( prefs.defaultProxy || prefs.customProxy.split("$")[0] ||
-                                    prefs.knownProxy.split("$")[0] ).split(";");
-  if ( dPDs[1] == "" ) dPDs[1] = "127.0.0.1";
-  if ( dPDs[3] == "" ) dPDs[3] = "http";
-  // newProxyInfo(type, host, port, socks_remote_dns, failoverTimeout, failoverProxy);
-  policy.defaultProxy = proxyService.newProxyInfo(dPDs[3], dPDs[1], dPDs[2], 1, 0, null);
-
-  // Refresh fallBackProxy(fBP)
-  var fBP = prefs.fallBackProxy;
-  if ( fBP == "" ) policy.fallBackProxy = policy.defaultProxy;
-  else {
-    fBP = fBP.split(";");
-    if ( fBP[1] == "" ) fBP[1] = "127.0.0.1";
-    if ( fBP[3] == "" ) fBP[3] = "http";
-    policy.fallBackProxy = proxyService.newProxyInfo(fBP[3], fBP[1], fBP[2], 1, 0, null);
-  }
-
-  // Register / Unregister proxy filter & refresh shouldProxy() for specified mode.
-  if ( state == "disabled" ) proxyService.unregisterFilter(policy);
-  else {
-    if ( state == "global" ) policy.shouldProxy = function() { return true; };
-    else policy.shouldProxy = policy.autoMatching;
-
-    proxyService.unregisterFilter(policy);
-    proxyService.registerFilter(policy, 0);
-  }
-
-  aup.proxyMapString = {};
-  aup.proxyNameArray = [];
-  var proxies = prefs.customProxy.split("$");
-  if (proxies == "") proxies = prefs.knownProxy.split("$");
-  for each (let proxy in proxies) {
-    if (proxy == "") continue;
-    var list = proxy.split(";");
-    aup.proxyMapString[list[0]] = proxy;
-    aup.proxyNameArray.push(list[0]);
-  }
-
-  if (prefs.middleClick_global)
-    aup.middleClick = ["auto","global","disabled"];
-  else aup.middleClick = ["auto","disabled"];
+  proxy.reloadPrefs();
 }
 
 function aupInitImageManagerHiding() {
@@ -575,7 +532,7 @@ function aupFillPopup(event) {
     whitelistSeparator = whitelistSeparator.nextSibling;
 
   let location = getCurrentLocation();
-  if (location && policy.isProxyableScheme(location))
+  if (location && proxy.isProxyableScheme(location))
   {
     let host = location.host.replace(/^www\./, "");
 
@@ -613,14 +570,14 @@ function aupFillPopup(event) {
   if (menu.children.length == 1) menu.removeChild(menu.children[0]);
   menu.appendChild(popup);
 
-  for (var p in aup.proxyMapString) {
+  for each (var p in proxy.getName) {
     var item = document.createElement('menuitem');
     item.setAttribute('type', 'radio');
     item.setAttribute('label', p);
     item.setAttribute('value', p);
     item.setAttribute('name', 'radioGroup-switchProxy');
     item.addEventListener("command", switchDefaultProxy, false);
-    if (prefs.defaultProxy.split(';')[0] == p) item.setAttribute('checked', true);
+    if (proxy.nameOfDefaultProxy == p) item.setAttribute('checked', true);
     popup.appendChild(item);
   }
 }
@@ -700,8 +657,7 @@ function aupClickHandler(e)
   if (e.button == 0)
     aupExecuteAction(prefs.defaultstatusbaraction,e);
   else if (e.button == 1) {
-    let index = aup.middleClick.indexOf(prefs.proxyMode);
-    prefs.proxyMode = aup.middleClick[ (index + 1) % aup.middleClick.length ];
+    prefs.proxyMode = proxy.mode[ (proxy.mode.indexOf(prefs.proxyMode)+1) % 3 ];
     prefs.save();
   }
 }
@@ -731,15 +687,12 @@ function aupExecuteAction(action, e)
       break;
     case 4: //cycle default proxy
       if (aup.proxyTipTimer) aup.proxyTipTimer.cancel();
-      var defaultProxy = prefs.defaultProxy.split(";")[0];
-      var index = aup.proxyNameArray.indexOf(defaultProxy);
-      var newIndex = (index + 1) % aup.proxyNameArray.length;
-      prefs.defaultProxy = aup.proxyMapString[aup.proxyNameArray[newIndex]];
+      prefs.defaultProxy = (prefs.defaultProxy + 1) % proxy.server.length;
       prefs.save();
       //show tooltip
       let tooltip = E("showCurrentProxy");
       let tooltipLabel = E("showCurrentProxyValue");
-      tooltipLabel.value = aup.proxyNameArray[newIndex];
+      tooltipLabel.value = proxy.nameOfDefaultProxy;
       if (e.screenX && e.screenY)
         tooltip.openPopupAtScreen(e.screenX, e.screenY, false);
       else
@@ -750,14 +703,14 @@ function aupExecuteAction(action, e)
     case 5: //default proxy menu
       let popup = document.getElementById("aup-popup-switchProxy");
       while (popup.firstChild) popup.removeChild(popup.lastChild);
-      for (let p in aup.proxyMapString) {
+      for each (let p in proxy.getName) {
         let item = document.createElement('menuitem');
         item.setAttribute('type', 'radio');
         item.setAttribute('label', p);
         item.setAttribute('value', p);
         item.setAttribute('name', 'radioGroup-switchProxy');
         item.addEventListener("command", switchDefaultProxy, false);
-        if (prefs.defaultProxy.split(';')[0] == p) item.setAttribute('checked', true);
+        if (proxy.nameOfDefaultProxy == p) item.setAttribute('checked', true);
         popup.appendChild(item);
       }
       if(e.screenX&&e.screenY) popup.openPopupAtScreen(e.screenX, e.screenY, false);
@@ -783,8 +736,8 @@ function aupImageStyle(computedStyle, property)
 function switchDefaultProxy(event)
 {
   var value = event.target.value;
-  if ( prefs.defaultProxy.split(";")[0] != value ) {
-    prefs.defaultProxy = aup.proxyMapString[value];
+  if ( proxy.nameOfDefaultProxy != value ) {
+    prefs.defaultProxy = proxy.getName.indexOf(value);
     prefs.save();
   }
 }

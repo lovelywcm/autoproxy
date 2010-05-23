@@ -31,6 +31,7 @@ const Cu = Components.utils;
 const aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
 const prefs = aup.prefs;
 const policy = aup.policy;
+const proxy = aup.proxy;
 const filterStorage = aup.filterStorage;
 const synchronizer = aup.synchronizer;
 

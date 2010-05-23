@@ -19,12 +19,12 @@
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
- * 2009: Wang Congming <lovelywcm@gmail.com> Modified for AutoProxy.
+ * 2009-2010: Wang Congming <lovelywcm@gmail.com> Modified for AutoProxy.
  *
  * ***** END LICENSE BLOCK ***** */
 
 /**
- * Content policy implementation, responsible for proxying things.
+ * Content policy implementation.
  * This file is included from AutoProxy.js.
  */
 
@@ -51,18 +51,6 @@ var policy =
    * @type Object
    */
   localizedDescr: null,
-
-  /**
-   * Map containing all schemes that can be proxyed.
-   * @type Object
-   */
-  proxyableSchemes: null,
-
-  /**
-   * nsIProxyInfo
-   */
-  defaultProxy: null,
-  fallBackProxy: null,
 
   shouldProxy: function(){},
 
@@ -99,21 +87,6 @@ var policy =
     this.type.BACKGROUND = 0xFFFE;
     this.typeDescr[0xFFFE] = "BACKGROUND";
     this.localizedDescr[0xFFFE] = aup.getString("type_label_background");
-
-    // Proxyable URL schemes
-    this.proxyableSchemes = {};
-    for each (var scheme in prefs.proxyableSchemes.toLowerCase().split(" "))
-      this.proxyableSchemes[scheme] = true;
-  },
-
-  //
-  // nsIProtocolProxyFilter implementation
-  //
-  applyFilter: function(pS, uri, proxy)
-  {
-    if (uri.schemeIs("feed")) return pS.newProxyInfo("direct", "", -1, 0, 0, null);
-    if (this.shouldProxy(uri)) return this.defaultProxy;
-    return this.fallBackProxy;
   },
 
   /**
@@ -166,15 +139,6 @@ var policy =
   },
 
   /**
-   * Checks whether the location's scheme is proxyable.
-   * @param location  {nsIURI}
-   * @return {Boolean}
-   */
-  isProxyableScheme: function(location) {
-    return location.scheme in this.proxyableSchemes;
-  },
-
-  /**
    * Extracts the hostname from a URL (might return null).
    */
   getHostname: function(/**String*/ url) /**String*/
@@ -217,7 +181,7 @@ var policy =
   // nsIContentPolicy interface implementation
   //
   shouldLoad: function(contentType, location, requestOrigin, node, mimeTypeGuess, extra) {
-    if ( this.isProxyableScheme(location) ) {
+    if ( proxy.isProxyableScheme(location) ) {
       // Interpret unknown types as "other"
       if ( !(contentType in this.typeDescr) ) contentType = this.type.OTHER;
 
@@ -298,7 +262,6 @@ var policy =
         var nodes = data[i].nodes;
         data[i].nodes = [];
         for (var j = 0; j < nodes.length; j++) {
-          //this.shouldProxy(wnd, nodes[j], data[i].type, makeURL(data[i].location));
         }
       }
     }

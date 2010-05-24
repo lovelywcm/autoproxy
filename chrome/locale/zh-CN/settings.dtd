@@ -100,5 +100,5 @@
 <!ENTITY changeClickBehaviour_quickAdd "快速添加规则">
 <!ENTITY changeClickBehaviour_preference "首选项">
 <!ENTITY changeClickBehaviour_proxyable "可代理资源列表">
-<!ENTITY slow.column                     "Slow filters">
+<!ENTITY slow.column                     "慢规则">
 <!ENTITY slow.accesskey                  "w">

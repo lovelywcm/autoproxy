@@ -313,8 +313,8 @@ const aup =
     loader.loadSubScript('chrome://autoproxy/content/filterStorage.js');
     loader.loadSubScript('chrome://autoproxy/content/matcher.js');
     loader.loadSubScript('chrome://autoproxy/content/filterListener.js');
-    loader.loadSubScript('chrome://autoproxy/content/policy.js');
     loader.loadSubScript('chrome://autoproxy/content/proxy.js');
+    loader.loadSubScript('chrome://autoproxy/content/policy.js');
     loader.loadSubScript('chrome://autoproxy/content/data.js');
     loader.loadSubScript('chrome://autoproxy/content/prefs.js');
     loader.loadSubScript('chrome://autoproxy/content/synchronizer.js');
@@ -325,11 +325,11 @@ const aup =
     timeLine.log("calling filterStore.loadFromDisk()");
     filterStorage.loadFromDisk();
 
-    timeLine.log("calling policy.init()");
-    policy.init();
-
     timeLine.log("calling proxy.init()");
     proxy.init();
+
+    timeLine.log("calling policy.init()");
+    policy.init();
 
     timeLine.log("aup.init() done");
   },

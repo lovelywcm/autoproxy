@@ -77,7 +77,7 @@ var proxy =
      *   1 - customProxy/knownProxy.length: corresponding proxy
      *   other: invalid, take 1 as it's value(use the first proxy)
      */
-    this.defaultProxy = server[ prefs.defaultProxy ] || server[1];
+    this.defaultProxy = this.server[ prefs.defaultProxy ] || this.server[1];
 
     /**
      * Refresh fallbackProxy (nsIProxyInfo)
@@ -89,7 +89,7 @@ var proxy =
      *   other: invalid, take 0 as it's value(direct connect)
      */
     if ( prefs.fallbackProxy == -1 ) this.fallbackProxy = this.defaultProxy;
-    else this.fallbackProxy = server[ prefs.fallbackProxy ] || server[0];
+    else this.fallbackProxy = this.server[ prefs.fallbackProxy ] || this.server[0];
 
     // Register/Unregister proxy filter & refresh shouldProxy() for specified mode
     if ( prefs.proxyMode == "disabled" ) pS.unregisterFilter(this);
@@ -102,13 +102,22 @@ var proxy =
     }
   },
 
-  /**
-   * TODO
-   */
   configToObj: function(config)
   {
-    // if ( dPDs[1] == "" ) dPDs[1] = "127.0.0.1";
-    // if ( dPDs[3] == "" ) dPDs[3] = "http";
+      if(config=="")return false;
+      var array = [];
+      var proxyAttrArray = config.split("$");
+      for each(var i in proxyAttrArray)
+      {
+          var proxyAttr = i.split(";");
+          var proxy={};
+          proxy.name = proxyAttr[0];
+          proxy.host = proxyAttr[1]==""?"127.0.0.1":proxyAttr[1];
+          proxy.port = proxyAttr[2];
+          proxy.type = proxyAttr[3]==""?"http":proxyAttr[3];
+          array.push(proxy);
+      }
+      return array.length==0?false:array;
   },
 
   /**

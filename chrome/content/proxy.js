@@ -60,7 +60,7 @@ var proxy =
      *
      * newProxyInfo(type, host, port, socks_remote_dns, failoverTimeout, failoverProxy)
      */
-    this.getName = [ '直接连接' ];
+    this.getName = [ aup.getString("directConnect") ];
     this.server = [ pS.newProxyInfo('direct', '', -1, 0, 0, null) ];
     for each ( var conf in this.validConfigs) {
       this.getName.push( conf.name );

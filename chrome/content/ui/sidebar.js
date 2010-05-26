@@ -80,7 +80,11 @@ function init() {
 
   // Retrieve data for the window
   wndData = DataContainer.getDataForWindow(window.content);
-  treeView.setData(wndData.getAllLocations());
+  var locations=[];
+  var rootCurrentData = DataContainer.getDataForWindow(mainWin)
+          .getLocation(6, aup.getBrowserInWindow(mainWin).currentURI.spec);
+  if(rootCurrentData) locations.push(rootCurrentData);
+  treeView.setData(wndData.getAllLocations(locations));
   if (wndData.lastSelection) {
     noFlash = true;
     treeView.selectItem(wndData.lastSelection);
@@ -167,7 +171,11 @@ function handleItemChange(wnd, type, data, item) {
   else if (type == "select" || type == "refresh") {
     // We moved to a different document, reload list
     wndData = data;
-    treeView.setData(wndData.getAllLocations());
+    var locations=[];
+    var rootCurrentData = DataContainer.getDataForWindow(mainWin)
+            .getLocation(6, aup.getBrowserInWindow(mainWin).currentURI.spec);
+    if(rootCurrentData) locations.push(rootCurrentData);
+    treeView.setData(wndData.getAllLocations(locations));
   }
   else if (type == "invalidate")
     treeView.boxObject.invalidate();
@@ -177,7 +185,11 @@ function handleItemChange(wnd, type, data, item) {
 
 function handleTabChange() {
   wndData = DataContainer.getDataForWindow(window.content);
-  treeView.setData(wndData.getAllLocations());
+  var locations=[];
+  var rootCurrentData = DataContainer.getDataForWindow(mainWin)
+          .getLocation(6, aup.getBrowserInWindow(mainWin).currentURI.spec);
+  if(rootCurrentData) locations.push(rootCurrentData);
+  treeView.setData(wndData.getAllLocations(locations));
   if (wndData.lastSelection) {
     noFlash = true;
     treeView.selectItem(wndData.lastSelection);

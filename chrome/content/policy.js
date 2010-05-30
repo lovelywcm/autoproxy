@@ -132,7 +132,7 @@ var policy =
       data.addNode(wnd.top, node, contentType, docDomain, thirdParty, locationText, match);
     }
 
-    if (match)
+    if (match&&arguments.length==1)
       filterStorage.increaseHitCount(match);
 
     return match && !(match instanceof WhitelistFilter);
@@ -209,6 +209,13 @@ var policy =
         contexts.pop();
       else if (contexts[0] && contexts[0].parent != contexts[0])
         contexts.push(contexts[0].parent);
+      else if (contexts[0] && contexts[0].parent == contexts[0])
+      {
+          contexts.push(Cc["@mozilla.org/appshell/window-mediator;1"]
+                  .getService(Ci.nsIWindowMediator)
+                  .getMostRecentWindow("navigator:browser"));          
+          contexts.shift();
+      }
 
       let info = null;
       for each (let context in contexts)
@@ -227,6 +234,7 @@ var policy =
           this.ContentType = info.type;
           this.ContentURI = newChannel.URI;
 
+          this.autoMatching(newChannel.URI,true);
           return;
         }
       }

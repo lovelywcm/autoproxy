@@ -26,8 +26,7 @@
 var aup = Components.classes["@mozilla.org/autoproxy;1"]
                           .createInstance().wrappedJSObject;
 var prefs = aup.prefs;
-var proxies = prefs.customProxy.split("$");
-if (proxies == "") proxies = prefs.knownProxy.split("$");
+var proxies = aup.proxy.validConfigs;
 var defaultProxy = prefs.defaultProxy;
 
 let rows;
@@ -38,27 +37,11 @@ let cE = function(b) { return document.createElementNS(
 function init()
 {
   rows = document.getElementsByTagName("rows")[0];
-  for (var i=0; i<proxies.length; i++) {
-    if (proxies[i] == "") continue;
-    createBlankRow();
-
-    var pConfig = proxies[i].split(";");
-    pConfig[1] = pConfig[1] || "127.0.0.1";
-    var pDs = rows.lastChild.firstChild; // proxyDetails -> proxyName
-
-    for (var j = 0; j <= 2; j++, pDs = pDs.nextSibling)
-                  pDs.setAttribute( "value", pConfig[j] ); //name, host, port
-
-    pDs = pDs.firstChild; // pDs -> http
-    switch (pConfig[3]) {
-      case "socks4": { pDs = pDs.nextSibling; break; }
-      case "socks": { pDs = pDs.nextSibling.nextSibling; break; }
-    }
-    pDs.parentNode.selectedItem = pDs;
-  }
+  for (var i=0; i<proxies.length; i++)
+      createBlankRow(proxies[i]);
 }
 
-function createBlankRow()
+function createBlankRow(proxy)
 {
   // a new row
   var proxyRow  = cE("row");
@@ -78,15 +61,23 @@ function createBlankRow()
   // proxy type nodes
   var http = cE("radio");
   var socks4 = cE("radio");
-  var socks5 = cE("radio");
+  var socks = cE("radio");
   http.setAttribute("class", "proxyHttp");
   socks4.setAttribute("class", "proxySocks4");
-  socks5.setAttribute("class", "proxySocks5");
+  socks.setAttribute("class", "proxySocks5");
+
+  if(proxy)
+  {
+      proxyName.setAttribute("value",proxy.name);
+      proxyHost.setAttribute("value",proxy.host);
+      proxyPort.setAttribute("value",proxy.port);
+      eval(proxy.type+".setAttribute('selected',true)");
+  }
 
   // insert type nodes to type
   proxyType.appendChild(http);
   proxyType.appendChild(socks4);
-  proxyType.appendChild(socks5);
+  proxyType.appendChild(socks);
 
   // insert row nodes to the new proxy row
   proxyRow.appendChild(proxyName);
@@ -144,22 +135,13 @@ function delSelectedRow()
 
   // check whether default proxy has been removed.
   // it may be modified before delete, so do a new loop.
+  if(defaultProxy!=0){
   show("note");
   for (row=rows.firstChild.nextSibling; row; row=row.nextSibling) {
-    let pDs = "";
-    temp = row.firstChild;
-    for (var i=0; i<=2; i++) {
-      pDs += temp.value;
-      pDs += ";";
-      temp = temp.nextSibling;
-    }
-    temp = temp.firstChild.nextSibling;
-    if (temp.selected) pDs += "socks4";
-    else if (temp.nextSibling.selected) pDs += "socks";
-
-    if ( pDs.replace(/127\.0\.0\.1/,"") == defaultProxy ) {
+    if (row.firstChild.value==aup.proxy.nameOfDefaultProxy) {
       hide("note"); break;
     }
+  }
   }
 
   if ( !gE("warning").hidden ) hide("note");
@@ -181,12 +163,12 @@ function reset2Default()
     window.sizeToContent();
   }
 
-  proxies = prefs.knownProxy.split("$");
+  proxies = aup.proxy.configToObj(prefs.knownProxy);
   init();
   window.sizeToContent();
   window.centerWindowOnScreen();
 
-  defaultProxy = prefs.knownProxy.split("$")[6];
+  defaultProxy = 0;
 }
 
 function saveProxyServerSettings()
@@ -209,6 +191,7 @@ function saveProxyServerSettings()
           pDs.value += j.toString();
         }
       }
+      if(i==1 && pDs.value=="") pDs.value = "127.0.0.1";
 
       temp += pDs.value;
       temp += ";";
@@ -226,11 +209,6 @@ function saveProxyServerSettings()
     // 127.0.0.1 is default
     temp = temp.replace(/127\.0\.0\.1/, "");
 
-    // original default proxy may be modified or deleted.
-    // if a proxy has the same name or configuration as it, copy the proxy.
-    if ( multiIndex(defaultProxy, matchedDefaultProxy) <= 0 )
-      if ( multiIndex(defaultProxy, temp) >= 0 ) matchedDefaultProxy = temp;
-
     pConfig += temp;
     pConfig += "$";
   }
@@ -238,18 +216,16 @@ function saveProxyServerSettings()
   if (pConfig) {
     // remove the last "$" symbol
     pConfig = pConfig.replace(/\$$/, "");
-
-    switch (multiIndex(defaultProxy, matchedDefaultProxy)) {
-      // not modified, pass.
-      case 2: break;
-
-      // original default proxy is null or has been removed,
-      // choose the first proxy in proxy list as new default proxy.
-      case -1: matchedDefaultProxy = pConfig.split("$")[0];
-
-      // else: modified, but some infomation kept.
-      default: prefs.defaultProxy = matchedDefaultProxy;
-    }
+      if (defaultProxy > 0) {
+          let newProxies = aup.proxy.configToObj(pConfig);
+          let hasDefaultProxy = newProxies.some(function(proxy, index) {
+              if (proxy.name == aup.proxy.nameOfDefaultProxy) {
+                  prefs.defaultProxy = index + 1;
+                  return true;
+              }
+          });
+          if (!hasDefaultProxy) prefs.defaultProxy = 0;
+      }
   }
   else {
     // all proxies removed, restore to default.
@@ -258,21 +234,4 @@ function saveProxyServerSettings()
 
   prefs.customProxy = pConfig;
   prefs.save();
-}
-
-/**
- * multiIndex(stringA, stringB)
- * return 2: stringB equal to stringA;
- * return 1: proxy name of stringB found in stringA;
- * return 0: proxy config(host, port, type) of string B found in stringA
- * return -1: else, not found or stringB is null.
- */
-function multiIndex(sA, sB)
-{
-  if(sB == "") return -1;
-  if (sA == sB) return 2;
-  let proxyName = sB.split(";")[0];
-  if ( sA.indexOf(proxyName) != -1 ) return 1;
-  if ( sA.indexOf(sB.replace(proxyName,"")) != -1 ) return 0;
-  return -1;
 }

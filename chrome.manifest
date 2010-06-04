@@ -4,6 +4,7 @@ overlay   chrome://messenger/content/mailWindowOverlay.xul chrome://autoproxy/co
 overlay   chrome://midbrowser/content/midbrowser.xul chrome://autoproxy/content/ui/overlay.xul
 overlay   chrome://emusic/content/startup.xul chrome://autoproxy/content/ui/overlay.xul
 overlay   chrome://webrunner/content/webrunner.xul chrome://autoproxy/content/ui/prismOverlay.xul
+overlay chrome://browser/content/preferences/preferences.xul  chrome://autoproxy/content/ui/optionsOverlay.xul
 content   autoproxy jar:chrome/autoproxy.jar!/content/
 skin      autoproxy classic/1.0 jar:chrome/autoproxy.jar!/skin/
 style     chrome://global/content/customizeToolbar.xul  chrome://autoproxy/skin/overlay.css

@@ -540,7 +540,7 @@ function aupFillPopup(event) {
     if (host)
     {
       siteWhitelist = aup.Filter.fromText("@@||" + host + "^$document");
-      whitelistItemSite.setAttribute("checked", isUserDefinedFilter(siteWhitelist));
+      whitelistItemSite.setAttribute("checked", !siteWhitelist.disabled && isUserDefinedFilter(siteWhitelist));
       whitelistItemSite.setAttribute("label", whitelistItemSite.getAttribute("labeltempl").replace(/--/, host));
       whitelistItemSite.hidden = false;
     }
@@ -647,7 +647,14 @@ function aupTogglePref(pref) {
 function toggleFilter(/**Filter*/ filter)
 {
   if (isUserDefinedFilter(filter))
-    filterStorage.removeFilter(filter);
+  {
+      if (filter.disabled) {
+          filter.disabled = false;
+          filterStorage.triggerFilterObservers("enable", [filter]);
+      }
+      else
+          filterStorage.removeFilter(filter);
+  }
   else
     filterStorage.addFilter(filter);
   filterStorage.saveToDisk();

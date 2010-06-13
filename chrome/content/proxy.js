@@ -77,7 +77,7 @@ var proxy =
      *   1 - customProxy/knownProxy.length: corresponding proxy
      *   other: invalid, take 1 as it's value(use the first proxy)
      */
-    this.defaultProxy = this.server[ prefs.defaultProxy ] || this.server[1];
+    this.defaultProxy = this.server[prefs.defaultProxy] || this.server[1];
 
     /**
      * Refresh fallbackProxy (nsIProxyInfo)
@@ -89,7 +89,7 @@ var proxy =
      *   other: invalid, take 0 as it's value(direct connect)
      */
     if ( prefs.fallbackProxy == -1 ) this.fallbackProxy = this.defaultProxy;
-    else this.fallbackProxy = this.server[ prefs.fallbackProxy ] || this.server[0];
+    else this.fallbackProxy = this.server[prefs.fallbackProxy] || this.server[0];
 
     // Register/Unregister proxy filter & refresh shouldProxy() for specified mode
     if ( prefs.proxyMode == "disabled" ) pS.unregisterFilter(this);
@@ -102,26 +102,34 @@ var proxy =
     }
   },
 
+  /**
+   * Convert proxy config(e.g.: prefs.knownProxy) to objects for convenient usage later
+   *
+   * @param config {String}
+   * @return {Array} of objects
+   */
   configToObj: function(config)
   {
-      if(config=="")return false;
-      var array = [];
-      var proxyAttrArray = config.split("$");
-      for each(var i in proxyAttrArray)
-      {
-          var proxyAttr = i.split(";");
-          var proxy={};
-          proxy.name = proxyAttr[0];
-          proxy.host = proxyAttr[1]==""?"127.0.0.1":proxyAttr[1];
-          proxy.port = proxyAttr[2];
-          proxy.type = proxyAttr[3]==""?"http":proxyAttr[3];
-          array.push(proxy);
-      }
-      return array.length==0?false:array;
+    var proxyObj = {};
+    var proxyObjArray = [];
+
+    for each (var proxyAttr in config.split('$')) {
+      proxyAttr = proxyAttr.split(';');
+      if (proxyAttr[0] == '' || isNaN(proxyAttr[2])) continue;
+
+      proxyObj.name = proxyAttr[0];
+      proxyObj.host = proxyAttr[1] == '' ? '127.0.0.1' : proxyAttr[1];
+      proxyObj.port = proxyAttr[2];
+      proxyObj.type = /^socks4?$/i.test(proxyAttr[3]) ? proxyAttr[3] : 'http';
+      proxyObjArray.push(proxyObj);
+    }
+
+    return proxyObjArray.length == 0 ? false : proxyObjArray;
   },
 
   /**
    * Checks whether the location's scheme is proxyable
+   *
    * @param location  {nsIURI}
    * @return {Boolean}
    */

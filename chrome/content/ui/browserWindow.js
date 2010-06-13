@@ -417,7 +417,7 @@ function aupFillTooltip(event) {
   var statusDescr = E("aup-tooltip-status");
   statusDescr.setAttribute("value", aup.getString(state + "_tooltip"));
   var proxyDescr = E("aup-tooltip-proxy");
-  proxyDescr.setAttribute("value", prefs.defaultProxy.split(";")[0]);
+  proxyDescr.setAttribute("value", proxy.nameOfDefaultProxy);
 
   var activeFilters = [];
   E("aup-tooltip-blocked-label").hidden = (state != "auto");

@@ -582,7 +582,7 @@ function aupFillPopup(event) {
     if (proxy.nameOfDefaultProxy == p) item.setAttribute('checked', true);
     popup.appendChild(item);
   }
-  popup.insertBefore(document.createElement("menuseparator"),popup.firstChild.nextSibling);
+  popup.insertBefore(document.createElement("menuseparator"), popup.firstChild.nextSibling);
 }
 
 // Only show context menu on toolbar button in vertical toolbars
@@ -716,7 +716,7 @@ function aupExecuteAction(action, e)
         if (proxy.nameOfDefaultProxy == p) item.setAttribute('checked', true);
         popup.appendChild(item);
       }
-      popup.insertBefore(document.createElement("menuseparator"),popup.firstChild.nextSibling);
+      popup.insertBefore(document.createElement("menuseparator"), popup.firstChild.nextSibling);
       if(e.screenX&&e.screenY) popup.openPopupAtScreen(e.screenX, e.screenY, false);
       else popup.openPopupAtScreen(e.target.boxObject.screenX, e.target.boxObject.screenY, false);
       break;

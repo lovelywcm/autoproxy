@@ -104,7 +104,7 @@ var menu =
   {
     var menuItem = cE('menuitem');
     menuItem.setAttribute('label', proxyName);
-    this.menuList.firstChild.appendChild(menuItem);
+    menu.menuList.firstChild.appendChild(menuItem);
   }
 }
 

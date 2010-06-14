@@ -116,7 +116,8 @@ var proxy =
 
     for each (var proxyAttr in config.split('$')) {
       proxyAttr = proxyAttr.split(';');
-      if (proxyAttr[0] == '' || isNaN(proxyAttr[2])) continue;
+      if (proxyAttr.length != 4 || proxyAttr[0] == '' || isNaN(proxyAttr[2]))
+        continue;
 
       proxyObj.name = proxyAttr[0];
       proxyObj.host = proxyAttr[1] == '' ? '127.0.0.1' : proxyAttr[1];

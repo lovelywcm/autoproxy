@@ -70,6 +70,7 @@ function aupInit() {
   // Process preferences
   window.aupDetachedSidebar = null;
   aupReloadPrefs();
+  proxy.reloadPrefs();
 
   // Register event listeners
   window.addEventListener("unload", aupUnload, false);
@@ -81,6 +82,7 @@ function aupInit() {
   }
 
   prefs.addListener(aupReloadPrefs);
+  prefs.addListener(proxy.reloadPrefs);
   filterStorage.addFilterObserver(aupReloadPrefs);
   filterStorage.addSubscriptionObserver(aupReloadPrefs);
 
@@ -156,6 +158,7 @@ function aupInit() {
 function aupUnload()
 {
   prefs.removeListener(aupReloadPrefs);
+  prefs.removeListener(proxy.reloadPrefs);
   filterStorage.removeFilterObserver(aupReloadPrefs);
   filterStorage.removeSubscriptionObserver(aupReloadPrefs);
   aup.getBrowserInWindow(window).removeProgressListener(progressListener);
@@ -214,8 +217,6 @@ function aupReloadPrefs() {
   }
 
   updateElement(aupGetPaletteButton());
-
-  proxy.reloadPrefs();
 }
 
 function aupInitImageManagerHiding() {

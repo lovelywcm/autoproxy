@@ -87,7 +87,6 @@ function addNewRow()
   createBlankRow();
   E("warning").hidden = E("note").hidden = E("tip").hidden = true;
   window.sizeToContent();
-  window.centerWindowOnScreen();
 }
 
 /**
@@ -139,8 +138,6 @@ function delSelectedRow()
   if ( !E("warning").hidden ) hide("note");
   if ( E("warning").hidden && E("note").hidden ) hide("tip");
   else show("tip");
-
-  window.centerWindowOnScreen();
 }
 
 function reset2Default()
@@ -158,7 +155,6 @@ function reset2Default()
   proxies = proxy.configToObj(prefs.knownProxy);
   init();
   window.sizeToContent();
-  window.centerWindowOnScreen();
 
   defaultProxy = 0;
 }

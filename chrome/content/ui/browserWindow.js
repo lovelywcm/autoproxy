@@ -70,7 +70,6 @@ function aupInit() {
   // Process preferences
   window.aupDetachedSidebar = null;
   aupReloadPrefs();
-  proxy.reloadPrefs();
 
   // Register event listeners
   window.addEventListener("unload", aupUnload, false);
@@ -82,7 +81,6 @@ function aupInit() {
   }
 
   prefs.addListener(aupReloadPrefs);
-  prefs.addListener(proxy.reloadPrefs);
   filterStorage.addFilterObserver(aupReloadPrefs);
   filterStorage.addSubscriptionObserver(aupReloadPrefs);
 

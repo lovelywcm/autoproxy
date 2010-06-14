@@ -42,7 +42,8 @@ var proxy =
 
   init: function()
   {
-    // TODO
+    this.reloadPrefs();
+    prefs.addListener(this.reloadPrefs);
   },
 
   reloadPrefs: function()
@@ -156,4 +157,3 @@ aup.proxy = proxy;
 // TODO: if ( customProxy == knownProxy ) customProxy = "";
 // TODO: ";" & "$" is not allowed in proxy name
 // TODO: editProxyServer.js
-// TODO: call this.reloadPrefs only when necessary?

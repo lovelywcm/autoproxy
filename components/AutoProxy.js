@@ -322,11 +322,11 @@ const aup =
     timeLine.log("calling prefs.init()");
     prefs.init();
 
-    timeLine.log("calling filterStore.loadFromDisk()");
-    filterStorage.loadFromDisk();
-
     timeLine.log("calling proxy.init()");
     proxy.init();
+
+    timeLine.log("calling filterStore.loadFromDisk()");
+    filterStorage.loadFromDisk();
 
     timeLine.log("calling policy.init()");
     policy.init();

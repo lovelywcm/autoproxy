@@ -23,19 +23,10 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-var aup = Components.classes["@mozilla.org/autoproxy;1"]
-                          .createInstance().wrappedJSObject;
-var prefs = aup.prefs;
-var proxy = aup.proxy;
-
-var gE = function(id) { return document.getElementById(id); };
-var cE = function(tag) { return document.createElementNS(
-       "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", tag); };
-
 function init()
 {
   // row for setting default proxy
-  menu.newList( gE('defaultProxy'), prefs.defaultProxy, true );
+  menu.newList( E('defaultProxy'), prefs.defaultProxy, true );
 
   // one row per rule group
   var rows = document.getElementsByTagName('rows')[0];
@@ -44,7 +35,7 @@ function init()
     var row = cE('row');
     var groupName = cE('label');
     row.appendChild(groupName);
-    rows.insertBefore( row, gE('groupSeparator') );
+    rows.insertBefore( row, E('groupSeparator') );
 
     groupName.setAttribute('value',
       (subscription instanceof aup.RegularSubscription ?
@@ -61,11 +52,11 @@ function init()
   }
 
   // row for setting fallback proxy
-  menu.newList( gE('fallbackProxy'),
+  menu.newList( E('fallbackProxy'),
         prefs.fallbackProxy == -1 ? proxy.server.length : prefs.fallbackProxy );
   // dummy, to be implemented
-  menu.newList( gE('fallbackProxy'), 0 );
-  menu.newList( gE('fallbackProxy'), 0 );
+  menu.newList( E('fallbackProxy'), 0 );
+  menu.newList( E('fallbackProxy'), 0 );
 
   defaultProxyforAll(true);
 }
@@ -116,7 +107,7 @@ function defaultProxyforAll(init)
   var checkbox = document.getElementsByTagName('checkbox')[0];
   checkbox.setAttribute('checked', prefs.defaultProxyforAll);
 
-  for ( var row=gE('description'); row!=gE('groupSeparator'); row=row.nextSibling )
+  for ( var row=E('description'); row!=E('groupSeparator'); row=row.nextSibling )
     for ( var node=row.firstChild; node; node=node.nextSibling )
       node.setAttribute('disabled', prefs.defaultProxyforAll);
 
@@ -128,9 +119,9 @@ function defaultProxyforAll(init)
 
 function save()
 {
-  prefs.defaultProxy = gE('defaultProxy').lastChild.selectedIndex;
+  prefs.defaultProxy = E('defaultProxy').lastChild.selectedIndex;
 
-  var fallbackId = gE('fallbackProxy').firstChild.nextSibling.selectedIndex;
+  var fallbackId = E('fallbackProxy').firstChild.nextSibling.selectedIndex;
   if ( fallbackId == proxy.server.length ) fallbackId = -1;
   prefs.fallbackProxy = fallbackId;
 

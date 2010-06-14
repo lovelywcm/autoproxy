@@ -39,6 +39,7 @@
   onload="init()"
   ondialogaccept="saveProxyServerSettings()">
 
+<script type="application/x-javascript;version=1.7" src="utils.js"/>
 <script type="application/x-javascript;version=1.7" src="editProxyServer.js"/>
 
 <grid>

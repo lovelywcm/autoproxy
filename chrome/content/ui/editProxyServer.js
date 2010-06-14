@@ -23,16 +23,10 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-var aup = Components.classes["@mozilla.org/autoproxy;1"]
-                          .createInstance().wrappedJSObject;
-var prefs = aup.prefs;
-var proxies = aup.proxy.validConfigs;
+var proxies = proxy.validConfigs;
 var defaultProxy = prefs.defaultProxy;
 
 let rows;
-let gE = function(a) { return document.getElementById(a); };
-let cE = function(b) { return document.createElementNS(
-		 "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", b); };
 
 function init()
 {
@@ -91,7 +85,7 @@ function createBlankRow(proxy)
 function addNewRow()
 {
   createBlankRow();
-  gE("warning").hidden = gE("note").hidden = gE("tip").hidden = true;
+  E("warning").hidden = E("note").hidden = E("tip").hidden = true;
   window.sizeToContent();
   window.centerWindowOnScreen();
 }
@@ -103,16 +97,16 @@ function addNewRow()
  */
 function show(id)
 {
-  if ( gE(id).hidden ) {
-    gE(id).hidden = false;
+  if ( E(id).hidden ) {
+    E(id).hidden = false;
     window.sizeToContent();
   }
 }
 
 function hide(id)
 {
-  if ( !gE(id).hidden ) {
-    gE(id).hidden = true;
+  if ( !E(id).hidden ) {
+    E(id).hidden = true;
     window.sizeToContent();
   }
 }
@@ -142,8 +136,8 @@ function delSelectedRow()
     }
   }
 
-  if ( !gE("warning").hidden ) hide("note");
-  if ( gE("warning").hidden && gE("note").hidden ) hide("tip");
+  if ( !E("warning").hidden ) hide("note");
+  if ( E("warning").hidden && E("note").hidden ) hide("tip");
   else show("tip");
 
   window.centerWindowOnScreen();
@@ -151,7 +145,7 @@ function delSelectedRow()
 
 function reset2Default()
 {
-  gE("warning").hidden = gE("note").hidden = gE("tip").hidden = true;
+  E("warning").hidden = E("note").hidden = E("tip").hidden = true;
 
   let row = rows.firstChild.nextSibling;
   while (row) {
@@ -161,7 +155,7 @@ function reset2Default()
     window.sizeToContent();
   }
 
-  proxies = aup.proxy.configToObj(prefs.knownProxy);
+  proxies = proxy.configToObj(prefs.knownProxy);
   init();
   window.sizeToContent();
   window.centerWindowOnScreen();

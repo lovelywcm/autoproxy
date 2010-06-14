@@ -44,6 +44,14 @@ function E(id)
 }
 
 /**
+ * Shortcut for document.createElementNS(element)
+ */
+function cE(elmt)
+{
+  return document.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", elmt);
+}
+
+/**
  * Switch to specified proxy mode.
  */
 function switchToMode(mode)

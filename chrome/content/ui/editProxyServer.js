@@ -66,10 +66,10 @@ function createBlankRow(proxy)
   socks.setAttribute("class", "proxySocks5");
 
   if (proxy) {
-    proxyName.setAttribute("value",proxy.name);
-    proxyHost.setAttribute("value",proxy.host);
-    proxyPort.setAttribute("value",proxy.port);
-    eval(proxy.type+".setAttribute('selected',true)");
+    proxyName.setAttribute("value", proxy.name);
+    proxyHost.setAttribute("value", proxy.host);
+    proxyPort.setAttribute("value", proxy.port);
+    eval( proxy.type + ".setAttribute('selected', true)" );
   }
 
   // insert type nodes to type
@@ -133,7 +133,7 @@ function delSelectedRow()
 
   // check whether default proxy has been removed.
   // it may be modified before delete, so do a new loop.
-  if (defaultProxy != 0 ){
+  if (defaultProxy != 0 ) {
     show("note");
     for (row=rows.firstChild.nextSibling; row; row=row.nextSibling) {
       if (row.firstChild.value == aup.proxy.nameOfDefaultProxy) {

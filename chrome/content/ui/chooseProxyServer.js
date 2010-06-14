@@ -61,7 +61,8 @@ function init()
   }
 
   // row for setting fallback proxy
-  menu.newList( gE('fallbackProxy'), prefs.fallbackProxy );
+  menu.newList( gE('fallbackProxy'),
+        prefs.fallbackProxy == -1 ? proxy.server.length : prefs.fallbackProxy );
   // dummy, to be implemented
   menu.newList( gE('fallbackProxy'), 0 );
   menu.newList( gE('fallbackProxy'), 0 );

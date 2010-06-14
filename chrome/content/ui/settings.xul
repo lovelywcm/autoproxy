@@ -177,9 +177,9 @@
     </menu>
     <menu id="options-menu" label="&options.label;" accesskey="&options.accesskey;">
       <menupopup id="options-popup" onpopupshowing="fillOptionsPopup()">
-        <menuitem id="mode-auto" label="&mode.auto.label;" accesskey="&mode.auto.accesskey;" type="radio" oncommand="switchToMode('auto')"/>
-        <menuitem id="mode-global" label="&mode.global.label;" accesskey="&mode.global.accesskey;" type="radio" oncommand="switchToMode('global')"/>
-        <menuitem id="mode-disabled" label="&mode.disabled.label;" accesskey="&mode.disabled.accesskey;" type="radio" oncommand="switchToMode('disabled')"/>
+        <menuitem id="mode-auto" label="&mode.auto.label;" accesskey="&mode.auto.accesskey;" type="radio" oncommand="proxy.switchToMode('auto')"/>
+        <menuitem id="mode-global" label="&mode.global.label;" accesskey="&mode.global.accesskey;" type="radio" oncommand="proxy.switchToMode('global')"/>
+        <menuitem id="mode-disabled" label="&mode.disabled.label;" accesskey="&mode.disabled.accesskey;" type="radio" oncommand="proxy.switchToMode('disabled')"/>
         <menuseparator/>
         <menuitem id="showintoolbar" label="&showintoolbar.label;" accesskey="&showintoolbar.accesskey;" type="checkbox" oncommand="togglePref('showintoolbar')"/>
         <menuitem id="showinstatusbar" label="&showinstatusbar.label;" accesskey="&showinstatusbar.accesskey;" type="checkbox" oncommand="togglePref('showinstatusbar')"/>

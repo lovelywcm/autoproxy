@@ -39,9 +39,9 @@ let eventHandlers = [
   ["aup-command-togglesitewhitelist", "command", function() { toggleFilter(siteWhitelist); }],
   ["aup-command-toggleshowintoolbar", "command", function() { aupTogglePref("showintoolbar"); }],
   ["aup-command-toggleshowinstatusbar", "command", function() { aupTogglePref("showinstatusbar"); }],
-  ["aup-command-modeauto", "command", function() { switchToMode('auto'); }],
-  ["aup-command-modeglobal", "command", function() { switchToMode('global'); }],
-  ["aup-command-modedisabled", "command", function() { switchToMode('disabled'); }],
+  ["aup-command-modeauto", "command", function() { proxy.switchToMode('auto'); }],
+  ["aup-command-modeglobal", "command", function() { proxy.switchToMode('global'); }],
+  ["aup-command-modedisabled", "command", function() { proxy.switchToMode('disabled'); }],
   ["aup-status", "click", aupClickHandler],
   ["aup-toolbarbutton", "click", function(event) { if (event.button==1) aupClickHandler(event) }],
   ["aup-toolbarbutton", "command", function(event) { if (event.eventPhase == event.AT_TARGET) aupCommandHandler(event); }]

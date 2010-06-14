@@ -132,13 +132,23 @@ var proxy =
   /**
    * Checks whether the location's scheme is proxyable
    *
-   * @param location  {nsIURI}
+   * @param location {nsIURI}
    * @return {Boolean}
    */
   isProxyableScheme: function(location)
   {
     return ["http", "https", "ftp", "gopher"].some(
       function(scheme){return location.scheme==scheme} );
+  },
+
+  /**
+   * Switch to specified proxy mode
+   * @param mode {String} see this.mode
+   */
+  switchToMode: function(mode)
+  {
+    prefs.proxyMode = mode;
+    prefs.save();
   },
 
   //

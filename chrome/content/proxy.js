@@ -48,8 +48,8 @@ var proxy =
   reloadPrefs: function()
   {
     // Refresh validConfigs - array of objects
-    this.validConfigs = this.configToObj(prefs.customProxy) ||
-                            this.configToObj(prefs.knownProxy);
+    proxy.validConfigs = proxy.configToObj(prefs.customProxy) ||
+                            proxy.configToObj(prefs.knownProxy);
 
     /**
      * Refresh proxy name string array (getName) & available proxy servers
@@ -60,14 +60,14 @@ var proxy =
      *
      * newProxyInfo(type, host, port, socks_remote_dns, failoverTimeout, failoverProxy)
      */
-    this.getName = [ aup.getString("directConnect") ];
-    this.server = [ pS.newProxyInfo('direct', '', -1, 0, 0, null) ];
-    for each ( var conf in this.validConfigs) {
-      this.getName.push( conf.name );
-      this.server.push(pS.newProxyInfo(conf.type, conf.host, conf.port, 1, 0, null));
+    proxy.getName = [ aup.getString("directConnect") ];
+    proxy.server = [ pS.newProxyInfo('direct', '', -1, 0, 0, null) ];
+    for each ( var conf in proxy.validConfigs) {
+      proxy.getName.push( conf.name );
+      proxy.server.push(pS.newProxyInfo(conf.type, conf.host, conf.port, 1, 0, null));
     }
 
-    this.nameOfDefaultProxy = this.getName[ prefs.defaultProxy ];
+    proxy.nameOfDefaultProxy = proxy.getName[ prefs.defaultProxy ];
 
     /**
      * Refresh defaultProxy (nsIProxyInfo)
@@ -77,7 +77,7 @@ var proxy =
      *   1 - customProxy/knownProxy.length: corresponding proxy
      *   other: invalid, take 1 as it's value(use the first proxy)
      */
-    this.defaultProxy = this.server[prefs.defaultProxy] || this.server[1];
+    proxy.defaultProxy = proxy.server[prefs.defaultProxy] || proxy.server[1];
 
     /**
      * Refresh fallbackProxy (nsIProxyInfo)
@@ -88,17 +88,17 @@ var proxy =
      *   1 - customProxy/knownProxy.length: corresponding proxy
      *   other: invalid, take 0 as it's value(direct connect)
      */
-    if ( prefs.fallbackProxy == -1 ) this.fallbackProxy = this.defaultProxy;
-    else this.fallbackProxy = this.server[prefs.fallbackProxy] || this.server[0];
+    if ( prefs.fallbackProxy == -1 ) proxy.fallbackProxy = proxy.defaultProxy;
+    else proxy.fallbackProxy = proxy.server[prefs.fallbackProxy] || proxy.server[0];
 
     // Register/Unregister proxy filter & refresh shouldProxy() for specified mode
-    if ( prefs.proxyMode == "disabled" ) pS.unregisterFilter(this);
+    if ( prefs.proxyMode == "disabled" ) pS.unregisterFilter(proxy);
     else {
       if ( prefs.proxyMode == "global" ) policy.shouldProxy = function() { return true; };
       else policy.shouldProxy = policy.autoMatching;
 
-      pS.unregisterFilter(this);
-      pS.registerFilter(this, 0);
+      pS.unregisterFilter(proxy);
+      pS.registerFilter(proxy, 0);
     }
   },
 

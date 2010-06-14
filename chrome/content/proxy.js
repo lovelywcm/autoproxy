@@ -64,11 +64,11 @@ var proxy =
     proxy.getName = [ aup.getString("directConnect") ];
     proxy.server = [ pS.newProxyInfo('direct', '', -1, 0, 0, null) ];
     for each ( var conf in proxy.validConfigs) {
-      proxy.getName.push( conf.name );
+      proxy.getName.push(conf.name);
       proxy.server.push(pS.newProxyInfo(conf.type, conf.host, conf.port, 1, 0, null));
     }
 
-    proxy.nameOfDefaultProxy = proxy.getName[ prefs.defaultProxy ];
+    proxy.nameOfDefaultProxy = proxy.getName[prefs.defaultProxy];
 
     /**
      * Refresh defaultProxy (nsIProxyInfo)
@@ -111,7 +111,6 @@ var proxy =
    */
   configToObj: function(config)
   {
-    var proxyObj = {};
     var proxyObjArray = [];
 
     for each (var proxyAttr in config.split('$')) {
@@ -119,6 +118,7 @@ var proxy =
       if (proxyAttr.length != 4 || proxyAttr[0] == '' || isNaN(proxyAttr[2]))
         continue;
 
+      var proxyObj = {};
       proxyObj.name = proxyAttr[0];
       proxyObj.host = proxyAttr[1] == '' ? '127.0.0.1' : proxyAttr[1];
       proxyObj.port = proxyAttr[2];

@@ -35,7 +35,6 @@
 
 <overlay id="aup-overlay-general" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/x-javascript;version=1.7" src="overlay.js"/>  
-  <script type="application/x-javascript;version=1.7" src="utils.js"/>
 
   <popupset id="aup-popupset">
     <tooltip id="aup-tooltip" orient="vertical">

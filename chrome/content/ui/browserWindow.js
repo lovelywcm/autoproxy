@@ -657,7 +657,7 @@ function toggleFilter(/**Filter*/ filter)
 function aupClickHandler(e)
 {
   if (e.button == 0)
-    aupExecuteAction(prefs.defaultstatusbaraction,e);
+    aupExecuteAction(prefs.defaultstatusbaraction, e);
   else if (e.button == 1) {
     prefs.proxyMode = proxy.mode[ (proxy.mode.indexOf(prefs.proxyMode)+1) % 3 ];
     prefs.save();
@@ -689,7 +689,7 @@ function aupExecuteAction(action, e)
       break;
     case 4: //cycle default proxy
       if (aup.proxyTipTimer) aup.proxyTipTimer.cancel();
-      prefs.defaultProxy = (prefs.defaultProxy + 1) % proxy.server.length;
+      prefs.defaultProxy = ++prefs.defaultProxy % proxy.server.length;
       prefs.save();
       //show tooltip
       let tooltip = E("showCurrentProxy");

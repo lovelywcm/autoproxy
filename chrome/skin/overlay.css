@@ -63,6 +63,7 @@ toolbar[iconsize="small"] #aup-toolbarbutton[proxyMode="global"],
 
 #aup-toolbar-popup {
   list-style-image: none;
+  -moz-image-region: rect(0px, 0px, 0px, 0px);
 }
 
 toolbox[vertical="true"] toolbar #aup-toolbarbutton dropmarker {

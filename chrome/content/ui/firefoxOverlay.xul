@@ -17,10 +17,11 @@
    -
    - The Initial Developer of the Original Code is
    - Wladimir Palant.
-   - Portions created by the Initial Developer are Copyright (C) 2006-2008
+   - Portions created by the Initial Developer are Copyright (C) 2006-2009
    - the Initial Developer. All Rights Reserved.
    -
    - Contributor(s):
+   - 2009-2010: Wang Congming <lovelywcm@gmail.com> Modified for AutoProxy.
    -
    - ***** END LICENSE BLOCK ***** -->
 
@@ -46,32 +47,19 @@
     <statusbarpanel id="aup-status" mousethrough="never" insertbefore="resizerBottomRight"/>
   </statusbar> 
 
-  <!-- Firefox toolbar -->
+  <!-- Toolbar -->
   <toolbarpalette id="BrowserToolbarPalette">
     <toolbarbutton id="aup-toolbarbutton" type="menu-button" insertbefore="print-button"
         class="chromeclass-toolbar-additional"
         oncontextmenu="aupCheckToolbarContext(event)"/>
   </toolbarpalette>
 
-  <!-- SeaMonkey toolbar -->
-  <toolbar id="PersonalToolbar">
-    <toolbarbutton id="aup-toolbarbutton" class="bookmark-item" hidden="true"/>
-  </toolbar>
-
-  <!-- SeaMonkey Tools menu -->
-  <menupopup id="taskPopup">
-    <menuitem id="aup-menuitem" insertafter="downloadmgr"/>
-  </menupopup>
-  <!-- Firefox Tools menu -->
+  <!-- Tools menu -->
   <menupopup id="menu_ToolsPopup">
     <menuitem id="aup-menuitem" insertafter="javascriptConsole"/>
   </menupopup>
 
-  <!-- SeaMonkey View menu -->
-  <menupopup id="view_toolbars_popup">
-    <menuitem id="aup-blockableitems" insertafter="sidebar-menu"/>
-  </menupopup>
-  <!-- Firefox View menu -->
+  <!-- View menu -->
   <menupopup id="menu_viewPopup">
     <menuitem id="aup-blockableitems" insertafter="viewSidebarMenuMenu"/>
   </menupopup>

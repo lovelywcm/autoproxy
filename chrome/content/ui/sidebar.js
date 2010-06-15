@@ -86,7 +86,7 @@ function init() {
   wndData = DataContainer.getDataForWindow(window.content);
   var locations=[];
   var rootCurrentData = DataContainer.getDataForWindow(mainWin)
-          .getLocation(6, aup.getBrowserInWindow(mainWin).currentURI.spec);
+          .getLocation(6, aupHooks.getBrowser().currentURI.spec);
   if(rootCurrentData) locations.push(rootCurrentData);
   treeView.setData(wndData.getAllLocations(locations));
   if (wndData.lastSelection) {
@@ -177,7 +177,7 @@ function handleItemChange(wnd, type, data, item) {
     wndData = data;
     var locations=[];
     var rootCurrentData = DataContainer.getDataForWindow(mainWin)
-            .getLocation(6, aup.getBrowserInWindow(mainWin).currentURI.spec);
+            .getLocation(6, aupHooks.getBrowser().currentURI.spec);
     if(rootCurrentData) locations.push(rootCurrentData);
     treeView.setData(wndData.getAllLocations(locations));
   }
@@ -191,7 +191,7 @@ function handleTabChange() {
   wndData = DataContainer.getDataForWindow(window.content);
   var locations=[];
   var rootCurrentData = DataContainer.getDataForWindow(mainWin)
-          .getLocation(6, aup.getBrowserInWindow(mainWin).currentURI.spec);
+          .getLocation(6, aupHooks.getBrowser().currentURI.spec);
   if(rootCurrentData) locations.push(rootCurrentData);
   treeView.setData(wndData.getAllLocations(locations));
   if (wndData.lastSelection) {

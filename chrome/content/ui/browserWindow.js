@@ -438,7 +438,7 @@ function aupFillTooltip(event) {
   if (state == "auto") {
     var locations = [];
     var rootData = aup.getDataForWindow(window);
-    var rootCurrentData = rootData.getLocation(6, aup.getBrowserInWindow(window).currentURI.spec);
+    var rootCurrentData = rootData.getLocation(6, aupHooks.getBrowser().currentURI.spec);
     if (rootCurrentData) locations.push(rootCurrentData);
     var data = aup.getDataForWindow(aupHooks.getBrowser().contentWindow);
     data.getAllLocations(locations);

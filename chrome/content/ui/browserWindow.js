@@ -118,11 +118,12 @@ function aupInit() {
     aup.createTimer(aupShowSubscriptions, 0);
   }
 
-  // Move toolbar button to a correct location in Mozilla/SeaMonkey
+  // Move toolbar button to a correct location in SeaMonkey
   var button = E("aup-toolbarbutton");
-  if (button && button.parentNode.id == "nav-bar-buttons") {
-    var ptf = E("bookmarks-ptf");
-    ptf.parentNode.insertBefore(button, ptf);
+  if (button && button.parentNode.id == "PersonalToolbar")
+  {
+    let bookmarks = E("bookmarks-button");
+    bookmarks.parentNode.insertBefore(button, bookmarks);
   }
 
   // Copy the menu from status bar icon to the toolbar

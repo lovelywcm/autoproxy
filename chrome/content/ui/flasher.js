@@ -75,7 +75,7 @@ var flasher = {
 
     this.count++;
 
-    this.timer = createTimer(function() {flasher.doFlash()}, 300);
+    this.timer = window.setTimeout(function() {flasher.doFlash()}, 300);
   },
 
   stop: function() {

@@ -180,7 +180,8 @@ var policy =
   //
   // nsIContentPolicy interface implementation
   //
-  shouldLoad: function(contentType, location, requestOrigin, node, mimeTypeGuess, extra) {
+  shouldLoad: function(contentType, location, requestOrigin, node, mimeTypeGuess, extra)
+  {
     if ( proxy.isProxyableScheme(location) ) {
       // Interpret unknown types as "other"
       if ( !(contentType in this.typeDescr) ) contentType = this.type.OTHER;
@@ -193,7 +194,8 @@ var policy =
     return ok;
   },
 
-  shouldProcess: function(contentType, contentLocation, requestOrigin, insecNode, mimeType, extra) {
+  shouldProcess: function(contentType, contentLocation, requestOrigin, insecNode, mimeType, extra)
+  {
     return ok;
   },
 
@@ -262,7 +264,7 @@ var policy =
     for (var i = start; i < data.length; i++) {
       if (i - start >= 20) {
         // Allow events to process
-        createTimer(function() {policy.refilterWindowInternal(wnd, i);}, 0);
+        runAsync(this.refilterWindowInternal, this, wnd, i);
         return;
       }
 
@@ -279,7 +281,7 @@ var policy =
 
   // Calls refilterWindowInternal delayed to allow events to process
   refilterWindow: function(wnd) {
-    createTimer(function() {policy.refilterWindowInternal(wnd, 0);}, 0);
+    runAsync(this, this.refilterWindowInternal, wnd, 0);
   }
 };
 

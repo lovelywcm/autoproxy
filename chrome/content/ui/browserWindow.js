@@ -129,10 +129,10 @@ function aupInit() {
     prefs.doneFirstRunActions = true;
 
     // Add aup icon to toolbar if necessary
-    aup.createTimer(aupInstallInToolbar, 0);
+    aup.runAsync(aupInstallInToolbar);
 
     // Show subscriptions dialog if the user doesn't have any subscriptions yet
-    aup.createTimer(aupShowSubscriptions, 0);
+    aup.runAsync(aupShowSubscriptions);
   }
 
   // Run application-specific initialization
@@ -164,7 +164,7 @@ function aupInit() {
   copyMenu(E("aup-toolbarbutton"));
   copyMenu(aupGetPaletteButton());
 
-  aup.createTimer(aupInitImageManagerHiding, 0);
+  aup.runAsync(aupInitImageManagerHiding);
 }
 
 function aupUnload()

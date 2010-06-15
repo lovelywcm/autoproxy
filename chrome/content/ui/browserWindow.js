@@ -554,7 +554,7 @@ function aupFillPopup(event) {
     if (host)
     {
       siteWhitelist = aup.Filter.fromText("@@||" + host + "^$document");
-      whitelistItemSite.setAttribute("checked", !siteWhitelist.disabled && isUserDefinedFilter(siteWhitelist));
+      whitelistItemSite.setAttribute("checked", siteWhitelist.subscriptions.length && !siteWhitelist.disabled);
       whitelistItemSite.setAttribute("label", whitelistItemSite.getAttribute("labeltempl").replace(/--/, host));
       whitelistItemSite.hidden = false;
     }
@@ -639,16 +639,6 @@ function aupToggleSidebar() {
     menuItem.setAttribute("checked", aupIsSidebarOpen());
 }
 
-/**
- * Checks whether the specified filter exists as a user-defined filter in the list.
- *
- * @param {String} filter   text representation of the filter
- */
-function isUserDefinedFilter(/**Filter*/ filter)  /**Boolean*/
-{
-  return filter.subscriptions.some(function(subscription) { return subscription instanceof aup.SpecialSubscription; });
-}
-
 // Toggles the value of a boolean pref
 function aupTogglePref(pref) {
   prefs[pref] = !prefs[pref];
@@ -660,14 +650,15 @@ function aupTogglePref(pref) {
  */
 function toggleFilter(/**Filter*/ filter)
 {
-  if (isUserDefinedFilter(filter))
+  if (filter.subscriptions.length)
   {
-      if (filter.disabled) {
-          filter.disabled = false;
-          filterStorage.triggerFilterObservers("enable", [filter]);
-      }
-      else
-          filterStorage.removeFilter(filter);
+    if (filter.disabled || filter.subscriptions.some(function(subscription) !(subscription instanceof aup.SpecialSubscription)))
+    {
+      filter.disabled = !filter.disabled;
+      filterStorage.triggerFilterObservers(filter.disabled ? "disable" : "enable", [filter]);
+    }
+    else
+      filterStorage.removeFilter(filter);
   }
   else
     filterStorage.addFilter(filter);

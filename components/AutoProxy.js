@@ -279,6 +279,14 @@ const aup =
     return "{{VERSION}}";
   },
 
+  /**
+   * Returns source code revision this AutoProxy build was created from (if available)
+   */
+  getInstalledBuild: function() /**String*/
+  {
+    return "{{BUILD}}";
+  },
+
   //
   // Custom methods
   //

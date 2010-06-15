@@ -7,6 +7,12 @@ sub new
 {
   my ($class, $params) = @_;
 
+  unless (exists($params->{build}))
+  {
+    $params->{build} = `hg id -i`;
+    $params->{build} =~ s/\W//gs;
+  }
+
   my $self = bless($params, $class);
 
   return $self;
@@ -88,6 +94,7 @@ sub cp
       s/\r//g;
       s/^((?:  )+)/"\t" x (length($1)\/2)/e;
       s/\{\{VERSION\}\}/$self->{version}/g if $extendedTextMode;
+      s/\{\{BUILD\}\}/$self->{build}/g if $extendedTextMode;
       if ($extendedTextMode && /\{\{LOCALE\}\}/)
       {
         my $loc = "";

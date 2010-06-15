@@ -37,6 +37,8 @@ var noFlash = false;
 var disabledBlacklistMatcher = new aup.Matcher();
 var disabledWhitelistMatcher = new aup.Matcher();
 
+var aupHooks = null;
+
 function init() {
   var list = E("list");
   list.view = treeView;
@@ -54,7 +56,9 @@ function init() {
       parent.document.getElementById("detached-keyset").appendChild(parent.document.importNode(sidebarKey, true));
     }
   }
-  window.__defineGetter__("content", function() {return aup.getBrowserInWindow(mainWin).contentWindow;});
+
+  aupHooks = mainWin.document.getElementById("aup-hooks");
+  window.__defineGetter__("content", function() {return aupHooks.getBrowser().contentWindow;});
 
   // Install item listener
   DataContainer.addListener(handleItemChange);
@@ -92,7 +96,7 @@ function init() {
   }
 
   // Install a handler for tab changes
-  aup.getBrowserInWindow(mainWin).addEventListener("select", handleTabChange, false);
+  aupHooks.getBrowser().addEventListener("select", handleTabChange, false);
 }
 
 // To be called for a detached window when the main window has been closed
@@ -110,7 +114,7 @@ function cleanUp() {
   filterStorage.removeFilterObserver(reloadDisabledFilters);
   filterStorage.removeSubscriptionObserver(reloadDisabledFilters);
 
-  aup.getBrowserInWindow(mainWin).removeEventListener("select", handleTabChange, false);
+  aupHooks.getBrowser().removeEventListener("select", handleTabChange, false);
   mainWin.removeEventListener("unload", mainUnload, false);
 }
 

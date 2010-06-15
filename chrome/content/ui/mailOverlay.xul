@@ -32,6 +32,7 @@
     <popupset id="aup-popupset"/>
     <keyset id="aup-keyset"/>
     <commandset id="aup-commandset"/>
+    <box id="aup-hooks" getBrowser="return window.messageContent;"/>
   </window>
 
   <!-- Status bar -->

@@ -64,9 +64,22 @@ let siteWhitelist = null;
  */
 let progressListener = null;
 
+/**
+ * Object implementing app-specific methods.
+ */
+let aupHooks = E("aup-hooks");
+
 aupInit();
 
 function aupInit() {
+  // Initialize app hooks
+  for each (let hook in ["getBrowser", "addTab", "onInit"])
+  {
+    let handler = aupHooks.getAttribute(hook);
+    if (handler)
+      aupHooks[hook] = new Function(handler);
+  }
+
   // Process preferences
   window.aupDetachedSidebar = null;
   aupReloadPrefs();
@@ -84,7 +97,7 @@ function aupInit() {
   filterStorage.addFilterObserver(aupReloadPrefs);
   filterStorage.addSubscriptionObserver(aupReloadPrefs);
 
-  let browser = aup.getBrowserInWindow(window);
+  let browser = aupHooks.getBrowser();
   browser.addEventListener("click", handleLinkClick, true);
 
   let dummy = function() {};
@@ -118,13 +131,9 @@ function aupInit() {
     aup.createTimer(aupShowSubscriptions, 0);
   }
 
-  // Move toolbar button to a correct location in SeaMonkey
-  var button = E("aup-toolbarbutton");
-  if (button && button.parentNode.id == "PersonalToolbar")
-  {
-    let bookmarks = E("bookmarks-button");
-    bookmarks.parentNode.insertBefore(button, bookmarks);
-  }
+  // Run application-specific initialization
+  if (aupHooks.onInit)
+    aupHooks.onInit();
 
   // Copy the menu from status bar icon to the toolbar
   var fixId = function(node) {
@@ -160,7 +169,7 @@ function aupUnload()
   prefs.removeListener(proxy.reloadPrefs);
   filterStorage.removeFilterObserver(aupReloadPrefs);
   filterStorage.removeSubscriptionObserver(aupReloadPrefs);
-  aup.getBrowserInWindow(window).removeProgressListener(progressListener);
+  aupHooks.getBrowser().removeProgressListener(progressListener);
 }
 
 function aupReloadPrefs() {
@@ -427,7 +436,7 @@ function aupFillTooltip(event) {
     var rootData = aup.getDataForWindow(window);
     var rootCurrentData = rootData.getLocation(6, aup.getBrowserInWindow(window).currentURI.spec);
     if (rootCurrentData) locations.push(rootCurrentData);
-    var data = aup.getDataForWindow( aup.getBrowserInWindow(window).contentWindow );
+    var data = aup.getDataForWindow(aupHooks.getBrowser().contentWindow);
     data.getAllLocations(locations);
 
     var blocked = 0;
@@ -503,7 +512,7 @@ function getCurrentLocation() /**nsIURI*/
   else
   {
     // Regular browser
-    return aup.unwrapURL(aup.getBrowserInWindow(window).contentWindow.location.href);
+    return aup.unwrapURL(aupHooks.getBrowser().contentWindow.location.href);
   }
 }
 

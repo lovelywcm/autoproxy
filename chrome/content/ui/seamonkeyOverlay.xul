@@ -33,12 +33,15 @@
     <popupset id="aup-popupset"/>
     <keyset id="aup-keyset"/>
     <commandset id="aup-commandset"/>
+    <box id="aup-hooks" getBrowser="return window.gBrowser;"
+      addTab="window.gBrowser.addTab(arguments[0], null, null, true);"
+      onInit="let bookmarks = E('bookmarks-button');bookmarks.parentNode.insertBefore(E('aup-toolbarbutton'), bookmarks);"/>
   </window>
 
   <!-- Status bar -->
   <statusbar id="status-bar">
     <statusbarpanel id="aup-status" mousethrough="never" insertbefore="resizerBottomRight"/>
-  </statusbar> 
+  </statusbar>
 
   <!-- Toolbar -->
   <toolbar id="PersonalToolbar">

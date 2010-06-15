@@ -9,7 +9,7 @@ sub new
 
   unless (exists($params->{build}))
   {
-    $params->{build} = `hg id -i`;
+    $params->{build} = `git describe --tags`;
     $params->{build} =~ s/\W//gs;
   }
 

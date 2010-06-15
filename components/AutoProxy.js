@@ -332,8 +332,8 @@ const aup =
     timeLine.log("calling proxy.init()");
     proxy.init();
 
-    timeLine.log("calling filterStore.loadFromDisk()");
-    filterStorage.loadFromDisk();
+    timeLine.log("calling filterStorage.init()");
+    filterStorage.init();
 
     timeLine.log("calling policy.init()");
     policy.init();

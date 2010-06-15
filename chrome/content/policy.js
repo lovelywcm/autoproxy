@@ -229,7 +229,11 @@ var policy =
 
         if (info)
         {
-          let node = (info.nodes.length ? info.nodes[info.nodes.length - 1] : context.document);
+          let node = null;
+          for (let i = info.nodes.length - 1; !node && i >= 0; i--)
+            node = info.nodes[i].get();
+          if (!node)
+            node = context.document;
 
           this.Wnd = context;
           this.Node = node;
@@ -269,10 +273,8 @@ var policy =
       }
 
       if (!data[i].filter || data[i].filter instanceof WhitelistFilter) {
-        var nodes = data[i].nodes;
+        let nodes = data[i].nodes;
         data[i].nodes = [];
-        for (var j = 0; j < nodes.length; j++) {
-        }
       }
     }
 

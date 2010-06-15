@@ -88,17 +88,8 @@ DataContainer.prototype = {
         DataContainer.notifyListeners(this, "select", me);
     };
 
-    var removeHandler = function(ev) {
-      if (!ev.isTrusted)
-        return;
-
-      me.removeNode(ev.target);
-    };
-
     wnd.addEventListener("pagehide", hideHandler, false);
     wnd.addEventListener("pageshow", showHandler, false);
-
-    wnd.addEventListener("DOMNodeRemoved", removeHandler, true);
   },
 
   registerSubdocument: function(topWnd, data) {
@@ -130,12 +121,12 @@ DataContainer.prototype = {
       // Always override the filter just in case a known node has been blocked
       if (filter)
         this.locations[key].filter = filter;
-      this.locations[key].nodes.push(node);
+      this.locations[key].nodes.push(Components.utils.getWeakReference(node));
     }
     else {
       // Add a new location and notify the listeners
       this.locations[key] = {
-        nodes: [node],
+        nodes: [Components.utils.getWeakReference(node)],
         location: location,
         type: contentType,
         typeDescr: policy.typeDescr[contentType],
@@ -157,7 +148,7 @@ DataContainer.prototype = {
     if ("aupLocation" + dataSeed in node) {
       var nodes = node["aupLocation" + dataSeed].nodes;
       for (var i = 0; i < nodes.length; i++)
-        if (nodes[i] == node)
+        if (nodes[i].get() == node)
           nodes.splice(i--, 1);
     }
   },

@@ -23,6 +23,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+Cu.import("resource://gre/modules/XPCOMUtils.jsm");
+
 var aupHideImageManager;
 
 /**
@@ -106,7 +108,8 @@ function aupInit() {
     onProgressChange: dummy,
     onSecurityChange: dummy,
     onStateChange: dummy,
-    onStatusChange: dummy
+    onStatusChange: dummy,
+    QueryInterface: XPCOMUtils.generateQI([Ci.nsIWebProgressListener, Ci.nsISupportsWeakReference])
   };
   browser.addProgressListener(progressListener);
 

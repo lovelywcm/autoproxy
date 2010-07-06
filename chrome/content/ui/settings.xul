@@ -17,7 +17,7 @@
    -
    - The Initial Developer of the Original Code is
    - Wladimir Palant.
-   - Portions created by the Initial Developer are Copyright (C) 2006-2008
+   - Portions created by the Initial Developer are Copyright (C) 2006-2009
    - the Initial Developer. All Rights Reserved.
    -
    - Contributor(s):
@@ -56,7 +56,7 @@
 <script type="application/x-javascript;version=1.7" src="settings.js"/>
 <script type="application/x-javascript;version=1.7" src="findbar.js"/>
 
-<keyset id="autoProxyKeys">
+<keyset id="AutoProxyKeys">
   <key id="synchsubscription-key" key="t" modifiers="accel"/>
   <key id="synchsubscriptions-key" key="t" modifiers="accel,shift" command="synchsubscriptions-command"/>
   <key id="import-key" key="i" modifiers="accel" command="import-command"/>

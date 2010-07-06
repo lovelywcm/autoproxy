@@ -6,7 +6,7 @@
 # This script is used to handle such problem.
 #
 # @usage: same as `diff`
-# @example: $./apdiff.sh -Bb chrome/content/ ../adblockplus/chrome/content/
+# @example: $./apdiff.sh -rBb chrome/content/ ../adblockplus/chrome/content/
 # @output: same as `diff` but will ignore lines which diff only because abp/aup
 ################################################################################
 

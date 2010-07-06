@@ -108,7 +108,7 @@ var policy =
         contentType = this.type.BACKGROUND;
 
       // Fix type for objects misrepresented as frames or images
-      if (contentType != this.type.OBJECT && (node instanceof Ci.nsIDOMHTMLObjectElement || node instanceof Ci.nsIDOMHTMLEmbedElement ))
+      if (contentType != this.type.OBJECT && (node instanceof Ci.nsIDOMHTMLObjectElement || node instanceof Ci.nsIDOMHTMLEmbedElement))
         contentType = this.type.OBJECT;
 
       docDomain = this.getHostname(wnd.location.href);
@@ -124,7 +124,7 @@ var policy =
     //   * no sidebar window can be used to display extension's http request;
     //   * shouldLoad() doesn't check extension's request, any way to do this?
     //     * just like onChannelRedirect() did for 301/302 redirection.
-    if ( location == this.ContentURI ) {
+    if (location == this.ContentURI) {
       var data = DataContainer.getDataForWindow(wnd);
       data.addNode(wnd.top, node, contentType, docDomain, thirdParty, locationText, match);
     }

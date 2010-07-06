@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Wladimir Palant.
- * Portions created by the Initial Developer are Copyright (C) 2006-2008
+ * Portions created by the Initial Developer are Copyright (C) 2006-2009
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -128,8 +128,7 @@ function subscribeAndSetDefault()
 /**
  * Popup dialog for add a custom subscription.
  */
-function addOther()
-{
+function addOther() {
   openDialog("subscription.xul", "_blank", "chrome,centerscreen,modal", null, result);
   if ("url" in result)
   {
@@ -139,8 +138,7 @@ function addOther()
   }
 }
 
-function handleKeyPress(e)
-{
+function handleKeyPress(e) {
   switch (e.keyCode) {
     case e.DOM_VK_PAGE_UP:
     case e.DOM_VK_PAGE_DOWN:
@@ -157,7 +155,9 @@ function handleKeyPress(e)
 
 function handleCommand(event)
 {
-  let scrollBox = document.getElementById("subscriptionsScrollbox").boxObject.QueryInterface(Ci.nsIScrollBoxObject);
+  let scrollBox = document.getElementById("subscriptionsScrollbox")
+                          .boxObject
+                          .QueryInterface(Ci.nsIScrollBoxObject);
   scrollBox.ensureElementIsVisible(event.target);
   scrollBox.ensureElementIsVisible(event.target.nextSibling);
 }

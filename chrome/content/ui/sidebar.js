@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Wladimir Palant.
- * Portions created by the Initial Developer are Copyright (C) 2006-2008
+ * Portions created by the Initial Developer are Copyright (C) 2006-2009
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -620,7 +620,8 @@ var treeView = {
   //
 
   QueryInterface: function(uuid) {
-    if ( !uuid.equals(Ci.nsISupports) && !uuid.equals(Ci.nsITreeView))
+    if ( !uuid.equals(Ci.nsISupports) &&
+         !uuid.equals(Ci.nsITreeView))
     {
       throw Cr.NS_ERROR_NO_INTERFACE;
     }

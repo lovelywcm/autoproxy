@@ -128,7 +128,7 @@ function aupInit() {
     // Don't repeat first run actions if new window is opened
     prefs.doneFirstRunActions = true;
 
-    // Add aup icon to toolbar if necessary
+    // Add AUP icon to toolbar if necessary
     aup.runAsync(aupInstallInToolbar);
 
     // Show subscriptions dialog if the user doesn't have any subscriptions yet
@@ -549,7 +549,7 @@ function aupFillPopup(event) {
   let location = getCurrentLocation();
   if (location && proxy.isProxyableScheme(location))
   {
-    let host = location.host.replace(/^www\./, "");
+    host = location.host.replace(/^www\./, "");
 
     if (host)
     {
@@ -737,8 +737,7 @@ function aupExecuteAction(action, e)
 }
 
 // Retrieves the image URL for the specified style property
-function aupImageStyle(computedStyle, property)
-{
+function aupImageStyle(computedStyle, property) {
   var value = computedStyle.getPropertyCSSValue(property);
   if (value instanceof Ci.nsIDOMCSSValueList && value.length >= 1)
     value = value[0];

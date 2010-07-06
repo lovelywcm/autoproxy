@@ -64,10 +64,8 @@ var policy =
   ContentType: "",  // String
   ContentURI: null, // nsIURI
 
-  init: function()
-  {
-    var types = ["OTHER", "SCRIPT", "IMAGE", "STYLESHEET", "OBJECT", "SUBDOCUMENT",
-      "DOCUMENT", "XBL", "PING", "XMLHTTPREQUEST", "OBJECT_SUBREQUEST", "DTD", "FONT", "MEDIA"];
+  init: function() {
+    var types = ["OTHER", "SCRIPT", "IMAGE", "STYLESHEET", "OBJECT", "SUBDOCUMENT", "DOCUMENT", "XBL", "PING", "XMLHTTPREQUEST", "OBJECT_SUBREQUEST", "DTD", "FONT", "MEDIA"];
 
     // type constant by type description and type description by type constant
     this.type = {};
@@ -110,8 +108,7 @@ var policy =
         contentType = this.type.BACKGROUND;
 
       // Fix type for objects misrepresented as frames or images
-      if (contentType != this.type.OBJECT && (node instanceof Ci.nsIDOMHTMLObjectElement ||
-                                              node instanceof Ci.nsIDOMHTMLEmbedElement ))
+      if (contentType != this.type.OBJECT && (node instanceof Ci.nsIDOMHTMLObjectElement || node instanceof Ci.nsIDOMHTMLEmbedElement ))
         contentType = this.type.OBJECT;
 
       docDomain = this.getHostname(wnd.location.href);
@@ -180,16 +177,17 @@ var policy =
   //
   // nsIContentPolicy interface implementation
   //
-  shouldLoad: function(contentType, location, requestOrigin, node, mimeTypeGuess, extra)
+  shouldLoad: function(contentType, contentLocation, requestOrigin, node, mimeTypeGuess, extra)
   {
-    if ( proxy.isProxyableScheme(location) ) {
+    if ( proxy.isProxyableScheme(contentLocation) ) {
       // Interpret unknown types as "other"
-      if ( !(contentType in this.typeDescr) ) contentType = this.type.OTHER;
+      if (!(contentType in this.typeDescr))
+        contentType = this.type.OTHER;
 
       this.Wnd = getWindow(node);
       this.Node = node;
       this.ContentType = contentType;
-      this.ContentURI = unwrapURL(location);
+      this.ContentURI = unwrapURL(contentLocation);
     }
     return ok;
   },
@@ -248,7 +246,7 @@ var policy =
     catch (e if (e != Cr.NS_BASE_STREAM_WOULD_BLOCK))
     {
       // We shouldn't throw exceptions here - this will prevent the redirect.
-      dump("\nAutoProxy: Unexpected error in policy.onChannelRedirect: " + e + "\n");
+      dump("AutoProxy: Unexpected error in policy.onChannelRedirect: " + e + "\n");
     }
   },
 
@@ -272,7 +270,8 @@ var policy =
         return;
       }
 
-      if (!data[i].filter || data[i].filter instanceof WhitelistFilter) {
+      if (!data[i].filter || data[i].filter instanceof WhitelistFilter)
+      {
         let nodes = data[i].nodes;
         data[i].nodes = [];
       }

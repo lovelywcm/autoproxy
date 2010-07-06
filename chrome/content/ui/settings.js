@@ -698,7 +698,7 @@ function onListDragGesture(/**Event*/ e)
  * Filter observer
  * @see filterStorage.addFilterObserver()
  */
-function onFilterChange(/**String*/ action, /**Array of Filter*/ filters)
+function onFilterChange(/**String*/ action, /**Array of Filter*/ filters, additionalData)
 {
   switch (action)
   {
@@ -708,7 +708,10 @@ function onFilterChange(/**String*/ action, /**Array of Filter*/ filters)
       // an update batch makes sure that everything is invalidated.
       treeView.boxObject.beginUpdateBatch();
       for each (let filter in filters)
-        treeView.addFilter(getFilterByText(filter.text), null, null, true);
+      {
+        let insertBefore = (additionalData ? getFilterByText(additionalData.text) : null);
+        treeView.addFilter(getFilterByText(filter.text), null, insertBefore, true);
+      }
       treeView.boxObject.endUpdateBatch();
       return;
     case "remove":
@@ -1284,7 +1287,8 @@ function compareText(/**Filter*/ filter1, /**Filter*/ filter2)
 }
 
 /**
- * Sort function for the filter list, compares two filters by "slow" marker.
+ * Sort function for the filter list, compares two filters by "slow"
+ * marker.
  */
 function compareSlow(/**Filter*/ filter1, /**Filter*/ filter2)
 {
@@ -1380,8 +1384,8 @@ let treeView = {
   //
 
   QueryInterface: function(uuid) {
-    if ( !uuid.equals(Ci.nsISupports) &&
-         !uuid.equals(Ci.nsITreeView))
+    if (!uuid.equals(Ci.nsISupports) &&
+        !uuid.equals(Ci.nsITreeView))
     {
       throw Cr.NS_ERROR_NO_INTERFACE;
     }

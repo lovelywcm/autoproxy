@@ -187,12 +187,34 @@ aup.CommentFilter = CommentFilter;
 /**
  * Abstract base class for filters that can get hits
  * @param {String} text see Filter()
+ * @param {Array of String} domains  (optional) Domains that the filter is restricted to, e.g. ["foo.com", "bar.com", "~baz.com"]
  * @constructor
  * @augments Filter
  */
-function ActiveFilter(text)
+function ActiveFilter(text, domains)
 {
   Filter.call(this, text);
+
+  if (domains != null)
+  {
+    for each (let domain in domains)
+    {
+      if (domain == "")
+        continue;
+
+      let hash = "includeDomains";
+      if (domain[0] == "~")
+      {
+        hash = "excludeDomains";
+        domain = domain.substr(1);
+      }
+
+      if (!this[hash])
+        this[hash] = {__proto__: null};
+
+      this[hash][domain] = true;
+    }
+  }
 }
 ActiveFilter.prototype =
 {
@@ -213,99 +235,6 @@ ActiveFilter.prototype =
    * @type Number
    */
   lastHit: 0,
-
-  /**
-   * See Filter.serialize()
-   */
-  serialize: function(buffer)
-  {
-    if (this.disabled || this.hitCount || this.lastHit)
-    {
-      Filter.prototype.serialize.call(this, buffer);
-      if (this.disabled)
-        buffer.push("disabled=true");
-      if (this.hitCount)
-        buffer.push("hitCount=" + this.hitCount);
-      if (this.lastHit)
-        buffer.push("lastHit=" + this.lastHit);
-    }
-  }
-};
-aup.ActiveFilter = ActiveFilter;
-
-/**
- * Abstract base class for RegExp-based filters
- * @param {String} text see Filter()
- * @param {String} regexp       regular expression this filter should use
- * @param {Number} contentType  (optional) Content types the filter applies to, combination of values from RegExpFilter.typeMap
- * @param {Boolean} matchCase   (optional) Defines whether the filter should distinguish between lower and upper case letters
- * @param {String} domains      (optional) Domains that the filter is restricted to, e.g. "foo.com|bar.com|~baz.com"
- * @param {Boolean} thirdParty  (optional) Defines whether the filter should apply to third-party or first-party content only
- * @constructor
- * @augments ActiveFilter
- */
-function RegExpFilter(text, regexp, contentType, matchCase, domains, thirdParty)
-{
-  ActiveFilter.call(this, text);
-
-  if (contentType != null)
-    this.contentType = contentType;
-  if (matchCase)
-    this.matchCase = matchCase;
-  if (domains != null)
-  {
-    for each (let domain in domains.split("|"))
-    {
-      if (domain == "")
-        continue;
-
-      let hash = "includeDomains";
-      if (domain[0] == "~")
-      {
-        hash = "excludeDomains";
-        domain = domain.substr(1);
-      }
-
-      if (!this[hash])
-        this[hash] = {__proto__: null};
-
-      this[hash][domain] = true;
-    }
-  }
-  if (thirdParty != null)
-    this.thirdParty = thirdParty;
-
-  this.regexp = new RegExp(regexp, this.matchCase ? "" : "i");
-}
-RegExpFilter.prototype =
-{
-  __proto__: ActiveFilter.prototype,
-
-  /**
-   * Regular expression to be used when testing against this filter
-   * @type RegExp
-   */
-  regexp: null,
-  /**
-   * 8 character string identifying this filter for faster matching
-   * @type String
-   */
-  shortcut: null,
-  /**
-   * Content types the filter applies to, combination of values from RegExpFilter.typeMap
-   * @type Number
-   */
-  contentType: 0x7FFFFFFF,
-  /**
-   * Defines whether the filter should distinguish between lower and upper case letters
-   * @type Boolean
-   */
-  matchCase: false,
-  /**
-   * Defines whether the filter should apply to third-party or first-party content only. Can be null (apply to all content).
-   * @type Boolean
-   */
-  thirdParty: null,
 
   /**
    * Map containing domains that this filter should match on or null if the filter should match on all domains
@@ -346,6 +275,96 @@ RegExpFilter.prototype =
     }
     return (this.includeDomains == null);
   },
+
+  /**
+   * Checks whether this filter is active only on a domain and its subdomains.
+   */
+  isActiveOnlyOnDomain: function(/**String*/ docDomain) /**Boolean*/
+  {
+    if (!docDomain || !this.includeDomains)
+      return false;
+
+    docDomain = docDomain.replace(/\.+$/, "").toUpperCase();
+
+    for (let domain in this.includeDomains)
+      if (domain != docDomain && domain.indexOf("." + docDomain) != domain.length - docDomain.length - 1)
+        return false;
+
+    return true;
+  },
+
+  /**
+   * See Filter.serialize()
+   */
+  serialize: function(buffer)
+  {
+    if (this.disabled || this.hitCount || this.lastHit)
+    {
+      Filter.prototype.serialize.call(this, buffer);
+      if (this.disabled)
+        buffer.push("disabled=true");
+      if (this.hitCount)
+        buffer.push("hitCount=" + this.hitCount);
+      if (this.lastHit)
+        buffer.push("lastHit=" + this.lastHit);
+    }
+  }
+};
+aup.ActiveFilter = ActiveFilter;
+
+/**
+ * Abstract base class for RegExp-based filters
+ * @param {String} text see Filter()
+ * @param {String} regexp       regular expression this filter should use
+ * @param {Number} contentType  (optional) Content types the filter applies to, combination of values from RegExpFilter.typeMap
+ * @param {Boolean} matchCase   (optional) Defines whether the filter should distinguish between lower and upper case letters
+ * @param {String} domains      (optional) Domains that the filter is restricted to, e.g. "foo.com|bar.com|~baz.com"
+ * @param {Boolean} thirdParty  (optional) Defines whether the filter should apply to third-party or first-party content only
+ * @constructor
+ * @augments ActiveFilter
+ */
+function RegExpFilter(text, regexp, contentType, matchCase, domains, thirdParty)
+{
+  ActiveFilter.call(this, text, domains ? domains.split("|") : null);
+
+  if (contentType != null)
+    this.contentType = contentType;
+  if (matchCase)
+    this.matchCase = matchCase;
+  if (thirdParty != null)
+    this.thirdParty = thirdParty;
+
+  this.regexp = new RegExp(regexp, this.matchCase ? "" : "i");
+}
+RegExpFilter.prototype =
+{
+  __proto__: ActiveFilter.prototype,
+
+  /**
+   * Regular expression to be used when testing against this filter
+   * @type RegExp
+   */
+  regexp: null,
+  /**
+   * 8 character string identifying this filter for faster matching
+   * @type String
+   */
+  shortcut: null,
+  /**
+   * Content types the filter applies to, combination of values from RegExpFilter.typeMap
+   * @type Number
+   */
+  contentType: 0x7FFFFFFF,
+  /**
+   * Defines whether the filter should distinguish between lower and upper case letters
+   * @type Boolean
+   */
+  matchCase: false,
+  /**
+   * Defines whether the filter should apply to third-party or first-party content only. Can be null (apply to all content).
+   * @type Boolean
+   */
+  thirdParty: null,
 
   /**
    * Tests whether the URL matches this filters
@@ -495,7 +514,6 @@ function BlockingFilter(text, regexp, contentType, matchCase, domains, thirdPart
 BlockingFilter.prototype =
 {
   __proto__: RegExpFilter.prototype
-  
 };
 aup.BlockingFilter = BlockingFilter;
 

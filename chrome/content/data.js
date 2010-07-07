@@ -132,7 +132,7 @@ DataContainer.prototype = {
 
     this.notifyListeners("refresh", this);
   },
-  addNode: function(node, contentType, docDomain, thirdParty, location, filter, objTab)
+  addNode: function(node, contentType, docDomain, thirdParty, location, filter)
   {
     // for images repeated on page store node for each repeated image
     let key = " " + contentType + " " + location;

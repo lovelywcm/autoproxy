@@ -126,7 +126,7 @@ var policy =
     //     * just like onChannelRedirect() did for 301/302 redirection.
     if (location == this.ContentURI) {
       var data = DataContainer.getDataForWindow(wnd);
-      data.addNode(wnd.top, node, contentType, docDomain, thirdParty, locationText, match);
+      data.addNode(node, contentType, docDomain, thirdParty, locationText, match);
     }
 
     if (match&&arguments.length==1)

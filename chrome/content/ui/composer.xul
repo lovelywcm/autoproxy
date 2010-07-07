@@ -45,13 +45,15 @@
     buttonlabeldisclosure_on="&advanced.label;"
     buttonlabeldisclosure_off="&basic.label;"
     windowtype="aup:composer">
+
+  <script type="application/x-javascript;version=1.7" src="utils.js"/>
   <script type="application/x-javascript;version=1.7" src="composer.js"/>  
   
   <popupset>
     <tooltip id="domainRestrictionHelp" label="&domainRestriction.help;"/>
   </popupset>
 
-  <description id="disabledWarning">
+  <description id="disabledWarning" hidden="true">
     &disabled.warning.beforeLink;<label class="text-link" value="&disabled.warning.link;" onclick="doEnable()"/>&disabled.warning.afterLink;
   </description>
 

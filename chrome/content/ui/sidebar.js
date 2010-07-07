@@ -620,7 +620,7 @@ var treeView = {
   //
 
   QueryInterface: function(uuid) {
-    if ( !uuid.equals(Ci.nsISupports) &&
+    if (!uuid.equals(Ci.nsISupports) &&
          !uuid.equals(Ci.nsITreeView))
     {
       throw Cr.NS_ERROR_NO_INTERFACE;

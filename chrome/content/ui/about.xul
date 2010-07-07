@@ -33,7 +33,7 @@
 <dialog
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   title="&dialog.title;"
-  id="autoProxyAboutWindow"
+  id="AutoProxyAboutWindow"
   windowtype="aup:about"
   onload="fillInVersion()"
   buttons="accept">

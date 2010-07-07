@@ -22,15 +22,9 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-let aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
-
 let wnd = null;
 let item = null;
 let advancedMode = false;
-
-function E(id) {
-  return document.getElementById(id);
-}
 
 function init() {
   // In K-Meleon we might get the arguments wrapped
@@ -53,14 +47,13 @@ function init() {
     insertionPoint.parentNode.insertBefore(suggestion, insertionPoint);
   }
 
-  let ioService = Components.classes["@mozilla.org/network/io-service;1"]
-                            .getService(Components.interfaces.nsIIOService);
+  let ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
   try
   {
     let suggestions = [""];
 
     let url = ioService.newURI(item.location, null, null)
-                       .QueryInterface(Components.interfaces.nsIURL);
+                       .QueryInterface(Ci.nsIURL);
     let suffix = (url.query ? "?*" : "");
     url.query = "";
     suggestions[1] = url.spec + suffix;
@@ -94,7 +87,7 @@ function init() {
       suggestions[4] = suggestions[3];
     }
 
-    E("patternGroup").value = (aup.prefs.composer_default in suggestions ? suggestions[aup.prefs.composer_default] : suggestions[1]);
+    E("patternGroup").value = (prefs.composer_default in suggestions ? suggestions[prefs.composer_default] : suggestions[1]);
   }
   catch (e)
   {
@@ -102,7 +95,7 @@ function init() {
     addSuggestion(item.location);
     E("patternGroup").value = "";
   }
-  if (aup.prefs.composer_default == 0)
+  if (prefs.composer_default == 0)
     E("customPattern").focus();
   else
     E("patternGroup").focus();
@@ -145,9 +138,8 @@ function init() {
     typeGroup.appendChild(typeNode);
   }
 
+  E("disabledWarning").hidden = true;
   updatePatternSelection();
-
-  document.getElementById("disabledWarning").hidden = true;
 }
 
 function updateFilter()
@@ -220,10 +212,9 @@ function updateFilter()
   E("regexpWarning").hidden = !aup.Filter.regexpRegExp.test(filter);
 
   let hasShortcut = true;
+  let compiledFilter = aup.Filter.fromText(filter);
   if (E("regexpWarning").hidden)
   {
-    let compiledFilter = aup.Filter.fromText(filter);
-
     let matcher = null;
     if (compiledFilter instanceof aup.BlockingFilter)
       matcher = aup.blacklistMatcher;
@@ -288,11 +279,11 @@ function addFilter() {
   if (filter.disabled)
   {
     filter.disabled = false;
-    aup.filterStorage.triggerFilterObservers("enable", [filter]);
+    filterStorage.triggerFilterObservers("enable", [filter]);
   }
 
-  aup.filterStorage.addFilter(filter);
-  aup.filterStorage.saveToDisk();
+  filterStorage.addFilter(filter);
+  filterStorage.saveToDisk();
 
   if (wnd && !wnd.closed)
     aup.policy.refilterWindow(wnd);
@@ -336,8 +327,8 @@ function openPreferences() {
 
 function doEnable() {
 /*
-  aup.prefs.enabled = true;
-  aup.prefs.save();
+  prefs.enabled = true;
+  prefs.save();
   E("disabledWarning").hidden = true;
 */
 }

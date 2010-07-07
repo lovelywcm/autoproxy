@@ -45,8 +45,8 @@ let eventHandlers = [
   ["aup-command-modeglobal", "command", function() { proxy.switchToMode('global'); }],
   ["aup-command-modedisabled", "command", function() { proxy.switchToMode('disabled'); }],
   ["aup-status", "click", aupClickHandler],
-  ["aup-toolbarbutton", "click", function(event) { if (event.button==1) aupClickHandler(event) }],
-  ["aup-toolbarbutton", "command", function(event) { if (event.eventPhase == event.AT_TARGET) aupCommandHandler(event); }]
+  ["aup-toolbarbutton", "command", function(event) { if (event.eventPhase == event.AT_TARGET) aupCommandHandler(event); }],
+  ["aup-toolbarbutton", "click", function(event) { if (event.button==1) aupClickHandler(event) }]
 ];
 
 /**
@@ -676,8 +676,7 @@ function aupClickHandler(e)
   }
 }
 
-function aupCommandHandler(e)
-{
+function aupCommandHandler(e) {
   if (prefs.defaulttoolbaraction == 0)
     e.target.open = true;
   else

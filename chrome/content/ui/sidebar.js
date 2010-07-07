@@ -529,12 +529,8 @@ function getItemSize(item)
   if (item.filter && !item.filter.disabled && item.filter instanceof aup.BlockingFilter)
     return null;
 
-  for each (let node in item.nodes)
+  for each (let node in item.nodesIterator)
   {
-    node = node.get();
-    if (!node)
-      continue;
-
     if (node instanceof HTMLImageElement && (node.naturalWidth || node.naturalHeight))
       return [node.naturalWidth, node.naturalHeight];
     else if (node instanceof HTMLElement && (node.offsetWidth || node.offsetHeight))

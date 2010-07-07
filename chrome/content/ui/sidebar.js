@@ -306,9 +306,12 @@ const visual = {
   SUBDOCUMENT: true
 }
 
-// Fill in tooltip data before showing it
-function fillInContext(e) {
-  var item, allItems;
+/**
+ * Updates context menu before it is shown.
+ */
+function fillInContext(/**Event*/ e)
+{
+  let item, allItems;
   if (treeView.data && !treeView.data.length)
   {
     item = treeView.getDummyTooltip();
@@ -328,7 +331,7 @@ function fillInContext(e) {
   if ("filter" in item && item.filter)
   {
     let filter = item.filter;
-    let menuItem = E(item.filter.disabled ? "contextEnableFilter" : "contextDisableFilter");
+    let menuItem = E(filter.disabled ? "contextEnableFilter" : "contextDisableFilter");
     menuItem.filter = filter;
     menuItem.setAttribute("label", menuItem.getAttribute("labeltempl").replace(/--/, filter.text));
     menuItem.hidden = false;
@@ -621,7 +624,7 @@ var treeView = {
 
   QueryInterface: function(uuid) {
     if (!uuid.equals(Ci.nsISupports) &&
-         !uuid.equals(Ci.nsITreeView))
+        !uuid.equals(Ci.nsITreeView))
     {
       throw Cr.NS_ERROR_NO_INTERFACE;
     }

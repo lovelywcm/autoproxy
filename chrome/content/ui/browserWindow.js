@@ -666,8 +666,7 @@ function toggleFilter(/**Filter*/ filter)
 }
 
 // Handle clicks on the statusbar panel
-function aupClickHandler(e)
-{
+function aupClickHandler(e) {
   if (e.button == 0)
     aupExecuteAction(prefs.defaultstatusbaraction, e);
   else if (e.button == 1) {

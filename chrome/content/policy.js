@@ -273,7 +273,7 @@ var policy =
       }
     }
 
-    aup.DataContainer.notifyListeners(wnd, "invalidate", data);
+    wndData.notifyListeners("invalidate", data);
   },
 
   // Calls refilterWindowInternal delayed to allow events to process

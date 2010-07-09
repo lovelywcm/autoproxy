@@ -31,8 +31,6 @@ const prefRoot = "extensions.autoproxy.";
 
 var prefService = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService);
 
-var ScriptableInputStream = Components.Constructor("@mozilla.org/scriptableinputstream;1", "nsIScriptableInputStream", "init");
-
 var prefs = {
   lastVersion: null,
   disableObserver: false,

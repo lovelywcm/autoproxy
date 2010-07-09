@@ -415,9 +415,16 @@ sub makeXPI
     }
   }
 
-  chdir('tmp');
-  print `zip -rX9 ../temp_xpi_file.xpi @files`;
-  chdir('..');
+  if (-f 'sign.pl')
+  {
+    system($^X, 'sign.pl', 'tmp',  'temp_xpi_file.xpi');
+  }
+  else
+  {
+    chdir('tmp');
+    print `zip -rDX ../temp_xpi_file.xpi @files`;
+    chdir('..');
+  }
 
   $self->fixZipPermissions("temp_xpi_file.xpi") if $^O =~ /Win32/i;
   

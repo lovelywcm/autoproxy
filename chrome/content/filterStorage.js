@@ -348,6 +348,9 @@ var filterStorage =
    */
   loadFromDisk: function()
   {
+    timeLine.start();
+    timeLine.log("Entered filterStorage.loadFromDisk()");
+
     this.subscriptions = [];
     this.knownSubscriptions = {__proto__: null};
 
@@ -378,6 +381,8 @@ var filterStorage =
     if (!this.file)
       dump("AutoProxy: Failed to resolve filter file location from extensions.autoproxy.patternsfile preference\n");
 
+    timeLine.log("* done locating patterns.ini file");
+
     let stream = null;
     try
     {
@@ -405,6 +410,8 @@ var filterStorage =
       stream.close();
     }
 
+    timeLine.log("* done parsing file");
+
     // Add missing special subscriptions if necessary
     for each (let specialSubscription in ["~il~", "~wl~", "~fl~", "~eh~"])
     {
@@ -426,9 +433,10 @@ var filterStorage =
       }
     }
 
-    timeLine.log("* loaded from disk");
+    timeLine.log("* load complete, calling observers");
     this.triggerSubscriptionObservers("reload", this.subscriptions);
-    timeLine.log("* called subscription observers (reload)");
+    timeLine.log("* filterStorage.loadFromDisk() done");
+    timeLine.stop;
   },
 
   /**

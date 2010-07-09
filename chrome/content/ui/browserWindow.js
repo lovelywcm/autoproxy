@@ -630,6 +630,8 @@ function aupToggleSidebar() {
       E("aup-sidebar-splitter").hidden = !sidebar.hidden;
       E("aup-sidebar-browser").setAttribute("src", sidebar.hidden ? "chrome://autoproxy/content/ui/sidebar.xul" : "about:blank");
       sidebar.hidden = !sidebar.hidden;
+      if (sidebar.hidden)
+        aupHooks.getBrowser().contentWindow.focus();
     }
     else
       window.aupDetachedSidebar = window.openDialog("chrome://autoproxy/content/ui/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no,width=600,height=300");

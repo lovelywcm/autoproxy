@@ -362,8 +362,11 @@ RequestEntry.prototype =
     if (this._nodes.length >= 20 && Date.now() - this._lastCompact >= 60000)   // Compact the list of nodes every minute
       this.nodes;
 
-    this._nodes.push(getWeakReference(node));
-    node[nodeDataProp] = this;
+    if (node instanceof Element)
+    {
+      this._nodes.push(getWeakReference(node));
+      node[nodeDataProp] = this;
+    }
   },
 
   /**
@@ -385,7 +388,7 @@ function getWeakReference(node)
 {
   // Store weak reference to the node itself rather than its wrapper - wrapper
   // will go away even if there are still references to the node
-  return Cu.getWeakReference(typeof node.wrappedJSObject == "undefined" ? node : node.wrappedJSObject);
+  return Cu.getWeakReference(node.QueryInterface(Ci.nsISupportsWeakReference));
 }
 
 

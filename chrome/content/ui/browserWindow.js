@@ -26,6 +26,7 @@
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
 var aupHideImageManager;
+var DataContainer = aup.DataContainer;
 
 /**
  * List of event handers to be registered. For each event handler the element ID,
@@ -437,10 +438,10 @@ function aupFillTooltip(event) {
   E("aup-tooltip-blocked").hidden = (state != "auto");
   if (state == "auto") {
     var locations = [];
-    var rootData = aup.getDataForWindow(window);
+    var rootData = DataContainer.getDataForWindow(window);
     var rootCurrentData = rootData.getLocation(6, aupHooks.getBrowser().currentURI.spec);
     if (rootCurrentData) locations.push(rootCurrentData);
-    var data = aup.getDataForWindow(aupHooks.getBrowser().contentWindow);
+    var data = DataContainer.getDataForWindow(aupHooks.getBrowser().contentWindow);
     data.getAllLocations(locations);
 
     var blocked = 0;

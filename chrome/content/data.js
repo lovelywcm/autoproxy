@@ -200,7 +200,6 @@ DataContainer.getDataForWindow = function(wnd, noInstall)
   else
     return null;
 };
-aup.getDataForWindow = DataContainer.getDataForWindow;
 
 /**
  * Retrieves the data entry associated with the document element.
@@ -225,7 +224,6 @@ DataContainer.getDataForNode = function(node, noParent)
 
   return null;
 };
-aup.getDataForNode = DataContainer.getDataForNode;
 
 /**
  * List of registered data listeners

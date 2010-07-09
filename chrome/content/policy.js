@@ -258,7 +258,7 @@ var policy =
     if (wnd.closed)
       return;
 
-    var wndData = aup.getDataForWindow(wnd);
+    var wndData = DataContainer.getDataForWindow(wnd);
     var data = wndData.getAllLocations();
     for (var i = start; i < data.length; i++) {
       if (i - start >= 20) {

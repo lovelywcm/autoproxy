@@ -125,7 +125,7 @@ var policy =
     //   * shouldLoad() doesn't check extension's request, any way to do this?
     //     * just like onChannelRedirect() did for 301/302 redirection.
     if (location == this.ContentURI) {
-      var data = DataContainer.getDataForWindow(wnd);
+      var data = RequestList.getDataForWindow(wnd);
       data.addNode(node, contentType, docDomain, thirdParty, locationText, match);
     }
 
@@ -221,7 +221,7 @@ var policy =
       for each (let context in contexts)
       {
         // Did we record the original request in its own window?
-        let data = DataContainer.getDataForWindow(context, true);
+        let data = RequestList.getDataForWindow(context, true);
         if (data)
           info = data.getURLInfo(oldChannel.originalURI.spec);
 
@@ -258,7 +258,7 @@ var policy =
     if (wnd.closed)
       return;
 
-    var wndData = DataContainer.getDataForWindow(wnd);
+    var wndData = RequestList.getDataForWindow(wnd);
     var data = wndData.getAllLocations();
     for (var i = start; i < data.length; i++) {
       if (i - start >= 20) {

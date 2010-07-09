@@ -22,7 +22,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-var DataContainer = aup.DataContainer;
+var RequestList = aup.RequestList;
 
 // Main browser window
 var mainWin = parent;
@@ -61,7 +61,7 @@ function init() {
   window.__defineGetter__("content", function() {return aupHooks.getBrowser().contentWindow;});
 
   // Install item listener
-  DataContainer.addListener(handleItemChange);
+  RequestList.addListener(handleItemChange);
 
   // Initialize matchers for disabled filters
   reloadDisabledFilters();
@@ -83,9 +83,9 @@ function init() {
   list.addEventListener("select", onSelectionChange, false);
 
   // Retrieve data for the window
-  wndData = DataContainer.getDataForWindow(window.content);
+  wndData = RequestList.getDataForWindow(window.content);
   var locations=[];
-  var rootCurrentData = DataContainer.getDataForWindow(mainWin)
+  var rootCurrentData = RequestList.getDataForWindow(mainWin)
           .getLocation(6, aupHooks.getBrowser().currentURI.spec);
   if(rootCurrentData) locations.push(rootCurrentData);
   treeView.setData(wndData.getAllLocations(locations));
@@ -110,7 +110,7 @@ function cleanUp() {
     return;
 
   flasher.stop();
-  DataContainer.removeListener(handleItemChange);
+  RequestList.removeListener(handleItemChange);
   filterStorage.removeFilterObserver(reloadDisabledFilters);
   filterStorage.removeSubscriptionObserver(reloadDisabledFilters);
 
@@ -176,7 +176,7 @@ function handleItemChange(wnd, type, data, item) {
     // We moved to a different document, reload list
     wndData = data;
     var locations=[];
-    var rootCurrentData = DataContainer.getDataForWindow(mainWin)
+    var rootCurrentData = RequestList.getDataForWindow(mainWin)
             .getLocation(6, aupHooks.getBrowser().currentURI.spec);
     if(rootCurrentData) locations.push(rootCurrentData);
     treeView.setData(wndData.getAllLocations(locations));
@@ -188,9 +188,9 @@ function handleItemChange(wnd, type, data, item) {
 }
 
 function handleTabChange() {
-  wndData = DataContainer.getDataForWindow(window.content);
+  wndData = RequestList.getDataForWindow(window.content);
   var locations=[];
-  var rootCurrentData = DataContainer.getDataForWindow(mainWin)
+  var rootCurrentData = RequestList.getDataForWindow(mainWin)
           .getLocation(6, aupHooks.getBrowser().currentURI.spec);
   if(rootCurrentData) locations.push(rootCurrentData);
   treeView.setData(wndData.getAllLocations(locations));

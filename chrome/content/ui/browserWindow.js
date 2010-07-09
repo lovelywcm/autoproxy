@@ -88,6 +88,50 @@ function aupInit() {
   window.aupDetachedSidebar = null;
   aupReloadPrefs();
 
+  // Copy the menu from status bar icon to the toolbar
+  function fixId(node)
+  {
+    if (node.nodeType != node.ELEMENT_NODE)
+      return node;
+
+    if ("id" in node && node.id)
+      node.id = node.id.replace(/aup-status/, "aup-toolbar");
+
+    for (var child = node.firstChild; child; child = child.nextSibling)
+      fixId(child);
+
+    return node;
+  }
+  function copyMenu(to)
+  {
+    if (!to || !to.firstChild)
+      return;
+
+    to = to.firstChild;
+    var from = E("aup-status-popup");
+    for (var node = from.firstChild; node; node = node.nextSibling)
+      to.appendChild(fixId(node.cloneNode(true)));
+  }
+  let paletteButton = aupGetPaletteButton();
+  copyMenu(E("aup-toolbarbutton"));
+  copyMenu(paletteButton);
+
+  // Palette button elements aren't reachable by ID, create a lookup table
+  let paletteButtonIDs = {};
+  if (paletteButton)
+  {
+    function getElementIds(element)
+    {
+      if (element.hasAttribute("id"))
+        paletteButtonIDs[element.getAttribute("id")] = element;
+
+      for (let child = element.firstChild; child; child = child.nextSibling)
+        if (child.nodeType == Ci.nsIDOMNode.ELEMENT_NODE)
+          getElementIds(child);
+    }
+    getElementIds(paletteButton);
+  }
+
   // Register event listeners
   window.addEventListener("unload", aupUnload, false);
   for each (let [id, event, handler] in eventHandlers)
@@ -95,6 +139,9 @@ function aupInit() {
     let element = E(id);
     if (element)
       element.addEventListener(event, handler, false);
+
+    if (id in paletteButtonIDs)
+      paletteButtonIDs[id].addEventListener(event, handler, false);
   }
 
   prefs.addListener(aupReloadPrefs);
@@ -139,31 +186,6 @@ function aupInit() {
   // Run application-specific initialization
   if (aupHooks.onInit)
     aupHooks.onInit();
-
-  // Copy the menu from status bar icon to the toolbar
-  var fixId = function(node) {
-    if (node.nodeType != node.ELEMENT_NODE)
-      return node;
-
-    if ("id" in node && node.id)
-      node.id = node.id.replace(/aup-status/, "aup-toolbar");
-
-    for (var child = node.firstChild; child; child = child.nextSibling)
-      fixId(child);
-
-    return node;
-  };
-  var copyMenu = function(to) {
-    if (!to || !to.firstChild)
-      return;
-
-    to = to.firstChild;
-    var from = E("aup-status-popup");
-    for (var node = from.firstChild; node; node = node.nextSibling)
-      to.appendChild(fixId(node.cloneNode(true)));
-  };
-  copyMenu(E("aup-toolbarbutton"));
-  copyMenu(aupGetPaletteButton());
 
   aup.runAsync(aupInitImageManagerHiding);
 }

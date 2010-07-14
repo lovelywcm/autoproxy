@@ -113,7 +113,8 @@ function aupInit() {
   }
   let paletteButton = aupGetPaletteButton();
   copyMenu(E("aup-toolbarbutton"));
-  copyMenu(paletteButton);
+  if (paletteButton != E("aup-toolbarbutton"))
+    copyMenu(paletteButton);
 
   // Palette button elements aren't reachable by ID, create a lookup table
   let paletteButtonIDs = {};

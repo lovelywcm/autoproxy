@@ -76,7 +76,7 @@ aupInit();
 
 function aupInit() {
   // Initialize app hooks
-  for each (let hook in ["getBrowser", "addTab", "onInit"])
+  for each (let hook in ["getBrowser", "addTab"])
   {
     let handler = aupHooks.getAttribute(hook);
     if (handler)
@@ -182,10 +182,6 @@ function aupInit() {
     // Show subscriptions dialog if the user doesn't have any subscriptions yet
     aup.runAsync(aupShowSubscriptions);
   }
-
-  // Run application-specific initialization
-  if (aupHooks.onInit)
-    aupHooks.onInit();
 
   aup.runAsync(aupInitImageManagerHiding);
 }

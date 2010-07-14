@@ -263,7 +263,7 @@ sub makeJAR
 
   chdir('tmp');
   $self->fixLocales();
-  print `zip -rX0 $jarFile @include`;
+  system('zip', '-rXD0', $jarFile, @include);
   chdir('..');
 
   rename("tmp/$jarFile", "$jarFile");
@@ -436,7 +436,7 @@ sub makeXPI
   }
 
   chdir('tmp');
-  print `zip -rDX9 ../temp_xpi_file.xpi @files`;
+  system('zip', '-rDX9', '../temp_xpi_file.xpi', @files);
   chdir('..');
 
   $self->fixZipPermissions("temp_xpi_file.xpi") if $^O =~ /Win32/i;

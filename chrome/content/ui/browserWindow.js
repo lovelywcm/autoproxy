@@ -614,19 +614,6 @@ function aupFillPopup(event) {
   popup.insertBefore(document.createElement("menuseparator"), popup.firstChild.nextSibling);
 }
 
-// Only show context menu on toolbar button in vertical toolbars
-function aupCheckToolbarContext(event) {
-  var toolbox = event.target;
-  while (toolbox && toolbox.tagName != "toolbox")
-    toolbox = toolbox.parentNode;
-
-  if (!toolbox || toolbox.getAttribute("vertical") != "true")
-    return;
-
-  event.target.open = true;
-  event.preventDefault();
-}
-
 function aupIsSidebarOpen() {
   // Test whether detached sidebar window is open
   if (window.aupDetachedSidebar && !window.aupDetachedSidebar.closed)

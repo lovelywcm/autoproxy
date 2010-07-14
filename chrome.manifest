@@ -9,3 +9,12 @@ content   autoproxy jar:chrome/autoproxy.jar!/content/
 skin      autoproxy classic/1.0 jar:chrome/autoproxy.jar!/skin/
 style     chrome://global/content/customizeToolbar.xul  chrome://autoproxy/skin/overlay.css
 locale    autoproxy {{LOCALE}} jar:chrome/autoproxy.jar!/locale/{{LOCALE}}/
+
+component {6b6b24d0-63c3-11de-8a39-0800200c9a66} components/AutoProxy.js
+contract @autoproxy.org/aup/startup;1 {6b6b24d0-63c3-11de-8a39-0800200c9a66}
+category profile-after-change @autoproxy.org/aup/startup;1 @autoproxy.org/aup/startup;1
+component {7FCE727A-028D-11DE-9E0F-298E56D89593} components/AutoProxy.js
+contract @mozilla.org/autoproxy;1 {7FCE727A-028D-11DE-9E0F-298E56D89593}
+category content-policy AUPComponent @mozilla.org/autoproxy;1
+category net-channel-event-sinks AUPComponent @mozilla.org/autoproxy;1
+

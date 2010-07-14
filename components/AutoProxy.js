@@ -67,14 +67,15 @@ Initializer.prototype =
 
   observe: function(subject, topic, data)
   {
+    let observerService = Cc["@mozilla.org/observer-service;1"].getService(Ci.nsIObserverService);
     switch (topic)
     {
       case "app-startup":
-        let observerService = Cc["@mozilla.org/observer-service;1"].getService(Ci.nsIObserverService);
         observerService.addObserver(this, "profile-after-change", true);
         observerService.addObserver(this, "quit-application", true);
         break;
       case "profile-after-change":
+        observerService.addObserver(this, "quit-application", true);
         aup.init();
         break;
       case "quit-application":
@@ -472,8 +473,10 @@ aup.wrappedJSObject = aup;
  */
 function AUPComponent() {}
 AUPComponent.prototype = aup;
-var NSGetModule = XPCOMUtils.generateNSGetModule([Initializer, AUPComponent]);
-
+if (XPCOMUtils.generateNSGetFactory)
+    var NSGetFactory = XPCOMUtils.generateNSGetFactory([Initializer, AUPComponent]);
+else
+    var NSGetModule = XPCOMUtils.generateNSGetModule([Initializer, AUPComponent]);
 /*
  * Core Routines
  */

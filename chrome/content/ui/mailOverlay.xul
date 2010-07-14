@@ -42,13 +42,13 @@
     <statusbarpanel id="aup-status"/>
   </statusbar> 
 
-  <!-- Thunderbird toolbar -->
+  <!-- toolbar -->
   <toolbarpalette id="MailToolbarPalette">
     <toolbarbutton id="aup-toolbarbutton" type="menu-button" insertafter="button-junk"
         class="chromeclass-toolbar-additional toolbarbutton-1 seamonkeyHack2"/>
   </toolbarpalette>
 
-  <!-- Thunderbird/SeaMonkey Mail tools menu -->
+  <!-- tools menu -->
   <menupopup id="taskPopup">
     <menuitem id="aup-menuitem" insertafter="downloadmgr,javaScriptConsole"/>
   </menupopup>

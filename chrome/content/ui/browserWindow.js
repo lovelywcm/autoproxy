@@ -25,7 +25,6 @@
 
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
-var aupHideImageManager;
 var RequestList = aup.RequestList;
 
 /**
@@ -274,23 +273,40 @@ function aupReloadPrefs() {
   updateElement(aupGetPaletteButton());
 }
 
-function aupInitImageManagerHiding() {
-  if (!aup || typeof aupHideImageManager != "undefined")
-    return;
+/**
+ * Tests whether image manager context menu entry should be hidden with user's current preferences.
+ * @return Boolean
+ */
+function shouldHideImageManager()
+{
+  if (typeof arguments.callee._result != "undefined")
+    return arguments.callee._result;
 
-  aupHideImageManager = false;
-  if (prefs.hideimagemanager && "@mozilla.org/permissionmanager;1" in Cc) {
-    try {
-      aupHideImageManager = true;
-      var permissionManager = Cc["@mozilla.org/permissionmanager;1"].getService(Ci.nsIPermissionManager);
-      var enumerator = permissionManager.enumerator;
-      while (aupHideImageManager && enumerator.hasMoreElements()) {
-        var item = enumerator.getNext().QueryInterface(Ci.nsIPermission);
+  let result = false;
+  if (prefs.hideimagemanager && "@mozilla.org/permissionmanager;1" in Cc)
+  {
+    try
+    {
+      result = true;
+      let enumerator = Cc["@mozilla.org/permissionmanager;1"].getService(Ci.nsIPermissionManager).enumerator;
+      while (enumerator.hasMoreElements())
+      {
+        let item = enumerator.getNext().QueryInterface(Ci.nsIPermission);
         if (item.type == "image" && item.capability == Ci.nsIPermissionManager.DENY_ACTION)
-          aupHideImageManager = false;
+        {
+          result = false;
+          break;
+        }
       }
-    } catch(e) {}
+    }
+    catch(e)
+    {
+      result = false;
+    }
   }
+
+  arguments.callee._result = result;
+  return result;
 }
 
 function aupConfigureKey(key, value) {

@@ -34,7 +34,7 @@
     <commandset id="aup-commandset"/>
     <box id="aup-hooks" getBrowser="return window.messageContent;"
       getToolbox="return E('mail-toolbox')"
-      getDefaultToolbar="return E('mail-bar2');" toolbarInsertBefore="return E('button-junk');"/>
+      getDefaultToolbar="return E('mail-bar2') || E('msgToolbar');" toolbarInsertBefore="return E('button-junk');"/>
   </window>
 
   <!-- Status bar -->

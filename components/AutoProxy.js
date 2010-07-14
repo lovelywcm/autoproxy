@@ -433,11 +433,7 @@ const aup =
                     windowMediator.getMostRecentWindow("Songbird:Main") ||
                     windowMediator.getMostRecentWindow("emusic:window");
     let aupHooks = currentWindow ? currentWindow.document.getElementById("aup-hooks") : null;
-    if (aupHooks && aupHooks.addTab)
-    {
-      aupHooks.addTab(url);
-    }
-    else
+    if (!aupHooks || !aupHooks.addTab || aupHooks.addTab(url) === false)
     {
       let protocolService = Cc["@mozilla.org/uriloader/external-protocol-service;1"].getService(Ci.nsIExternalProtocolService);
       protocolService.loadURI(makeURL(url), null);

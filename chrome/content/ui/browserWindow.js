@@ -437,7 +437,9 @@ function aupShowSubscriptions()
   for each (let subscription in filterStorage.subscriptions)
     if (subscription instanceof aup.DownloadableSubscription)
       return;
-  window.openDialog("chrome://autoproxy/content/ui/tip_subscriptions.xul", "_blank", "chrome,centerscreen,resizable,dialog=no");
+
+  if (!aupHooks.addTab || aupHooks.addTab("chrome://autoproxy/content/ui/tip_subscriptions.xul") === false)
+    window.openDialog("chrome://autoproxy/content/ui/tip_subscriptions.xul", "_blank", "chrome,centerscreen,resizable,dialog=no");
 }
 
 function aupFillTooltip(event) {

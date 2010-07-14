@@ -8,6 +8,8 @@ overlay   chrome://browser/content/preferences/preferences.xul  chrome://autopro
 content   autoproxy jar:chrome/autoproxy.jar!/content/
 skin      autoproxy classic/1.0 jar:chrome/autoproxy.jar!/skin/
 style     chrome://global/content/customizeToolbar.xul  chrome://autoproxy/skin/overlay.css
+style     chrome://autoproxy/content/ui/seamonkeyOverlay.xul chrome://autoproxy/skin/seaMonkeyHack.css application={92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}
+style     chrome://autoproxy/content/ui/mailOverlay.xul chrome://autoproxy/skin/seaMonkeyHack.css application={92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}
 locale    autoproxy {{LOCALE}} jar:chrome/autoproxy.jar!/locale/{{LOCALE}}/
 
 component {6b6b24d0-63c3-11de-8a39-0800200c9a66} components/AutoProxy.js

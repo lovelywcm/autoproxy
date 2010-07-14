@@ -44,19 +44,6 @@
   display: none;
 }
 
-#aup-toolbarbutton.seamonkeyHack .toolbarbutton-icon
-{
-  margin-top: 5px;
-}
-#aup-toolbarbutton.seamonkeyHack > .toolbarbutton-menubutton-stack > .toolbarbutton-menubutton-dropmarker
-{
-  margin-bottom: 0px;
-}
-#aup-toolbarbutton.seamonkeyHack2 .toolbarbutton-menubutton-button
-{
-  -moz-box-orient: vertical;
-}
-
 toolbar[iconsize="small"] #aup-toolbarbutton,
 #PersonalToolbar #aup-toolbarbutton,
 #aup-status image {

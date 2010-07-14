@@ -36,6 +36,7 @@
     <box id="aup-hooks"
       getBrowser="return window.gBrowser;"
       addTab="window.gBrowser.loadOneTab(arguments[0], null, null, null, false);"
+      getToolbox="return E('navigator-toolbox')"
       getDefaultToolbar="return E('nav-bar');"/>
   </window>
 
@@ -47,6 +48,7 @@
     <box id="aup-hooks"
       getBrowser="return window.gBrowser;"
       addTab="window.gBrowser.loadOneTab(arguments[0], null, null, null, false);"
+      getToolbox="return E('navigator-toolbox')"
       getDefaultToolbar="return E('nav-bar');"/>
   </sb-support>
 

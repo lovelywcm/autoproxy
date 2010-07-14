@@ -76,7 +76,7 @@ aupInit();
 
 function aupInit() {
   // Initialize app hooks
-  for each (let hook in ["getBrowser", "addTab", "getDefaultToolbar", "toolbarInsertBefore"])
+  for each (let hook in ["getBrowser", "addTab", "getToolbox", "getDefaultToolbar", "toolbarInsertBefore"])
   {
     let handler = aupHooks.getAttribute(hook);
     if (handler)
@@ -355,8 +355,9 @@ function handleLinkClick(/**Event*/ event)
 }
 
 // Finds the toolbar button in the toolbar palette
-function aupGetPaletteButton() {
-  var toolbox = E("navigator-toolbox") || E("mail-toolbox");
+function aupGetPaletteButton()
+{
+  let toolbox = (aupHooks.getToolbox ? aupHooks.getToolbox() : null);
   if (!toolbox || !("palette" in toolbox) || !toolbox.palette)
     return null;
 

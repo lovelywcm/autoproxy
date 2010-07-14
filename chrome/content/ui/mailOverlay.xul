@@ -33,6 +33,7 @@
     <keyset id="aup-keyset"/>
     <commandset id="aup-commandset"/>
     <box id="aup-hooks" getBrowser="return window.messageContent;"
+      getToolbox="return E('mail-toolbox')"
       getDefaultToolbar="return E('mail-bar2');" toolbarInsertBefore="return E('button-junk');"/>
   </window>
 

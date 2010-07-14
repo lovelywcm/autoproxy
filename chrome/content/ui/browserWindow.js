@@ -82,7 +82,6 @@ function aupInit() {
     if (handler)
       aupHooks[hook] = new Function(handler);
   }
-  aupHooks.hasToolbar = (aupHooks.getAttribute("hasToolbar") == "true");
 
   // Process preferences
   window.aupDetachedSidebar = null;
@@ -217,7 +216,7 @@ function aupReloadPrefs() {
       element.hidden = !prefs.showintoolbar;
 
     // HACKHACK: Show status bar icon instead of toolbar icon if the application doesn't have a toolbar icon
-    if (element.hidden && element.tagName == "statusbarpanel" && !aupHooks.hasToolbar)
+    if (element.hidden && element.tagName == "statusbarpanel" && !aupHooks.getDefaultToolbar)
       element.hidden = !prefs.showintoolbar;
 
     if (currentlyShowingInToolbar != prefs.showintoolbar)

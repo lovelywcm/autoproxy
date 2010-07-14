@@ -35,7 +35,8 @@
     <commandset id="aup-commandset"/>
     <box id="aup-hooks" hasToolbar="true"
       getBrowser="return window.gBrowser;"
-      addTab="window.gBrowser.addTab(arguments[0], null, null, true);"/>
+      addTab="window.gBrowser.addTab(arguments[0], null, null, true);"
+      getDefaultToolbar="return E('PersonalToolbar');"  toolbarInsertBefore="return E('bookmarks-button');"/>
   </window>
 
   <!-- Status bar -->

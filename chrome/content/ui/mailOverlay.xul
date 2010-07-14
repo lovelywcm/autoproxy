@@ -32,7 +32,8 @@
     <popupset id="aup-popupset"/>
     <keyset id="aup-keyset"/>
     <commandset id="aup-commandset"/>
-    <box id="aup-hooks" getBrowser="return window.messageContent;"/>
+    <box id="aup-hooks" getBrowser="return window.messageContent;"
+      getDefaultToolbar="return E('mail-bar2');" toolbarInsertBefore="return E('button-junk');"/>
   </window>
 
   <!-- Status bar -->

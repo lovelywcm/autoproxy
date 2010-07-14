@@ -76,7 +76,7 @@ aupInit();
 
 function aupInit() {
   // Initialize app hooks
-  for each (let hook in ["getBrowser", "addTab"])
+  for each (let hook in ["getBrowser", "addTab", "getDefaultToolbar", "toolbarInsertBefore"])
   {
     let handler = aupHooks.getAttribute(hook);
     if (handler)
@@ -369,17 +369,15 @@ function aupGetPaletteButton() {
 }
 
 // Check whether we installed the toolbar button already
-function aupInstallInToolbar() {
-  if (!E("aup-toolbarbutton")) {
-    var insertBeforeBtn = null;
-    var toolbar = E("nav-bar");
-    if (!toolbar) {
-      insertBeforeBtn = "button-junk";
-      toolbar = E("mail-bar");
-    }
-
-    if (toolbar && "insertItem" in toolbar) {
-      var insertBefore = (insertBeforeBtn ? E(insertBeforeBtn) : null);
+function aupInstallInToolbar()
+{
+  let tb = E("aup-toolbarbutton");
+  if (!tb || tb.parentNode.localName == "toolbarpalette")
+  {
+    let toolbar = (aupHooks.getDefaultToolbar ? aupHooks.getDefaultToolbar() : null);
+    let insertBefore = (aupHooks.toolbarInsertBefore ? aupHooks.toolbarInsertBefore() : null);
+    if (toolbar && "insertItem" in toolbar)
+    {
       if (insertBefore && insertBefore.parentNode != toolbar)
         insertBefore = null;
 

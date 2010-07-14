@@ -216,7 +216,7 @@ var synchronizer =
     subscription.nextURL = null;
 
     let curVersion = aup.getInstalledVersion();
-    let loadFrom = (newURL || url).replace(/%VERSION%/, "ABP" + curVersion);
+    let loadFrom = (newURL || url).replace(/%VERSION%/, "AUP" + curVersion);
 
     let request = null;
     try {

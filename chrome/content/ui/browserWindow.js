@@ -182,22 +182,29 @@ function aupInit() {
   }
 
   // Window-specific first run actions
-  if (!("doneFirstRunActions_" + window.location.href in prefs))
+  if (!("doneFirstRunActions " + window.location.href in prefs))
   {
     // Don't repeat first run actions for this window any more
-    prefs["doneFirstRunActions_" + window.location.href] = true;
+    prefs["doneFirstRunActions " + window.location.href] = true;
 
-    let needInstall = (aup.versionComparator.compare(prefs.lastVersion, "0.0") <= 0);
-    if (!needInstall)
+    let lastVersion = aupHooks.getAttribute("currentVersion") || "0.0";
+    if (lastVersion != prefs.currentVersion)
     {
-      // Before version 1.1 we didn't add toolbar icon in SeaMonkey, do it now
-      needInstall = aup.versionComparator.compare(prefs.lastVersion, "1.1") < 0 &&
-                    Cc["@mozilla.org/xre/app-info;1"].getService(Ci.nsIXULAppInfo).ID == "{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}";
-    }
+      aupHooks.setAttribute("currentVersion", prefs.currentVersion);
+      document.persist("aup-hooks", "currentVersion");
 
-    // Add AUP icon to toolbar if necessary
-    if (needInstall)
-      aup.runAsync(aupInstallInToolbar);
+      let needInstall = (aup.versionComparator.compare(lastVersion, "0.0") <= 0);
+      if (!needInstall)
+      {
+        // Before version 1.1 we didn't add toolbar icon in SeaMonkey, do it now
+        needInstall = aup.versionComparator.compare(lastVersion, "1.1") < 0 &&
+                      Cc["@mozilla.org/xre/app-info;1"].getService(Ci.nsIXULAppInfo).ID == "{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}";
+      }
+
+      // Add AUP icon to toolbar if necessary
+      if (needInstall)
+        aup.runAsync(aupInstallInToolbar);
+    }
   }
 
   aup.runAsync(aupInitImageManagerHiding);

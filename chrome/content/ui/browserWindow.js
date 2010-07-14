@@ -176,20 +176,28 @@ function aupInit() {
     // Don't repeat first run actions if new window is opened
     prefs.doneFirstRunActions = true;
 
+    // Show subscriptions dialog if the user doesn't have any subscriptions yet
     if (aup.versionComparator.compare(prefs.lastVersion, "0.0") <= 0)
-    {
-      // Add AUP icon to toolbar if necessary
-      aup.runAsync(aupInstallInToolbar);
-
-      // Show subscriptions dialog if the user doesn't have any subscriptions yet
       aup.runAsync(aupShowSubscriptions);
-    }
-    else if (aup.versionComparator.compare(prefs.lastVersion, "1.1") < 0 &&
-             Cc["@mozilla.org/xre/app-info;1"].getService(Ci.nsIXULAppInfo).ID == "{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}")
+  }
+
+  // Window-specific first run actions
+  if (!("doneFirstRunActions_" + window.location.href in prefs))
+  {
+    // Don't repeat first run actions for this window any more
+    prefs["doneFirstRunActions_" + window.location.href] = true;
+
+    let needInstall = (aup.versionComparator.compare(prefs.lastVersion, "0.0") <= 0);
+    if (!needInstall)
     {
       // Before version 1.1 we didn't add toolbar icon in SeaMonkey, do it now
-      aup.runAsync(aupInstallInToolbar);
+      needInstall = aup.versionComparator.compare(prefs.lastVersion, "1.1") < 0 &&
+                    Cc["@mozilla.org/xre/app-info;1"].getService(Ci.nsIXULAppInfo).ID == "{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}";
     }
+
+    // Add AUP icon to toolbar if necessary
+    if (needInstall)
+      aup.runAsync(aupInstallInToolbar);
   }
 
   aup.runAsync(aupInitImageManagerHiding);
@@ -395,33 +403,6 @@ function aupInstallInToolbar()
 
       toolbar.setAttribute("currentset", toolbar.currentSet);
       document.persist(toolbar.id, "currentset");
-
-      // HACKHACK: Make sure icon is added to both main window and message window in Thunderbird
-      var override = null;
-      if (window.location.href == "chrome://messenger/content/messenger.xul")
-        override = "chrome://messenger/content/messageWindow.xul#mail-bar";
-      else if (window.location.href == "chrome://messenger/content/messageWindow.xul")
-        override = "chrome://messenger/content/messenger.xul#mail-bar";
-
-      if (override) {
-        try {
-          var rdf = Cc["@mozilla.org/rdf/rdf-service;1"].getService(Ci.nsIRDFService);
-          var localstore = rdf.GetDataSource("rdf:local-store");
-          var resource = rdf.GetResource(override);
-          var arc = rdf.GetResource("currentset");
-          var target = localstore.GetTarget(resource, arc, true);
-          var currentSet = (target ? target.QueryInterface(Ci.nsIRDFLiteral).Value : E('mail-bar').getAttribute("defaultset"));
-
-          if (/\bbutton-junk\b/.test(currentSet))
-            currentSet = currentSet.replace(/\bbutton-junk\b/, "aup-toolbarbutton,button-junk");
-          else
-            currentSet = currentSet + ",aup-toolbarbutton";
-
-          if (target)
-            localstore.Unassert(resource, arc, target, true);
-          localstore.Assert(resource, arc, rdf.GetLiteral(currentSet), true);
-        } catch (e) {}
-      }
     }
   }
 }

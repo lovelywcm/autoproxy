@@ -125,7 +125,7 @@ RequestList.prototype = {
     let entry;
     let isNew = !(key in this.entries);
     if (isNew)
-      this.entries[key] = this.urls[location] = entry = new RequestEntry(contentType, docDomain, thirdParty, location);
+      this.entries[key] = this.urls[location] = entry = new RequestEntry(key, contentType, docDomain, thirdParty, location);
     else
       entry = this.entries[key];
 
@@ -244,8 +244,13 @@ RequestList.getDataForNode = function(node, noParent)
 {
   while (node)
   {
-    if (nodeDataProp in node)
-      return [node, node[nodeDataProp]];
+    let entryKey = node.getUserData(nodeDataProp);
+    if (entryKey)
+    {
+      let data = RequestList.getDataForWindow(node.ownerDocument.defaultView, true);
+      if (data && entryKey in data.entries)
+      return [node, data.entries[entryKey]];
+    }
 
     if (typeof noParent == "boolean" && noParent)
       return null;
@@ -284,9 +289,10 @@ RequestList.removeListener = function(/**Function*/ listener)
       RequestList._listeners.splice(i--, 1);
 };
 
-function RequestEntry(contentType, docDomain, thirdParty, location)
+function RequestEntry(key, contentType, docDomain, thirdParty, location)
 {
   this._nodes = [];
+  this.key = key;
   this.type = contentType;
   this.docDomain = docDomain;
   this.thirdParty = thirdParty;
@@ -316,6 +322,11 @@ RequestEntry.prototype =
    * @type Integer
    */
   lastUpdate: 0,
+  /**
+   * ID of this entry in document's list
+   * @type String
+   */
+  key: null,
   /**
    * Content type of the request (one of the nsIContentPolicy constants)
    * @type Integer
@@ -395,9 +406,10 @@ RequestEntry.prototype =
   addNode: function(/**Node*/ node)
   {
     // If we had this node already - remove it from its old data entry first
-    if (nodeDataProp in node)
+    let oldEntry = RequestList.getDataForNode(node, true);
+    if (oldEntry)
     {
-      let oldEntry = node[nodeDataProp];
+      oldEntry = oldEntry[1];
       let index = oldEntry.nodes.indexOf(node);
       if (index >= 0)
         oldEntry._nodes.splice(index, 1);
@@ -408,7 +420,7 @@ RequestEntry.prototype =
     else
       this.lastUpdate = Date.now();
 
-    node[nodeDataProp] = this;
+    node.setUserData(nodeDataProp, this.key, null);
 
     let weakRef = getWeakReference(node);
     if (weakRef)

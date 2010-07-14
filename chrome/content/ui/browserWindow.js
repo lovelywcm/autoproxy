@@ -171,16 +171,25 @@ function aupInit() {
   } catch(e) {}
 
   // First run actions
-  if (!("doneFirstRunActions" in prefs) && aup.versionComparator.compare(prefs.lastVersion, "0.0") <= 0)
+  if (!("doneFirstRunActions" in prefs))
   {
     // Don't repeat first run actions if new window is opened
     prefs.doneFirstRunActions = true;
 
-    // Add AUP icon to toolbar if necessary
-    aup.runAsync(aupInstallInToolbar);
+    if (aup.versionComparator.compare(prefs.lastVersion, "0.0") <= 0)
+    {
+      // Add AUP icon to toolbar if necessary
+      aup.runAsync(aupInstallInToolbar);
 
-    // Show subscriptions dialog if the user doesn't have any subscriptions yet
-    aup.runAsync(aupShowSubscriptions);
+      // Show subscriptions dialog if the user doesn't have any subscriptions yet
+      aup.runAsync(aupShowSubscriptions);
+    }
+    else if (aup.versionComparator.compare(prefs.lastVersion, "1.1") < 0 &&
+             Cc["@mozilla.org/xre/app-info;1"].getService(Ci.nsIXULAppInfo).ID == "{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}")
+    {
+      // Before version 1.1 we didn't add toolbar icon in SeaMonkey, do it now
+      aup.runAsync(aupInstallInToolbar);
+    }
   }
 
   aup.runAsync(aupInitImageManagerHiding);

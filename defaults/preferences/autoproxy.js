@@ -1,5 +1,6 @@
 // For description of these values see http://autoproxy.org/en/preferences
 
+pref("extensions.autoproxy.clearStatsOnHistoryPurge", true);
 pref("extensions.autoproxy.composer_default", 2);
 pref("extensions.autoproxy.currentVersion", "0.0");
 pref("extensions.autoproxy.defaultstatusbaraction", 4);

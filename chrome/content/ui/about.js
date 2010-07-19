@@ -25,4 +25,7 @@
 function fillInVersion() {
   var versionField = document.getElementById("version");
   versionField.value = aup.getInstalledVersion();
+
+  // Work-around for bug 494901, change align attribute to ensure correct positioning
+  versionField.parentNode.setAttribute("align", "baseline");
 }

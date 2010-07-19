@@ -100,7 +100,7 @@ const aup =
         throw Cr.NS_ERROR_NO_AGGREGATION;
 
       if (!aup.initialized)
-        throw Cr.NS_ERROR_NOT_INITIALIZED;
+        aup.init();
 
       return aup.QueryInterface(iid);
     }
@@ -309,11 +309,11 @@ const aup =
    */
   init: function()
   {
-    timeLine.enter("Entered aup.init()");
-
     if (this.initialized)
       return;
     this.initialized = true;
+
+    timeLine.enter("Entered aup.init()");
 
     loader.loadSubScript('chrome://autoproxy/content/utils.js');
     loader.loadSubScript('chrome://autoproxy/content/filterClasses.js');

@@ -650,7 +650,7 @@ function aupToggleSidebar() {
         aupHooks.getBrowser().contentWindow.focus();
     }
     else
-      window.aupDetachedSidebar = window.openDialog("chrome://autoproxy/content/ui/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no,width=600,height=300");
+      window.aupDetachedSidebar = window.openDialog("chrome://autoproxy/content/ui/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no");
   }
 
   let menuItem = E("aup-blockableitems");

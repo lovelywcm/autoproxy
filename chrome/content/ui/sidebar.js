@@ -495,11 +495,11 @@ function detach() {
 
   // Calculate default position for the detached window
   var boxObject = document.documentElement.boxObject;
-  var position = ",left="+boxObject.screenX+",top="+boxObject.screenY+",outerWidth="+boxObject.width+",outerHeight="+boxObject.height;
+  var position = {screenX: boxObject.screenX, screenY: boxObject.screenY, width: boxObject.width, height: boxObject.height};
 
   // Close sidebar and open detached window
   mainWin.document.getElementById("aup-command-sidebar").doCommand();
-  mainWin.aupDetachedSidebar = mainWin.openDialog("chrome://autoproxy/content/ui/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no"+position);
+  mainWin.aupDetachedSidebar = mainWin.openDialog("chrome://autoproxy/content/ui/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no", position);
 
   // Save setting
   prefs.detachsidebar = true;

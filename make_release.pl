@@ -20,17 +20,6 @@ close(VERSION);
 @ARGV = ("../downloads/autoproxy-$version.xpi");
 do './create_xpi.pl';
 
-opendir(LOCALES, "chrome/locale");
-my @locales = grep {!/[^\w\-]/ && !-e("chrome/locale/$_/.incomplete")} readdir(LOCALES);
-closedir(LOCALES);
-
-# Create new single-locale builds
-for my $locale (@locales)
-{
-  @ARGV = ("../downloads/autoproxy-$version-$locale.xpi", $locale);
-  do './create_xpi.pl';
-}
-
 chdir('..');
 system("hg add downloads/autoproxy-$version.xpi");
 system(qq(hg commit -m "Releasing AutoProxy $version" downloads src));

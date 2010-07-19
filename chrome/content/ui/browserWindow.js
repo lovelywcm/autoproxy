@@ -37,7 +37,7 @@ let eventHandlers = [
   ["aup-status-popup", "popupshowing", aupFillPopup],
   ["aup-toolbar-popup", "popupshowing", aupFillPopup],
   ["aup-command-settings", "command", function() { aup.openSettingsDialog(); }],
-  ["aup-command-sidebar", "command", aupToggleSidebar],
+  ["aup-command-sidebar", "command", toggleSidebar],
   ["aup-command-togglesitewhitelist", "command", function() { toggleFilter(siteWhitelist); }],
   ["aup-command-toggleshowintoolbar", "command", function() { aupTogglePref("showintoolbar"); }],
   ["aup-command-toggleshowinstatusbar", "command", function() { aupTogglePref("showinstatusbar"); }],
@@ -71,6 +71,12 @@ let progressListener = null;
  */
 let aupHooks = E("aup-hooks");
 
+/**
+ * Window of the detached list of blockable items (might be null or closed).
+ * @type nsIDOMWindow
+ */
+let detachedSidebar = null;
+
 aupInit();
 
 function aupInit() {
@@ -83,7 +89,6 @@ function aupInit() {
   }
 
   // Process preferences
-  window.aupDetachedSidebar = null;
   aupReloadPrefs();
 
   // Copy the menu from status bar icon to the toolbar
@@ -630,19 +635,25 @@ function aupFillPopup(event) {
 
 function aupIsSidebarOpen() {
   // Test whether detached sidebar window is open
-  if (window.aupDetachedSidebar && !window.aupDetachedSidebar.closed)
+  if (detachedSidebar && !detachedSidebar.closed)
     return true;
 
   var sidebar = E("aup-sidebar");
   return (sidebar ? !sidebar.hidden : false);
 }
 
-function aupToggleSidebar() {
-  if (window.aupDetachedSidebar && !window.aupDetachedSidebar.closed)
-    window.aupDetachedSidebar.close();
-  else {
+function toggleSidebar()
+{
+  if (detachedSidebar && !detachedSidebar.closed)
+  {
+    detachedSidebar.close();
+    detachedSidebar = null;
+  }
+  else
+  {
     var sidebar = E("aup-sidebar");
-    if (sidebar && (!prefs.detachsidebar || !sidebar.hidden)) {
+    if (sidebar && (!prefs.detachsidebar || !sidebar.hidden))
+    {
       E("aup-sidebar-splitter").hidden = !sidebar.hidden;
       E("aup-sidebar-browser").setAttribute("src", sidebar.hidden ? "chrome://autoproxy/content/ui/sidebar.xul" : "about:blank");
       sidebar.hidden = !sidebar.hidden;
@@ -650,7 +661,7 @@ function aupToggleSidebar() {
         aupHooks.getBrowser().contentWindow.focus();
     }
     else
-      window.aupDetachedSidebar = window.openDialog("chrome://autoproxy/content/ui/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no");
+      detachedSidebar = window.openDialog("chrome://autoproxy/content/ui/sidebarDetached.xul", "_blank", "chrome,resizable,dependent,dialog=no");
   }
 
   let menuItem = E("aup-blockableitems");
@@ -709,7 +720,7 @@ function aupExecuteAction(action, e)
       aupFillPopup(e);
       break;
     case 1: //proxyable items
-      aupToggleSidebar();
+      toggleSidebar();
       break;
     case 2: //preference
       aup.openSettingsDialog();

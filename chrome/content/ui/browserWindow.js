@@ -205,8 +205,6 @@ function aupInit() {
         aup.runAsync(aupInstallInToolbar);
     }
   }
-
-  aup.runAsync(aupInitImageManagerHiding);
 }
 
 function aupUnload()

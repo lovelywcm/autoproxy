@@ -125,9 +125,8 @@ var prefs = {
   // Reloads the preferences
   reload: function() {
     // Load data from prefs.js
-    for each (var pref in this.prefList)
-      this.loadPref(pref);
-
+    for (let i = 0; i < this.prefList.length; i++)
+      this.loadPref(this.prefList[i]);
 
     // Fire pref listeners
     for each (var listener in this.listeners)
@@ -138,8 +137,8 @@ var prefs = {
   save: function() {
     this.disableObserver = true;
 
-    for each (var pref in this.prefList)
-      this.savePref(pref);
+    for (let i = 0; i < this.prefList.length; i++)
+      this.savePref(this.prefList[i]);
 
     this.disableObserver = false;
 

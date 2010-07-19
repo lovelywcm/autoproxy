@@ -379,5 +379,4 @@ var synchronizer =
   }
 };
 
-synchronizer.init();
 aup.synchronizer = synchronizer;

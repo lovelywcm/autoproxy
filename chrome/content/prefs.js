@@ -97,6 +97,9 @@ var prefs = {
       this.currentVersion = aup.getInstalledVersion();
       this.save();
     }
+
+    // Add observers for pref changes
+    prefs.addObservers();
   },
 
   // Loads a pref and stores it as a property of the object
@@ -178,5 +181,4 @@ var prefs = {
   QueryInterface: XPCOMUtils.generateQI([Ci.nsISupportsWeakReference, Ci.nsIObserver])
 };
 
-prefs.addObservers();
 aup.prefs = prefs;

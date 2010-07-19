@@ -330,6 +330,9 @@ const aup =
     timeLine.log("calling prefs.init()");
     prefs.init();
 
+    timeLine.log("calling filterListener.init()");
+    filterListener.init();
+
     timeLine.log("calling proxy.init()");
     proxy.init();
 
@@ -338,6 +341,9 @@ const aup =
 
     timeLine.log("calling policy.init()");
     policy.init();
+
+    timeLine.log("calling synchronizer.init()");
+    synchronizer.init();
 
     timeLine.leave("aup.init() done");
   },

@@ -165,5 +165,3 @@ var filterListener =
     }
   }
 };
-
-filterListener.init();

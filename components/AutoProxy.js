@@ -99,9 +99,6 @@ const aup =
       if (outer)
         throw Cr.NS_ERROR_NO_AGGREGATION;
 
-      if (!aup.initialized)
-        aup.init();
-
       return aup.QueryInterface(iid);
     }
   },
@@ -309,23 +306,11 @@ const aup =
    */
   init: function()
   {
+    timeLine.enter("Entered aup.init()");
+
     if (this.initialized)
       return;
     this.initialized = true;
-
-    timeLine.enter("Entered aup.init()");
-
-    loader.loadSubScript('chrome://autoproxy/content/utils.js');
-    loader.loadSubScript('chrome://autoproxy/content/filterClasses.js');
-    loader.loadSubScript('chrome://autoproxy/content/subscriptionClasses.js');
-    loader.loadSubScript('chrome://autoproxy/content/filterStorage.js');
-    loader.loadSubScript('chrome://autoproxy/content/matcher.js');
-    loader.loadSubScript('chrome://autoproxy/content/filterListener.js');
-    loader.loadSubScript('chrome://autoproxy/content/proxy.js');
-    loader.loadSubScript('chrome://autoproxy/content/policy.js');
-    loader.loadSubScript('chrome://autoproxy/content/requests.js');
-    loader.loadSubScript('chrome://autoproxy/content/prefs.js');
-    loader.loadSubScript('chrome://autoproxy/content/synchronizer.js');
 
     timeLine.log("calling prefs.init()");
     prefs.init();
@@ -479,6 +464,22 @@ if (XPCOMUtils.generateNSGetFactory)
     var NSGetFactory = XPCOMUtils.generateNSGetFactory([Initializer, AUPComponent]);
 else
     var NSGetModule = XPCOMUtils.generateNSGetModule([Initializer, AUPComponent]);
+
+/*
+ * Loading additional files
+ */
+loader.loadSubScript('chrome://autoproxy/content/utils.js');
+loader.loadSubScript('chrome://autoproxy/content/filterClasses.js');
+loader.loadSubScript('chrome://autoproxy/content/subscriptionClasses.js');
+loader.loadSubScript('chrome://autoproxy/content/filterStorage.js');
+loader.loadSubScript('chrome://autoproxy/content/matcher.js');
+loader.loadSubScript('chrome://autoproxy/content/filterListener.js');
+loader.loadSubScript('chrome://autoproxy/content/proxy.js');
+loader.loadSubScript('chrome://autoproxy/content/policy.js');
+loader.loadSubScript('chrome://autoproxy/content/requests.js');
+loader.loadSubScript('chrome://autoproxy/content/prefs.js');
+loader.loadSubScript('chrome://autoproxy/content/synchronizer.js');
+
 /*
  * Core Routines
  */

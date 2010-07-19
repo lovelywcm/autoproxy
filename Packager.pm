@@ -107,6 +107,11 @@ sub cp
         $_ = $loc;
       }
 
+      # if ($self->{devbuild} && $fromFile =~ /\binstall\.rdf$/ && /^(\s*)<em:version>/)
+      # {
+      #  $_ .= "$1<em:updateURL>https://autoproxy.org/devbuilds/update.rdf</em:updateURL>\n";
+      # }
+
       $_ = $self->{postprocess_line}->($fromFile, $_) if exists $self->{postprocess_line};
 
       $_;

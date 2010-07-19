@@ -563,7 +563,7 @@ function exportList()
 
           // Find version requirements of this filter
           let filterVersion;
-          if (/^(?:@@)?\|\|/.test(filter.text) || /\^/.test(filter.text))
+          if (/^(?:@@)?\|\|/.test(filter.text) || (!aup.Filter.regexpRegExp.test(filter.text) && /\^/.test(filter.text)))
             filterVersion = "0.3.0";
           else
             filterVersion = "0.1.0";

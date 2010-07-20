@@ -257,20 +257,20 @@ function aupReloadPrefs() {
   var status = E("aup-status");
   updateElement(status);
   if (prefs.defaultstatusbaraction == 0)
-    status.setAttribute("popup", status.getAttribute("context"));
+    status.setAttribute("menupopup", status.getAttribute("context"));
   else
-    status.removeAttribute("popup");
+    status.removeAttribute("menupopup");
 
   var button = E("aup-toolbarbutton");
   updateElement(button);
   if (button) {
     if (button.hasAttribute("context") && prefs.defaulttoolbaraction == 0)
     {
-      button.setAttribute("popup", button.getAttribute("context"));
+      button.setAttribute("menupopup", button.getAttribute("context"));
       button.removeAttribute("type");
     }
     else
-      button.removeAttribute("popup");
+      button.removeAttribute("menupopup");
   }
 
   updateElement(aupGetPaletteButton());

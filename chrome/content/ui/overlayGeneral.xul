@@ -48,7 +48,7 @@
       <label id="aup-tooltip-filters-label" value="&filters.tooltip;" hidden="true"/>
       <vbox id="aup-tooltip-filters" hidden="true"/>
     </tooltip>
-    <popup id="aup-status-popup">
+    <menupopup id="aup-status-popup">
       <menuitem id="aup-status-modeauto" label="&mode.auto.label;" accesskey="&mode.auto.accesskey;" type="radio" command="aup-command-modeauto"/>
       <menuitem id="aup-status-modeglobal" label="&mode.global.label;" accesskey="&mode.global.accesskey;" type="radio" command="aup-command-modeglobal"/>
       <menuitem id="aup-status-modedisabled" label="&mode.disabled.label;" accesskey="&mode.disabled.accesskey;" type="radio" command="aup-command-modedisabled"/>
@@ -63,8 +63,8 @@
       <menuseparator/>
       <menuitem id="aup-status-showintoolbar" label="&showintoolbar.label;" accesskey="&showintoolbar.accesskey;" type="checkbox" command="aup-command-toggleshowintoolbar"/>
       <menuitem id="aup-status-showinstatusbar" label="&showinstatusbar.label;" accesskey="&showinstatusbar.accesskey;" type="checkbox" command="aup-command-toggleshowinstatusbar"/>
-    </popup>
-    <popup id="aup-popup-switchProxy"></popup>
+    </menupopup>
+    <menupopup id="aup-popup-switchProxy"></menupopup>
     <tooltip id="showCurrentProxy" orient="horizontal">
       <label value="&showCurrentProxy.label;"/>
       <label id="showCurrentProxyValue"/>

@@ -55,9 +55,9 @@
       <menuseparator/>
       <menu label="&switchProxy.label;" id="aup-status-switchProxy"/>
       <menuseparator/>
+      <menuitem id="aup-status-settings" label="&settings.label;..." accesskey="&settings.accesskey;" key="aup-key-settings" command="aup-command-settings"/>
       <menuitem id="aup-status-opensidebar" label="&opensidebar.label;" accesskey="&opensidebar.accesskey;" key="aup-key-sidebar" command="aup-command-sidebar"/>
       <menuitem id="aup-status-closesidebar" label="&closesidebar.label;" accesskey="&closesidebar.accesskey;" key="aup-key-sidebar" command="aup-command-sidebar"/>
-      <menuitem id="aup-status-settings" label="&settings.label;..." accesskey="&settings.accesskey;" key="aup-key-settings" command="aup-command-settings"/>
       <menuseparator id="aup-status-whitelist-sep"/>
       <menuitem id="aup-status-whitelistsite" labeltempl="&whitelist.site.label;" type="checkbox" command="aup-command-togglesitewhitelist"/>
       <menuseparator/>

@@ -39,8 +39,6 @@ let eventHandlers = [
   ["aup-command-settings", "command", function() { aup.openSettingsDialog(); }],
   ["aup-command-sidebar", "command", toggleSidebar],
   ["aup-command-togglesitewhitelist", "command", function() { toggleFilter(siteWhitelist); }],
-  ["aup-command-toggleshowintoolbar", "command", function() { aupTogglePref("showintoolbar"); }],
-  ["aup-command-toggleshowinstatusbar", "command", function() { aupTogglePref("showinstatusbar"); }],
   ["aup-command-modeauto", "command", function() { proxy.switchToMode('auto'); }],
   ["aup-command-modeglobal", "command", function() { proxy.switchToMode('global'); }],
   ["aup-command-modedisabled", "command", function() { proxy.switchToMode('disabled'); }],
@@ -595,9 +593,6 @@ function aupFillPopup(event) {
     }
   }
   whitelistSeparator.hidden = whitelistItemSite.hidden;
-
-  elements.showintoolbar.setAttribute("checked", prefs.showintoolbar);
-  elements.showinstatusbar.setAttribute("checked", prefs.showinstatusbar);
 
   var defAction = (popup.tagName == "menupopup" || document.popupNode.id == "aup-toolbarbutton" ? prefs.defaulttoolbaraction : prefs.defaultstatusbaraction);
   elements.opensidebar.setAttribute("default", defAction == 1);

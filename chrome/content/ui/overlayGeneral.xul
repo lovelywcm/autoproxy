@@ -61,8 +61,6 @@
       <menuseparator id="aup-status-whitelist-sep"/>
       <menuitem id="aup-status-whitelistsite" labeltempl="&whitelist.site.label;" type="checkbox" command="aup-command-togglesitewhitelist"/>
       <menuseparator/>
-      <menuitem id="aup-status-showintoolbar" label="&showintoolbar.label;" accesskey="&showintoolbar.accesskey;" type="checkbox" command="aup-command-toggleshowintoolbar"/>
-      <menuitem id="aup-status-showinstatusbar" label="&showinstatusbar.label;" accesskey="&showinstatusbar.accesskey;" type="checkbox" command="aup-command-toggleshowinstatusbar"/>
     </menupopup>
     <menupopup id="aup-popup-switchProxy"></menupopup>
     <tooltip id="showCurrentProxy" orient="horizontal">
@@ -79,9 +77,6 @@
     <command id="aup-command-settings" oncommand="//"/>
     <command id="aup-command-sidebar" oncommand="//"/>
     <command id="aup-command-togglesitewhitelist"/>
-    <command id="aup-command-toggleshowintoolbar"/>
-
-    <command id="aup-command-toggleshowinstatusbar"/>
   </commandset>
 
   <statusbarpanel id="aup-status" context="aup-status-popup">

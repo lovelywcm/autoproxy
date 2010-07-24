@@ -1,11 +1,11 @@
-<!ENTITY status.tooltip "状态:">
-<!ENTITY defaultProxy.tooltip "默认代理:">
-<!ENTITY blocked.tooltip "本页已使用代理的项目:">
-<!ENTITY filters.tooltip "最活跃的代理规则:">
+<!ENTITY status.tooltip "状态：">
+<!ENTITY defaultProxy.tooltip "默认代理：">
+<!ENTITY blocked.tooltip "本页已使用代理的项目：">
+<!ENTITY filters.tooltip "最活跃的代理规则：">
 <!ENTITY menuitem.label "AutoProxy 首选项">
 <!ENTITY menuitem.accesskey "B">
 <!ENTITY toolbarbutton.label "AutoProxy">
-<!ENTITY view.blockableItems.label "AutoProxy: 可代理资源">
+<!ENTITY view.blockableItems.label "AutoProxy：可代理资源">
 <!ENTITY context.image.label "代理该图片">
 <!ENTITY context.object.label "代理该对象">
 <!ENTITY context.frame.label "代理该帧">
@@ -19,5 +19,4 @@
 <!ENTITY whitelist.site.label "在 -- 禁用代理">
 <!ENTITY objecttab.title "代理">
 <!ENTITY objecttab.tooltip "点击使用 AutoProxy 来代理">
-<!ENTITY switchProxy.label "选择默认代理">
-<!ENTITY showCurrentProxy.label "切换默认代理为:">
+<!ENTITY switchProxy.label "默认代理：">

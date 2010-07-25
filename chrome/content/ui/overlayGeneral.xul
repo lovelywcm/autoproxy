@@ -54,7 +54,7 @@
       <menuitem id="aup-status-modedisabled" label="&mode.disabled.label;" accesskey="&mode.disabled.accesskey;" type="radio" command="aup-command-modedisabled"/>
       <menuseparator/>
       <menu id="aup-status-switchProxy" label="&switchProxy.label;"/>
-      <menuseparator id="aup-status-whitelist-sep"/>
+      <menuseparator/>
       <menuitem id="aup-status-whitelistsite" labeltempl="&whitelist.site.label;" type="checkbox" command="aup-command-togglesitewhitelist"/>
       <menuseparator/>
       <menuitem id="aup-status-settings" label="&settings.label;..." accesskey="&settings.accesskey;" key="aup-key-settings" command="aup-command-settings"/>

@@ -603,12 +603,7 @@ function aupFillPopup(event) {
   elements.modeglobal.setAttribute("checked", "global" == prefs.proxyMode);
   elements.modedisabled.setAttribute("checked", "disabled" == prefs.proxyMode);
 
-  var menu = null;
-  if (popup.id == "aup-toolbar-popup")
-    menu = E("aup-toolbar-switchProxy");
-  else if (popup.id == "aup-status-popup")
-    menu = E("aup-status-switchProxy");
-  else return;
+  var menu = elements.whitelistsite.previousSibling.previousSibling;
 
   var popup = document.createElement("menupopup");
   popup.id = "options-switchProxy";

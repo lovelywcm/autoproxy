@@ -581,33 +581,33 @@ function aupFillPopup(event) {
   //
 
   // remove previously created "default proxy" menuitems
-  var menu = elements.whitelistsite.previousSibling.previousSibling;
+  var menu = popup.getElementsByTagName('menu')[0];
   while (menu.firstChild) menu.removeChild(menu.firstChild);
-  while (menu.previousSibling != elements.modedisabled.nextSibling)
-    menu.parentNode.removeChild(menu.previousSibling)
+  while (menu.nextSibling.tagName != 'menuseparator')
+    menu.parentNode.removeChild(menu.nextSibling)
 
   // more than 4 proxy servers ? display them in a menupopup : inline of main context menu
   var menuPop = null;
   if (proxy.server.length > 4) {
     menuPop = cE('menupopup');
     menuPop.id = "options-switchProxy";
+    menu.appendChild(menuPop);
   }
+
+  var menuSeparator = menu.nextSibling;
   for each (var p in proxy.getName) {
     var item = cE('menuitem');
     item.setAttribute('type', 'radio');
-    item.setAttribute('label', menuPop ? p : menu.label+p);
+    item.setAttribute('label', p);
     item.setAttribute('value', p);
     item.setAttribute('name', 'radioGroup-switchProxy');
     item.addEventListener('command', switchDefaultProxy, false);
     if (proxy.nameOfDefaultProxy == p) item.setAttribute('checked', true);
-    menuPop ? menuPop.appendChild(item) : menu.parentNode.insertBefore(item, menu);
+    menuPop ? menuPop.appendChild(item) : menu.parentNode.insertBefore(item, menuSeparator);
   }
-  if (menuPop) {
-    menu.appendChild(menuPop);
-    menu.style.display = 'block';
+
+  if (menuPop)
     menuPop.insertBefore(cE('menuseparator'), menuPop.firstChild.nextSibling);
-  }
-  else menu.style.display = 'none';
 
 
   //

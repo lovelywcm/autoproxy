@@ -568,10 +568,51 @@ function aupFillPopup(event) {
     if (list[i].id && /\-(\w+)$/.test(list[i].id))
       elements[RegExp.$1] = list[i];
 
-  var sidebarOpen = aupIsSidebarOpen();
-  elements.opensidebar.hidden = sidebarOpen;
-  elements.closesidebar.hidden = !sidebarOpen;
+  //
+  // Fill "Proxy Mode" Menu Items
+  //
+  elements.modeauto.setAttribute("checked", "auto" == prefs.proxyMode);
+  elements.modeglobal.setAttribute("checked", "global" == prefs.proxyMode);
+  elements.modedisabled.setAttribute("checked", "disabled" == prefs.proxyMode);
 
+
+  //
+  // Fill "Default Proxy" Menu Items
+  //
+
+  // remove previously created "default proxy" menuitems
+  var menu = elements.whitelistsite.previousSibling.previousSibling;
+  while (menu.firstChild) menu.removeChild(menu.firstChild);
+  while (menu.previousSibling != elements.modedisabled.nextSibling)
+    menu.parentNode.removeChild(menu.previousSibling)
+
+  // more than 4 proxy servers ? display them in a menupopup : inline of main context menu
+  var menuPop = null;
+  if (proxy.server.length > 4) {
+    menuPop = cE('menupopup');
+    menuPop.id = "options-switchProxy";
+  }
+  for each (var p in proxy.getName) {
+    var item = cE('menuitem');
+    item.setAttribute('type', 'radio');
+    item.setAttribute('label', menuPop ? p : menu.label+p);
+    item.setAttribute('value', p);
+    item.setAttribute('name', 'radioGroup-switchProxy');
+    item.addEventListener('command', switchDefaultProxy, false);
+    if (proxy.nameOfDefaultProxy == p) item.setAttribute('checked', true);
+    menuPop ? menuPop.appendChild(item) : menu.parentNode.insertBefore(item, menu);
+  }
+  if (menuPop) {
+    menu.appendChild(menuPop);
+    menu.style.display = 'block';
+    menuPop.insertBefore(cE('menuseparator'), menuPop.firstChild.nextSibling);
+  }
+  else menu.style.display = 'none';
+
+
+  //
+  // Fill "Enable Proxy On" Menu Items
+  //
   var whitelistItemSite = elements.whitelistsite;
   whitelistItemSite.hidden = true;
 
@@ -598,43 +639,18 @@ function aupFillPopup(event) {
   }
   whitelistSeparator.hidden = whitelistItemSite.hidden;
 
+
+  //
+  // Fill "Sidebar" & "Preference" Menu Items
+  //
   var defAction = (popup.tagName == "menupopup" || document.popupNode.id == "aup-toolbarbutton" ? prefs.defaulttoolbaraction : prefs.defaultstatusbaraction);
   elements.opensidebar.setAttribute("default", defAction == 1);
   elements.closesidebar.setAttribute("default", defAction == 1);
   elements.settings.setAttribute("default", defAction == 2);
 
-  elements.modeauto.setAttribute("checked", "auto" == prefs.proxyMode);
-  elements.modeglobal.setAttribute("checked", "global" == prefs.proxyMode);
-  elements.modedisabled.setAttribute("checked", "disabled" == prefs.proxyMode);
-
-  // remove previously created "default proxy" menuitems
-  var menu = elements.whitelistsite.previousSibling.previousSibling;
-  while (menu.firstChild) menu.removeChild(menu.firstChild);
-  while (menu.previousSibling != elements.modedisabled.nextSibling)
-    menu.parentNode.removeChild(menu.previousSibling)
-
-  // more than 4 proxy servers ? display them in a menupopup : inline of main context menu
-  var popup = null;
-  if (proxy.server.length > 4) {
-    popup = cE('menupopup');
-    popup.id = "options-switchProxy";
-  }
-  for each (var p in proxy.getName) {
-    var item = cE('menuitem');
-    item.setAttribute('type', 'radio');
-    item.setAttribute('label', popup ? p : menu.label+p);
-    item.setAttribute('value', p);
-    item.setAttribute('name', 'radioGroup-switchProxy');
-    item.addEventListener('command', switchDefaultProxy, false);
-    if (proxy.nameOfDefaultProxy == p) item.setAttribute('checked', true);
-    popup ? popup.appendChild(item) : menu.parentNode.insertBefore(item, menu);
-  }
-  if (popup) {
-    menu.appendChild(popup);
-    menu.style.display = 'block';
-    popup.insertBefore(cE('menuseparator'), popup.firstChild.nextSibling);
-  }
-  else menu.style.display = 'none';
+  var sidebarOpen = aupIsSidebarOpen();
+  elements.opensidebar.hidden = sidebarOpen;
+  elements.closesidebar.hidden = !sidebarOpen;
 }
 
 function aupIsSidebarOpen() {

@@ -15,7 +15,7 @@ pref("extensions.autoproxy.patternsbackups", 5);
 pref("extensions.autoproxy.patternsfile", "autoproxy/patterns.ini");
 pref("extensions.autoproxy.previewimages", true);
 pref("extensions.autoproxy.savestats", true);
-pref("extensions.autoproxy.settings_key", "Accel Alt E");
+pref("extensions.autoproxy.settings_key", "Accel Alt P");
 pref("extensions.autoproxy.showinstatusbar", true);
 pref("extensions.autoproxy.showintoolbar", false);
 pref("extensions.autoproxy.sidebar_key", "Accel Alt V");

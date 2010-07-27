@@ -11,11 +11,11 @@
 <!ENTITY context.frame.label "代理该帧">
 <!ENTITY sidebar.title "当前页面可代理的资源">
 <!ENTITY settings.label "首选项">
-<!ENTITY settings.accesskey "F">
+<!ENTITY settings.accesskey "P">
 <!ENTITY opensidebar.label "打开可代理资源列表">
-<!ENTITY opensidebar.accesskey "B">
+<!ENTITY opensidebar.accesskey "V">
 <!ENTITY closesidebar.label "关闭可代理资源列表">
-<!ENTITY closesidebar.accesskey "B">
+<!ENTITY closesidebar.accesskey "V">
 <!ENTITY whitelist.site.label "在 -- 启用代理">
 <!ENTITY objecttab.title "代理">
 <!ENTITY objecttab.tooltip "点击使用 AutoProxy 来代理">

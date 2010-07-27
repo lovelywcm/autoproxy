@@ -568,18 +568,23 @@ function aupFillPopup(event) {
     if (list[i].id && /\-(\w+)$/.test(list[i].id))
       elements[RegExp.$1] = list[i];
 
+
   //
-  // Fill "Proxy Mode" Menu Items
+  // Fill "Preference" & "Sidebar" Menu Items
   //
-  elements.modeauto.setAttribute("checked", "auto" == prefs.proxyMode);
-  elements.modeglobal.setAttribute("checked", "global" == prefs.proxyMode);
-  elements.modedisabled.setAttribute("checked", "disabled" == prefs.proxyMode);
+  var defAction = (popup.tagName == "menupopup" || document.popupNode.id == "aup-toolbarbutton" ? prefs.defaulttoolbaraction : prefs.defaultstatusbaraction);
+  elements.opensidebar.setAttribute("default", defAction == 1);
+  elements.closesidebar.setAttribute("default", defAction == 1);
+  elements.settings.setAttribute("default", defAction == 2);
+
+  var sidebarOpen = aupIsSidebarOpen();
+  elements.opensidebar.hidden = sidebarOpen;
+  elements.closesidebar.hidden = !sidebarOpen;
 
 
   //
   // Fill "Default Proxy" Menu Items
   //
-
   // remove previously created "default proxy" menuitems
   var menu = popup.getElementsByTagName('menu')[0];
   while (menu.firstChild) menu.removeChild(menu.firstChild);
@@ -641,16 +646,11 @@ function aupFillPopup(event) {
 
 
   //
-  // Fill "Sidebar" & "Preference" Menu Items
+  // Fill "Proxy Mode" Menu Items
   //
-  var defAction = (popup.tagName == "menupopup" || document.popupNode.id == "aup-toolbarbutton" ? prefs.defaulttoolbaraction : prefs.defaultstatusbaraction);
-  elements.opensidebar.setAttribute("default", defAction == 1);
-  elements.closesidebar.setAttribute("default", defAction == 1);
-  elements.settings.setAttribute("default", defAction == 2);
-
-  var sidebarOpen = aupIsSidebarOpen();
-  elements.opensidebar.hidden = sidebarOpen;
-  elements.closesidebar.hidden = !sidebarOpen;
+  elements.modeauto.setAttribute("checked", "auto" == prefs.proxyMode);
+  elements.modeglobal.setAttribute("checked", "global" == prefs.proxyMode);
+  elements.modedisabled.setAttribute("checked", "disabled" == prefs.proxyMode);
 }
 
 function aupIsSidebarOpen() {

@@ -17,7 +17,6 @@
 <!ENTITY opensidebar.accesskey "B">
 <!ENTITY closesidebar.label "Fermer les éléments proxyables">
 <!ENTITY closesidebar.accesskey "B">
-<!ENTITY whitelist.site.label "Désactiver pour…">
 <!ENTITY whitelist.page.label "Désactiver uniquement pour cette page">
 <!ENTITY objecttab.title "Proxy">
 <!ENTITY objecttab.tooltip "Cliquez ici pour utiliser un proxy avec AutoProxy">

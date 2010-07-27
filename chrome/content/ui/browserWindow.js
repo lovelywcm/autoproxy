@@ -582,11 +582,15 @@ function aupFillPopup(event) {
   let location = getCurrentLocation();
   if (location && proxy.isProxyableScheme(location))
   {
-    host = location.host.replace(/^www\./, "");
+    let host = null;
+    try
+    {
+      host = location.host.replace(/^www\./, "");
+    } catch (e) {}
 
     if (host)
     {
-      siteWhitelist = aup.Filter.fromText("@@||" + host + "^$document");
+      siteWhitelist = aup.Filter.fromText("||" + host);
       whitelistItemSite.setAttribute("checked", siteWhitelist.subscriptions.length && !siteWhitelist.disabled);
       whitelistItemSite.setAttribute("label", whitelistItemSite.getAttribute("labeltempl").replace(/--/, host));
       whitelistItemSite.hidden = false;

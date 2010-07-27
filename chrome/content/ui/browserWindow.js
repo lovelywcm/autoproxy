@@ -255,20 +255,20 @@ function aupReloadPrefs() {
   var status = E("aup-status");
   updateElement(status);
   if (prefs.defaultstatusbaraction == 0)
-    status.setAttribute("menupopup", status.getAttribute("context"));
+    status.setAttribute("popup", status.getAttribute("context"));
   else
-    status.removeAttribute("menupopup");
+    status.removeAttribute("popup");
 
   var button = E("aup-toolbarbutton");
   updateElement(button);
   if (button) {
     if (button.hasAttribute("context") && prefs.defaulttoolbaraction == 0)
     {
-      button.setAttribute("menupopup", button.getAttribute("context"));
+      button.setAttribute("popup", button.getAttribute("context"));
       button.removeAttribute("type");
     }
     else
-      button.removeAttribute("menupopup");
+      button.removeAttribute("popup");
   }
 
   updateElement(aupGetPaletteButton());
@@ -611,7 +611,10 @@ function aupFillPopup(event) {
 
   // more than 4 proxy servers ? display them in a menupopup : inline of main context menu
   var popup = null;
-  if (proxy.server.length > 4) popup = cE('menupopup');
+  if (proxy.server.length > 4) {
+    popup = cE('menupopup');
+    popup.id = "options-switchProxy";
+  }
   for each (var p in proxy.getName) {
     var item = cE('menuitem');
     item.setAttribute('type', 'radio');
@@ -740,10 +743,10 @@ function aupExecuteAction(action, e)
       aup.proxyTipTimer.initWithCallback( {notify:function(){tooltip.hidePopup();}}, 2500, Components.interfaces.nsITimer.TYPE_ONE_SHOT );
       break;
     case 5: //default proxy menu
-      let popup = document.getElementById("aup-popup-switchProxy");
+      let popup = E("aup-popup-switchProxy");
       while (popup.firstChild) popup.removeChild(popup.lastChild);
       for each (let p in proxy.getName) {
-        let item = document.createElement('menuitem');
+        let item = cE('menuitem');
         item.setAttribute('type', 'radio');
         item.setAttribute('label', p);
         item.setAttribute('value', p);
@@ -752,8 +755,8 @@ function aupExecuteAction(action, e)
         if (proxy.nameOfDefaultProxy == p) item.setAttribute('checked', true);
         popup.appendChild(item);
       }
-      popup.insertBefore(document.createElement("menuseparator"), popup.firstChild.nextSibling);
-      if(e.screenX&&e.screenY) popup.openPopupAtScreen(e.screenX, e.screenY, false);
+      popup.insertBefore(cE("menuseparator"), popup.firstChild.nextSibling);
+      if(e.screenX && e.screenY) popup.openPopupAtScreen(e.screenX, e.screenY, false);
       else popup.openPopupAtScreen(e.target.boxObject.screenX, e.target.boxObject.screenY, false);
       break;
     default:

@@ -595,6 +595,7 @@ function aupFillPopup(event)
     menuPop.id = "options-switchProxy";
     menu.appendChild(menuPop);
   }
+  menu.hidden = ! menuPop;
 
   var menuSeparator = menu.nextSibling;
   for each (var p in proxy.getName) {
@@ -807,6 +808,5 @@ function switchDefaultProxy(event)
 
 function isActive(/**Filter*/ filter)
 {
-  if (filter.subscriptions.length && !filter.disabled) return true;
-  else return false;
+  return filter.subscriptions.length && !filter.disabled;
 }

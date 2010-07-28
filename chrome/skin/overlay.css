@@ -124,10 +124,3 @@ menuitem[default="true"] {
 #aup-sidebar-close:hover:active {
   -moz-image-region: rect(0px, 42px, 14px, 28px);
 }
-
-#aup-status-switchProxy,
-#aup-status-settings,
-#aup-status-opensidebar,
-#aup-status-closesidebar {
-  margin-left: -16px;
-}

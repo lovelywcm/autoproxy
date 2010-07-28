@@ -17,7 +17,7 @@
 
 <!ENTITY settings.label         "Preferences">
 <!ENTITY settings.accesskey     "P">
-<!ENTITY opensidebar.label      "Open proxyable items">
+<!ENTITY opensidebar.label      "Proxyable items">
 <!-- Note: This access key should usually be the same as closesidebar.accesskey. It is the same menu item with different label depending on whether the sidebar is currently open.-->
 <!ENTITY opensidebar.accesskey  "V">
 <!ENTITY closesidebar.label     "Close proxyable items">

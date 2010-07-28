@@ -12,7 +12,6 @@
 <!ENTITY context.frame.label "Marco Proxy">
 <!ENTITY sidebar.title "Elementos pasables por proxy en la página actual">
 <!ENTITY settings.label "Preferencias">
-<!ENTITY opensidebar.label "Abrir elementos pasables por proxy">
 <!ENTITY closesidebar.label "Cerrar elementos pasables por proxy">
 <!ENTITY whitelist.page.label "Desactivar sólo en esta página">
 <!ENTITY objecttab.title "Proxy">

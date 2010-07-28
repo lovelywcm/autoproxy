@@ -12,7 +12,6 @@
 <!ENTITY context.frame.label "Cade du proxy">
 <!ENTITY sidebar.title "Éléments proxyable de la page actuelle">
 <!ENTITY settings.label "Préférences">
-<!ENTITY opensidebar.label "Ouvrir les éléments proxyables">
 <!ENTITY closesidebar.label "Fermer les éléments proxyables">
 <!ENTITY whitelist.page.label "Désactiver uniquement pour cette page">
 <!ENTITY objecttab.title "Proxy">

@@ -39,12 +39,13 @@ let eventHandlers = [
   ["aup-command-settings", "command", function() { aup.openSettingsDialog(); }],
   ["aup-command-sidebar", "command", toggleSidebar],
   ["aup-command-togglesitewhitelist", "command", function() { toggleFilter(siteWhitelist); }],
+  ["aup-command-contextmenu", "command", function(e) {
+    if (e.eventPhase == e.AT_TARGET) E("aup-status-popup").openPopupAtScreen(window.screen.width/2, window.screen.height/2, false); }],
   ["aup-command-modeauto", "command", function() { proxy.switchToMode('auto'); }],
   ["aup-command-modeglobal", "command", function() { proxy.switchToMode('global'); }],
   ["aup-command-modedisabled", "command", function() { proxy.switchToMode('disabled'); }],
   ["aup-status", "click", aupClickHandler],
-  ["aup-toolbarbutton", "command", function(event) { if (event.eventPhase == event.AT_TARGET) aupCommandHandler(event); }],
-  ["aup-toolbarbutton", "click", function(event) { if (event.button==1) aupClickHandler(event) }]
+  ["aup-toolbarbutton", "click", aupClickHandler]
 ];
 
 /**
@@ -715,21 +716,16 @@ function toggleFilter(/**Filter*/ filter)
   filterStorage.saveToDisk();
 }
 
-// Handle clicks on the statusbar panel
-function aupClickHandler(e) {
-  if (e.button == 0)
+// Handle clicks on statusbar/toolbar panel
+function aupClickHandler(e)
+{
+  if (e.button == 0 && e.target.tagName == 'image')
     aupExecuteAction(prefs.defaultstatusbaraction, e);
   else if (e.button == 1) {
     prefs.proxyMode = proxy.mode[ (proxy.mode.indexOf(prefs.proxyMode)+1) % 3 ];
     prefs.save();
   }
-}
-
-function aupCommandHandler(e) {
-  if (prefs.defaulttoolbaraction == 0)
-    e.target.open = true;
-  else
-    aupExecuteAction(prefs.defaulttoolbaraction, e);
+  else aupExecuteAction(prefs.defaulttoolbaraction, e);
 }
 
 // Executes default action for statusbar/toolbar by its number
@@ -737,12 +733,12 @@ function aupExecuteAction(action, e)
 {
   switch (action) {
     case 0:
-      aupFillPopup(e);
+      e.target.open = true;
       break;
-    case 1: //proxyable items
+    case 1:
       toggleSidebar();
       break;
-    case 2: //preference
+    case 2:
       aup.openSettingsDialog();
       break;
     case 3: //quick add
@@ -776,7 +772,7 @@ function aupExecuteAction(action, e)
         popup.appendChild(item);
       }
       popup.insertBefore(cE("menuseparator"), popup.firstChild.nextSibling);
-      if(e.screenX && e.screenY) popup.openPopupAtScreen(e.screenX, e.screenY, false);
+      if (e.screenX && e.screenY) popup.openPopupAtScreen(e.screenX, e.screenY, false);
       else popup.openPopupAtScreen(e.target.boxObject.screenX, e.target.boxObject.screenY, false);
       break;
     default:

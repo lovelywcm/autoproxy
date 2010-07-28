@@ -12,7 +12,6 @@
 <!ENTITY context.frame.label "Moldura do proxy">
 <!ENTITY sidebar.title "Itens bloqueáveis pelo proxy nesta página">
 <!ENTITY settings.label "Preferências">
-<!ENTITY opensidebar.label "Abrir itens bloqueáveis pelo proxy">
 <!ENTITY closesidebar.label "Fechar itens bloqueáveis pelo proxy">
 <!ENTITY whitelist.page.label "Desabilitar apenas nesta página">
 <!ENTITY objecttab.title "Proxy">

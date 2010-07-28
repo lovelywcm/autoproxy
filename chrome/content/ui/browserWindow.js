@@ -637,6 +637,7 @@ function aupFillPopup(event)
       if (isActive(tmpRule) || !siteRule) {
         siteRule = tmpRule;
         var newProxyOn = cE('menuitem');
+        newProxyOn.setAttribute('type', 'checkbox');
         newProxyOn.setAttribute('checked', isActive(tmpRule));
         newProxyOn.setAttribute('command', 'aup-command-togglesiterule');
         newProxyOn.setAttribute('label', enableProxySeparator.previousSibling.getAttribute('labeltempl').replace(/--/, host));

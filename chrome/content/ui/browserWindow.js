@@ -573,11 +573,6 @@ function aupFillPopup(event) {
   //
   // Fill "Preference" & "Sidebar" Menu Items
   //
-  var defAction = (popup.tagName == "menupopup" || document.popupNode.id == "aup-toolbarbutton" ? prefs.defaulttoolbaraction : prefs.defaultstatusbaraction);
-  elements.opensidebar.setAttribute("default", defAction == 1);
-  elements.closesidebar.setAttribute("default", defAction == 1);
-  elements.settings.setAttribute("default", defAction == 2);
-
   var sidebarOpen = aupIsSidebarOpen();
   elements.opensidebar.hidden = sidebarOpen;
   elements.closesidebar.hidden = !sidebarOpen;

@@ -38,7 +38,7 @@ let eventHandlers = [
   ["aup-toolbar-popup", "popupshowing", aupFillPopup],
   ["aup-command-settings", "command", function() { aup.openSettingsDialog(); }],
   ["aup-command-sidebar", "command", toggleSidebar],
-  ["aup-command-togglesitewhitelist", "command", function() { toggleFilter(siteWhitelist); }],
+  ["aup-command-togglesiterule", "command", function() { toggleFilter(siteRule); }],
   ["aup-command-contextmenu", "command", function(e) {
     if (e.eventPhase == e.AT_TARGET) E("aup-status-popup").openPopupAtScreen(window.screen.width/2, window.screen.height/2, false); }],
   ["aup-command-modeauto", "command", function() { proxy.switchToMode('auto'); }],
@@ -57,7 +57,7 @@ let currentlyShowingInToolbar = prefs.showintoolbar;
  * Filter corresponding with "disable on site" menu item (set in aupFillPopup()).
  * @type Filter
  */
-let siteWhitelist = null;
+let siteRule = null;
 
 /**
  * Progress listener detecting location changes and triggering status updates.
@@ -555,7 +555,8 @@ function getCurrentLocation() /**nsIURI*/
 }
 
 // Fills the context menu on the status bar
-function aupFillPopup(event) {
+function aupFillPopup(event)
+{
   let popup = event.target;
 
   // Not at-target call, ignore
@@ -614,31 +615,40 @@ function aupFillPopup(event) {
   //
   // Fill "Enable Proxy On" Menu Items
   //
-  var whitelistItemSite = elements.whitelistsite;
-  whitelistItemSite.hidden = true;
+  var enableProxyOn = elements.enableproxyon;
+  var enableProxySeparator = enableProxyOn.nextSibling;
 
-  var whitelistSeparator = whitelistItemSite.nextSibling;
-  while (whitelistSeparator.nodeType != whitelistSeparator.ELEMENT_NODE)
-    whitelistSeparator = whitelistSeparator.nextSibling;
+  // remove previously created extra "Enable Proxy On --" menu items
+  while (enableProxyOn.previousSibling.tagName != 'menuseparator')
+    enableProxyOn.parentNode.removeChild(enableProxyOn.previousSibling);
 
   let location = getCurrentLocation();
-  if (location && proxy.isProxyableScheme(location))
-  {
-    let host = null;
-    try
-    {
-      host = location.host.replace(/^www\./, "");
-    } catch (e) {}
+  if (proxy.isProxyableScheme(location)) {
+    let host = location.host.replace(/^\.+/, '').replace(/\.{2,}/, '.'); // avoid: .www..xxx.com
 
-    if (host)
-    {
-      siteWhitelist = aup.Filter.fromText("||" + host);
-      whitelistItemSite.setAttribute("checked", siteWhitelist.subscriptions.length && !siteWhitelist.disabled);
-      whitelistItemSite.setAttribute("label", whitelistItemSite.getAttribute("labeltempl").replace(/--/, host));
-      whitelistItemSite.hidden = false;
+    // for host 'www.xxx.com', ignore 'www' unless rule '||www.xxx.com' is active.
+    if (host.indexOf('www.')==0 && !isActive(aup.Filter.fromText('||'+host)))
+      host = host.replace(/^www\./, '');
+
+    siteRule = null;
+    while (true) {
+      var tmpRule = aup.Filter.fromText('||' + host);
+      if (isActive(tmpRule) || !siteRule) {
+        siteRule = tmpRule;
+        var newProxyOn = cE('menuitem');
+        newProxyOn.setAttribute('checked', isActive(tmpRule));
+        newProxyOn.setAttribute('command', 'aup-command-togglesiterule');
+        newProxyOn.setAttribute('label', enableProxySeparator.previousSibling.getAttribute('labeltempl').replace(/--/, host));
+        enableProxyOn.parentNode.insertBefore(newProxyOn, enableProxyOn);
+        enableProxyOn.setAttribute('command', '');
+        enableProxyOn.setAttribute('disabled', true);
+        enableProxyOn = newProxyOn;
+      }
+      if (host.indexOf('.') <= 0) break;
+      host = host.replace(/^[^\.]+\./, '');
     }
   }
-  whitelistSeparator.hidden = whitelistItemSite.hidden;
+  enableProxySeparator.hidden = enableProxyOn.hidden;
 
 
   //
@@ -793,4 +803,10 @@ function switchDefaultProxy(event)
     prefs.defaultProxy = proxy.getName.indexOf(value);
     prefs.save();
   }
+}
+
+function isActive(/**Filter*/ filter)
+{
+  if (filter.subscriptions.length && !filter.disabled) return true;
+  else return false;
 }

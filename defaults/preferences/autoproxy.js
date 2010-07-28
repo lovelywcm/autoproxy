@@ -3,7 +3,7 @@
 pref("extensions.autoproxy.clearStatsOnHistoryPurge", true);
 pref("extensions.autoproxy.composer_default", 2);
 pref("extensions.autoproxy.currentVersion", "0.0");
-pref("extensions.autoproxy.defaultstatusbaraction", 4);
+pref("extensions.autoproxy.defaultstatusbaraction", 5);
 pref("extensions.autoproxy.defaulttoolbaraction", 0);
 pref("extensions.autoproxy.detachsidebar", false);
 pref("extensions.autoproxy.enable_key", "");

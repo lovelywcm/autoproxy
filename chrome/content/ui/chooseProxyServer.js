@@ -84,7 +84,11 @@ var menu =
     node.appendChild( this.menuList );
 
     proxy.getName.forEach(this.newItem);
-    if (!isDefaultProxyPopup) this.newItem('默认代理');
+
+    if (isDefaultProxyPopup)
+      this.menuList.firstChild.firstChild.hidden = true;
+    else
+      this.newItem('默认代理');
 
     this.menuList.selectedIndex = index;
   },

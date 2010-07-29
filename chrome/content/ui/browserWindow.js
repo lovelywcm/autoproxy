@@ -592,7 +592,7 @@ function aupFillPopup(event)
 
   // more than 4 proxy servers ? display them in a menupopup : inline of main context menu
   var menuPop = null;
-  if (proxy.server.length > 4) {
+  if (proxy.validConfigs.length > 3) {
     menuPop = cE('menupopup');
     menuPop.id = "options-switchProxy";
     menu.appendChild(menuPop);
@@ -600,19 +600,16 @@ function aupFillPopup(event)
   menu.hidden = ! menuPop;
 
   var menuSeparator = menu.nextSibling;
-  for each (var p in proxy.getName) {
+  for each (var conf in proxy.validConfigs) {
     var item = cE('menuitem');
     item.setAttribute('type', 'radio');
-    item.setAttribute('label', p);
-    item.setAttribute('value', p);
+    item.setAttribute('label', conf.name);
+    item.setAttribute('value', conf.name);
     item.setAttribute('name', 'radioGroup-switchProxy');
     item.addEventListener('command', switchDefaultProxy, false);
-    if (proxy.nameOfDefaultProxy == p) item.setAttribute('checked', true);
+    if (proxy.nameOfDefaultProxy == conf.name) item.setAttribute('checked', true);
     menuPop ? menuPop.appendChild(item) : menu.parentNode.insertBefore(item, menuSeparator);
   }
-
-  if (menuPop)
-    menuPop.insertBefore(cE('menuseparator'), menuPop.firstChild.nextSibling);
 
 
   //

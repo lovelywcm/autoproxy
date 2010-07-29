@@ -16,12 +16,10 @@ my @must_differ = (
   ['aup:settings:enable.accesskey', 'aup:settings:showintoolbar.accesskey', 'aup:settings:showinstatusbar.accesskey', 'aup:settings:objecttabs.accesskey'],
   ['aup:settings:gettingStarted.accesskey', 'aup:settings:faq.accesskey', 'aup:settings:filterdoc.accesskey', 'aup:settings:about.accesskey'],
   ['aup:subscription:location.accesskey', 'aup:subscription:title.accesskey', 'aup:subscription:autodownload.accesskey', 'aup:subscription:enabled.accesskey'],
-  ['aup:composer:filter.accesskey', 'aup:composer:preferences.accesskey', 'aup:composer:type.filter.accesskey', 'aup:composer:type.whitelist.accesskey', 'aup:composer:custom.pattern.accesskey', 'aup:composer:anchor.start.accesskey', 'aup:composer:anchor.end.accesskey', 'aup:composer:domainRestriction.accesskey', 'aup:composer:firstParty.accesskey', 'aup:composer:thirdParty.accesskey', 'aup:composer:matchCase.accesskey'],
 );
 
 my @must_equal = (
   ['aup:overlay:opensidebar.accesskey', 'aup:overlay:closesidebar.accesskey'],
-  ['aup:composer:anchor.start.accesskey', 'aup:composer:anchor.start.flexible.accesskey'],
 );
 
 my %keepAccessKeys = map {$_ => $_} (

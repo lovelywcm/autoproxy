@@ -28,7 +28,7 @@
  * This file is included from AutoProxy.js.
  */
 
-const pS = Cc["@mozilla.org/network/protocol-proxy-service;1"].getService(Ci.nsIProtocolProxyService);
+const pS = Cc['@mozilla.org/network/protocol-proxy-service;1'].getService(Ci.nsIProtocolProxyService);
 
 var proxy =
 {
@@ -61,7 +61,7 @@ var proxy =
      *
      * newProxyInfo(type, host, port, socks_remote_dns, failoverTimeout, failoverProxy)
      */
-    proxy.getName = [ aup.getString("directConnect") ];
+    proxy.getName = [ aup.getString('directConnect') ];
     proxy.server = [ pS.newProxyInfo('direct', '', -1, 0, 0, null) ];
     for each ( var conf in proxy.validConfigs) {
       proxy.getName.push(conf.name);
@@ -93,9 +93,9 @@ var proxy =
     else proxy.fallbackProxy = proxy.server[prefs.fallbackProxy] || proxy.server[0];
 
     // Register/Unregister proxy filter & refresh shouldProxy() for specified mode
-    if ( prefs.proxyMode == "disabled" ) pS.unregisterFilter(proxy);
+    if ( prefs.proxyMode == 'disabled' ) pS.unregisterFilter(proxy);
     else {
-      if ( prefs.proxyMode == "global" ) policy.shouldProxy = function() { return true; };
+      if ( prefs.proxyMode == 'global' ) policy.shouldProxy = function() { return true; };
       else policy.shouldProxy = policy.autoMatching;
 
       pS.unregisterFilter(proxy);
@@ -137,7 +137,7 @@ var proxy =
    */
   isProxyableScheme: function(location)
   {
-    return ["http", "https", "ftp", "gopher"].some(
+    return ['http', 'https', 'ftp', 'gopher'].some(
       function(scheme){return location.scheme==scheme} );
   },
 
@@ -156,7 +156,7 @@ var proxy =
   //
   applyFilter: function(pS, uri, aProxy)
   {
-    if ( uri.schemeIs("feed") ) return this.server[0];
+    if ( uri.schemeIs('feed') ) return this.server[0];
     if ( policy.shouldProxy(uri) ) return this.defaultProxy;
     return this.fallbackProxy;
   }
@@ -165,6 +165,5 @@ var proxy =
 aup.proxy = proxy;
 
 // TODO: i18n
-// TODO: if ( customProxy == knownProxy ) customProxy = "";
 // TODO: ";" & "$" is not allowed in proxy name
 // TODO: editProxyServer.js

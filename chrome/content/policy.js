@@ -250,40 +250,6 @@ var policy =
       // We shouldn't throw exceptions here - this will prevent the redirect.
       dump("AutoProxy: Unexpected error in policy.onChannelRedirect: " + e + "\n");
     }
-  },
-
-
-
-/*
-  below 2 functions can be removed after removing of composer
-*/
-
-  // Reapplies filters to all nodes of the window
-  refilterWindowInternal: function(wnd, start) {
-    if (wnd.closed)
-      return;
-
-    var wndData = RequestList.getDataForWindow(wnd);
-    var data = wndData.getAllLocations();
-    for (var i = start; i < data.length; i++) {
-      if (i - start >= 20) {
-        // Allow events to process
-        runAsync(this.refilterWindowInternal, this, wnd, i);
-        return;
-      }
-
-      if (!data[i].filter || data[i].filter instanceof WhitelistFilter)
-      {
-        let nodes = data[i].clearNodes()
-      }
-    }
-
-    wndData.notifyListeners("invalidate", data);
-  },
-
-  // Calls refilterWindowInternal delayed to allow events to process
-  refilterWindow: function(wnd) {
-    runAsync(this, this.refilterWindowInternal, wnd, 0);
   }
 };
 

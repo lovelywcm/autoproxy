@@ -134,7 +134,6 @@
 
     <treechildren tooltip="tooltip" context="context"
                   onclick="handleClick(event)"
-                  ondblclick="handleDblClick(event)"
                   noitemslabel="&noitems.label;"
                   whitelistedlabel="&whitelisted.label;"/>
   </tree>

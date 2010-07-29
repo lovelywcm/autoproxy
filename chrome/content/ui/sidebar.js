@@ -379,18 +379,6 @@ function handleClick(event)
 }
 
 /**
- * Processes double-clicks on the item list.
- * @param {Event} event
- */
-function handleDblClick(event)
-{
-  if (event.button != 0 || treeView.getColumnAt(event.clientX, event.clientY) == "state")
-    return;
-
-  doBlock();
-}
-
-/**
  * Opens the item in a new tab.
  */
 function openInTab(item)
@@ -401,24 +389,6 @@ function openInTab(item)
     return;
 
   aup.loadInBrowser(item.location, mainWin);
-}
-
-function doBlock() {
-  if (!aup)
-    return;
-
-  var item = treeView.getSelectedItem();
-  if (!item)
-    return;
-
-  var filter = null;
-  if ("filter" in item && item.filter && !item.filter.disabled)
-    filter = item.filter;
-
-  if (filter && filter instanceof aup.WhitelistFilter)
-    return;
-
-  openDialog("chrome://autoproxy/content/ui/composer.xul", "_blank", "chrome,centerscreen,resizable,dialog=no,dependent", window.content, item);
 }
 
 function editFilter() {

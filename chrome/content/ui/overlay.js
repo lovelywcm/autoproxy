@@ -33,4 +33,5 @@ window.addEventListener("load", function()
                          .getService(Components.interfaces.mozIJSSubScriptLoader)
   loader.loadSubScript("chrome://autoproxy/content/ui/utils.js", sandbox);
   loader.loadSubScript("chrome://autoproxy/content/ui/browserWindow.js", sandbox);
+  loader.loadSubScript("chrome://autoproxy/content/ui/enableProxyOn.js", sandbox);
 }, false);

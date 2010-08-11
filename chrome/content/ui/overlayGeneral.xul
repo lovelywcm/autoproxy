@@ -72,7 +72,6 @@
     <!-- Dummy oncommand attributes are work-arounds for bug 371900 -->
     <command id="aup-command-settings" oncommand="//"/>
     <command id="aup-command-sidebar" oncommand="//"/>
-    <command id="aup-command-togglesiterule"/>
     <command id="aup-command-contextmenu" oncommand="//"/>
     <command id="aup-command-modeauto" oncommand="//"/>
     <command id="aup-command-modeglobal" oncommand="//"/>

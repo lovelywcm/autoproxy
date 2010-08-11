@@ -38,7 +38,6 @@ let eventHandlers = [
   ["aup-toolbar-popup", "popupshowing", aupFillPopup],
   ["aup-command-settings", "command", function() { aup.openSettingsDialog(); }],
   ["aup-command-sidebar", "command", toggleSidebar],
-  ["aup-command-togglesiterule", "command", function() { toggleFilter(siteRule); }],
   ["aup-command-contextmenu", "command", function(e) {
     if (e.eventPhase == e.AT_TARGET) E("aup-status-popup").openPopupAtScreen(window.screen.width/2, window.screen.height/2, false); }],
   ["aup-command-modeauto", "command", function() { proxy.switchToMode('auto'); }],
@@ -52,12 +51,6 @@ let eventHandlers = [
  * Stores the current value of showintoolbar preference (to detect changes).
  */
 let currentlyShowingInToolbar = prefs.showintoolbar;
-
-/**
- * Filter corresponding with "disable on site" menu item (set in aupFillPopup()).
- * @type Filter
- */
-let siteRule = null;
 
 /**
  * Progress listener detecting location changes and triggering status updates.
@@ -615,41 +608,7 @@ function aupFillPopup(event)
   //
   // Fill "Enable Proxy On" Menu Items
   //
-  var enableProxyOn = elements.enableproxyon;
-  var enableProxySeparator = enableProxyOn.nextSibling;
-
-  // remove previously created extra "Enable Proxy On --" menu items
-  while (enableProxyOn.previousSibling.tagName != 'menuseparator')
-    enableProxyOn.parentNode.removeChild(enableProxyOn.previousSibling);
-
-  let location = getCurrentLocation();
-  if (proxy.isProxyableScheme(location)) {
-    let host = location.host.replace(/^\.+/, '').replace(/\.{2,}/, '.'); // avoid: .www..xxx.com
-
-    // for host 'www.xxx.com', ignore 'www' unless rule '||www.xxx.com' is active.
-    if (host.indexOf('www.')==0 && !isActive(aup.Filter.fromText('||'+host)))
-      host = host.replace(/^www\./, '');
-
-    siteRule = null;
-    while (true) {
-      var tmpRule = aup.Filter.fromText('||' + host);
-      if (isActive(tmpRule) || !siteRule) {
-        siteRule = tmpRule;
-        var newProxyOn = cE('menuitem');
-        newProxyOn.setAttribute('type', 'checkbox');
-        newProxyOn.setAttribute('checked', isActive(tmpRule));
-        newProxyOn.setAttribute('command', 'aup-command-togglesiterule');
-        newProxyOn.setAttribute('label', enableProxySeparator.previousSibling.getAttribute('labeltempl').replace(/--/, host));
-        enableProxyOn.parentNode.insertBefore(newProxyOn, enableProxyOn);
-        enableProxyOn.setAttribute('command', '');
-        enableProxyOn.setAttribute('disabled', true);
-        enableProxyOn = newProxyOn;
-      }
-      if (host.indexOf('.') <= 0) break;
-      host = host.replace(/^[^\.]+\./, '');
-    }
-  }
-  enableProxySeparator.hidden = enableProxyOn.hidden;
+  enableProxyOn(getCurrentLocation(), elements.enableproxyon);
 
 
   //
@@ -700,26 +659,6 @@ function toggleSidebar()
 function aupTogglePref(pref) {
   prefs[pref] = !prefs[pref];
   prefs.save();
-}
-
-/**
- * If the given filter is already in user's list, removes it from the list. Otherwise adds it.
- */
-function toggleFilter(/**Filter*/ filter)
-{
-  if (filter.subscriptions.length)
-  {
-    if (filter.disabled || filter.subscriptions.some(function(subscription) !(subscription instanceof aup.SpecialSubscription)))
-    {
-      filter.disabled = !filter.disabled;
-      filterStorage.triggerFilterObservers(filter.disabled ? "disable" : "enable", [filter]);
-    }
-    else
-      filterStorage.removeFilter(filter);
-  }
-  else
-    filterStorage.addFilter(filter);
-  filterStorage.saveToDisk();
 }
 
 // Handle clicks on statusbar/toolbar panel
@@ -804,9 +743,4 @@ function switchDefaultProxy(event)
     prefs.defaultProxy = proxy.getName.indexOf(value);
     prefs.save();
   }
-}
-
-function isActive(/**Filter*/ filter)
-{
-  return filter.subscriptions.length && !filter.disabled;
 }

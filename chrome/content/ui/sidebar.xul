@@ -91,8 +91,6 @@
     </tooltip>
 
     <menupopup id="context" onpopupshowing="return fillInContext(event)">
-      <menuitem id="contextBlock" label="&context.block.label;..." oncommand="doBlock()" key="block-key"/>
-      <menuitem id="contextWhitelist" label="&context.whitelist.label;..." oncommand="doBlock()" key="block-key"/>
       <menuitem id="contextEditFilter" label="&context.editfilter.label;..." oncommand="editFilter()"/>
       <menuitem id="contextDisableFilter" labeltempl="&context.disablefilter.label;" oncommand="enableFilter(this.filter, false)"/>
       <menuitem id="contextEnableFilter" labeltempl="&context.enablefilter.label;" oncommand="enableFilter(this.filter, true)"/>
@@ -116,8 +114,7 @@
   </hbox>
 
   <tree id="list" flex="1" seltype="multiple" enableColumnDrag="true"
-        defaultSort="state descending" persist="defaultSort"
-        onkeypress="if (event.keyCode == event.DOM_VK_RETURN || event.keyCode == event.DOM_VK_ENTER) doBlock()">
+        defaultSort="state descending" persist="defaultSort">
     <treecols>
       <treecol id="address" label="&address.label;" flex="2" crop="center" persist="width ordinal sortDirection hidden"/>
       <splitter class="tree-splitter"/>

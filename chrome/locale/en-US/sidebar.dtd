@@ -25,9 +25,7 @@
 <!ENTITY tooltip.filter.label     "Rule in effect:">
 <!ENTITY tooltip.filterSource.label "Rule source:">
 
-<!ENTITY context.block.label      "Proxy this item">
 <!ENTITY context.editfilter.label "Edit rule in effect">
-<!ENTITY context.whitelist.label  "Add no-proxy rule for item">
 <!ENTITY context.disablefilter.label  "Disable rule --">
 <!ENTITY context.enablefilter.label   "Re-enable rule --">
 <!ENTITY context.disablefilteronsite.label  "Disable this rule on --">

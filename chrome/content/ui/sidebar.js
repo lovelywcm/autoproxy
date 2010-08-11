@@ -347,12 +347,7 @@ function fillInContext(/**Event*/ e)
     menuItem.hidden = false;
   }
 
-  E("contextWhitelist").hidden = ("tooltip" in item || !item.filter || item.filter.disabled || item.filter instanceof aup.WhitelistFilter);
-  E("contextBlock").hidden = !E("contextWhitelist").hidden;
-  E("contextBlock").setAttribute("disabled", "filter" in item && item.filter && !item.filter.disabled);
   E("contextEditFilter").setAttribute("disabled", !("filter" in item && item.filter));
-  E("contextOpen").setAttribute("disabled", "tooltip" in item );
-  E("contextFlash").setAttribute("disabled", "tooltip" in item || !(item.typeDescr in visual) || (item.filter && !item.filter.disabled && !(item.filter instanceof aup.WhitelistFilter)));
   E("contextCopyFilter").setAttribute("disabled", !allItems.some(function(item) {return "filter" in item && item.filter}));
 
   return true;

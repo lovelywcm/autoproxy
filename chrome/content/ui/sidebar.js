@@ -336,18 +336,22 @@ function fillInContext(/**Event*/ e)
   if (!item || ("tooltip" in item && !("filter" in item)))
     return false;
 
+  enableProxyOn(aup.makeURL(item.location), E('contextEnableProxyOn'));
+
+  E("contextEditFilter").hidden = true;
   E("contextDisableFilter").hidden = true;
   E("contextEnableFilter").hidden = true;
-  if ("filter" in item && item.filter)
+  if ("filter" in item && item.filter && item.filter.text.indexOf("||") != 0)
   {
     let filter = item.filter;
     let menuItem = E(filter.disabled ? "contextEnableFilter" : "contextDisableFilter");
     menuItem.filter = filter;
     menuItem.setAttribute("label", menuItem.getAttribute("labeltempl").replace(/--/, filter.text));
-    menuItem.hidden = false;
+    menuItem.hidden = E("contextEditFilter").hidden = false;
+    for (let item = E("contextEnableProxyOn"); item.tagName != "menuseparator"; item = item.previousSibling)
+      item.hidden = true;
   }
 
-  E("contextEditFilter").setAttribute("disabled", !("filter" in item && item.filter));
   E("contextCopyFilter").setAttribute("disabled", !allItems.some(function(item) {return "filter" in item && item.filter}));
 
   return true;

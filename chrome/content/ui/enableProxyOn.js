@@ -32,6 +32,7 @@
  *   <menuitem...
  *   <menuseparator/>
  *
+ * @param location {nsIURI}
  * @param menuItem: document.getElementById, see @require
  */
 function enableProxyOn(location, menuItem)
@@ -56,7 +57,7 @@ function enableProxyOn(location, menuItem)
         newProxyOn.setAttribute('type', 'checkbox');
         newProxyOn.setAttribute('checked', isActive(siteFilter));
         newProxyOn.addEventListener('command', function() { toggleFilter(siteFilter); }, false);
-        newProxyOn.setAttribute('label', menuSeparator.previousSibling.getAttribute('labeltempl').replace(/--/, siteHost));
+        newProxyOn.setAttribute('label', aup.getString('enableProxyOn').replace(/--/, siteHost));
         menuItem.parentNode.insertBefore(newProxyOn, menuItem);
         menuItem.setAttribute('disabled', true);
         menuItem = newProxyOn;
@@ -75,10 +76,8 @@ function enableProxyOn(location, menuItem)
  */
 function toggleFilter(/**Filter*/ filter)
 {
-  if (filter.subscriptions.length)
-  {
-    if (filter.disabled || filter.subscriptions.some(function(subscription) !(subscription instanceof aup.SpecialSubscription)))
-    {
+  if (filter.subscriptions.length) {
+    if (filter.disabled || filter.subscriptions.some(function(subscription) !(subscription instanceof aup.SpecialSubscription))) {
       filter.disabled = !filter.disabled;
       filterStorage.triggerFilterObservers(filter.disabled ? "disable" : "enable", [filter]);
     }
@@ -87,7 +86,11 @@ function toggleFilter(/**Filter*/ filter)
   }
   else
     filterStorage.addFilter(filter);
+
   filterStorage.saveToDisk();
+
+  if (treeView)
+    treeView.boxObject.invalidate();
 }
 
 
@@ -95,3 +98,7 @@ function isActive(/**Filter*/ filter)
 {
   return filter.subscriptions.length && !filter.disabled;
 }
+
+
+// TODO: @@, |http:*, etc.
+// TODO: all level domains

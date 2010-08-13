@@ -96,7 +96,7 @@ var policy =
     var match = null, docDomain = "extension", thirdParty = false, contentType = 3;
     var wnd, node, locationText = location.spec;
 
-    if ( location == this.ContentURI ) {
+    if (location == this.ContentURI) {
       wnd = this.Wnd; node = this.Node; contentType = this.ContentType;
 
       // Data loaded by plugins should be attached to the document
@@ -129,7 +129,7 @@ var policy =
       data.addNode(node, contentType, docDomain, thirdParty, locationText, match);
     }
 
-    if (match&&arguments.length==1)
+    if (match && arguments.length == 1)
       filterStorage.increaseHitCount(match);
 
     return match && !(match instanceof WhitelistFilter);
@@ -184,7 +184,7 @@ var policy =
   //
   shouldLoad: function(contentType, contentLocation, requestOrigin, node, mimeTypeGuess, extra)
   {
-    if ( proxy.isProxyableScheme(contentLocation) ) {
+    if (proxy.isProxyableScheme(contentLocation)) {
       // Interpret unknown types as "other"
       if (!(contentType in this.typeDescr))
         contentType = this.type.OTHER;
@@ -216,10 +216,10 @@ var policy =
         contexts.push(contexts[0].parent);
       else if (contexts[0] && contexts[0].parent == contexts[0])
       {
-          contexts.push(Cc["@mozilla.org/appshell/window-mediator;1"]
-                  .getService(Ci.nsIWindowMediator)
-                  .getMostRecentWindow("navigator:browser"));          
-          contexts.shift();
+        contexts.push(Cc["@mozilla.org/appshell/window-mediator;1"]
+                .getService(Ci.nsIWindowMediator)
+                .getMostRecentWindow("navigator:browser"));
+        contexts.shift();
       }
 
       let info = null;
@@ -240,7 +240,7 @@ var policy =
           this.ContentType = info.type;
           this.ContentURI = newChannel.URI;
 
-          this.autoMatching(newChannel.URI,true);
+          this.autoMatching(newChannel.URI, true);
           return;
         }
       }

@@ -51,18 +51,21 @@ function enableProxyOn(location, menuItem)
       siteHost = siteHost.replace(/^www\./, '');
 
     while (true) {
-      let siteFilter = aup.Filter.fromText('||' + siteHost);
-      if (isActive(siteFilter) || menuItem.nextSibling==menuSeparator) {
-        var newProxyOn = cE('menuitem');
-        newProxyOn.setAttribute('type', 'checkbox');
-        newProxyOn.setAttribute('checked', isActive(siteFilter));
-        newProxyOn.addEventListener('command', function() { toggleFilter(siteFilter); }, false);
-        newProxyOn.setAttribute('label', aup.getString('enableProxyOn').replace(/--/, siteHost));
-        menuItem.parentNode.insertBefore(newProxyOn, menuItem);
-        menuItem.setAttribute('disabled', true);
-        menuItem = newProxyOn;
-      }
       if (siteHost.indexOf('.') <= 0) break;
+
+      let siteFilter = aup.Filter.fromText('||' + siteHost);
+      var newProxyOn = cE('menuitem');
+      newProxyOn.setAttribute('type', 'checkbox');
+      newProxyOn.setAttribute('checked', isActive(siteFilter));
+      newProxyOn.addEventListener('command', function() { toggleFilter(siteFilter); }, false);
+      newProxyOn.setAttribute('label', aup.getString('enableProxyOn').replace(/--/, siteHost));
+      menuItem.parentNode.insertBefore(newProxyOn, menuItem);
+
+      if (isActive(siteFilter))
+        for (; menuItem != menuSeparator; menuItem = menuItem.nextSibling)
+          menuItem.setAttribute('disabled', true);
+
+      menuItem = newProxyOn;
       siteHost = siteHost.replace(/^[^\.]+\./, '');
     }
   }
@@ -101,4 +104,3 @@ function isActive(/**Filter*/ filter)
 
 
 // TODO: @@, |http:*, etc.
-// TODO: all level domains

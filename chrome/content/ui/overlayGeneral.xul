@@ -55,8 +55,7 @@
       <menuseparator/>
       <menu id="aup-status-switchProxy" label="&switchProxy.label;" key="aup-key-contextmenu"/>
       <menuseparator/>
-      <menuitem id="aup-status-enableproxyon" hidden="true"/>
-      <menuseparator/>
+      <!--"Enable Proxy On" menu items will be insert here by JS-->
       <menuitem id="aup-status-modeauto" label="&mode.auto.label;" accesskey="&mode.auto.accesskey;" type="radio" key="aup-key-modeauto" command="aup-command-modeauto"/>
       <menuitem id="aup-status-modeglobal" label="&mode.global.label;" accesskey="&mode.global.accesskey;" type="radio" key="aup-key-modeglobal" command="aup-command-modeglobal"/>
       <menuitem id="aup-status-modedisabled" label="&mode.disabled.label;" accesskey="&mode.disabled.accesskey;" type="radio" key="aup-key-modedisabled" command="aup-command-modedisabled"/>

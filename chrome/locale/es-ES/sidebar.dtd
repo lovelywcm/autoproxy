@@ -18,9 +18,6 @@
 <!ENTITY tooltip.size.label "Tamaño:">
 <!ENTITY tooltip.filter.label "Regla efectiva:">
 <!ENTITY tooltip.filterSource.label "Regla de origen:">
-<!ENTITY context.editfilter.label "Editar la regla en uso">
-<!ENTITY context.disablefilter.label "Desactivar regla --">
-<!ENTITY context.enablefilter.label "Reactivar regla --">
 <!ENTITY context.disablefilteronsite.label "Desactivar esta regla en --">
 <!ENTITY context.enablefilteronsite.label "Reactivar regla en --">
 <!ENTITY context.open.label "Abrir en Nueva Pestaña">

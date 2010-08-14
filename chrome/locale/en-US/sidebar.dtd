@@ -25,9 +25,6 @@
 <!ENTITY tooltip.filter.label     "Rule in effect:">
 <!ENTITY tooltip.filterSource.label "Rule source:">
 
-<!ENTITY context.editfilter.label "Edit rule in effect">
-<!ENTITY context.disablefilter.label  "Disable rule --">
-<!ENTITY context.enablefilter.label   "Re-enable rule --">
 <!ENTITY context.disablefilteronsite.label  "Disable this rule on --">
 <!ENTITY context.enablefilteronsite.label   "Re-enable rule on --">
 <!ENTITY context.open.label       "Open in New Tab">

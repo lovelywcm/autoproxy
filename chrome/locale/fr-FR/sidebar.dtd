@@ -18,9 +18,6 @@
 <!ENTITY tooltip.size.label "Taille :">
 <!ENTITY tooltip.filter.label "Règle effective :">
 <!ENTITY tooltip.filterSource.label "Source de la règle :">
-<!ENTITY context.editfilter.label "Éditer la règle utilisée">
-<!ENTITY context.disablefilter.label "Désactiver la règle --">
-<!ENTITY context.enablefilter.label "Réactiver la règle --">
 <!ENTITY context.disablefilteronsite.label "Désactiver cette règle pour --">
 <!ENTITY context.enablefilteronsite.label "Réactiver la règle pour --">
 <!ENTITY context.open.label "Ouvrir dans un nouvel onglet">

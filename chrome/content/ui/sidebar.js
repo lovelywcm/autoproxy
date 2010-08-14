@@ -336,21 +336,7 @@ function fillInContext(/**Event*/ e)
   if (!item || ("tooltip" in item && !("filter" in item)))
     return false;
 
-  enableProxyOn(aup.makeURL(item.location), E('contextEnableProxyOn'));
-
-  E("contextEditFilter").hidden = true;
-  E("contextDisableFilter").hidden = true;
-  E("contextEnableFilter").hidden = true;
-  if ("filter" in item && item.filter && item.filter.text.indexOf("||") != 0)
-  {
-    let filter = item.filter;
-    let menuItem = E(filter.disabled ? "contextEnableFilter" : "contextDisableFilter");
-    menuItem.filter = filter;
-    menuItem.setAttribute("label", menuItem.getAttribute("labeltempl").replace(/--/, filter.text));
-    menuItem.hidden = E("contextEditFilter").hidden = false;
-    for (let item = E("contextEnableProxyOn"); item.tagName != "menuseparator"; item = item.previousSibling)
-      item.hidden = true;
-  }
+  enableProxyOn(E('contextOpen'), item);
 
   E("contextCopyFilter").setAttribute("disabled", !allItems.some(function(item) {return "filter" in item && item.filter}));
 
@@ -388,23 +374,6 @@ function openInTab(item)
     return;
 
   aup.loadInBrowser(item.location, mainWin);
-}
-
-function editFilter() {
-  if (!aup)
-    return;
-
-  var item = treeView.getSelectedItem();
-  if (treeView.data && !treeView.data.length)
-    item = treeView.getDummyTooltip();
-
-  if (!("filter" in item) || !item.filter)
-    return;
-
-  if (!("location") in item)
-    item.location = undefined
-
-  aup.openSettingsDialog(item.location, item.filter);
 }
 
 function enableFilter(filter, enable) {

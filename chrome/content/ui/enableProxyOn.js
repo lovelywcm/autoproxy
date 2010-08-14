@@ -27,57 +27,106 @@
  * Used for creating "Enable Proxy On --" menu items.
  * Shared by context menu of statusbar, toolbar & sidebar.
  *
- * @require
- *   <menuseparator/>
- *   <menuitem...
- *   <menuseparator/>
- *
- * @param location {nsIURI}
- * @param menuItem: document.getElementById, see @require
+ * @param menuItem  document.getElementById
+ * @param data  {RequestEntry} see requests.js
  */
-function enableProxyOn(location, menuItem)
+function enableProxyOn(menuItem, data)
 {
-  var menuSeparator = menuItem.nextSibling;
+  // global, intended
+  curItem = menuItem;
 
-  // remove previously created extra "Enable Proxy On --" menu items
-  while (menuItem.previousSibling.tagName != 'menuseparator')
-    menuItem.parentNode.removeChild(menuItem.previousSibling);
+  // remove previously created items
+  while (curItem.previousSibling && curItem.previousSibling.className == 'enableProxyOn')
+    curItem.parentNode.removeChild(curItem.previousSibling);
 
-  if (proxy.isProxyableScheme(location)) {
-    var siteHost = location.host.replace(/^\.+/, '').replace(/\.{2,}/, '.'); // avoid: .www..xxx.com
+  if (!data) return;
 
-    // for host 'www.xxx.com', ignore 'www' unless rule '||www.xxx.com' is active.
-    if (siteHost.indexOf('www.')==0 && !isActive(aup.Filter.fromText('||'+siteHost)))
-      siteHost = siteHost.replace(/^www\./, '');
+  var location = aup.makeURL(data.location);
+  if (!proxy.isProxyableScheme(location)) return;
 
-    while (true) {
-      if (siteHost.indexOf('.') <= 0) break;
+  // create "enable proxy on site" menu items
+  makeSiteCheckbox(location, '||');
 
-      let siteFilter = aup.Filter.fromText('||' + siteHost);
-      var newProxyOn = cE('menuitem');
-      newProxyOn.setAttribute('type', 'checkbox');
-      newProxyOn.setAttribute('checked', isActive(siteFilter));
-      newProxyOn.addEventListener('command', function() { toggleFilter(siteFilter); }, false);
-      newProxyOn.setAttribute('label', aup.getString('enableProxyOn').replace(/--/, siteHost));
-      menuItem.parentNode.insertBefore(newProxyOn, menuItem);
+  var filter = aup.whitelistMatcher.matchesAny(data.location, data.typeDescr, data.docDomain, data.thirdParty);
+  if (filter == null)
+    filter = aup.blacklistMatcher.matchesAny(data.location, data.typeDescr, data.docDomain, data.thirdParty);
 
-      if (isActive(siteFilter))
-        for (; menuItem != menuSeparator; menuItem = menuItem.nextSibling)
-          menuItem.setAttribute('disabled', true);
+  // create "enable proxy on url" menu item
+  if (filter && filter instanceof aup.BlockingFilter && filter.text.indexOf('||') != 0)
+    makeNewCheckbox(filter, 'enableProxyOnUrl');
 
-      menuItem = newProxyOn;
-      siteHost = siteHost.replace(/^[^\.]+\./, '');
+  // create "disable proxy on url" menu item
+  if (filter && filter instanceof aup.WhitelistFilter && filter.text.indexOf('@@||') != 0)
+    makeNewCheckbox(filter, 'disableProxyOnUrl');
+
+  // create "disable proxy on site" menu items
+  makeSiteCheckbox(location, '@@||');
+
+  // create a menuseparator
+  while (curItem.className == 'enableProxyOn') curItem = curItem.nextSibling;
+  curItem.parentNode.insertBefore(cE('menuseparator'), curItem);
+  curItem.previousSibling.className = 'enableProxyOn';
+}
+
+
+/**
+ * @param location  {nsIURI}
+ * @param prefix  {string} "||" or "@@||"
+ */
+function makeSiteCheckbox(location, prefix)
+{
+  var hostFilter = function() { return aup.Filter.fromText(prefix + host); }
+
+  // avoid: .www..xxx.com
+  var host = location.host.replace(/^\.+/, '').replace(/\.{2,}/, '.');
+
+  // for host 'www.xxx.com', ignore 'www' unless rule '||www.xxx.com' is active.
+  if (!isActive(hostFilter())) host = host.replace(/^www\./, '');
+
+  while (true) {
+    makeNewCheckbox(hostFilter(), prefix == '||' ? 'enableProxyOnSite' : 'disableProxyOnSite');
+
+    // strip sub domain
+    host = host.replace(/^[^\.]+\./, '');
+    // com
+    if (host.indexOf('.') <= 0) break;
+    // com.cn
+    if (/^(?:com|net|org|edu|gov)\.[a-z]{2}$/i.test(host) && !isActive(hostFilter())) break;
+  }
+}
+
+
+function makeNewCheckbox(filter, labeltempl)
+{
+  if (filter instanceof aup.WhitelistFilter && !isActive(filter)) return;
+
+  var filterText = filter.text.replace(/^@@/, '').replace(/^\|+/, '');
+  var checkbox = cE('menuitem');
+  checkbox.className = 'enableProxyOn';
+  checkbox.setAttribute('type', 'checkbox');
+  checkbox.setAttribute('label', aup.getString(labeltempl).replace(/--/, filterText));
+  checkbox.addEventListener('command', function() { toggleFilter(filter); }, false);
+  curItem.parentNode.insertBefore(checkbox, curItem);
+
+  if (isActive(filter)) {
+    checkbox.setAttribute('checked', true);
+    checkbox.style.color = filter instanceof aup.BlockingFilter ? 'green' : 'red';
+    if (labeltempl != 'enableProxyOnUrl') {
+      for (; curItem.className == 'enableProxyOn'; curItem = curItem.nextSibling) {
+        curItem.setAttribute('disabled', true);
+        curItem.style.color = '';
+      }
     }
   }
 
-  menuSeparator.hidden = menuItem.hidden;
+  curItem = checkbox;
 }
 
 
 /**
  * If the given filter is active, remove/disable it, Otherwise add/enable it.
  */
-function toggleFilter(/**Filter*/ filter)
+function toggleFilter(filter)
 {
   if (filter.subscriptions.length) {
     if (filter.disabled || filter.subscriptions.some(function(subscription) !(subscription instanceof aup.SpecialSubscription))) {
@@ -92,15 +141,18 @@ function toggleFilter(/**Filter*/ filter)
 
   filterStorage.saveToDisk();
 
-  if (treeView)
+  if (typeof treeView != "undefined")
     treeView.boxObject.invalidate();
 }
 
 
+/**
+ * @return true  if filter exist & not disabled
+ */
 function isActive(/**Filter*/ filter)
 {
   return filter.subscriptions.length && !filter.disabled;
 }
 
 
-// TODO: @@, |http:*, etc.
+// TODO: reuse code for top window

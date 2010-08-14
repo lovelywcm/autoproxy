@@ -17,9 +17,6 @@
 <!ENTITY tooltip.size.label "大小:">
 <!ENTITY tooltip.filter.label "生效的规则:">
 <!ENTITY tooltip.filterSource.label "规则来源:">
-<!ENTITY context.editfilter.label "编辑该规则">
-<!ENTITY context.disablefilter.label "禁用代理规则 --">
-<!ENTITY context.enablefilter.label "重新启用规则 --">
 <!ENTITY context.disablefilteronsite.label "这 --  禁用这条规则">
 <!ENTITY context.enablefilteronsite.label "在 -- 重新启用代理规则">
 <!ENTITY context.open.label "在新标签页打开">

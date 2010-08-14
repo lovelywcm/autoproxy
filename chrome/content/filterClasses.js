@@ -444,7 +444,12 @@ RegExpFilter.fromText = function(text)
   {
     // Issue 126: Strictly mapping to keyword blocking,
     // rule "example.com" should not match "httpS://example.com/"
-    if (text[0] != "|") text = "|http:*" + text;
+    //
+    // (trivial) bug here:
+    //   "p://" will match almost nothing contrast to almost anything
+    //   "http://abc" will not match http://example.com/?http://abc
+    if (text.indexOf("http:") == 0) text = "|" + text;
+    else if (text[0] != "|") text = "|http:*" + text;
 
     regexp = text.replace(/\*+/g, "*")        // remove multiple wildcards
                  .replace(/\^\|$/, "^")       // remove anchors following separator placeholder

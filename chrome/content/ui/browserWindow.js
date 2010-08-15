@@ -727,17 +727,6 @@ function aupExecuteAction(action, e)
   }
 }
 
-// Retrieves the image URL for the specified style property
-function aupImageStyle(computedStyle, property) {
-  var value = computedStyle.getPropertyCSSValue(property);
-  if (value instanceof Ci.nsIDOMCSSValueList && value.length >= 1)
-    value = value[0];
-  if (value instanceof Ci.nsIDOMCSSPrimitiveValue && value.primitiveType == Ci.nsIDOMCSSPrimitiveValue.CSS_URI)
-    return aup.unwrapURL(value.getStringValue()).spec;
-
-  return null;
-}
-
 function switchDefaultProxy(event)
 {
   var value = event.target.value;

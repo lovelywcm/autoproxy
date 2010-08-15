@@ -44,7 +44,8 @@ let eventHandlers = [
   ["aup-command-modeglobal", "command", function() { proxy.switchToMode('global'); }],
   ["aup-command-modedisabled", "command", function() { proxy.switchToMode('disabled'); }],
   ["aup-status", "click", aupClickHandler],
-  ["aup-toolbarbutton", "click", aupClickHandler]
+  ["aup-toolbarbutton", "command", aupClickHandler],
+  ["aup-toolbarbutton", "click", function(e) { if (e.button == 1) aupClickHandler(e); }]
 ];
 
 /**
@@ -665,13 +666,12 @@ function aupTogglePref(pref) {
 // Handle clicks on statusbar/toolbar panel
 function aupClickHandler(e)
 {
-  if (e.button == 0 && e.target.tagName == 'image')
-    aupExecuteAction(prefs.defaultstatusbaraction, e);
-  else if (e.button == 1) {
+  if (e.button == 1) {
     prefs.proxyMode = proxy.mode[ (proxy.mode.indexOf(prefs.proxyMode)+1) % 3 ];
     prefs.save();
   }
-  else aupExecuteAction(prefs.defaulttoolbaraction, e);
+  else
+    aupExecuteAction(e.target.tagName == 'image' ? prefs.defaultstatusbaraction : prefs.defaulttoolbaraction, e);
 }
 
 // Executes default action for statusbar/toolbar by its number

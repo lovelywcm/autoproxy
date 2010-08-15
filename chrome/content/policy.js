@@ -251,10 +251,12 @@ var policy =
       dump("AutoProxy: Unexpected error in policy.onChannelRedirect: " + e + "\n");
     }
   },
-    asyncOnChannelRedirect: function(oldChannel, newChannel, flags, cb) {
-        this.onChannelRedirect(oldChannel, newChannel, flags);
-        cb.onRedirectVerifyCallback(0);
-    }
+
+  asyncOnChannelRedirect: function(oldChannel, newChannel, flags, cb)
+  {
+    this.onChannelRedirect(oldChannel, newChannel, flags);
+    cb.onRedirectVerifyCallback(0);
+  }
 };
 
 aup.policy = policy;

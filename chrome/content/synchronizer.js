@@ -264,10 +264,12 @@ var synchronizer =
           if (oldEventSink)
             oldEventSink.onChannelRedirect(oldChannel, newChannel, flags);
         },
-          asyncOnChannelRedirect: function(oldChannel, newChannel, flags, cb) {
-              this.onChannelRedirect(oldChannel, newChannel, flags);
-              cb.onRedirectVerifyCallback(0);
-          }
+
+        asyncOnChannelRedirect: function(oldChannel, newChannel, flags, cb)
+        {
+          this.onChannelRedirect(oldChannel, newChannel, flags);
+          cb.onRedirectVerifyCallback(0);
+        }
       }
     } catch (e) {}
 

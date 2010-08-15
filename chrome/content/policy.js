@@ -250,7 +250,11 @@ var policy =
       // We shouldn't throw exceptions here - this will prevent the redirect.
       dump("AutoProxy: Unexpected error in policy.onChannelRedirect: " + e + "\n");
     }
-  }
+  },
+    asyncOnChannelRedirect: function(oldChannel, newChannel, flags, cb) {
+        this.onChannelRedirect(oldChannel, newChannel, flags);
+        cb.onRedirectVerifyCallback(0);
+    }
 };
 
 aup.policy = policy;

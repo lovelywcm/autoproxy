@@ -578,32 +578,14 @@ function aupFillPopup(event)
   //
   // Fill "Default Proxy" Menu Items
   //
-  // remove previously created "default proxy" menuitems
   var menu = popup.getElementsByTagName('menu')[0];
-  while (menu.firstChild) menu.removeChild(menu.firstChild);
-  while (menu.nextSibling.tagName != 'menuseparator')
-    menu.parentNode.removeChild(menu.nextSibling)
+  while (menu.previousSibling.tagName != 'menuseparator')
+    menu.parentNode.removeChild(menu.previousSibling);
 
-  // more than 4 proxy servers ? display them in a menupopup : inline of main context menu
-  var menuPop = null;
-  if (proxy.validConfigs.length > 3) {
-    menuPop = cE('menupopup');
-    menuPop.id = "options-switchProxy";
-    menu.appendChild(menuPop);
-  }
-  menu.hidden = ! menuPop;
+  var popup = proxy.validConfigs.length > 3 ? menu.firstChild : null;
+  makeProxyItems(popup, menu);
 
-  var menuSeparator = menu.nextSibling;
-  for each (var conf in proxy.validConfigs) {
-    var item = cE('menuitem');
-    item.setAttribute('type', 'radio');
-    item.setAttribute('label', conf.name);
-    item.setAttribute('value', conf.name);
-    item.setAttribute('name', 'radioGroup-switchProxy');
-    item.addEventListener('command', switchDefaultProxy, false);
-    if (proxy.nameOfDefaultProxy == conf.name) item.setAttribute('checked', true);
-    menuPop ? menuPop.appendChild(item) : menu.parentNode.insertBefore(item, menuSeparator);
-  }
+  menu.hidden = !popup;
 
 
   //
@@ -670,7 +652,8 @@ function aupClickHandler(e)
     prefs.proxyMode = proxy.mode[ (proxy.mode.indexOf(prefs.proxyMode)+1) % 3 ];
     prefs.save();
   }
-  else if (e.button != 2) // e.button is undefined when left click tool bar icon
+  // e.button is undefined when left click on tool bar icon
+  else if (e.button != 2 && e.target.tagName != 'menuitem')
     aupExecuteAction(e.target.tagName == 'image' ? prefs.defaultstatusbaraction : prefs.defaulttoolbaraction, e);
 }
 
@@ -707,18 +690,7 @@ function aupExecuteAction(action, e)
       break;
     case 5: //default proxy menu
       let popup = E("aup-popup-switchProxy");
-      while (popup.firstChild) popup.removeChild(popup.lastChild);
-      for each (let p in proxy.getName) {
-        let item = cE('menuitem');
-        item.setAttribute('type', 'radio');
-        item.setAttribute('label', p);
-        item.setAttribute('value', p);
-        item.setAttribute('name', 'radioGroup-switchProxy');
-        item.addEventListener("command", switchDefaultProxy, false);
-        if (proxy.nameOfDefaultProxy == p) item.setAttribute('checked', true);
-        popup.appendChild(item);
-      }
-      popup.insertBefore(cE("menuseparator"), popup.firstChild.nextSibling);
+      makeProxyItems(popup);
       if (e.screenX && e.screenY) popup.openPopupAtScreen(e.screenX, e.screenY, false);
       else popup.openPopupAtScreen(e.target.boxObject.screenX, e.target.boxObject.screenY, false);
       break;
@@ -733,5 +705,34 @@ function switchDefaultProxy(event)
   if ( proxy.nameOfDefaultProxy != value ) {
     prefs.defaultProxy = proxy.getName.indexOf(value);
     prefs.save();
+  }
+}
+
+function makeProxyItems(popup, menu)
+{
+  if (popup)
+    while (popup.firstChild) popup.removeChild(popup.firstChild);
+
+  for each (let p in proxy.getName) {
+    let item = cE('menuitem');
+    item.setAttribute('type', 'radio');
+    item.setAttribute('label', p);
+    item.setAttribute('value', p);
+    item.setAttribute('name', 'radioGroup-switchProxy');
+    item.addEventListener("command", switchDefaultProxy, false);
+    if (proxy.nameOfDefaultProxy == p) item.setAttribute('checked', true);
+    if (popup)
+      popup.appendChild(item);
+    else
+      menu.parentNode.insertBefore(item, menu);
+  }
+
+  // use 'direct connect' as default proxy is confusing, so hide it
+  if (popup)
+    popup.firstChild.hidden = true;
+  else {
+    while (menu.previousSibling.tagName != 'menuseparator')
+      menu = menu.previousSibling;
+    menu.hidden = true;
   }
 }

@@ -210,8 +210,6 @@ function aupUnload()
   prefs.removeListener(aupReloadPrefs);
   prefs.removeListener(proxy.reloadPrefs);
   filterStorage.removeFilterObserver(aupReloadPrefs);
-  filterStorage.removeFilterObserver(reloadDisabledFilters);
-  filterStorage.removeSubscriptionObserver(reloadDisabledFilters);
   filterStorage.removeSubscriptionObserver(aupReloadPrefs);
   aupHooks.getBrowser().removeProgressListener(progressListener);
 }

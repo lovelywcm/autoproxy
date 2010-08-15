@@ -692,6 +692,7 @@ function aupExecuteAction(action, e)
     case 4: //cycle default proxy
       if (aup.proxyTipTimer) aup.proxyTipTimer.cancel();
       prefs.defaultProxy = ++prefs.defaultProxy % proxy.server.length;
+      if (prefs.defaultProxy == 0) prefs.defaultProxy = 1;
       prefs.save();
       //show tooltip
       let tooltip = E("showCurrentProxy");

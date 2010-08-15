@@ -1,4 +1,4 @@
-<!ENTITY dialog.title "Préférences d&apos;AutoProxy">
+<!ENTITY dialog.title "Préférences d'AutoProxy">
 <!ENTITY filters.accesskey "g">
 <!ENTITY add.label "Ajouter une règle">
 <!ENTITY add.accesskey "A">
@@ -12,6 +12,13 @@
 <!ENTITY export.accesskey "x">
 <!ENTITY clearall.label "Retirer les règles personnalisées">
 <!ENTITY clearall.accesskey "r">
+<!ENTITY resethitcounts.accesskey "R">
+<!ENTITY proxies.label "Serveur proxy">
+<!ENTITY proxies.accesskey "S">
+<!ENTITY editproxies.label "Édition de serveur proxy">
+<!ENTITY editproxies.accesskey "e">
+<!ENTITY chooseproxies.label "Choix de serveur proxy">
+<!ENTITY chooseproxies.accesskey "C">
 <!ENTITY edit.label "Éditer">
 <!ENTITY edit.accesskey "d">
 <!ENTITY cut.label "Couper">
@@ -38,23 +45,27 @@
 <!ENTITY sort.descending.accesskey "Z">
 <!ENTITY options.label "Options">
 <!ENTITY options.accesskey "O">
-<!ENTITY enable.label "Activer AutoProxy">
-<!ENTITY enable.accesskey "c">
-<!ENTITY showintoolbar.label "Afficher dans la barre d&apos;outils">
+<!ENTITY mode.auto.label "Mode automatique">
+<!ENTITY mode.auto.accesskey "a">
+<!ENTITY mode.global.label "Mode global">
+<!ENTITY mode.global.accesskey "g">
+<!ENTITY mode.disabled.label "Désactiver AutoProxy">
+<!ENTITY mode.disabled.accesskey "D">
+<!ENTITY showintoolbar.label "Afficher dans la barre d'outils">
 <!ENTITY showintoolbar.accesskey "b">
-<!ENTITY showinstatusbar.label "Afficher dans la barre d&apos;état">
+<!ENTITY showinstatusbar.label "Afficher dans la barre d'état">
 <!ENTITY showinstatusbar.accesskey "t">
 <!ENTITY help.label "Aide">
 <!ENTITY help.accesskey "d">
-<!ENTITY gettingStarted.label "Débuter (en)">
+<!ENTITY gettingStarted.label "Débuter (en anglais)">
 <!ENTITY gettingStarted.accesskey "b">
-<!ENTITY gettingStarted.url "http://autoproxy.org/en/getting_started">
-<!ENTITY faq.label "Foire aux questions (en)">
+<!ENTITY gettingStarted.url "http://www.autoproxy.org/">
+<!ENTITY faq.label "Foire aux questions (en anglais)">
 <!ENTITY faq.accesskey "F">
-<!ENTITY faq.url "http://autoproxy.org/en/faq">
-<!ENTITY filterdoc.label "Écriture des règles d&apos;AutoProxy">
+<!ENTITY faq.url "http://www.autoproxy.org/">
+<!ENTITY filterdoc.label "Écriture des règles d'AutoProxy (en anglais)">
 <!ENTITY filterdoc.accesskey "r">
-<!ENTITY filterdoc.url "http://autoproxy.org/en/rules">
+<!ENTITY filterdoc.url "http://www.autoproxy.org/">
 <!ENTITY about.label "À propos de AutoProxy">
 <!ENTITY about.accesskey "p">
 <!ENTITY filter.column "Règles">
@@ -66,9 +77,9 @@
 <!ENTITY lasthit.column "Dernière occurrence">
 <!ENTITY lasthit.accesskey "n">
 <!ENTITY context.edit.label "Éditer la règle">
-<!ENTITY context.resethitcount.label "Réinitialiser les statistiques de l&apos;occurrence pour la règle">
-<!ENTITY context.synchsubscription.label "Mettre maintenant à jour l&apos;abonnement">
-<!ENTITY context.editsubscription.label "Éditer l&apos;abonnement">
+<!ENTITY context.resethitcount.label "Réinitialiser les statistiques de l'occurrence pour la règle">
+<!ENTITY context.synchsubscription.label "Mettre maintenant à jour l'abonnement">
+<!ENTITY context.editsubscription.label "Éditer l'abonnement">
 <!ENTITY context.moveup.label "Faire monter la règle">
 <!ENTITY context.movedown.label "Faire descendre la règle">
 <!ENTITY context.movegroupup.label "Faire monter le groupe">

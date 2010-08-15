@@ -1,0 +1,17 @@
+<!ENTITY dialog.title "Proxyserver bearbeiten">
+<!ENTITY name.label "Name:">
+<!ENTITY host.label "Proxy-Host">
+<!ENTITY port.label "Port:">
+<!ENTITY http.label "http">
+<!ENTITY socks4.label "socks4">
+<!ENTITY socks5.label "socks5">
+<!ENTITY delete.label "Löschen">
+<!ENTITY addButton.label "Proxy hinzufügen">
+<!ENTITY addButton.accesskey "z">
+<!ENTITY delButton.label "Proxy löschen">
+<!ENTITY delButton.accesskey "l">
+<!ENTITY resetButton.label "Zurücksetzen">
+<!ENTITY resetButton.accesskey "r">
+<!ENTITY warning.text "Warnung: Sie haben sich entschieden, alle Proxies zu löschen. Bitte vergessen Sie nicht, einen neuen Proxy hinzuzufügen, ansonsten wird AutoProxy nicht funktionieren.">
+<!ENTITY note.text "Hinweis: Sie haben sich entschieden, den Standardproxy zu löschen. Bitte vergessen Sie nicht, einen neuen Standardproxy zu wählen (via &quot;Standard Proxyserver wählen&quot; menu), ansonsten wird AutoProxy nicht funktionieren.">
+<!ENTITY tip.text "Tipp: Der &quot;Abbrechen&quot;-Button macht die vorherige Aktion rückgängig.">

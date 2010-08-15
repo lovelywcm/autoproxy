@@ -1,17 +1,19 @@
 <!ENTITY dialog.title "Editar o servidor de proxy">
 <!ENTITY name.label "Dar um nome:">
-<!ENTITY name.accesskey "N">
 <!ENTITY host.label "Proxy Host:">
-<!ENTITY host.accesskey "H">
 <!ENTITY port.label "Porta:">
-<!ENTITY port.accesskey "P">
-<!ENTITY type.label "Tipo de proxy:">
-<!ENTITY type.accesskey "T">
 <!ENTITY http.label "http">
-<!ENTITY http.accesskey "t">
 <!ENTITY socks4.label "socks4">
-<!ENTITY socks4.accesskey "4">
 <!ENTITY socks5.label "socks5">
-<!ENTITY socks5.accesskey "5">
 <!ENTITY delete.label "Apagar">
-<!ENTITY delete.accesskey "D">
+<!ENTITY addButton.label "Add proxy">
+<!ENTITY addButton.accesskey "A">
+<!ENTITY delButton.label "Delete proxy">
+<!ENTITY delButton.accesskey "D">
+<!ENTITY resetButton.label "Reset to default">
+<!ENTITY resetButton.accesskey "R">
+<!ENTITY warning.text "Warning: you chose to delete all proxies, please
+ remember to add a new proxy, or AutoProxy will not work.">
+<!ENTITY note.text "Note: you chose to delete the default proxy, please remember to set a new
+ default proxy(by &quot;Choose proxy server&quot; menu), or AutoProxy may not work.">
+<!ENTITY tip.text "Tip: Click the &quot;Cancel&quot; button can undo previous operation.">

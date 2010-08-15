@@ -1,0 +1,33 @@
+<!ENTITY detached.title "AutoProxy: Proxy-bare Objekte (abgekoppelt)">
+<!ENTITY detach.label "Abkoppeln">
+<!ENTITY reattach.label "Anheften">
+<!ENTITY search.label "Suchen:">
+<!ENTITY search.accesskey "S">
+<!ENTITY type.label "Typ">
+<!ENTITY address.label "Adresse">
+<!ENTITY filter.label "Regel">
+<!ENTITY state.label "Status">
+<!ENTITY size.label "Größe">
+<!ENTITY docDomain.label "Dokumentquelle">
+<!ENTITY noitems.label "Objekte, die nicht via Proxy geladen werden können">
+<!ENTITY whitelisted.label "Kein-Proxy Seite">
+<!ENTITY tooltip.address.label "Adresse:">
+<!ENTITY tooltip.type.label "Typ:">
+<!ENTITY tooltip.type.blocked "(via Proxy)">
+<!ENTITY tooltip.type.whitelisted "(Proxy verboten, direkt verbunden)">
+<!ENTITY tooltip.size.label "Größe:">
+<!ENTITY tooltip.docDomain.label "Dokumentquelle:">
+<!ENTITY tooltip.filter.label "Angewandte Regel:">
+<!ENTITY tooltip.filterSource.label "Regelquelle:">
+<!ENTITY context.block.label "Dieses Objekt via Proxy laden">
+<!ENTITY context.editfilter.label "Angewandte Regel bearbeiten">
+<!ENTITY context.whitelist.label "Kein-Proxy Regel für dieses Objekt hinzufügen">
+<!ENTITY context.disablefilter.label "Regel -- deaktivieren">
+<!ENTITY context.enablefilter.label "Regel -- aktivieren">
+<!ENTITY context.disablefilteronsite.label "Diese Regel für -- deaktivieren">
+<!ENTITY context.enablefilteronsite.label "Diese Regel für -- aktivieren">
+<!ENTITY context.open.label "In neuem Tab öffnen">
+<!ENTITY context.flash.label "Objektränder blinken lassen">
+<!ENTITY context.copy.label "Adresse des Objekts kopieren">
+<!ENTITY context.copyFilter.label "Regel kopieren">
+<!ENTITY context.selectAll.label "Alles markieren">

@@ -3,7 +3,7 @@
 <!ENTITY new.description "Merci d'entrer l'adresse Web ou de préciser le fichier contenant la liste de des règles d'AutoProxy.">
 <!ENTITY edit.description "La liste de règles pour cet abonnement sera téléchargée depuis l'adresse précisée.">
 <!ENTITY external.description "Ceci est une règle externe d'abonnement, qui sera mise à jour par l'extension ayant créé cet abonnement.">
-<!ENTITY autodownload.description "Si vous choisissez « Mettre à jour automatiquement » cette adresse sera utilisée quotidiennement pour vérifier les mises à jour. En désactivant cette option, vous pouvez quand même effectuer manuellement une mise à jour depuis le menu contextuel des abonnements.">
+<!ENTITY autodownload.description "Si vous choisissez « Mettre à jour automatique » cette adresse sera utilisée quotidiennement pour vérifier les mises à jour. En désactivant cette option, vous pouvez quand même effectuer manuellement une mise à jour depuis le menu contextuel des abonnements.">
 <!ENTITY location.label "Adresse de la liste de règles :">
 <!ENTITY location.accesskey "l">
 <!ENTITY title.label "Titre de l'abonnement :">

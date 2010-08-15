@@ -1,5 +1,3 @@
-<!ENTITY notloaded.label "Não carregado">
-<!ENTITY notloaded.tooltip "Um componente do AutoProxy não pode ser carregado, talvez não tenha sido instalado adequadamente.">
 <!ENTITY status.tooltip "Status:">
 <!ENTITY blocked.tooltip "Itens bloqueados pelo proxy nesta página:">
 <!ENTITY filters.tooltip "Regras mais ativas:">
@@ -12,7 +10,11 @@
 <!ENTITY context.frame.label "Moldura do proxy">
 <!ENTITY sidebar.title "Itens bloqueáveis pelo proxy nesta página">
 <!ENTITY settings.label "Preferências">
+<!ENTITY settings.accesskey "F">
+<!ENTITY opensidebar.label "Abrir itens bloqueáveis pelo proxy">
+<!ENTITY opensidebar.accesskey "B">
 <!ENTITY closesidebar.label "Fechar itens bloqueáveis pelo proxy">
-<!ENTITY whitelist.page.label "Desabilitar apenas nesta página">
+<!ENTITY closesidebar.accesskey "B">
+<!ENTITY whitelist.site.label "Desabilitar em --">
 <!ENTITY objecttab.title "Proxy">
 <!ENTITY objecttab.tooltip "Clique aqui para referir este objeto ao proxy com o AutoProxy">

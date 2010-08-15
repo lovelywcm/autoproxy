@@ -1,10 +1,8 @@
-<!ENTITY notloaded.label "Non chargé">
-<!ENTITY notloaded.tooltip "Le composant d&apos;AutoProxy n&apos;a pas pu être chargé, peut-être n&apos;est-il pas installé correctement.">
 <!ENTITY status.tooltip "État :">
 <!ENTITY blocked.tooltip "Éléments utilisant un proxy sur cette page :">
 <!ENTITY filters.tooltip "Règles les plus actives :">
 <!ENTITY menuitem.label "Préférences de AutoProxy">
-<!ENTITY menuitem.accesskey "B">
+<!ENTITY menuitem.accesskey "c">
 <!ENTITY toolbarbutton.label "AutoProxy">
 <!ENTITY view.blockableItems.label "AutoProxy : éléments proxyables">
 <!ENTITY context.image.label "Image du proxy">
@@ -12,7 +10,11 @@
 <!ENTITY context.frame.label "Cade du proxy">
 <!ENTITY sidebar.title "Éléments proxyable de la page actuelle">
 <!ENTITY settings.label "Préférences">
+<!ENTITY settings.accesskey "f">
+<!ENTITY opensidebar.label "Ouvrir les éléments proxyables">
+<!ENTITY opensidebar.accesskey "B">
 <!ENTITY closesidebar.label "Fermer les éléments proxyables">
-<!ENTITY whitelist.page.label "Désactiver uniquement pour cette page">
+<!ENTITY closesidebar.accesskey "B">
+<!ENTITY whitelist.site.label "Désactiver pour…">
 <!ENTITY objecttab.title "Proxy">
 <!ENTITY objecttab.tooltip "Cliquez ici pour utiliser un proxy avec AutoProxy">

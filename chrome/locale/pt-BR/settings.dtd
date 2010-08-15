@@ -19,6 +19,8 @@
 <!ENTITY proxies.accesskey "S">
 <!ENTITY editproxies.label "Editar servidor proxy">
 <!ENTITY editproxies.accesskey "E">
+<!ENTITY chooseproxies.label "Choose proxy server">
+<!ENTITY chooseproxies.accesskey "C">
 <!ENTITY edit.label "Editar">
 <!ENTITY edit.accesskey "E">
 <!ENTITY cut.label "Recortar">
@@ -45,8 +47,12 @@
 <!ENTITY sort.descending.accesskey "Z">
 <!ENTITY options.label "Opções">
 <!ENTITY options.accesskey "O">
-<!ENTITY enable.label "Ativar AutoProxy">
-<!ENTITY enable.accesskey "N">
+<!ENTITY mode.auto.label "Automatic Mode">
+<!ENTITY mode.auto.accesskey "A">
+<!ENTITY mode.global.label "Global Mode">
+<!ENTITY mode.global.accesskey "G">
+<!ENTITY mode.disabled.label "Disable AutoProxy">
+<!ENTITY mode.disabled.accesskey "D">
 <!ENTITY showintoolbar.label "Exibir na barra de ferramentas">
 <!ENTITY showintoolbar.accesskey "B">
 <!ENTITY showinstatusbar.label "Exibir na barra de status">
@@ -67,6 +73,8 @@
 <!ENTITY description "As seguintes regras determinam que endereços podem ser filtrados pelo proxy e quais não podem:">
 <!ENTITY filter.column "Regras">
 <!ENTITY filter.accesskey "F">
+<!ENTITY slow.column "Slow filters">
+<!ENTITY slow.accesskey "w">
 <!ENTITY enabled.column "Ativado">
 <!ENTITY enabled.accesskey "n">
 <!ENTITY hitcount.column "Hits">

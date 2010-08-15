@@ -8,16 +8,22 @@
 <!ENTITY filter.label "Regla">
 <!ENTITY state.label "Estado">
 <!ENTITY size.label "Tamaño">
+<!ENTITY docDomain.label "Origen del documento">
 <!ENTITY noitems.label "No hay elementos a pasar por proxy">
 <!ENTITY whitelisted.label "Página en lista negra">
-<!ENTITY notloaded.label "AutoProxy no se ha instalado correctamente">
 <!ENTITY tooltip.address.label "Dirección:">
 <!ENTITY tooltip.type.label "Tipo:">
 <!ENTITY tooltip.type.blocked "(pasado por proxy)">
 <!ENTITY tooltip.type.whitelisted "(en lista negra)">
 <!ENTITY tooltip.size.label "Tamaño:">
+<!ENTITY tooltip.docDomain.label "Origen del documento:">
 <!ENTITY tooltip.filter.label "Regla efectiva:">
 <!ENTITY tooltip.filterSource.label "Regla de origen:">
+<!ENTITY context.block.label "Pasar por el proxy este elemento">
+<!ENTITY context.editfilter.label "Editar la regla en uso">
+<!ENTITY context.whitelist.label "Añadir regla de no pasar por proxy para un elemento">
+<!ENTITY context.disablefilter.label "Desactivar regla --">
+<!ENTITY context.enablefilter.label "Reactivar regla --">
 <!ENTITY context.disablefilteronsite.label "Desactivar esta regla en --">
 <!ENTITY context.enablefilteronsite.label "Reactivar regla en --">
 <!ENTITY context.open.label "Abrir en Nueva Pestaña">

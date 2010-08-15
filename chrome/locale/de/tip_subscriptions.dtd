@@ -1,0 +1,17 @@
+<!ENTITY welcome.title "Willkommen bei AutoProxy">
+<!ENTITY subscribe.title "AutoProxy Regelabonnement hinzufügen">
+<!ENTITY description.par1 "Danke, dass Sie AutoProxy installiert haben. Effektive Proxyverwaltung benötigt eine Reihe von Regeln. Diese können Sie selbst definieren oder einfach eine Regelliste abonnieren, die andere für Sie pflegen.">
+<!ENTITY description.par2 "Sie werden immernoch die Möglichkeit haben, Ihre eigenen Proxy-Regeln hinzuzufügen oder eine Regelliste zu abonnieren/abzubestellen wann immer nötig.">
+<!ENTITY description.par3 "Neben Proxy-Regeln benötigen Sie auch einen Proxyserver. AutoProxy hat Tor als Standard ausgewählt. Falls Sie Tor nicht verwenden wollen, ändern Sie dies bitte unten in diesem Fenster.">
+<!ENTITY description.par4 "Sie können ein oder kein Abonnement aus der Liste der empfohlenen Abonnements wählen:">
+<!ENTITY note "Hinweis: Bitte wählen Sie keine Regelliste, die für Ihre Region nicht gepflegt wird">
+<!ENTITY homepage.label "Homepage">
+<!ENTITY full-list.label "Alle Abonnements anzeigen">
+<!ENTITY full-list.url "http://autoproxy.org/en/subscriptions">
+<!ENTITY other.label "Ein benutzerdefiniertes Abonnement hinzufügen">
+<!ENTITY other.accesskey "b">
+<!ENTITY defaultBtn.label "Standard-Proxy">
+<!ENTITY defaultBtn.accesskey "P">
+<!ENTITY defaultBtn.custom "Einen neuen Proxy hinzufügen">
+<!ENTITY acceptBtn.label "Abonnieren">
+<!ENTITY acceptBtn.accesskey "A">

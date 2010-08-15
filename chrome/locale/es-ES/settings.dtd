@@ -19,6 +19,8 @@
 <!ENTITY proxies.accesskey "S">
 <!ENTITY editproxies.label "Editar servidor proxy">
 <!ENTITY editproxies.accesskey "E">
+<!ENTITY chooseproxies.label "Choose proxy server">
+<!ENTITY chooseproxies.accesskey "C">
 <!ENTITY edit.label "Editar">
 <!ENTITY edit.accesskey "E">
 <!ENTITY cut.label "Cortar">
@@ -45,8 +47,12 @@
 <!ENTITY sort.descending.accesskey "Z">
 <!ENTITY options.label "Opciones">
 <!ENTITY options.accesskey "O">
-<!ENTITY enable.label "Activar AutoProxy">
-<!ENTITY enable.accesskey "N">
+<!ENTITY mode.auto.label "Modo automático">
+<!ENTITY mode.auto.accesskey "A">
+<!ENTITY mode.global.label "Modo global">
+<!ENTITY mode.global.accesskey "G">
+<!ENTITY mode.disabled.label "Desactivar AutoProxy">
+<!ENTITY mode.disabled.accesskey "D">
 <!ENTITY showintoolbar.label "Mostrar en la barra de tareas">
 <!ENTITY showintoolbar.accesskey "B">
 <!ENTITY showinstatusbar.label "Mostrar en la barra de estado">
@@ -67,6 +73,8 @@
 <!ENTITY description "Las siguientes reglas determinan que direcciones pasarán o no por un proxy:">
 <!ENTITY filter.column "Reglas">
 <!ENTITY filter.accesskey "F">
+<!ENTITY slow.column "Reducir filtros">
+<!ENTITY slow.accesskey "w">
 <!ENTITY enabled.column "Activado">
 <!ENTITY enabled.accesskey "n">
 <!ENTITY hitcount.column "Aciertos">

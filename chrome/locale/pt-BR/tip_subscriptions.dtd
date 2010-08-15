@@ -1,3 +1,4 @@
+<!ENTITY welcome.title "Welcome to AutoProxy">
 <!ENTITY subscribe.title "Adicionar assinatura de regras do AutoProxy">
 <!ENTITY description.par1 "Obrigado por instalar o AutoProxy. Esta extensão o ajudará a usar automaticamente o proxy. Entretanto, o gerenciamento efetivo do proxy requer um bom conjunto de regras. Você pode defini-las você mesmo, ou pode simplesmente aderir a outras listas de regras mantidas por você.">
 <!ENTITY description.par2 "Ainda é possível acrescentar suas próprias regras ou assinar/remover assinaturas quando necessário.">
@@ -11,5 +12,6 @@
 <!ENTITY other.accesskey "C">
 <!ENTITY defaultBtn.label "Proxy padrão:">
 <!ENTITY defaultBtn.accesskey "P">
+<!ENTITY defaultBtn.custom "Add a new proxy">
 <!ENTITY acceptBtn.label "Assinar">
 <!ENTITY acceptBtn.accesskey "S">

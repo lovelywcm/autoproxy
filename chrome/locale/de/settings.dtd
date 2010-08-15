@@ -1,0 +1,95 @@
+<!ENTITY dialog.title "AutoProxy Einstellungen">
+<!ENTITY filters.label "Proxy Regel">
+<!ENTITY filters.accesskey "R">
+<!ENTITY add.label "Regel hinzufügen">
+<!ENTITY add.accesskey "z">
+<!ENTITY addsubscription.label "Regel-Abonnement hinzufügen">
+<!ENTITY addsubscription.accesskey "A">
+<!ENTITY synchsubscriptions.label "Alle Abonnements aktualisieren">
+<!ENTITY synchsubscriptions.accesskey "a">
+<!ENTITY import.label "Regeln importieren">
+<!ENTITY import.accesskey "i">
+<!ENTITY export.label "Benutzerdefinierte Regeln exportieren">
+<!ENTITY export.accesskey "x">
+<!ENTITY clearall.label "Alle benutzerdefinierten Regeln entfernen">
+<!ENTITY clearall.accesskey "e">
+<!ENTITY resethitcounts.label "Zugriffsstatistiken zurücksetzen">
+<!ENTITY resethitcounts.accesskey "z">
+<!ENTITY proxies.label "Proxyserver">
+<!ENTITY proxies.accesskey "s">
+<!ENTITY editproxies.label "Proxyserver bearbeiten">
+<!ENTITY editproxies.accesskey "b">
+<!ENTITY chooseproxies.label "Proxyserver auswählen">
+<!ENTITY chooseproxies.accesskey "w">
+<!ENTITY edit.label "Bearbeiten">
+<!ENTITY edit.accesskey "B">
+<!ENTITY cut.label "Ausschneiden">
+<!ENTITY cut.accesskey "A">
+<!ENTITY copy.label "Kopieren">
+<!ENTITY copy.accesskey "K">
+<!ENTITY paste.label "Einfügen">
+<!ENTITY paste.accesskey "E">
+<!ENTITY remove.label "Löschen">
+<!ENTITY remove.accesskey "L">
+<!ENTITY menu.find.label "Suchen">
+<!ENTITY menu.find.accesskey "S">
+<!ENTITY menu.findagain.label "Weitersuchen">
+<!ENTITY menu.findagain.accesskey "W">
+<!ENTITY view.label "Ansicht">
+<!ENTITY view.accesskey "A">
+<!ENTITY sort.label "Sortieren nach">
+<!ENTITY sort.accesskey "o">
+<!ENTITY sort.none.label "Unsortiert">
+<!ENTITY sort.none.accesskey "U">
+<!ENTITY sort.ascending.label "A &gt; Z Sortierung">
+<!ENTITY sort.ascending.accesskey "A">
+<!ENTITY sort.descending.label "Z &gt; A Sortierung">
+<!ENTITY sort.descending.accesskey "Z">
+<!ENTITY options.label "Optionen">
+<!ENTITY options.accesskey "O">
+<!ENTITY mode.auto.label "Automatischer Modus">
+<!ENTITY mode.auto.accesskey "A">
+<!ENTITY mode.global.label "Globaler Modus">
+<!ENTITY mode.global.accesskey "G">
+<!ENTITY mode.disabled.label "AutoProxy deaktivieren">
+<!ENTITY mode.disabled.accesskey "d">
+<!ENTITY showintoolbar.label "In Symbolleiste anzeigen">
+<!ENTITY showintoolbar.accesskey "y">
+<!ENTITY showinstatusbar.label "In Statusleiste anzeigen">
+<!ENTITY showinstatusbar.accesskey "S">
+<!ENTITY help.label "Hilfe">
+<!ENTITY help.accesskey "H">
+<!ENTITY gettingStarted.label "Einführung">
+<!ENTITY gettingStarted.accesskey "f">
+<!ENTITY gettingStarted.url "http://autoproxy.org/en/getting_started">
+<!ENTITY faq.label "Häufig gestellte Fragen">
+<!ENTITY faq.accesskey "F">
+<!ENTITY faq.url "http://autoproxy.org/en/faq">
+<!ENTITY filterdoc.label "AutoProxy Regeln schreiben">
+<!ENTITY filterdoc.accesskey "r">
+<!ENTITY filterdoc.url "http://autoproxy.org/en/rules">
+<!ENTITY about.label "Über AutoProxy">
+<!ENTITY about.accesskey "b">
+<!ENTITY description "Die folgenden Regeln bestimmen, welche Adressen via Proxy angesprochen werden sollen und welche nicht:">
+<!ENTITY filter.column "Regeln">
+<!ENTITY filter.accesskey "g">
+<!ENTITY slow.column "Filter anzeigen">
+<!ENTITY slow.accesskey "z">
+<!ENTITY enabled.column "Aktiviert">
+<!ENTITY enabled.accesskey "A">
+<!ENTITY hitcount.column "Zugriffe">
+<!ENTITY hitcount.accesskey "Z">
+<!ENTITY lasthit.column "Letzter Zugriff">
+<!ENTITY lasthit.accesskey "L">
+<!ENTITY context.edit.label "Regel bearbeiten">
+<!ENTITY context.resethitcount.label "Zugriffsstatistik für Regel zurücksetzen">
+<!ENTITY context.synchsubscription.label "Abonnement jetzt aktualisieren">
+<!ENTITY context.editsubscription.label "Abonnement bearbeiten">
+<!ENTITY context.moveup.label "Regel nach oben verschieben">
+<!ENTITY context.movedown.label "Regel nach unten verschieben">
+<!ENTITY context.movegroupup.label "Gruppe nach oben verschieben">
+<!ENTITY context.movegroupdown.label "Gruppe nach unten verschieben">
+<!ENTITY context.enable.label "Aktivieren">
+<!ENTITY context.disable.label "Deaktivieren">
+<!ENTITY apply.label "Anwenden">
+<!ENTITY apply.accesskey "A">

@@ -1,0 +1,14 @@
+<!ENTITY dialog.title "Abonnement bearbeiten">
+<!ENTITY dialog.newtitle "Regelabonnement hinzufügen">
+<!ENTITY new.description "Bitte geben Sie die Webadresse oder Datei an, die eine Liste von AutoProxy Regeln beinhaltet.">
+<!ENTITY edit.description "Die Regelliste für dieses Abonnement wird vom angegebenen Ort heruntergeladen.">
+<!ENTITY external.description "Dies ist ein externes Regelabonnement, dessen Regelliste von der Erweiterung aktuell gehalten wird, die sie erstellt hat.">
+<!ENTITY autodownload.description "Wenn Sie &quot;Automatisch aktualisieren&quot; auswählen, wird diese Quelle täglich nach Aktualisierungen überprüft. Wenn diese Option deaktiviert ist, können Sie eine manuelle Aktualisierung via Kontextmenü des Abonnements anstoßen.">
+<!ENTITY location.label "Quelle der Regelliste:">
+<!ENTITY location.accesskey "Q">
+<!ENTITY title.label "Abonnementtitel:">
+<!ENTITY title.accesskey "t">
+<!ENTITY autodownload.label "Automatisch aktualisieren">
+<!ENTITY autodownload.accesskey "A">
+<!ENTITY enabled.label "Regeln aktivieren">
+<!ENTITY enabled.accesskey "k">

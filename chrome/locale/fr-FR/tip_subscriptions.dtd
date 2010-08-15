@@ -1,3 +1,4 @@
+<!ENTITY welcome.title "Bienvenue dans AutoProxy">
 <!ENTITY subscribe.title "Ajouter un abonnement à une règle AutoProxy">
 <!ENTITY description.par1 "Merci d'avoir installé AutoProxy. Cette extension peut vous permettre d'utiliser automatiquement un proxy. Cependant, la gestion efficace d'un proxy oblige à bien respecter les règles d'utilisation. Vous pouvez personnaliser cela vous-même, ou tout simplement vous abonner à une liste de règles que quelqu'un d'autre gère pour vous.">
 <!ENTITY description.par2 "Il vous sera toujours possible d'ajouter vos propres règles, ou d'ajouter / supprimer des abonnements dès que nécessaire.">
@@ -5,11 +6,12 @@
 <!ENTITY description.par4 "Vous pouvez choisir un abonnement parmi la liste de ceux recommandés, ci-dessous :">
 <!ENTITY note "NB : une liste des règles est en général plus efficace lorsqu'elle est appliquée à des sites Web de la zone pour laquelle cette liste de règles a été créée.">
 <!ENTITY homepage.label "Page Web">
-<!ENTITY full-list.label "Voir toutes les inscriptions">
-<!ENTITY full-list.url "http://autoproxy.org/en/subscriptions">
+<!ENTITY full-list.label "Voir toutes les inscriptions (en anglais)">
+<!ENTITY full-list.url "http://www.autoproxy.org/">
 <!ENTITY other.label "Ajouter un abonnement personnalisé">
 <!ENTITY other.accesskey "f">
 <!ENTITY defaultBtn.label "Proxy par défaut :">
 <!ENTITY defaultBtn.accesskey "P">
+<!ENTITY defaultBtn.custom "Ajouter un nouveau proxy">
 <!ENTITY acceptBtn.label "S'abonner">
 <!ENTITY acceptBtn.accesskey "S">

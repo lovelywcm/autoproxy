@@ -23,6 +23,34 @@
  * ***** END LICENSE BLOCK ***** */
 
 
+// Matchers for disabled filters
+var disabledBlacklistMatcher = new aup.Matcher();
+var disabledWhitelistMatcher = new aup.Matcher();
+
+/**
+ * Updates matchers for disabled filters (global disabledBlacklistMatcher and
+ * disabledWhitelistMatcher variables), called on each filter change.
+ */
+function reloadDisabledFilters(action, filter, additionalData)
+{
+  disabledBlacklistMatcher.clear();
+  disabledWhitelistMatcher.clear();
+
+  for each (let subscription in filterStorage.subscriptions)
+  {
+    if (subscription.disabled)
+      continue;
+
+    for each (let filter in subscription.filters)
+      if (filter instanceof aup.RegExpFilter && filter.disabled)
+        (filter instanceof aup.BlockingFilter ? disabledBlacklistMatcher : disabledWhitelistMatcher).add(filter);
+  }
+}
+reloadDisabledFilters();
+filterStorage.addFilterObserver(reloadDisabledFilters);
+filterStorage.addSubscriptionObserver(reloadDisabledFilters);
+
+
 /**
  * Used for creating "Enable Proxy On --" menu items.
  * Shared by context menu of statusbar, toolbar & sidebar.
@@ -47,9 +75,11 @@ function enableProxyOn(menuItem, data)
   // create "enable proxy on site" menu items
   makeSiteCheckbox(location, '||');
 
-  var filter = aup.whitelistMatcher.matchesAny(data.location, data.typeDescr, data.docDomain, data.thirdParty);
-  if (filter == null)
-    filter = aup.blacklistMatcher.matchesAny(data.location, data.typeDescr, data.docDomain, data.thirdParty);
+  var filter =
+    aup.whitelistMatcher.matchesAny(data.location, data.typeDescr, data.docDomain, data.thirdParty) ||
+    aup.blacklistMatcher.matchesAny(data.location, data.typeDescr, data.docDomain, data.thirdParty) ||
+    disabledBlacklistMatcher.matchesAny(data.location, data.typeDescr, data.docDomain, data.thirdParty) ||
+    disabledWhitelistMatcher.matchesAny(data.location, data.typeDescr, data.docDomain, data.thirdParty);
 
   // create "enable proxy on url" menu item
   if (filter && filter instanceof aup.BlockingFilter && filter.text.indexOf('||') != 0)

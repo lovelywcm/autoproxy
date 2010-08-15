@@ -703,7 +703,7 @@ function aupExecuteAction(action, e)
       else
         tooltip.openPopupAtScreen(e.target.boxObject.screenX, e.target.boxObject.screenY, false);
       aup.proxyTipTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-      aup.proxyTipTimer.initWithCallback( {notify:function(){tooltip.hidePopup();}}, 2500, Components.interfaces.nsITimer.TYPE_ONE_SHOT );
+      aup.proxyTipTimer.initWithCallback( {notify:function(){tooltip.hidePopup();}}, 2000, Components.interfaces.nsITimer.TYPE_ONE_SHOT );
       break;
     case 5: //default proxy menu
       let popup = E("aup-popup-switchProxy");

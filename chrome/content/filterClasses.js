@@ -468,10 +468,10 @@ RegExpFilter.fromText = function(text)
   if (constructor == WhitelistFilter && (contentType == null || (contentType & RegExpFilter.typeMap.DOCUMENT)) &&
       (!options || options.indexOf("DOCUMENT") < 0) && !/^\|?[\w\-]+:/.test(text))
   {
-    // Exception filters shouldn't apply to pages by default unless they start with a protocol name
+    // 0x7FFFFFFF & typeMap.* != 0
+    // it means filter '@@||example.com' will match all content types
     if (contentType == null)
       contentType = 0x7FFFFFFF;
-    contentType &= ~RegExpFilter.typeMap.DOCUMENT;
   }
 
   try

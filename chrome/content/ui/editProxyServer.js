@@ -156,7 +156,7 @@ function reset2Default()
   init();
   window.sizeToContent();
 
-  defaultProxy = 0;
+  defaultProxy = 10;
 }
 
 function saveProxyServerSettings()
@@ -212,14 +212,14 @@ function saveProxyServerSettings()
                   return true;
               }
           });
-          if (!hasDefaultProxy) prefs.defaultProxy = 0;
+          if (!hasDefaultProxy) prefs.defaultProxy = 1;
       }
   }
   else {
     // all proxies removed, restore to default.
-    prefs.defaultProxy = "";
+    prefs.defaultProxy = 10;
   }
 
-  prefs.customProxy = pConfig;
+  prefs.customProxy = (pConfig == prefs.knownProxy ? '' : pConfig);
   prefs.save();
 }

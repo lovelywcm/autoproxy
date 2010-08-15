@@ -670,7 +670,7 @@ function aupClickHandler(e)
     prefs.proxyMode = proxy.mode[ (proxy.mode.indexOf(prefs.proxyMode)+1) % 3 ];
     prefs.save();
   }
-  else
+  else if (e.button != 2) // e.button is undefined when left click tool bar icon
     aupExecuteAction(e.target.tagName == 'image' ? prefs.defaultstatusbaraction : prefs.defaulttoolbaraction, e);
 }
 

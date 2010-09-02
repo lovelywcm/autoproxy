@@ -104,6 +104,8 @@ Subscription.fromURL = function(url)
 
   if (url in SpecialSubscription.map && SpecialSubscription.map[url] instanceof Array)
     return new SpecialSubscription(url);
+  else if(url=="~fl~")
+  return new CustomSubscription(url);
   else
   {
     try
@@ -130,10 +132,14 @@ Subscription.fromObject = function(obj)
   let result;
   if (obj.url in SpecialSubscription.map && SpecialSubscription.map[obj.url] instanceof Array)
     result = new SpecialSubscription(obj.url);
+  else if(obj.url.match(/^~fl\d*~$/))
+  {
+      result = new CustomSubscription(obj.url,obj.title,obj.proxyIndex);
+  }
   else
   {
     if ("external" in obj && obj.external == "true")
-      result = new ExternalSubscription(obj.url, obj.title);
+      result = new ExternalSubscription(obj.url, obj.title,obj.proxyIndex);
     else
     {
       try
@@ -146,7 +152,7 @@ Subscription.fromObject = function(obj)
         return null;
       }
 
-      result = new DownloadableSubscription(obj.url, obj.title);
+      result = new DownloadableSubscription(obj.url, obj.title,obj.proxyIndex);
       if ("autoDownload" in obj)
         result.autoDownload = (obj.autoDownload == "true");
       if ("nextURL" in obj)
@@ -186,6 +192,7 @@ function SpecialSubscription(url)
   Subscription.call(this, url);
 
   let data = SpecialSubscription.map[url];
+    if(!data)return;
   this._titleID = data[0];
   this._priority = data[1];
   this.filterTypes = data.slice(2);
@@ -250,10 +257,50 @@ aup.SpecialSubscription = SpecialSubscription;
 SpecialSubscription.map = {
   __proto__: null,
   "~il~": ["invalid_description", 1, InvalidFilter, CommentFilter],
-  "~wl~": ["whitelist_description", 3, WhitelistFilter, CommentFilter],
-  "~fl~": ["filterlist_description", 4, BlockingFilter, CommentFilter]
+	"~wl~": ["whitelist_description", 3, WhitelistFilter, CommentFilter],
 };
 
+function CustomSubscription(url,title,proxyIndex)
+{
+    SpecialSubscription.call(this,url);
+    this.title = title||aup.getString("filterlist_description");
+    this.proxyIndex = proxyIndex||0;
+
+    this._priority = 5;
+    this.filterTypes = [BlockingFilter, CommentFilter];
+}
+CustomSubscription.prototype=
+{
+    __proto__: SpecialSubscription.prototype,    
+    _title:null,
+    set title(title)
+    {
+        this._title = title;
+    },
+    get title()
+    {
+        var proxy = this.proxyIndex?aup.proxy.getName[this.proxyIndex]:"default proxy";//todo loc
+        return this._title+" : "+proxy;
+    },
+    get titleOnly()
+    {
+        return this._title;
+    },
+    get priority()
+    {
+        if(this.url=="~fl~")return 4;
+        else return this._priority;
+    },
+    proxyIndex:0,
+    serialize: function(buffer) {
+        SpecialSubscription.prototype.serialize.call(this, buffer);
+        if (this._title && this._title != "" && this._title!=aup.getString("filterlist_description"))
+            buffer.push("title=" + this._title);
+        if(this.proxyIndex)
+        buffer.push("proxyIndex="+this.proxyIndex);
+    }
+}
+aup.CustomSubscription = CustomSubscription;
 /**
  * Abstract base class for regular filter subscriptions (both internally and externally updated)
  * @param {String} url    see Subscription()
@@ -261,11 +308,12 @@ SpecialSubscription.map = {
  * @constructor
  * @augments Subscription
  */
-function RegularSubscription(url, title)
+function RegularSubscription(url, title,proxyIndex)
 {
   Subscription.call(this, url);
 
   this.title = title || url;
+    this.proxyIndex = proxyIndex;
 }
 RegularSubscription.prototype =
 {
@@ -282,6 +330,7 @@ RegularSubscription.prototype =
    * @type Number
    */
   lastDownload: 0,
+    proxyIndex:0,
 
   /**
    * See Subscription.serialize()
@@ -292,6 +341,8 @@ RegularSubscription.prototype =
     buffer.push("title=" + this.title);
     if (this.lastDownload)
       buffer.push("lastDownload=" + this.lastDownload);
+      if(this.proxyIndex)
+      buffer.push("proxyIndex="+this.proxyIndex)
   }
 };
 aup.RegularSubscription = RegularSubscription;
@@ -303,9 +354,9 @@ aup.RegularSubscription = RegularSubscription;
  * @constructor
  * @augments RegularSubscription
  */
-function ExternalSubscription(url, title)
+function ExternalSubscription(url, title,proxyIndex)
 {
-  RegularSubscription.call(this, url, title);
+  RegularSubscription.call(this, url, title,proxyIndex);
 }
 ExternalSubscription.prototype =
 {
@@ -329,9 +380,9 @@ aup.ExternalSubscription = ExternalSubscription;
  * @constructor
  * @augments RegularSubscription
  */
-function DownloadableSubscription(url, title)
+function DownloadableSubscription(url, title,proxyIndex)
 {
-  RegularSubscription.call(this, url, title);
+  RegularSubscription.call(this, url, title,proxyIndex);
 }
 DownloadableSubscription.prototype =
 {

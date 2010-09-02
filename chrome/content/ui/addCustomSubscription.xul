@@ -1,0 +1,31 @@
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://autoproxy/skin/addCustomSubscription.css" type="text/css"?>
+<!DOCTYPE dialog SYSTEM "chrome://autoproxy/locale/addCustomSubscription.dtd">        
+<dialog
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  title="&dialog.title;"
+  id=""
+  onload="init()"
+  ondialogaccept="return save()"
+  buttonalign="right"
+  buttons="accept,cancel"
+>
+    <script type="application/x-javascript;version=1.7" src="utils.js"/>
+    <script type="application/x-javascript;version=1.7" src="addCustomSubscription.js"/>
+    
+    <grid>
+        <rows>
+        <row>
+            <label value="&title.label;"/>
+            <textbox id="groupName"/>
+        </row>
+        <row>
+            <label value="&proxy.label;"/>
+            <menulist id="proxyMenu">
+                <menupopup>
+                </menupopup>
+            </menulist>
+        </row>
+        </rows>
+    </grid>
+</dialog>

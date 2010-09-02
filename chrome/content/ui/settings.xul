@@ -81,6 +81,7 @@
 
 <commandset id="aupCommands">
   <command id="addsubscription-command" oncommand="editSubscription(null)"/>
+  <command id="addCustomSubscription-command" oncommand="addCustomSubscription()"/>
   <command id="synchsubscriptions-command" oncommand="synchAllSubscriptions(false)"/>
   <command id="import-command" oncommand="importList()"/>
   <command id="export-command" oncommand="exportList()"/>
@@ -123,6 +124,7 @@
       <menupopup id="filters-popup" onpopupshowing="fillFiltersPopup()">
         <menuitem id="addfilter" label="&add.label;..." accesskey="&add.accesskey;" key="addfilter-key" oncommand="treeView.startEditor(true)"/>
         <menuseparator/>
+        <menuitem id="addCustomSubscription" label="&addCustomSubscription.label;" command="addCustomSubscription-command"/>
         <menuitem id="addsubscription" label="&addsubscription.label;..." accesskey="&addsubscription.accesskey;" command="addsubscription-command"/>
         <menuitem id="synchsubscriptions" label="&synchsubscriptions.label;" accesskey="&synchsubscriptions.accesskey;" key="synchsubscriptions-key" command="synchsubscriptions-command"/>
         <menuseparator/>

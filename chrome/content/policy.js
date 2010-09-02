@@ -132,7 +132,7 @@ var policy =
     if (match && arguments.length == 1)
       filterStorage.increaseHitCount(match);
 
-    return match && !(match instanceof WhitelistFilter);
+    return match?match:false;
   },
 
   /**

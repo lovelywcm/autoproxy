@@ -4,6 +4,7 @@
 <!ENTITY add.label "增加规则">
 <!ENTITY add.accesskey "A">
 <!ENTITY addsubscription.label "添加规则订阅">
+<!ENTITY addCustomSubscription.label "新建自定义代理组">
 <!ENTITY addsubscription.accesskey "S">
 <!ENTITY synchsubscriptions.label "更新所有订阅">
 <!ENTITY synchsubscriptions.accesskey "D">

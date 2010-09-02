@@ -157,7 +157,22 @@ var proxy =
   applyFilter: function(pS, uri, aProxy)
   {
     if ( uri.schemeIs('feed') ) return this.server[0];
-    if ( policy.shouldProxy(uri) ) return this.defaultProxy;
+      var match = policy.shouldProxy(uri);
+    if (match)
+    {
+        if(match instanceof WhitelistFilter)
+        {
+            return this.server[0];
+        }
+        for each(var s in match.subscriptions)
+        {
+            if(!s.disabled&&s.proxyIndex)//any more conditions?
+            {
+                return this.server[s.proxyIndex] || this.defaultProxy;
+            }
+        }
+        return this.defaultProxy;
+    }
     return this.fallbackProxy;
   }
 };

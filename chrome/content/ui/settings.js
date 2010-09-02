@@ -843,6 +843,9 @@ function editFilter(type) /**Boolean*/
 
   if (type != "filter" && subscription instanceof aup.RegularSubscription)
     editSubscription(subscription);
+  else if(type != "filter" && (subscription instanceof aup.CustomSubscription)
+          &&treeView.isContainer(treeView.selection.currentIndex))
+  addCustomSubscription(subscription);
   else
     treeView.startEditor(false);
 
@@ -937,6 +940,8 @@ function removeFilters(allowSubscriptions)
     }
 
     if (selectedSubscription && selectedSubscription instanceof aup.RegularSubscription && confirm(aup.getString("remove_subscription_warning")))
+      treeView.removeSubscription(selectedSubscription);
+      if (selectedSubscription && selectedSubscription instanceof aup.CustomSubscription && confirm("Do you really wish to remove this subscription?"))
       treeView.removeSubscription(selectedSubscription);
   }
 }
@@ -1166,6 +1171,17 @@ function fillContext()
     E("context-edit").hidden = false;
     E("context-edit").setAttribute("disabled", !(currentSubscription instanceof aup.SpecialSubscription && currentFilter instanceof aup.Filter));
   }
+    if(selectedSubscription instanceof aup.CustomSubscription){
+        if(treeView.isContainer(treeView.selection.currentIndex)){
+        E("context-editsubscription").hidden= false;
+        E("context-edit").hidden=true;
+        }
+        else
+        {
+        E("context-editsubscription").hidden= true;
+        E("context-edit").hidden=false;
+        }
+    }
 
   E("context-synchsubscription").setAttribute("disabled", !(selectedSubscription instanceof aup.DownloadableSubscription));
   E("context-resethitcount").setAttribute("disabled", !hasFilters);
@@ -1183,7 +1199,7 @@ function fillContext()
   E("copy-command").setAttribute("disabled", !hasFilters);
   E("cut-command").setAttribute("disabled", !hasRemovable);
   E("paste-command").setAttribute("disabled", !hasFlavour);
-  E("remove-command").setAttribute("disabled", !(hasRemovable || selectedSubscription instanceof aup.RegularSubscription));
+  E("remove-command").setAttribute("disabled", !(hasRemovable || selectedSubscription instanceof aup.RegularSubscription || selectedSubscription instanceof aup.CustomSubscription));
 
   if (activeFilters.length || (selectedSubscription && !currentFilter))
   {
@@ -1458,7 +1474,7 @@ let treeView = {
     for each (let subscription in this.subscriptions)
     {
       // Special subscriptions are only shown if they aren't empty
-      if (subscription instanceof aup.SpecialSubscription && subscription._sortedFilters.length == 0)
+      if (subscription instanceof aup.SpecialSubscription && subscription._sortedFilters.length == 0 && subscription.url=="~il~")
         continue;
 
       count++;
@@ -1653,7 +1669,7 @@ let treeView = {
   canDrop: function(row, orientation)
   {
     let session = dragService.getCurrentSession();
-    if (!session || session.sourceNode != this.boxObject.treeBody || !this.dragSubscription || orientation == nsITreeView.DROP_ON)
+    if (!session || session.sourceNode != this.boxObject.treeBody || !this.dragSubscription)
       return false;
 
     let [subscription, filter] = this.getRowInfo(row);
@@ -1663,7 +1679,7 @@ let treeView = {
     if (this.dragFilter)
     {
       // Dragging a filter
-      return filter && subscription instanceof aup.SpecialSubscription && subscription.isFilterAllowed(this.dragFilter);
+      return subscription instanceof aup.SpecialSubscription && subscription.isFilterAllowed(this.dragFilter);
     }
     else
     {
@@ -1675,7 +1691,7 @@ let treeView = {
   drop: function(row, orientation)
   {
     let session = dragService.getCurrentSession();
-    if (!session || session.sourceNode != this.boxObject.treeBody || !this.dragSubscription || orientation == nsITreeView.DROP_ON)
+    if (!session || session.sourceNode != this.boxObject.treeBody || !this.dragSubscription)
       return;
 
     let [subscription, filter] = this.getRowInfo(row);
@@ -1685,14 +1701,17 @@ let treeView = {
     if (this.dragFilter)
     {
       // Dragging a filter
-      if (!(filter && subscription instanceof aup.SpecialSubscription && subscription.isFilterAllowed(this.dragFilter)))
+      if (!(subscription instanceof aup.SpecialSubscription && subscription.isFilterAllowed(this.dragFilter)))
         return;
 
       let oldSubscription = this.dragSubscription;
       let oldSortedIndex = oldSubscription._sortedFilters.indexOf(this.dragFilter);
-      let newSortedIndex = subscription._sortedFilters.indexOf(filter);
-      if (oldSortedIndex < 0 || newSortedIndex < 0)
+      let newSortedIndex;
+      if (oldSortedIndex < 0)
         return;
+        if(orientation==0){
+            newSortedIndex = this.getSubscriptionRowCount(subscription);
+        }else newSortedIndex = subscription._sortedFilters.indexOf(filter);
       if (orientation == nsITreeView.DROP_AFTER)
         newSortedIndex++;
 
@@ -1730,7 +1749,7 @@ let treeView = {
         let rowCountAfter = treeView.getSubscriptionRowCount(subscription);
         let row = treeView.getSubscriptionRow(subscription) + rowCountAfter - subscription._sortedFilters.length + newSortedIndex;
         this.boxObject.rowCountChanged(row + 1 + rowCountBefore - rowCountAfter, rowCountAfter - rowCountBefore);
-
+        if(orientation!=0)
         treeView.selectRow(row);
       }
     }
@@ -1854,8 +1873,10 @@ let treeView = {
   getSubscriptionRowCount: function(/**Subscription*/ subscription) /**Integer*/
   {
     if (subscription instanceof aup.SpecialSubscription && subscription._sortedFilters.length == 0)
-      return 0;
-
+    {
+      if(subscription.url =="~il~")return 0;
+      return 1;
+    }
     if (subscription.url in this.closed)
       return 1;
 
@@ -1876,7 +1897,7 @@ let treeView = {
     for each (let subscription in this.subscriptions)
     {
       // Special subscriptions are only shown if they aren't empty
-      if (subscription instanceof aup.SpecialSubscription && subscription._sortedFilters.length == 0)
+      if (subscription instanceof aup.SpecialSubscription && subscription._sortedFilters.length == 0 && subscription.url=="~il~")
         continue;
 
       // Check whether the subscription row has been requested
@@ -2227,6 +2248,19 @@ let treeView = {
             subscription = s;
         }
       }
+    }else
+    {
+      for each (let s in this.subscriptions)
+      {
+        if (s instanceof aup.SpecialSubscription && s.isFilterAllowed(filter))
+        {
+          if (s._sortedFilters.indexOf(filter) >= 0 || s.filters.indexOf(filter) >= 0)
+          {
+            subscription = s;
+            break;
+    }
+        }
+      }
     }
     if (!subscription)
       return null;
@@ -2360,9 +2394,6 @@ let treeView = {
 
     if (subscription instanceof aup.SpecialSubscription && subscription._sortedFilters.length == 0)
     {
-      // Empty special subscriptions aren't shown, remove everything
-      this.boxObject.rowCountChanged(parentRow, -rowCount);
-      newSelection -= rowCount;
     }
     else if (!(subscription.url in this.closed))
     {
@@ -2905,7 +2936,7 @@ let treeView = {
 
     let row = this.selection.currentIndex;
     let [subscription, filter] = this.getRowInfo(row);
-    if (!(subscription instanceof aup.SpecialSubscription) || !(filter instanceof aup.Filter))
+    if (!(subscription instanceof aup.SpecialSubscription))
     {
       let dummySubscription = new aup.Subscription("~dummy~");
       dummySubscription.title = aup.getString("new_filter_group_title");
@@ -2924,9 +2955,20 @@ let treeView = {
       if (subscription._sortedFilters == subscription.filters)
         subscription._sortedFilters = subscription.filters.slice();
 
-      let index = subscription._sortedFilters.indexOf(filter);
+      let index;
+        if (filter) {
+        index = subscription._sortedFilters.indexOf(filter);
       subscription._sortedFilters.splice(index, 0, " ");
       this.boxObject.rowCountChanged(row, 1);
+        } else {
+            if(!this.boxObject.view.isContainerOpen(row))
+            this.boxObject.view.toggleOpenState(row);
+            index = this.getSubscriptionRowCount(subscription);
+            subscription._sortedFilters.splice(index, 0, " ");
+            row+=index;
+            this.boxObject.rowCountChanged(row, 1);
+            //index--;
+        }
 
       this.selectRow(row);
       this.editorDummy = [subscription, index];
@@ -3002,6 +3044,12 @@ let treeView = {
     else if (this.editorDummy)
     {
       let [subscription, index] = this.editorDummy;
+        let count=this.getSubscriptionRowCount(subscription);
+        if(count==index+1){
+        var fixedRowInfo = this.getRowInfo(this.editedRow);
+        subscription._sortedFilters.splice(index-1, 1);
+        }
+        else
       subscription._sortedFilters.splice(index, 1);
       this.boxObject.rowCountChanged(this.editedRow, -1);
       this.selectRow(this.editedRow);
@@ -3012,7 +3060,7 @@ let treeView = {
     if (typeof blur == "undefined" || !blur)
       this.boxObject.treeBody.parentNode.focus();
 
-    let [subscription, filter] = this.getRowInfo(this.editedRow);
+    let [subscription, filter] = fixedRowInfo||this.getRowInfo(this.editedRow);
     let text = aup.normalizeFilter(this.editor.value);
     if (save && text && (insert || !(filter instanceof aup.Filter) || text != filter.text))
     {
@@ -3057,4 +3105,8 @@ function fillClickBehaviourPopup(e, isToolbar)
 {
   var value = isToolbar ? prefs.defaulttoolbaraction : prefs.defaultstatusbaraction;
   e.target.children[value].setAttribute("checked", true);
+}
+function addCustomSubscription(subscription)
+{
+    window.openDialog("chrome://autoproxy/content/ui/addCustomSubscription.xul", "_blank", "chrome,centerscreen,modal",subscription)
 }

@@ -1,0 +1,34 @@
+<!ENTITY detached.title           "AutoProxy: Proxyhanteringsbara objekt (bortkopplade)">
+
+<!ENTITY detach.label             "Koppla loss">
+<!ENTITY reattach.label           "Koppla tillbaka">
+
+<!ENTITY search.label             "Sök:">
+<!ENTITY search.accesskey         "S">
+
+<!ENTITY type.label               "Typ">
+<!ENTITY address.label            "Adress">
+<!ENTITY filter.label             "Regel">
+<!ENTITY state.label              "Tillstånd">
+<!ENTITY size.label               "Storlek">
+<!ENTITY docDomain.label          "Dokumentkälla">
+
+<!ENTITY noitems.label            "Icke proxyhanteringsbara objekt">
+<!ENTITY whitelisted.label        "Icke-proxysida">
+
+<!ENTITY tooltip.address.label    "Adress:">
+<!ENTITY tooltip.type.label       "Typ:">
+<!ENTITY tooltip.type.blocked     "(Via proxy)">
+<!ENTITY tooltip.type.whitelisted "(Proxy förbjuden, anslut direkt)">
+<!ENTITY tooltip.size.label       "Storlek:">
+<!ENTITY tooltip.docDomain.label  "Dokumentkälla:">
+<!ENTITY tooltip.filter.label     "Regel i kraft:">
+<!ENTITY tooltip.filterSource.label "Regelkälla:">
+
+<!ENTITY context.disablefilteronsite.label  "Inaktivera den här regeln för --">
+<!ENTITY context.enablefilteronsite.label   "Återaktivera regel för --">
+<!ENTITY context.open.label       "Öppna i ny flik">
+<!ENTITY context.flash.label      "Flash-objektets kantlinjer">
+<!ENTITY context.copy.label       "Kopiera objektets adress">
+<!ENTITY context.copyFilter.label "Kopiera regel">
+<!ENTITY context.selectAll.label  "Markera alla">

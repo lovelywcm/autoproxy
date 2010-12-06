@@ -1,0 +1,119 @@
+<!ENTITY dialog.title                    "Inställningar för AutoProxy">
+
+<!ENTITY filters.label                   "Proxyregel">
+<!ENTITY filters.accesskey               "r">
+
+<!ENTITY add.label                       "Lägg till regel">
+<!ENTITY add.accesskey                   "L">
+<!ENTITY addsubscription.label           "Lägg till regelprenumeration">
+<!ENTITY addsubscription.accesskey       "ä">
+<!ENTITY synchsubscriptions.label        "Uppdatera alla prenumerationer">
+<!ENTITY synchsubscriptions.accesskey    "d">
+<!ENTITY import.label                    "Importera regler">
+<!ENTITY import.accesskey                "m">
+<!ENTITY export.label                    "Exportera anpassade regler">
+<!ENTITY export.accesskey                "x">
+<!ENTITY clearall.label                  "Ta bort alla anpassade regler">
+<!ENTITY clearall.accesskey              "T">
+<!ENTITY resethitcounts.label            "Nollställ träffstatistik">
+<!ENTITY resethitcounts.accesskey        "N">
+
+<!ENTITY proxies.label                   "Proxyserver">
+<!ENTITY proxies.accesskey               "s">
+<!ENTITY editproxies.label               "Redigera proxyserver">
+<!ENTITY editproxies.accesskey           "e">
+<!ENTITY chooseproxies.label             "Välj proxyserver">
+<!ENTITY chooseproxies.accesskey         "V">
+
+<!ENTITY edit.label                      "Redigera">
+<!ENTITY edit.accesskey                  "e">
+
+<!ENTITY cut.label                       "Klipp ut">
+<!ENTITY cut.accesskey                   "t">
+<!ENTITY copy.label                      "Kopiera">
+<!ENTITY copy.accesskey                  "K">
+<!ENTITY paste.label                     "Klistra in">
+<!ENTITY paste.accesskey                 "l">
+<!ENTITY remove.label                    "Ta bort">
+<!ENTITY remove.accesskey                "T">
+<!ENTITY menu.find.label                 "Sök">
+<!ENTITY menu.find.accesskey             "ö">
+<!ENTITY menu.findagain.label            "Sök igen">
+<!ENTITY menu.findagain.accesskey        "g">
+
+<!ENTITY view.label                      "Visa">
+<!ENTITY view.accesskey                  "V">
+
+<!ENTITY sort.label                      "Sortera efter">
+<!ENTITY sort.accesskey                  "S">
+<!ENTITY sort.none.label                 "Osorterat">
+<!ENTITY sort.none.accesskey             "U">
+<!ENTITY sort.ascending.label            "A &gt; Z (stigande)">
+<!ENTITY sort.ascending.accesskey        "A">
+<!ENTITY sort.descending.label           "Z &gt; A (fallande)">
+<!ENTITY sort.descending.accesskey       "Z">
+
+<!ENTITY options.label                   "Alternativ">
+<!ENTITY options.accesskey               "n">
+
+<!ENTITY mode.auto.label                 "Automatiskt läge">
+<!ENTITY mode.auto.accesskey             "A">
+<!ENTITY mode.global.label               "Globalläge">
+<!ENTITY mode.global.accesskey           "G">
+<!ENTITY mode.disabled.label             "Inaktivera AutoProxy">
+<!ENTITY mode.disabled.accesskey         "I">
+<!ENTITY showintoolbar.label             "Visa i verktygsfältet">
+<!ENTITY showintoolbar.accesskey         "y">
+<!ENTITY showinstatusbar.label           "Visa i statusfältet">
+<!ENTITY showinstatusbar.accesskey       "s">
+
+<!ENTITY help.label                      "Hjälp">
+<!ENTITY help.accesskey                  "H">
+
+<!ENTITY gettingStarted.label            "Komma igång">
+<!ENTITY gettingStarted.accesskey        "o">
+<!ENTITY gettingStarted.url              "http://autoproxy.org/en/getting_started">
+<!ENTITY faq.label                       "Vanliga frågor och svar">
+<!ENTITY faq.accesskey                   "f">
+<!ENTITY faq.url                         "http://autoproxy.org/en/faq">
+<!ENTITY filterdoc.label                 "Skriva AutoProxy-regler">
+<!ENTITY filterdoc.accesskey             "r">
+<!ENTITY filterdoc.url                   "http://autoproxy.org/en/rules">
+<!ENTITY about.label                     "Om AutoProxy">
+<!ENTITY about.accesskey                 "m">
+
+<!ENTITY description "Följande regler bestämmer vilka adresser som skall gå via proxy och vilka som inte skall göra det:">
+
+<!ENTITY filter.column                   "Regler">
+<!ENTITY filter.accesskey                "R">
+<!ENTITY slow.column                     "Långsamma filter">
+<!ENTITY slow.accesskey                  "å">
+<!ENTITY enabled.column                  "Aktiverad">
+<!ENTITY enabled.accesskey               "k">
+<!ENTITY hitcount.column                 "Träffar">
+<!ENTITY hitcount.accesskey              "T">
+<!ENTITY lasthit.column                  "Senaste träff">
+<!ENTITY lasthit.accesskey               "S">
+
+<!ENTITY context.edit.label              "Redigera regel">
+<!ENTITY context.resethitcount.label     "Nollställ träffstatistik för regel">
+<!ENTITY context.synchsubscription.label "Uppdatera prenumeration nu">
+<!ENTITY context.editsubscription.label  "Redigera prenumeration">
+<!ENTITY context.moveup.label            "Flytta regel uppåt">
+<!ENTITY context.movedown.label          "Flytta regel nedåt">
+<!ENTITY context.movegroupup.label       "Flytta grupp uppåt">
+<!ENTITY context.movegroupdown.label     "Flytta grupp nedåt">
+<!ENTITY context.enable.label            "Aktivera">
+<!ENTITY context.disable.label           "Inaktivera">
+
+<!ENTITY apply.label                     "Verkställ">
+<!ENTITY apply.accesskey                 "e">
+
+<!ENTITY changeStatusClickBehaviour.label  "Beteende vid klick på statusfältsikonen">
+<!ENTITY changeToolbarClickBehaviour.label "Beteende vid klick på verktygsfältsikonen">
+<!ENTITY changeClickBehaviour_context      "Snabbmeny">
+<!ENTITY changeClickBehaviour_proxyMenu    "Proxymeny">
+<!ENTITY changeClickBehaviour_cycleProxy   "Proxyväxling">
+<!ENTITY changeClickBehaviour_quickAdd     "Lägg till filter snabbt">
+<!ENTITY changeClickBehaviour_preference   "Inställningar">
+<!ENTITY changeClickBehaviour_proxyable    "Proxyhanteringsbara objekt">

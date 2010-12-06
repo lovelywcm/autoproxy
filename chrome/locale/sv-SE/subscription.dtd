@@ -1,0 +1,19 @@
+<!ENTITY dialog.title               "Redigera prenumeration">
+<!ENTITY dialog.newtitle            "Lägg till regelprenumeration">
+
+<!ENTITY new.description            "Var vänlig ange en webbadress eller en fil som innehåller en lista över AutoProxy-regler.">
+
+<!ENTITY edit.description           "Regellistan för den här prenumerationen kommer att laddas ner från den angivna platsen.">
+
+<!ENTITY external.description       "Det här är en extern regelprenumeration. Dess regellista kommer att hållas à jour av det tillägg som skapade prenumerationen.">
+
+<!ENTITY autodownload.description   "Om du väljer &quot;Uppdatera automatiskt&quot; kommer den här platsen dagligen att kontrolleras för uppdateringar. Om det här alternativet är inaktiverat kan du fortfarande söka efter en uppdatering manuellt via prenumerationens snabbmeny.">
+
+<!ENTITY location.label             "Regellistans plats:">
+<!ENTITY location.accesskey         "l">
+<!ENTITY title.label                "Prenumerationsnamn:">
+<!ENTITY title.accesskey            "t">
+<!ENTITY autodownload.label         "Uppdatera automatiskt">
+<!ENTITY autodownload.accesskey     "p">
+<!ENTITY enabled.label              "Aktivera regler">
+<!ENTITY enabled.accesskey          "k">

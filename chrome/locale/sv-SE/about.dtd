@@ -1,0 +1,14 @@
+<!ENTITY dialog.title       "Om AutoProxy">
+
+<!ENTITY caption.title      "AutoProxy">
+<!ENTITY version.title      "Version">
+<!ENTITY description        "
+	AutoProxy låter dig bestämma vilka webbplatser som skall gå via proxy- 
+	servrar och lämnar övriga för direktsurfning. Du behöver inte längre 
+	manuellt växla proxystatus mellan aktiverad och inaktiverad.
+">
+
+<!ENTITY homepage.label     "AutoProxys webbplats:">
+<!ENTITY homepage.url       "http://autoproxy.org/">
+<!ENTITY author.label       "Skapat av:">
+<!ENTITY contributors.label "Medarbetare:">

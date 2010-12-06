@@ -1,0 +1,29 @@
+<!ENTITY status.tooltip         "Status:">
+<!ENTITY defaultProxy.tooltip   "Standardproxyserver:">
+<!ENTITY blocked.tooltip        "Objekt via proxy på den här sidan:">
+<!ENTITY filters.tooltip        "Mest aktiva regler:">
+
+<!ENTITY menuitem.label         "Inställningar för AutoProxy">
+<!ENTITY menuitem.accesskey     "B">
+<!ENTITY toolbarbutton.label    "AutoProxy">
+
+<!ENTITY view.blockableItems.label  "AutoProxy: Proxyhanteringsbara objekt">
+
+<!ENTITY context.image.label    "Bild via proxy">
+<!ENTITY context.object.label   "Objekt via proxy">
+<!ENTITY context.frame.label    "Ram via proxy">
+
+<!ENTITY sidebar.title          "Proxyhanteringsbara objekt på aktuell sida">
+
+<!ENTITY settings.label         "Inställningar">
+<!ENTITY settings.accesskey     "I">
+<!ENTITY opensidebar.label      "Proxyhanteringsbara objekt">
+<!-- Note: This access key should usually be the same as closesidebar.accesskey. It is the same menu item with different label depending on whether the sidebar is currently open.-->
+<!ENTITY opensidebar.accesskey  "V">
+<!ENTITY closesidebar.label     "Stäng Proxyhanteringsbara objekt">
+<!-- Note: This access key should usually be the same as opensidebar.accesskey. It is the same menu item with different label depending on whether the sidebar is currently open.-->
+<!ENTITY closesidebar.accesskey "V">
+
+<!ENTITY objecttab.title        "Proxy">
+<!ENTITY objecttab.tooltip      "Klicka här för att hantera det här objektet via proxyserver med AutoProxy">
+<!ENTITY switchProxy.label      "Standardproxyserver: ">

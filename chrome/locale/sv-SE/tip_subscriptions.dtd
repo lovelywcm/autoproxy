@@ -1,0 +1,39 @@
+<!ENTITY welcome.title         "Välkommen till AutoProxy">
+<!ENTITY subscribe.title       "Lägg till en regelprenumeration för AutoProxy">
+
+<!ENTITY description.par1      "Tack för att du installerar AutoProxy. Effektiv
+ proxyhantering kräver en bra uppsättning av regler. Du kan definiera dem själv
+ eller helt enkelt prenumerera på en regellista som andra sköter åt dig.
+">
+
+<!ENTITY description.par2     "Det kommer fortfarande vara möjligt att lägga till dina egna proxyregler
+ eller prenumerera/avbryta prenumerationen på regellistan närhelst du behöver.
+">
+
+<!ENTITY description.par3     "Förutom proxyregler behöver du också en proxyserver.
+ AutoProxy har valt Tor som standard. Om du inte använder Tor, byt
+ till din egen server nederst i det här fönstret.
+">
+
+<!ENTITY description.par4     "Du kan välja en (eller ingen) prenumeration ur
+	listan över rekommenderade prenumerationer här nedanför:
+">
+
+<!ENTITY note                 "Obs: Var vänlig välj inte en regellista som inte
+ hålls à jour för din region.
+">
+
+<!ENTITY homepage.label       "Webbplats">
+
+<!ENTITY full-list.label      "Visa alla prenumerationer">
+<!ENTITY full-list.url        "http://autoproxy.org/en/subscriptions">
+
+<!ENTITY other.label          "Lägg till en anpassad prenumeration">
+<!ENTITY other.accesskey      "L">
+
+<!ENTITY defaultBtn.label     "Standardproxyserver: ">
+<!ENTITY defaultBtn.accesskey "S">
+<!ENTITY defaultBtn.custom    "Lägg till en ny proxyserver">
+
+<!ENTITY acceptBtn.label      "Prenumerera">
+<!ENTITY acceptBtn.accesskey  "P">

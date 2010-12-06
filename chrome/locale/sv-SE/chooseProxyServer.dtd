@@ -1,0 +1,11 @@
+<!ENTITY dialog.title      "Välj proxyserver för olika regelgrupper">
+
+<!ENTITY default.label     "Standardproxyserver">
+
+<!ENTITY checkbox.label    "Använd standardproxyservern för alla regelgrupper">
+
+<!ENTITY http.label        "HTTP-proxyserver">
+
+<!ENTITY https.label       "HTTPS-proxyserver">
+
+<!ENTITY ftp.label         "FTP/Gopher-proxyserver">

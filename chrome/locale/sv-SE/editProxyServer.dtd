@@ -1,0 +1,33 @@
+<!ENTITY dialog.title            "Redigera proxyserver">
+
+<!ENTITY name.label              "Ge den ett namn:">
+
+<!ENTITY host.label              "Proxyvärd:">
+
+<!ENTITY port.label              "Port:">
+
+<!ENTITY http.label              "http">
+
+<!ENTITY socks4.label            "socks4">
+
+<!ENTITY socks5.label            "socks5">
+
+<!ENTITY delete.label            "Ta bort">
+
+<!ENTITY addButton.label         "Lägg till proxy">
+<!ENTITY addButton.accesskey     "L">
+
+<!ENTITY delButton.label         "Ta bort proxy">
+<!ENTITY delButton.accesskey     "T">
+
+<!ENTITY resetButton.label       "Återställ till standard">
+<!ENTITY resetButton.accesskey   "Å">
+
+<!ENTITY warning.text            "Varning: Du har valt att ta bort alla proxyservrar.
+ Kom ihåg att lägga till en ny proxyserver, annars kommer inte AutoProxy att fungera.">
+
+<!ENTITY note.text               "Obs: Du har valt att ta bort standardproxyn. Kom ihåg att ange en ny
+ standardproxyserver (via &quot;Välj proxyserver&quot;-menyn), annars fungerar kanske inte AutoProxy.">
+
+<!ENTITY tip.text                "Tips: Att klicka på &quot;Avbryt&quot; kan ångra föregående operation.">
+

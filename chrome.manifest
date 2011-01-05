@@ -23,6 +23,6 @@ category net-channel-event-sinks AUPComponent @mozilla.org/autoproxy;1
 # Hack to prevent .Net Framework Assistant from messing up the browser
 override chrome://dotnetassistant/content/bootstrap.xul data:text/xml,<nada/>
 
-# Hack to make icon.png available as adblockplus.png in the skin
+# Hack to make icon.png available as autoproxy.png in the skin
 skin      autoproxy_icon classic/1.0 ./
 override  chrome://autoproxy/skin/autoproxy.png chrome://autoproxy_icon/skin/icon.png

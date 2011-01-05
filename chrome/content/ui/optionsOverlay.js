@@ -1,10 +1,17 @@
-window.onload = function()
+const aup = Components.classes["@mozilla.org/autoproxy;1"].createInstance().wrappedJSObject;
+
+window.onload = bindEvent = function()
 {
-  document.getElementById("connectionSettings").addEventListener("click", onConnectionSettings, false);
+  var pane = document.getElementById("paneAdvanced");
+  if (!pane.loaded)
+    pane.addEventListener("click", bindEvent, false);
+  else {
+    document.getElementById("connectionSettings").setAttribute("oncommand", "handleProxySettings()");
+    pane.removeEventListener("click", bindEvent, false);
+  }
 }
 
-function onConnectionSettings(event)
+function handleProxySettings()
 {
   aup.openSettingsDialog();
-  event.preventDefault();
 }

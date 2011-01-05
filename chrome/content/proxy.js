@@ -92,15 +92,8 @@ var proxy =
     if ( prefs.fallbackProxy == -1 ) proxy.fallbackProxy = proxy.defaultProxy;
     else proxy.fallbackProxy = proxy.server[prefs.fallbackProxy] || proxy.server[0];
 
-    // Register/Unregister proxy filter & refresh shouldProxy() for specified mode
-    if ( prefs.proxyMode == 'disabled' ) pS.unregisterFilter(proxy);
-    else {
-      if ( prefs.proxyMode == 'global' ) policy.shouldProxy = function() { return true; };
-      else policy.shouldProxy = policy.autoMatching;
-
-      pS.unregisterFilter(proxy);
-      pS.registerFilter(proxy, 0);
-    }
+    pS.unregisterFilter(proxy);
+    if (prefs.proxyMode != 'disabled') pS.registerFilter(proxy, 0);
   },
 
   /**
@@ -156,24 +149,14 @@ var proxy =
   //
   applyFilter: function(pS, uri, aProxy)
   {
-    if ( uri.schemeIs('feed') ) return this.server[0];
-      var match = policy.shouldProxy(uri);
-    if (match)
-    {
-        if(match instanceof WhitelistFilter)
-        {
-            return this.server[0];
-        }
-        for each(var s in match.subscriptions)
-        {
-            if(!s.disabled&&s.proxyIndex)//any more conditions?
-            {
-                return this.server[s.proxyIndex] || this.defaultProxy;
-            }
-        }
-        return this.defaultProxy;
-    }
-    return this.fallbackProxy;
+    if (uri.schemeIs('feed')) return this.server[0];
+    if (prefs.proxyMode == 'global') return this.defaultProxy;
+
+    var match = policy.autoMatching(uri);
+    if (!match || match instanceof WhitelistFilter) return this.fallbackProxy;
+
+    for each (var s in match.subscriptions)
+      if(!s.disabled) return this.server[s.proxyIndex] || this.defaultProxy;
   }
 };
 

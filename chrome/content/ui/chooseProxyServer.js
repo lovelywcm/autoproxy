@@ -31,7 +31,6 @@ function init()
   // one row per rule group
   var rows = document.getElementsByTagName('rows')[0];
   for each (let subscription in aup.filterStorage.subscriptions) {
-    if ( subscription.url == '~il~' || subscription.url == '~wl~' ) continue;
     var row = cE('row');
     var groupName = cE('label');
     row.appendChild(groupName);

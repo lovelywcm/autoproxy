@@ -254,12 +254,12 @@ var filterStorage =
     {
       for each (let s in this.subscriptions)
       {
-        if (s instanceof SpecialSubscription && s.isFilterAllowed(filter))
+        if (s instanceof SpecialSubscription)
         {
           if (s.filters.indexOf(filter) >= 0)
             return;
 
-          if (!subscription || s.priority > subscription.priority)
+          if (!subscription)
             subscription = s;
         }
       }
@@ -410,17 +410,6 @@ var filterStorage =
     }
 
     timeLine.log("done parsing file");
-
-    // Add missing special subscriptions if necessary
-    for each (let specialSubscription in ["~il~", "~wl~", "~fl~", "~eh~"])
-    {
-      if (!(specialSubscription in this.knownSubscriptions))
-      {
-        let subscription = Subscription.fromURL(specialSubscription);
-        if (subscription)
-          this.addSubscription(subscription, true);
-      }
-    }
 
     if (userFilters)
     {

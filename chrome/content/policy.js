@@ -52,8 +52,6 @@ var policy =
    */
   localizedDescr: null,
 
-  shouldProxy: function(){},
-
   /**
    * Assigned in shouldLoad() & used by autoMatching().
    * Since autoMatching is called by applyFilter,
@@ -132,7 +130,7 @@ var policy =
     if (match && arguments.length == 1)
       filterStorage.increaseHitCount(match);
 
-    return match?match:false;
+    return match;
   },
 
   /**

@@ -6,7 +6,7 @@
 <!ENTITY add.label                       "Add rule">
 <!ENTITY add.accesskey                   "A">
 <!ENTITY addsubscription.label           "Add rule subscription">
-<!ENTITY addCustomSubscription.label "Add custom rule subscription">
+<!ENTITY addCustomSubscription.label     "Add custom rule subscription">
 <!ENTITY addsubscription.accesskey       "S">
 <!ENTITY synchsubscriptions.label        "Update all subscriptions">
 <!ENTITY synchsubscriptions.accesskey    "D">

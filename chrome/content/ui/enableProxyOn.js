@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Wang Congming <lovelywcm@gmail.com>.
- * Portions created by the Initial Developer are Copyright (C) 2010
+ * Portions created by the Initial Developer are Copyright (C) 2010-2011
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -39,7 +39,7 @@ function enableProxyOn(menuItem, data)
   while (curItem.previousSibling && curItem.previousSibling.className == 'enableProxyOn')
     curItem.parentNode.removeChild(curItem.previousSibling);
 
-  if (!data) return;
+  if (!data || prefs.proxyMode != 'auto') return;
 
   var location = aup.makeURL(data.location);
   if (!proxy.isProxyableScheme(location)) return;

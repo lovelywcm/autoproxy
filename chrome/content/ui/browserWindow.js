@@ -146,7 +146,6 @@ function aupInit() {
   filterStorage.addSubscriptionObserver(aupReloadPrefs);
 
   let browser = aupHooks.getBrowser();
-  //browser.addEventListener("click", handleLinkClick, true);
 
   let dummy = function() {};
   let progressListener = {
@@ -343,51 +342,6 @@ function aupConfigureKey(key, value) {
     element.setAttribute("modifiers", modifiers.join(","));
 
     E("aup-keyset").appendChild(element);
-  }
-}
-
-/**
- * Handles browser clicks to intercept clicks on aup: links.
- */
-function handleLinkClick(/**Event*/ event)
-{
-  // Ignore right-clicks
-  if (event.button == 2)
-    return;
-
-  let link = event.target;
-  while (link && !(link instanceof Ci.nsIDOMNSHTMLAnchorElement))
-    link = link.parentNode;
-
-  if (link && /^aup:\/*subscribe\/*\?(.*)/i.test(link.href)) /* */
-  {
-    event.preventDefault();
-    event.stopPropagation();
-
-    let unescape = Cc["@mozilla.org/intl/texttosuburi;1"].getService(Ci.nsITextToSubURI);
-
-    let params = RegExp.$1.split('&');
-    let title = null;
-    let url = null;
-    for each (let param in params)
-    {
-      let parts = param.split("=", 2);
-      if (parts.length == 2 && parts[0] == 'title')
-        title = decodeURIComponent(parts[1]);
-      if (parts.length == 2 && parts[0] == 'location')
-        url = decodeURIComponent(parts[1]);
-    }
-
-    if (url && /\S/.test(url))
-    {
-      if (!title || !/\S/.test(title))
-        title = url;
-
-      var subscription = {url: url, title: title, disabled: false, external: false, autoDownload: true};
-
-      window.openDialog("chrome://autoproxy/content/ui/subscription.xul", "_blank",
-                         "chrome,centerscreen,modal", subscription);
-    }
   }
 }
 

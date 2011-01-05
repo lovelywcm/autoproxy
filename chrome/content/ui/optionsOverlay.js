@@ -1,10 +1,10 @@
-window.onload = function() {
-    var e = document.getElementById("connectionSettings");
-    e.addEventListener("click", onConnectionSettings, false);
+window.onload = function()
+{
+  document.getElementById("connectionSettings").addEventListener("click", onConnectionSettings, false);
 }
-function onConnectionSettings(event) {
-    if (prefs.proxyMode != "disabled") {
-        aup.openSettingsDialog();
-        event.preventDefault();
-    }
+
+function onConnectionSettings(event)
+{
+  aup.openSettingsDialog();
+  event.preventDefault();
 }

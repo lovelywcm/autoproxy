@@ -51,7 +51,6 @@
 <!ENTITY mode.auto.accesskey "A">
 <!ENTITY mode.global.label "Global Mode">
 <!ENTITY mode.global.accesskey "G">
-<!ENTITY mode.disabled.label "Disable AutoProxy">
 <!ENTITY mode.disabled.accesskey "D">
 <!ENTITY showintoolbar.label "Exibir na barra de ferramentas">
 <!ENTITY showintoolbar.accesskey "B">

@@ -418,8 +418,7 @@ function aupFillTooltip(event) {
   proxyDescr.hidden = E("aup-tooltip-proxy-label").hidden = (state == "disabled");
 
   var activeFilters = [];
-  E("aup-tooltip-blocked-label").hidden = (state != "auto");
-  E("aup-tooltip-blocked").hidden = (state != "auto");
+  E("aup-tooltip-blocked").hidden = E("aup-tooltip-blocked-label").hidden = (state!="auto");
   if (state == "auto") {
     var locations = [];
     var rootData = RequestList.getDataForWindow(window);

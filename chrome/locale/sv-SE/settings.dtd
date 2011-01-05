@@ -60,7 +60,6 @@
 <!ENTITY mode.auto.accesskey             "A">
 <!ENTITY mode.global.label               "Globalläge">
 <!ENTITY mode.global.accesskey           "G">
-<!ENTITY mode.disabled.label             "Inaktivera AutoProxy">
 <!ENTITY mode.disabled.accesskey         "I">
 <!ENTITY showintoolbar.label             "Visa i verktygsfältet">
 <!ENTITY showintoolbar.accesskey         "y">

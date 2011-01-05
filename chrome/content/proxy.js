@@ -93,7 +93,7 @@ var proxy =
     else proxy.fallbackProxy = proxy.server[prefs.fallbackProxy] || proxy.server[0];
 
     pS.unregisterFilter(proxy);
-    if (prefs.proxyMode != 'disabled') pS.registerFilter(proxy, 0);
+    pS.registerFilter(proxy, 0);
   },
 
   /**
@@ -149,14 +149,14 @@ var proxy =
   //
   applyFilter: function(pS, uri, aProxy)
   {
-    if (uri.schemeIs('feed')) return this.server[0];
+    if (prefs.proxyMode == 'disabled' || uri.schemeIs('feed')) return this.server[0];
     if (prefs.proxyMode == 'global') return this.defaultProxy;
 
     var match = policy.autoMatching(uri);
     if (!match || match instanceof WhitelistFilter) return this.fallbackProxy;
 
     for each (var s in match.subscriptions)
-      if(!s.disabled) return this.server[s.proxyIndex] || this.defaultProxy;
+      if (!s.disabled) return this.server[s.proxy] || this.defaultProxy;
   }
 };
 

@@ -105,7 +105,7 @@ function makeNewCheckbox(filter, labeltempl)
   checkbox.addEventListener('command', function() { toggleFilter(filter); }, false);
   curItem.parentNode.insertBefore(checkbox, curItem);
 
-  if (isActive(filter)) {
+  if (isActive(filter) || labeltempl=='enableProxyOnSite' && suffixed(filter).some(isActive)) {
     checkbox.setAttribute('checked', true);
     checkbox.style.color = filter instanceof aup.BlockingFilter ? 'green' : 'red';
     if (labeltempl != 'enableProxyOnUrl') {
@@ -125,16 +125,25 @@ function makeNewCheckbox(filter, labeltempl)
  */
 function toggleFilter(filter)
 {
-  if (filter.subscriptions.length) {
-    if (filter.disabled || filter.subscriptions.some(function(subscription) !(subscription instanceof aup.SpecialSubscription))) {
-      filter.disabled = !filter.disabled;
-      filterStorage.triggerFilterObservers(filter.disabled ? "disable" : "enable", [filter]);
-    }
-    else
+  var siteFilters = [filter];
+  if (filter.text.indexOf("||") == 0)
+    siteFilters = siteFilters.concat(suffixed(filter));
+
+  if (siteFilters.some(isActive)) {
+    siteFilters.forEach(function(filter) {
+      filter.disabled = true;
+      filterStorage.triggerFilterObservers("disable", [filter]);
       filterStorage.removeFilter(filter);
+    });
   }
-  else
-    filterStorage.addFilter(filter);
+  else {
+    if (filter.subscriptions.every(function(subscription) subscription.disabled))
+      filterStorage.addFilter(filter);
+    if (filter.disabled) {
+      filter.disabled = false;
+      filterStorage.triggerFilterObservers("enable", [filter]);
+    }
+  }
 
   filterStorage.saveToDisk();
 
@@ -148,11 +157,18 @@ function toggleFilter(filter)
  */
 function isActive(/**Filter*/ filter)
 {
-  if (!filter.disabled)
-    for each (var subscription in filter.subscriptions)
-      if (!subscription.disabled) return true;
+  return !filter.disabled && filter.subscriptions.some(function(s) !s.disabled);
+}
 
-  return false;
+
+/**
+ * ||example.com => ||example.com^, ||example.com/
+ *
+ * @return {Array} of Filter
+ */
+function suffixed(/**Filter*/ filter)
+{
+  return [filter.text + "^", filter.text + "/"].map(aup.Filter.fromText);
 }
 
 

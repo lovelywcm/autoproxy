@@ -2211,11 +2211,15 @@ let treeView = {
         {
           if (s._sortedFilters.indexOf(filter) >= 0 || s.filters.indexOf(filter) >= 0)
           {
-            subscription = s;
-            break;
+            if (!s.disabled) {
+              subscription = s;
+              break;
+            }
+            else if (subscription.disabled)
+              subscription = s;
           }
 
-          if (!subscription)
+          if (!subscription || subscription.disabled && !s.disabled)
             subscription = s;
         }
       }

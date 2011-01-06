@@ -33,5 +33,4 @@ pref("extensions.autoproxy.modeglobal_key", "Accel Alt G");
 pref("extensions.autoproxy.modedisabled_key", "Accel Alt D");
 pref("extensions.autoproxy.proxyMode", "auto");
 
-pref("extensions.autoproxy.customSubscriptionsPoint",0);
 pref("extensions.autoproxy@autoproxy.org.description", "chrome://autoproxy/locale/global.properties");

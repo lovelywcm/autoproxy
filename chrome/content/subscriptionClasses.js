@@ -71,8 +71,9 @@ Subscription.prototype =
   serialize: function(buffer)
   {
     buffer.push("[Subscription]");
-    buffer.push("title=" + this.title);
     buffer.push("url=" + this.url);
+    if (this.title)
+      buffer.push("title=" + this.title);
     if (this.disabled)
       buffer.push("disabled=true");
     if (this.proxy)
@@ -198,13 +199,19 @@ Subscription.fromObject = function(obj)
  */
 function SpecialSubscription(url, title, proxy)
 {
-  Subscription.call(this, url, title, proxy);
+  Subscription.call(this, url || this.makeNewSpecialUrl(), title, proxy);
 }
 SpecialSubscription.prototype =
 {
   __proto__: Subscription.prototype,
 
-  _typeDescId: "filterlist_description"
+  _typeDescId: "filterlist_description",
+
+  makeNewSpecialUrl: function()
+  {
+    var newUrl = "~fl" + Math.floor(Math.random()*100) + "~";
+    return Subscription.knownSubscriptions[newUrl] ? this.makeNewSpecialUrl() : newUrl;
+  }
 };
 aup.SpecialSubscription = SpecialSubscription;
 

@@ -254,19 +254,19 @@ var filterStorage =
     {
       for each (let s in this.subscriptions)
       {
-        if (s instanceof SpecialSubscription)
+        if (s instanceof SpecialSubscription && !s.disabled)
         {
           if (s.filters.indexOf(filter) >= 0)
             return;
-
-          if (!subscription)
-            subscription = s;
+          else subscription = s;
         }
       }
     }
 
-    if (!subscription)
-      return;
+    if (!subscription) {
+      subscription = new aup.SpecialSubscription();
+      this.addSubscription(subscription);
+    }
 
     let insertIndex = -1;
     if (insertBefore)

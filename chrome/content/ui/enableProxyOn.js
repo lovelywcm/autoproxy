@@ -148,7 +148,11 @@ function toggleFilter(filter)
  */
 function isActive(/**Filter*/ filter)
 {
-  return filter.subscriptions.length && !filter.disabled;
+  if (!filter.disabled)
+    for each (var subscription in filter.subscriptions)
+      if (!subscription.disabled) return true;
+
+  return false;
 }
 
 

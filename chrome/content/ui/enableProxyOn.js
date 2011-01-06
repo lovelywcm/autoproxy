@@ -28,28 +28,25 @@
  * Shared by context menu of statusbar, toolbar & sidebar.
  *
  * @param menuItem  document.getElementById
- * @param data  {RequestEntry} see requests.js
  */
-function enableProxyOn(menuItem, data)
+function enableProxyOn(menuItem)
 {
   // global, intended
   curItem = menuItem;
+  var location = aupHooks.getBrowser().currentURI;
 
   // remove previously created items
   while (curItem.previousSibling && curItem.previousSibling.className == 'enableProxyOn')
     curItem.parentNode.removeChild(curItem.previousSibling);
 
-  if (!data || prefs.proxyMode != 'auto') return;
-
-  var location = aup.makeURL(data.location);
-  if (!proxy.isProxyableScheme(location)) return;
+  if (prefs.proxyMode!='auto' || !proxy.isProxyableScheme(location)) return;
 
   // create "enable proxy on site" menu items
   makeSiteCheckbox(location, '||');
 
-  var filter = aup.whitelistMatcher.matchesAny(data.location, data.typeDescr, data.docDomain, data.thirdParty);
+  var filter = aup.whitelistMatcher.matchesAny(location.spec, "DOCUMENT", "browser", false);
   if (filter == null)
-    filter = aup.blacklistMatcher.matchesAny(data.location, data.typeDescr, data.docDomain, data.thirdParty);
+    filter = aup.blacklistMatcher.matchesAny(location.spec, "DOCUMENT", "browser", false);
 
   // create "enable proxy on url" menu item
   if (filter && filter instanceof aup.BlockingFilter && filter.text.indexOf('||') != 0)

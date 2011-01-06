@@ -544,8 +544,7 @@ function aupFillPopup(event)
   //
   // Fill "Enable Proxy On" Menu Items
   //
-  var rootData = RequestList.getDataForWindow(window).getURLInfo(aupHooks.getBrowser().currentURI.spec);
-  enableProxyOn(elements.modeauto, rootData);
+  enableProxyOn(elements.modeauto);
 
 
   //

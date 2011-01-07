@@ -156,7 +156,9 @@ var proxy =
     if (!match || match instanceof WhitelistFilter) return this.fallbackProxy;
 
     for each (var s in match.subscriptions)
-      if (!s.disabled) return this.server[s.proxy] || this.defaultProxy;
+      if (!s.disabled)
+        if (s.proxy == "-1") return this.defaultProxy;
+        else return this.server[s.proxy] || this.defaultProxy;
   }
 };
 

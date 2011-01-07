@@ -33,14 +33,15 @@
  *
  * @param {String} url    download location of the subscription
  * @param {String} title  title of the subscription
- * @param {Integer} proxy which proxy should be used for this subscription, see aup.proxy.server
+ * @param {String} proxy  which proxy should be used for this subscription,
+ *          will be implicitly converted to {Integer}, see aup.proxy.server.
  * @constructor
  */
 function Subscription(url, title, proxy)
 {
   this.url = url;
   this.title = title;
-  this.proxy = proxy || 0;
+  this.proxy = proxy || "-1";
   this.filters = [];
   Subscription.knownSubscriptions[url] = this;
 }
@@ -72,12 +73,11 @@ Subscription.prototype =
   {
     buffer.push("[Subscription]");
     buffer.push("url=" + this.url);
+    buffer.push("proxy=" + this.proxy);
     if (this.title)
       buffer.push("title=" + this.title);
     if (this.disabled)
       buffer.push("disabled=true");
-    if (this.proxy)
-      buffer.push("proxy=" + this.proxy);
   },
 
   serializeFilters: function(buffer)

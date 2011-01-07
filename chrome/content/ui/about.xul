@@ -53,7 +53,7 @@
   </description>
 
   <description id="homepageTitle" value="&homepage.label;"/>
-  <description id="homepage" value="&homepage.url;" onclick="aup.loadInBrowser(this.getAttribute('value'))"/>
+  <description id="homepage" value="https://autoproxy.org/" onclick="aup.loadInBrowser(this.getAttribute('value'))"/>
 
   <description id="authorTitle" value="&author.label;"/>
   <description id="author" value="WCM @ Twitter, lovelywcm@Gmail.com"/>

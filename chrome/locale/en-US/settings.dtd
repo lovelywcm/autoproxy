@@ -73,13 +73,10 @@
 
 <!ENTITY gettingStarted.label            "Getting started">
 <!ENTITY gettingStarted.accesskey        "s">
-<!ENTITY gettingStarted.url              "http://autoproxy.org/en/getting_started">
 <!ENTITY faq.label                       "Frequently Asked Questions">
 <!ENTITY faq.accesskey                   "F">
-<!ENTITY faq.url                         "http://autoproxy.org/en/faq">
 <!ENTITY filterdoc.label                 "Writing AutoProxy rules">
 <!ENTITY filterdoc.accesskey             "R">
-<!ENTITY filterdoc.url                   "http://autoproxy.org/en/rules">
 <!ENTITY about.label                     "About AutoProxy">
 <!ENTITY about.accesskey                 "B">
 

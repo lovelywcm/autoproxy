@@ -7,7 +7,6 @@
 <!ENTITY note "Hinweis: Bitte wählen Sie keine Regelliste, die für Ihre Region nicht gepflegt wird">
 <!ENTITY homepage.label "Homepage">
 <!ENTITY full-list.label "Alle Abonnements anzeigen">
-<!ENTITY full-list.url "http://autoproxy.org/en/subscriptions">
 <!ENTITY other.label "Ein benutzerdefiniertes Abonnement hinzufügen">
 <!ENTITY other.accesskey "b">
 <!ENTITY defaultBtn.label "Standard-Proxy">

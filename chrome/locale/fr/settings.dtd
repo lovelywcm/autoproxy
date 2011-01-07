@@ -58,13 +58,10 @@
 <!ENTITY help.accesskey "d">
 <!ENTITY gettingStarted.label "Débuter (en anglais)">
 <!ENTITY gettingStarted.accesskey "b">
-<!ENTITY gettingStarted.url "http://www.autoproxy.org/">
 <!ENTITY faq.label "Foire aux questions (en anglais)">
 <!ENTITY faq.accesskey "F">
-<!ENTITY faq.url "http://www.autoproxy.org/">
 <!ENTITY filterdoc.label "Écriture des règles d'AutoProxy (en anglais)">
 <!ENTITY filterdoc.accesskey "r">
-<!ENTITY filterdoc.url "http://www.autoproxy.org/">
 <!ENTITY about.label "À propos de AutoProxy">
 <!ENTITY about.accesskey "p">
 <!ENTITY filter.column "Règles">

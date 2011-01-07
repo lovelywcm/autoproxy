@@ -6,7 +6,6 @@
 <!ENTITY note "提示：请勿订阅非为您所在地区维护的列表。">
 <!ENTITY homepage.label "主页">
 <!ENTITY full-list.label "查看所有订阅">
-<!ENTITY full-list.url "http://autoproxy.org/en/subscriptions">
 <!ENTITY other.label "添加一个自定义订阅">
 <!ENTITY other.accesskey "C">
 <!ENTITY defaultBtn.label "默认代理：">

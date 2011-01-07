@@ -61,7 +61,7 @@
         <image id="icon"/>
       </hbox>
     </vbox>
-    <description class="fulllist" _url="&full-list.url;" tooltiptext="&full-list.url;" value="&full-list.label;" onclick="aup.loadInBrowser(this.getAttribute('_url'))"/>
+    <description class="fulllist" _url="https://autoproxy.org/subscriptions" tooltiptext="https://autoproxy.org/subscriptions" value="&full-list.label;" onclick="aup.loadInBrowser(this.getAttribute('_url'))"/>
   </vbox>
 </hbox>
 

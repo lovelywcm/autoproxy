@@ -60,13 +60,10 @@
 <!ENTITY help.accesskey "H">
 <!ENTITY gettingStarted.label "Einführung">
 <!ENTITY gettingStarted.accesskey "f">
-<!ENTITY gettingStarted.url "http://autoproxy.org/en/getting_started">
 <!ENTITY faq.label "Häufig gestellte Fragen">
 <!ENTITY faq.accesskey "F">
-<!ENTITY faq.url "http://autoproxy.org/en/faq">
 <!ENTITY filterdoc.label "AutoProxy Regeln schreiben">
 <!ENTITY filterdoc.accesskey "r">
-<!ENTITY filterdoc.url "http://autoproxy.org/en/rules">
 <!ENTITY about.label "Über AutoProxy">
 <!ENTITY about.accesskey "b">
 <!ENTITY description "Die folgenden Regeln bestimmen, welche Adressen via Proxy angesprochen werden sollen und welche nicht:">

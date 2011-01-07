@@ -7,7 +7,6 @@
 <!ENTITY note "NB : une liste des règles est en général plus efficace lorsqu'elle est appliquée à des sites Web de la zone pour laquelle cette liste de règles a été créée.">
 <!ENTITY homepage.label "Page Web">
 <!ENTITY full-list.label "Voir toutes les inscriptions (en anglais)">
-<!ENTITY full-list.url "http://www.autoproxy.org/">
 <!ENTITY other.label "Ajouter un abonnement personnalisé">
 <!ENTITY other.accesskey "f">
 <!ENTITY defaultBtn.label "Proxy par défaut :">

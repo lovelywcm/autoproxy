@@ -7,7 +7,6 @@
 <!ENTITY note "Nota: una lista de reglas es, normalmente, más efectiva para las personas de la región para la que fue creada.">
 <!ENTITY homepage.label "Página inicial">
 <!ENTITY full-list.label "Ver todas las subscripciones">
-<!ENTITY full-list.url "http://autoproxy.org/en/subscriptions">
 <!ENTITY other.label "Añadir una subscripción personalizada">
 <!ENTITY other.accesskey "C">
 <!ENTITY defaultBtn.label "Proxy por defecto:">

@@ -209,9 +209,9 @@
     </menu>
     <menu id="help-menu" label="&help.label;" accesskey="&help.accesskey;">
       <menupopup id="help-popup">
-        <menuitem id="gettingStartedLink" label="&gettingStarted.label;" accesskey="&gettingStarted.accesskey;" oncommand="aup.loadInBrowser('&gettingStarted.url;')"/>
-        <menuitem id="faqLink" label="&faq.label;" accesskey="&faq.accesskey;" oncommand="aup.loadInBrowser('&faq.url;')"/>
-        <menuitem id="filtersLink" label="&filterdoc.label;" accesskey="&filterdoc.accesskey;" oncommand="aup.loadInBrowser('&filterdoc.url;')"/>
+        <menuitem id="gettingStartedLink" label="&gettingStarted.label;" accesskey="&gettingStarted.accesskey;" oncommand="aup.loadInBrowser('https://autoproxy.org/getting_started')"/>
+        <menuitem id="faqLink" label="&faq.label;" accesskey="&faq.accesskey;" oncommand="aup.loadInBrowser('https://autoproxy.org/faq')"/>
+        <menuitem id="filtersLink" label="&filterdoc.label;" accesskey="&filterdoc.accesskey;" oncommand="aup.loadInBrowser('https://autoproxy.org/rules')"/>
         <menuseparator/>
         <menuitem id="aboutAup" label="&about.label;..." accesskey="&about.accesskey;" oncommand="openAbout()"/>
       </menupopup>

@@ -26,7 +26,6 @@
 <!ENTITY homepage.label       "Home page">
 
 <!ENTITY full-list.label      "View all subscriptions">
-<!ENTITY full-list.url        "http://autoproxy.org/en/subscriptions">
 
 <!ENTITY other.label          "Add a Custom Subscription">
 <!ENTITY other.accesskey      "C">

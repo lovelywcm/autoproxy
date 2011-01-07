@@ -91,7 +91,7 @@
   <em:name>AutoProxy</em:name>
   <em:description>GFW was yesterday!</em:description>
   <em:creator>WCM</em:creator>
-  <em:homepageURL>http://autoproxy.org/</em:homepageURL>
+  <em:homepageURL>https://autoproxy.org/</em:homepageURL>
 
   <!-- Front End Integration Hooks (used by Extension Manager)-->
   <em:iconURL>chrome://autoproxy/skin/autoproxy.png</em:iconURL>

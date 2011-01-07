@@ -3,6 +3,5 @@
 <!ENTITY version.title "版本">
 <!ENTITY description "撞墙已成往事！被墙网站自动代理，正常网站直接连接。">
 <!ENTITY homepage.label "AutoProxy 主页：">
-<!ENTITY homepage.url "http://autoproxy.org/">
 <!ENTITY author.label "作者：">
 <!ENTITY contributors.label "贡献者：">

@@ -3,6 +3,5 @@
 <!ENTITY version.title "Versión">
 <!ENTITY description "AutoProxy te permite decidir que sitios pasarán o no por un proxy. Ya no necesitarás activar o desactivar manualmente el uso del proxy.">
 <!ENTITY homepage.label "Página web de AutoProxy:">
-<!ENTITY homepage.url "http://autoproxy.org/">
 <!ENTITY author.label "Autor:">
 <!ENTITY contributors.label "Colaboradores:">

@@ -7,7 +7,6 @@
 <!ENTITY note "Aviso: uma lista de regras é comumente mais efetiva para pessoas da região para a qual a lista foi criada.">
 <!ENTITY homepage.label "Homepage">
 <!ENTITY full-list.label "Exibir todas as assinaturas">
-<!ENTITY full-list.url "http://autoproxy.org/en/subscriptions">
 <!ENTITY other.label "Acrescentar um assinatura padrão">
 <!ENTITY other.accesskey "C">
 <!ENTITY defaultBtn.label "Proxy padrão:">

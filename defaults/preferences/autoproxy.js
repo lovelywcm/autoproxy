@@ -1,4 +1,4 @@
-// For description of these values see http://autoproxy.org/en/preferences
+// For description of these values see https://autoproxy.org/preferences
 
 pref("extensions.autoproxy.clearStatsOnHistoryPurge", true);
 pref("extensions.autoproxy.currentVersion", "0.0");
@@ -19,7 +19,7 @@ pref("extensions.autoproxy.showinstatusbar", false);
 pref("extensions.autoproxy.showintoolbar", true);
 pref("extensions.autoproxy.sidebar_key", "Accel Alt V");
 pref("extensions.autoproxy.subscriptions_fallbackerrors", 5);
-pref("extensions.autoproxy.subscriptions_fallbackurl", "http://autoproxy.org/getSubscription?url=%s");
+pref("extensions.autoproxy.subscriptions_fallbackurl", "https://autoproxy.org/getSubscription?url=%s");
 pref("extensions.autoproxy.synchronizationinterval", 24);
 
 pref("extensions.autoproxy.contextmenu_key", "Accel Alt M");

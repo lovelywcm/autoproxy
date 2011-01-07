@@ -71,13 +71,10 @@
 
 <!ENTITY gettingStarted.label            "Komma igång">
 <!ENTITY gettingStarted.accesskey        "o">
-<!ENTITY gettingStarted.url              "http://autoproxy.org/en/getting_started">
 <!ENTITY faq.label                       "Vanliga frågor och svar">
 <!ENTITY faq.accesskey                   "f">
-<!ENTITY faq.url                         "http://autoproxy.org/en/faq">
 <!ENTITY filterdoc.label                 "Skriva AutoProxy-regler">
 <!ENTITY filterdoc.accesskey             "r">
-<!ENTITY filterdoc.url                   "http://autoproxy.org/en/rules">
 <!ENTITY about.label                     "Om AutoProxy">
 <!ENTITY about.accesskey                 "m">
 

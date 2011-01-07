@@ -9,6 +9,5 @@
 ">
 
 <!ENTITY homepage.label     "AutoProxy homepage:">
-<!ENTITY homepage.url       "http://autoproxy.org/">
 <!ENTITY author.label       "Author:">
 <!ENTITY contributors.label "Contributors:">

@@ -26,7 +26,6 @@
 <!ENTITY homepage.label       "Webbplats">
 
 <!ENTITY full-list.label      "Visa alla prenumerationer">
-<!ENTITY full-list.url        "http://autoproxy.org/en/subscriptions">
 
 <!ENTITY other.label          "Lägg till en anpassad prenumeration">
 <!ENTITY other.accesskey      "L">

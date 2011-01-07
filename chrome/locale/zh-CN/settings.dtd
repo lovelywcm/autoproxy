@@ -62,13 +62,10 @@
 <!ENTITY help.accesskey "H">
 <!ENTITY gettingStarted.label "新手入门">
 <!ENTITY gettingStarted.accesskey "s">
-<!ENTITY gettingStarted.url "http://autoproxy.org/en/getting_started">
 <!ENTITY faq.label "常见问题">
 <!ENTITY faq.accesskey "F">
-<!ENTITY faq.url "http://autoproxy.org/en/faq">
 <!ENTITY filterdoc.label "AutoProxy 代理规则写法">
 <!ENTITY filterdoc.accesskey "R">
-<!ENTITY filterdoc.url "http://autoproxy.org/en/rules">
 <!ENTITY about.label "关于 AutoProxy">
 <!ENTITY about.accesskey "B">
 <!ENTITY description "以下规则决定了一个网站是否应该使用代理：">

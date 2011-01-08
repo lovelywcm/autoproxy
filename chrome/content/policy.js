@@ -109,7 +109,7 @@ var policy =
       if (contentType != this.type.OBJECT && (node instanceof Ci.nsIDOMHTMLObjectElement || node instanceof Ci.nsIDOMHTMLEmbedElement))
         contentType = this.type.OBJECT;
 
-      docDomain = this.getHostname(wnd.location.href);
+      docDomain = wnd.location.host;
       thirdParty = this.isThirdParty(location, docDomain);
     }
 
@@ -131,21 +131,6 @@ var policy =
       filterStorage.increaseHitCount(match);
 
     return match;
-  },
-
-  /**
-   * Extracts the hostname from a URL (might return null).
-   */
-  getHostname: function(/**String*/ url) /**String*/
-  {
-    try
-    {
-      return unwrapURL(url).host;
-    }
-    catch(e)
-    {
-      return null;
-    }
   },
 
   /**

@@ -758,7 +758,7 @@ function onSubscriptionChange(/**String*/ action, /**Array of Subscription*/ sub
 {
   if (action == "reload")
   {
-    // TODO: reinit?
+    // @TODO: reinit?
     return;
   }
 

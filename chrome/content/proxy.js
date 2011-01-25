@@ -164,6 +164,6 @@ var proxy =
 
 aup.proxy = proxy;
 
-// TODO: i18n
-// TODO: ";" & "$" is not allowed in proxy name
-// TODO: editProxyServer.js
+// @TODO: i18n
+// @TODO: ";" & "$" is not allowed in proxy name
+// @TODO: review editProxyServer.js

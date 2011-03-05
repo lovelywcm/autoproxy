@@ -78,7 +78,6 @@
 <!ENTITY context.edit.label "Regel bearbeiten">
 <!ENTITY context.resethitcount.label "Zugriffsstatistik für Regel zurücksetzen">
 <!ENTITY context.synchsubscription.label "Abonnement jetzt aktualisieren">
-<!ENTITY context.editsubscription.label "Abonnement bearbeiten">
 <!ENTITY context.moveup.label "Regel nach oben verschieben">
 <!ENTITY context.movedown.label "Regel nach unten verschieben">
 <!ENTITY context.movegroupup.label "Gruppe nach oben verschieben">

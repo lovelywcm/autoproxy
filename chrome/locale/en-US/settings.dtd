@@ -97,7 +97,7 @@
 <!ENTITY context.edit.label              "Edit rule">
 <!ENTITY context.resethitcount.label     "Reset hit statistics for rule">
 <!ENTITY context.synchsubscription.label "Update subscription now">
-<!ENTITY context.editsubscription.label  "Edit subscription">
+<!ENTITY context.editsubscription.label  "Edit rule group">
 <!ENTITY context.moveup.label            "Move rule up">
 <!ENTITY context.movedown.label          "Move rule down">
 <!ENTITY context.movegroupup.label       "Move group up">

@@ -78,7 +78,6 @@
 <!ENTITY context.edit.label "Editar regla">
 <!ENTITY context.resethitcount.label "Reiniciar contador estadístico para la regla">
 <!ENTITY context.synchsubscription.label "Actualizar la subscripción ahora">
-<!ENTITY context.editsubscription.label "Editar subscripción">
 <!ENTITY context.moveup.label "Subir regla">
 <!ENTITY context.movedown.label "Bajar regla">
 <!ENTITY context.movegroupup.label "Subir grupo">

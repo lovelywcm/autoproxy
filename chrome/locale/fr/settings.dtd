@@ -73,7 +73,6 @@
 <!ENTITY context.edit.label "Éditer la règle">
 <!ENTITY context.resethitcount.label "Réinitialiser les statistiques de l'occurrence pour la règle">
 <!ENTITY context.synchsubscription.label "Mettre maintenant à jour l'abonnement">
-<!ENTITY context.editsubscription.label "Éditer l'abonnement">
 <!ENTITY context.moveup.label "Faire monter la règle">
 <!ENTITY context.movedown.label "Faire descendre la règle">
 <!ENTITY context.movegroupup.label "Faire monter le groupe">

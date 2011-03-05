@@ -78,7 +78,6 @@
 <!ENTITY context.edit.label "Editar regra">
 <!ENTITY context.resethitcount.label "Zerar as estatísticas de hit para regras">
 <!ENTITY context.synchsubscription.label "Atualizar assinatura agora">
-<!ENTITY context.editsubscription.label "Editar assinatura">
 <!ENTITY context.moveup.label "Mover regra para cima">
 <!ENTITY context.movedown.label "Mover regra para baixo">
 <!ENTITY context.movegroupup.label "Mover grupo para cima">

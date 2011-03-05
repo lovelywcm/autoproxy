@@ -92,7 +92,6 @@
 <!ENTITY context.edit.label              "Redigera regel">
 <!ENTITY context.resethitcount.label     "Nollställ träffstatistik för regel">
 <!ENTITY context.synchsubscription.label "Uppdatera prenumeration nu">
-<!ENTITY context.editsubscription.label  "Redigera prenumeration">
 <!ENTITY context.moveup.label            "Flytta regel uppåt">
 <!ENTITY context.movedown.label          "Flytta regel nedåt">
 <!ENTITY context.movegroupup.label       "Flytta grupp uppåt">

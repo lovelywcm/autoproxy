@@ -842,29 +842,13 @@ function editFilter(type) /**Boolean*/
   }
 
   if (type != "filter" && subscription instanceof aup.RegularSubscription)
-    editSubscription(subscription);
+    ruleGroupSettings();
   else if (type != "filter" && treeView.isContainer(treeView.selection.currentIndex))
-    editSubscription(subscription);
+    ruleGroupSettings();
   else
     treeView.startEditor(false);
 
   return true;
-}
-
-/**
- * Open the "Edit Proxy Server" dialog called by menu
- */
-function editProxyServer()
-{
-  openDialog("editProxyServer.xul", "_blank", "chrome,centerscreen,modal");
-}
-
-/**
- * Open the "Choose Proxy Server" dialog called by menu
- */
-function chooseProxyServer()
-{
-  openDialog("chooseProxyServer.xul", "_blank", "chrome,centerscreen,modal");
 }
 
 /**
@@ -3054,4 +3038,14 @@ function addRuleGroup()
   filterStorage.addSubscription(new aup.SpecialSubscription());
   // @TODO: also add a directive comment rule to this group.
   // @TODO: group name: 1(omit), 2, 3...
+}
+
+function editProxyServer()
+{
+  openDialog("editProxyServer.xul", "_blank", "chrome,centerscreen,modal");
+}
+
+function ruleGroupSettings()
+{
+  openDialog("chooseProxyServer.xul", "_blank", "chrome,centerscreen,modal");
 }

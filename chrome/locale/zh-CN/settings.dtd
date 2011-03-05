@@ -81,7 +81,7 @@
 <!ENTITY context.edit.label "编辑规则">
 <!ENTITY context.resethitcount.label "重置该条规则的计数">
 <!ENTITY context.synchsubscription.label "立即更新订阅">
-<!ENTITY context.editsubscription.label "编辑订阅">
+<!ENTITY context.editsubscription.label "编辑规则组">
 <!ENTITY context.moveup.label "上移规则">
 <!ENTITY context.movedown.label "下移规则">
 <!ENTITY context.movegroupup.label "上移组">

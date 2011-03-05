@@ -141,7 +141,7 @@
     <menu id="proxies-menu" label="&proxies.label;" accesskey="&proxies.accesskey;">
       <menupopup id="proxies-popup" >
         <menuitem id="editproxies" label="&editproxies.label;..." accesskey="&editproxies.accesskey;" oncommand="editProxyServer()"/>
-        <menuitem id="chooseproxies" label="&chooseproxies.label;..." accesskey="&chooseproxies.accesskey;" oncommand="chooseProxyServer()"/>
+        <menuitem id="chooseproxies" label="&chooseproxies.label;..." accesskey="&chooseproxies.accesskey;" oncommand="ruleGroupSettings()"/>
       </menupopup>
     </menu>
 

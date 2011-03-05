@@ -131,7 +131,7 @@ var proxy =
   isProxyableScheme: function(location)
   {
     return ['http', 'https', 'ftp', 'gopher'].some(
-      function(scheme){return location.scheme==scheme} );
+      function(scheme){return location.scheme==scheme;});
   },
 
   /**

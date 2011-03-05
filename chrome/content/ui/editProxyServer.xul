@@ -32,10 +32,10 @@
 
 <dialog
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-  buttons="accept,cancel"
   title="&dialog.title;"
   id="aupsettingProxyServer"
-  windowtype="aup:settingProxyServer"
+  windowtype="aup:settings"
+  buttons="accept,cancel"
   onload="init()"
   ondialogaccept="saveProxyServerSettings()">
 
@@ -58,17 +58,19 @@
     <!-- Proxy configs will be added here by JS -->
   </rows>
 </grid>
+
 <description id="warning" hidden="true"> &warning.text; </description>
 <description id="note" hidden="true"> &note.text; </description>
 <description id="tip" hidden="true"> &tip.text; </description>
 <menuseparator/>
+
 <hbox>
-  <hbox>
-    <button label="&addButton.label;" accesskey="&addButton.accesskey;" onclick="addNewRow()"/>
-    <button label="&delButton.label;" accesskey="&delButton.accesskey;" onclick="delSelectedRow()"/>
+  <hbox flex="1">
+    <button label="&addButton.label;" accesskey="&addButton.accesskey;" oncommand="addNewRow()"/>
+    <button label="&delButton.label;" accesskey="&delButton.accesskey;" oncommand="delSelectedRow()"/>
   </hbox>
-  <hbox>
-    <button label="&resetButton.label;" accesskey="&resetButton.accesskey;" onclick="reset2Default()"/>
+  <hbox flex="1">
+    <button label="&resetButton.label;" accesskey="&resetButton.accesskey;" oncommand="reset2Default()"/>
   </hbox>
   <hbox>
     <button dlgtype="cancel"/>

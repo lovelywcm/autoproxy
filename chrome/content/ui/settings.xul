@@ -40,15 +40,18 @@
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   title="&dialog.title;"
   id="aupPreferencesWindow"
+  width="600"
+  height="450"
   onload="init()"
   onunload="cleanUp()"
   ondialogaccept="applyChanges(); return true;"
-  ondialogextra2="treeView.startEditor(true)"
-  buttons="accept,cancel,extra2"
-  buttonlabelextra2="&add.label;..."
-  buttonaccesskeyextra2="&add.accesskey;"
-  width="600"
-  height="450"
+  ondialogextra1="treeView.startEditor(true)"
+  buttonlabelextra1="&add.label;..."
+  buttonaccesskeyextra1="&add.accesskey;"
+  ondialogextra2="addRuleGroup()"
+  buttonlabelextra2="&addRuleGroup.label;"
+  buttonaccesskeyextra2="&addRuleGroup.accesskey;"
+  buttons="accept,cancel,extra1,extra2"
   persist="screenX screenY width height sizemode"
   windowtype="aup:settings">
 
@@ -122,7 +125,7 @@
     <menu id="filters-menu" label="&filters.label;" accesskey="&filters.accesskey;">
       <menupopup id="filters-popup" onpopupshowing="fillFiltersPopup()">
         <menuitem id="addfilter" label="&add.label;..." accesskey="&add.accesskey;" key="addfilter-key" oncommand="treeView.startEditor(true)"/>
-        <menuitem id="addCustomSubscription" label="&addCustomSubscription.label;" command=""/>
+        <menuitem id="addRuleGroup" label="&addRuleGroup.label;" accesskey="&addRuleGroup.accesskey;" oncommand="addRuleGroup()"/>
         <menuseparator/>
         <menuitem id="addsubscription" label="&addsubscription.label;..." accesskey="&addsubscription.accesskey;" command="addsubscription-command"/>
         <menuitem id="synchsubscriptions" label="&synchsubscriptions.label;" accesskey="&synchsubscriptions.accesskey;" key="synchsubscriptions-key" command="synchsubscriptions-command"/>
@@ -250,4 +253,14 @@
   <findbar id="findbar"/>
 </vbox>
 
+<hbox>
+  <hbox flex="1">
+    <button dlgtype="extra1"/>
+    <button dlgtype="extra2"/>
+  </hbox>
+  <hbox>
+    <button dlgtype="cancel"/>
+    <button dlgtype="accept"/>
+  </hbox>
+</hbox>
 </dialog>

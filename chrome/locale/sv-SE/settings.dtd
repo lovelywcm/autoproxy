@@ -3,8 +3,6 @@
 <!ENTITY filters.label                   "Proxyregel">
 <!ENTITY filters.accesskey               "r">
 
-<!ENTITY add.label                       "Lägg till regel">
-<!ENTITY add.accesskey                   "L">
 <!ENTITY addsubscription.label           "Lägg till regelprenumeration">
 <!ENTITY addsubscription.accesskey       "ä">
 <!ENTITY synchsubscriptions.label        "Uppdatera alla prenumerationer">

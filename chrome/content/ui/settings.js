@@ -3048,3 +3048,10 @@ function fillClickBehaviourPopup(e, isToolbar)
   var value = isToolbar ? prefs.defaulttoolbaraction : prefs.defaultstatusbaraction;
   e.target.children[value].setAttribute("checked", true);
 }
+
+function addRuleGroup()
+{
+  filterStorage.addSubscription(new aup.SpecialSubscription());
+  // @TODO: also add a directive comment rule to this group.
+  // @TODO: group name: 1(omit), 2, 3...
+}

@@ -1,8 +1,6 @@
 <!ENTITY dialog.title "Preferencias de AutoProxy">
 <!ENTITY filters.label "Regla Proxy">
 <!ENTITY filters.accesskey "R">
-<!ENTITY add.label "Añadir regla">
-<!ENTITY add.accesskey "A">
 <!ENTITY addsubscription.label "Añadir subscripción de regla">
 <!ENTITY addsubscription.accesskey "S">
 <!ENTITY synchsubscriptions.label "Actualizar todas las subscripciones">

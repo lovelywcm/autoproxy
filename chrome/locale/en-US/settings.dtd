@@ -3,10 +3,11 @@
 <!ENTITY filters.label                   "Proxy Rule">
 <!ENTITY filters.accesskey               "R">
 
-<!ENTITY add.label                       "Add rule">
+<!ENTITY add.label                       "Add proxy rule">
 <!ENTITY add.accesskey                   "A">
+<!ENTITY addRuleGroup.label              "Add rule group">
+<!ENTITY addRuleGroup.accesskey          "G">
 <!ENTITY addsubscription.label           "Add rule subscription">
-<!ENTITY addCustomSubscription.label     "Add custom rule subscription">
 <!ENTITY addsubscription.accesskey       "S">
 <!ENTITY synchsubscriptions.label        "Update all subscriptions">
 <!ENTITY synchsubscriptions.accesskey    "D">

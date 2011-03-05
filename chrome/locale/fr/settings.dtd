@@ -1,7 +1,5 @@
 <!ENTITY dialog.title "Préférences d'AutoProxy">
 <!ENTITY filters.accesskey "g">
-<!ENTITY add.label "Ajouter une règle">
-<!ENTITY add.accesskey "A">
 <!ENTITY addsubscription.label "Ajouter un abonnement à une règle">
 <!ENTITY addsubscription.accesskey "b">
 <!ENTITY synchsubscriptions.label "Mettre à jour tous les abonnements">

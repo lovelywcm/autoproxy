@@ -1348,7 +1348,7 @@ function createSortFunction(cmpFunc, fallbackFunc, desc)
     let isLast1 = (filter1.__proto__ == null);
     let isLast2 = (filter2.__proto__ == null);
     if (isLast1)
-      return (isLast2 ? 0 : 1)
+      return (isLast2 ? 0 : 1);
     else if (isLast2)
       return -1;
 
@@ -1357,7 +1357,7 @@ function createSortFunction(cmpFunc, fallbackFunc, desc)
       return fallbackFunc(filter1, filter2);
     else
       return factor * ret;
-  }
+  };
 }
 
 const nsITreeView = Ci.nsITreeView;
@@ -1755,11 +1755,11 @@ let treeView = {
     onChange();
   },
 
-  getCellValue: function() {return null},
-  getProgressMode: function() {return null},
-  getImageSrc: function() {return null},
-  isSeparator: function() {return false},
-  isEditable: function() {return false},
+  getCellValue: function() {return null;},
+  getProgressMode: function() {return null;},
+  getImageSrc: function() {return null;},
+  isSeparator: function() {return false;},
+  isEditable: function() {return false;},
   cycleCell: function() {},
   performAction: function() {},
   performActionOnRow: function() {},

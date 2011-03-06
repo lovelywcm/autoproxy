@@ -44,7 +44,7 @@ function init()
     group.appendChild(groupType);
     group.appendChild(groupTitle);
     groupType.setAttribute("value", subscription.typeDesc);
-    groupTitle.setAttribute("value", subscription.title);
+    groupTitle.setAttribute("value", subscription.title || aup.getString("unnamed"));
 
     menu.newList(group, selectedItem(subscription.proxy));
   }
@@ -100,7 +100,8 @@ function save()
 {
   var textboxs = document.getElementsByTagName("textbox");
   for (var j=0; j<textboxs.length; j++) {
-    filterStorage.subscriptions[j].title = textboxs[j].value;
+    filterStorage.subscriptions[j].title = (
+      textboxs[j].value == aup.getString("unnamed") ? "" : textboxs[j].value);
   }
 
   var menus = document.getElementsByTagName("menulist");

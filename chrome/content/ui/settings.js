@@ -3033,7 +3033,19 @@ function fillClickBehaviourPopup(e, isToolbar)
 
 function addRuleGroup()
 {
-  filterStorage.addSubscription(new aup.SpecialSubscription());
+  var isUsedTitle = new Array;
+  for each (var subscription in filterStorage.subscriptions) {
+    isUsedTitle[subscription.title] = true;
+  }
+
+  var title = "";
+  if (isUsedTitle[""] || isUsedTitle["undefined"]) {
+    for (title=2; true; title++) {
+      if (!isUsedTitle[title]) break;
+    }
+  }
+
+  filterStorage.addSubscription(new aup.SpecialSubscription(null, title));
   // @TODO: also add a directive comment rule to this group.
   // @TODO: group name: 1(omit), 2, 3...
 }

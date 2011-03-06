@@ -1,3 +1,5 @@
 <!ENTITY dialog.title      "Choose Proxy Server for Rule Groups">
 
 <!ENTITY default.label     "Default Proxy">
+
+<!ENTITY fallback.label     "Non-Matching">

@@ -1,3 +1,5 @@
 <!ENTITY dialog.title      "选择代理">
 
 <!ENTITY default.label     "默认代理">
+
+<!ENTITY fallback.label     "规则不匹配时">

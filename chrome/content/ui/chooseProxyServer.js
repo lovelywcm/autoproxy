@@ -43,7 +43,7 @@ function init()
 
     group.appendChild(groupType);
     group.appendChild(groupTitle);
-    groupType.setAttribute("value", subscription.typeDesc + ": ");
+    groupType.setAttribute("value", subscription.typeDesc);
     groupTitle.setAttribute("value", subscription.title);
 
     menu.newList(group, selectedItem(subscription.proxy));
@@ -80,7 +80,7 @@ var menu =
     if (isDefaultProxyPopup)
       this.menuList.firstChild.firstChild.hidden = true;
     else
-      this.newItem('默认代理');
+      this.newItem(aup.getString('defaultProxy'));
 
     this.menuList.selectedIndex = index;
   },

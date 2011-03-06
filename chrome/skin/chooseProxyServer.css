@@ -26,6 +26,15 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 @namespace html url("http://www.w3.org/1999/xhtml");
 
-#defaultProxy > label {
+row > label {
   text-align: right;
+}
+
+#defaultProxy > label, #fallbackProxy > label {
+  font-weight: bold;
+  font-size: 120%;
+}
+
+menulist {
+  min-width: 135px;
 }

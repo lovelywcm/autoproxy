@@ -52,7 +52,7 @@
     <menuseparator id="groupSeparator"/>
 
     <row id="fallbackProxy">
-      <label value="内置组：无规则匹配时"/>
+      <label value="&fallback.label;"/>
       <!-- fallback proxy menu list will be append here by JS -->
     </row>
     <menuseparator/>

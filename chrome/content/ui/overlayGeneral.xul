@@ -50,6 +50,7 @@
     </tooltip>
     <menupopup id="aup-status-popup">
       <menuitem id="aup-status-settings" label="&settings.label;..." accesskey="&settings.accesskey;" key="aup-key-settings" command="aup-command-settings"/>
+      <menuitem id="aup-status-report" label="&report.label;..." accesskey="&report.accesskey;" key="aup-key-report" command="aup-command-report"/>
       <menuitem id="aup-status-opensidebar" label="&opensidebar.label;" accesskey="&opensidebar.accesskey;" key="aup-key-sidebar" command="aup-command-sidebar"/>
       <menuitem id="aup-status-closesidebar" label="&closesidebar.label;" accesskey="&closesidebar.accesskey;" key="aup-key-sidebar" command="aup-command-sidebar"/>
       <menuseparator/>
@@ -72,6 +73,7 @@
   <commandset id="aup-commandset">
     <!-- Dummy oncommand attributes are work-arounds for bug 371900 -->
     <command id="aup-command-settings" oncommand="//"/>
+    <command id="aup-command-report" oncommand="//"/>
     <command id="aup-command-sidebar" oncommand="//"/>
     <command id="aup-command-contextmenu" oncommand="//"/>
     <command id="aup-command-modeauto" oncommand="//"/>

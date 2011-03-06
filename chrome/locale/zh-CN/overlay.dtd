@@ -12,6 +12,8 @@
 <!ENTITY sidebar.title "当前页面可代理的资源">
 <!ENTITY settings.label "首选项">
 <!ENTITY settings.accesskey "P">
+<!ENTITY report.label "向 gfwList 报告问题">
+<!ENTITY report.accesskey "R">
 <!ENTITY opensidebar.label "可代理资源列表">
 <!ENTITY opensidebar.accesskey "V">
 <!ENTITY closesidebar.label "关闭可代理资源列表">

@@ -37,6 +37,7 @@ let eventHandlers = [
   ["aup-status-popup", "popupshowing", aupFillPopup],
   ["aup-toolbar-popup", "popupshowing", aupFillPopup],
   ["aup-command-settings", "command", function() { aup.openSettingsDialog(); }],
+  ["aup-command-report", "command", report2gfwList],
   ["aup-command-sidebar", "command", toggleSidebar],
   ["aup-command-contextmenu", "command", function(e) {
     if (e.eventPhase == e.AT_TARGET) E("aup-status-popup").openPopupAtScreen(window.screen.width/2, window.screen.height/2, false); }],
@@ -520,36 +521,32 @@ function aupFillPopup(event)
       elements[RegExp.$1] = list[i];
 
 
-  //
-  // Fill "Preference" & "Sidebar" Menu Items
-  //
+  // Fill "Report to gfwList" Menu Items
+  elements.report.hidden = !aup.getSubscription("http://autoproxy-gfwlist.googlecode.com/svn/trunk/gfwlist.txt");
+
+
+  // Fill "Sidebar" Menu Items
   var sidebarOpen = aupIsSidebarOpen();
   elements.opensidebar.hidden = sidebarOpen;
   elements.closesidebar.hidden = !sidebarOpen;
 
 
-  //
   // Fill "Default Proxy" Menu Items
-  //
   var menu = popup.getElementsByTagName('menu')[0];
   while (menu.previousSibling.tagName != 'menuseparator')
     menu.parentNode.removeChild(menu.previousSibling);
 
-  var popup = proxy.validConfigs.length > 3 ? menu.firstChild : null;
+  popup = proxy.validConfigs.length > 3 ? menu.firstChild : null;
   makeProxyItems(popup, menu);
 
   menu.hidden = !popup;
 
 
-  //
   // Fill "Enable Proxy On" Menu Items
-  //
   enableProxyOn(elements.modeauto);
 
 
-  //
   // Fill "Proxy Mode" Menu Items
-  //
   elements.modeauto.setAttribute("checked", "auto" == prefs.proxyMode);
   elements.modeglobal.setAttribute("checked", "global" == prefs.proxyMode);
   elements.modedisabled.setAttribute("checked", "disabled" == prefs.proxyMode);
@@ -687,4 +684,9 @@ function makeProxyItems(popup, menu)
       menu = menu.previousSibling;
     menu.hidden = true;
   }
+}
+
+function report2gfwList()
+{
+  aup.loadInBrowser("https://gfwlist.autoproxy.org/report/?url=" + aupHooks.getBrowser().currentURI.spec);
 }

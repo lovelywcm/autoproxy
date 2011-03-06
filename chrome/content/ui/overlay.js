@@ -30,7 +30,7 @@ window.addEventListener("load", function()
   sandbox.document = document;
 
   let loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
-                         .getService(Components.interfaces.mozIJSSubScriptLoader)
+                         .getService(Components.interfaces.mozIJSSubScriptLoader);
   loader.loadSubScript("chrome://autoproxy/content/ui/utils.js", sandbox);
   loader.loadSubScript("chrome://autoproxy/content/ui/browserWindow.js", sandbox);
   loader.loadSubScript("chrome://autoproxy/content/ui/enableProxyOn.js", sandbox);

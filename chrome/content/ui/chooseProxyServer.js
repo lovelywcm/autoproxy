@@ -101,24 +101,7 @@ var menu =
     menuItem.setAttribute('label', proxyName);
     menu.menuList.firstChild.appendChild(menuItem);
   }
-}
-
-function defaultProxyforAll(init)
-{
-  if (!init) prefs.defaultProxyforAll = ! prefs.defaultProxyforAll;
-
-  var checkbox = document.getElementsByTagName('checkbox')[0];
-  checkbox.setAttribute('checked', prefs.defaultProxyforAll);
-
-  for ( var row=E('description'); row!=E('groupSeparator'); row=row.nextSibling )
-    for ( var node=row.firstChild; node; node=node.nextSibling )
-      node.setAttribute('disabled', prefs.defaultProxyforAll);
-
-  // not implemented, temporarily disable them
-  var menulists = document.getElementsByTagName('menulist');
-  for (var i=1; i<menulists.length; i++)
-    if (i != menulists.length-3) menulists[i].setAttribute('disabled', true);
-}
+};
 
 function save()
 {

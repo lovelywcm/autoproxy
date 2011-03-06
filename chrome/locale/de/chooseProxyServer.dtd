@@ -6,4 +6,3 @@
 <!ENTITY secondary.tip "Falls die Anfrage an den primären Proxy fehlschlägt, wird AutoProxy versuchen, eine zweite Anfrage über den sekundären Proxy zu starten">
 <!ENTITY advance.label "Erweitern">
 <!ENTITY default.label "Standard">
-<!ENTITY checkbox.label "Gleiche Einstellungen für alle Regelgruppen verwenden">

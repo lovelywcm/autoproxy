@@ -2,8 +2,6 @@
 
 <!ENTITY default.label     "Default Proxy">
 
-<!ENTITY checkbox.label    "Use default proxy for all rule groups">
-
 <!ENTITY http.label        "HTTP Proxy">
 
 <!ENTITY https.label       "HTTPS Proxy">

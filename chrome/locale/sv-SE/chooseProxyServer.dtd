@@ -2,8 +2,6 @@
 
 <!ENTITY default.label     "Standardproxyserver">
 
-<!ENTITY checkbox.label    "Använd standardproxyservern för alla regelgrupper">
-
 <!ENTITY http.label        "HTTP-proxyserver">
 
 <!ENTITY https.label       "HTTPS-proxyserver">

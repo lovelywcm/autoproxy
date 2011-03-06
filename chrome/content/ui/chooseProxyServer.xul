@@ -47,7 +47,6 @@
       <label value="&default.label;"/>
       <!-- menu list will be append here by JS -->
     </row>
-    <checkbox label="&checkbox.label;" oncommand="defaultProxyforAll()"/>
     <menuseparator/>
 
     <row id="description">

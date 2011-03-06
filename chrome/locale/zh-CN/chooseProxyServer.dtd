@@ -2,8 +2,6 @@
 
 <!ENTITY default.label     "默认代理">
 
-<!ENTITY checkbox.label    "所有的规则匹配时均使用默认代理">
-
 <!ENTITY http.label        "HTTP 代理">
 
 <!ENTITY https.label       "HTTPS 代理">

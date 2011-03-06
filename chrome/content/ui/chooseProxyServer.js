@@ -35,15 +35,12 @@ function init()
   menu.newList(E('defaultProxy'), prefs.defaultProxy, true);
 
   // one row per rule group
-  for each (let subscription in aup.filterStorage.subscriptions) {
+  for each (let subscription in filterStorage.subscriptions) {
     var row = cE('row');
     var groupName = cE('label');
     row.appendChild(groupName);
-    rows.insertBefore( row, E('groupSeparator') );
-
+    rows.insertBefore(row, E('groupSeparator'));
     groupName.setAttribute('value', subscription.typeDesc + ": " + subscription.title);
-
-    // Parameter given to menu.newList() is to mark this munu item as selected
     menu.newList(row, menuIndex(subscription.proxy));
   }
 
@@ -59,7 +56,7 @@ var menu =
    * Create a menu list with several menu items:
    *   "direct connect" item
    *    ....
-   *    several items according to how many proxies
+   *    several items according to how many proxy servers
    *    ...
    *   "default proxy" item
    *
@@ -70,8 +67,8 @@ var menu =
   newList: function(node, index, isDefaultProxyPopup)
   {
     this.menuList = cE('menulist');
-    this.menuList.appendChild( cE('menupopup') );
-    node.appendChild( this.menuList );
+    this.menuList.appendChild(cE('menupopup'));
+    node.appendChild(this.menuList);
 
     proxy.getName.forEach(this.newItem);
 
@@ -96,12 +93,17 @@ var menu =
 
 function save()
 {
-  prefs.defaultProxy = E('defaultProxy').lastChild.selectedIndex;
+  var menus = document.getElementsByTagName("menulist");
+  for (var i=0; i<menus.length; i++) {
+    var selected = menus[i].selectedIndex;
+    if (selected == proxy.server.length) { selected = -1; }
 
-  var fallbackId = E('fallbackProxy').firstChild.nextSibling.selectedIndex;
-  if ( fallbackId == proxy.server.length ) fallbackId = -1;
-  prefs.fallbackProxy = fallbackId;
+    if (i == 0) { prefs.defaultProxy = selected; }
+    else if (i == menus.length - 1) { prefs.fallbackProxy = selected; }
+    else {
+      filterStorage.subscriptions[i-1].proxy = selected;
+    }
+  }
 
-  // other configs are ignored, not implemented yet
   prefs.save();
 }

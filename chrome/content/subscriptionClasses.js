@@ -205,7 +205,7 @@ SpecialSubscription.prototype =
 {
   __proto__: Subscription.prototype,
 
-  _typeDescId: "filterlist_description",
+  _typeDescId: "customRuleGroup_description",
 
   makeNewSpecialUrl: function()
   {

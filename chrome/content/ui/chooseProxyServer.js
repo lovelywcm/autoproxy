@@ -36,11 +36,7 @@ function init()
     row.appendChild(groupName);
     rows.insertBefore( row, E('groupSeparator') );
 
-    groupName.setAttribute('value',
-      (subscription instanceof aup.RegularSubscription ?
-                          aup.getString('subscription_description') : '自定义：')
-      + subscription.title
-    );
+    groupName.setAttribute('value', subscription.typeDesc + ": " + subscription.title);
 
     // for http, https and ftp proxy, we need 3 menu lists per row
     // Parameter given to menu.newList() is to mark this munu item as selected
@@ -56,8 +52,6 @@ function init()
   // dummy, to be implemented
   menu.newList( E('fallbackProxy'), 0 );
   menu.newList( E('fallbackProxy'), 0 );
-
-  defaultProxyforAll(true);
 }
 
 var menu =

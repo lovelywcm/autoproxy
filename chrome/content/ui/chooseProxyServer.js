@@ -32,7 +32,7 @@ function init()
   };
 
   // row for setting default proxy
-  menu.newList( E('defaultProxy'), prefs.defaultProxy, true );
+  menu.newList(E('defaultProxy'), prefs.defaultProxy, true);
 
   // one row per rule group
   for each (let subscription in aup.filterStorage.subscriptions) {
@@ -45,14 +45,10 @@ function init()
 
     // Parameter given to menu.newList() is to mark this munu item as selected
     menu.newList(row, menuIndex(subscription.proxy));
-    menu.newList( row, proxy.server.length );
-    menu.newList( row, proxy.server.length );
   }
 
   // row for setting fallback proxy
   menu.newList(E('fallbackProxy'), menuIndex(prefs.fallbackProxy));
-  menu.newList( E('fallbackProxy'), 0 );
-  menu.newList( E('fallbackProxy'), 0 );
 }
 
 var menu =

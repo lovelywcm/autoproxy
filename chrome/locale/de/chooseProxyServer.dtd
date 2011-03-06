@@ -1,8 +1,1 @@
 <!ENTITY dialog.title "Proxy Server für verschiedene Gruppen auswählen">
-<!ENTITY groupName.label "Gruppenname">
-<!ENTITY primary.label "Primärer Proxy">
-<!ENTITY primary.accesskey "P">
-<!ENTITY secondary.label "Sekundärer Proxy">
-<!ENTITY secondary.tip "Falls die Anfrage an den primären Proxy fehlschlägt, wird AutoProxy versuchen, eine zweite Anfrage über den sekundären Proxy zu starten">
-<!ENTITY advance.label "Erweitern">
-<!ENTITY default.label "Standard">

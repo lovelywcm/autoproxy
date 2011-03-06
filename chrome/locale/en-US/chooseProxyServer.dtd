@@ -1,9 +1,3 @@
 <!ENTITY dialog.title      "Choose Proxy Server for Different Rule Groups">
 
 <!ENTITY default.label     "Default Proxy">
-
-<!ENTITY http.label        "HTTP Proxy">
-
-<!ENTITY https.label       "HTTPS Proxy">
-
-<!ENTITY ftp.label         "FTP/Gopher Proxy">

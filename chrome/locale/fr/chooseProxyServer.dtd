@@ -1,8 +1,2 @@
 <!ENTITY dialog.title "Choisir le serveur proxy pour les différents groupes de règles">
-<!ENTITY groupName.label "Nom de groupe">
-<!ENTITY primary.label "Proxy primaire">
-<!ENTITY primary.accesskey "p">
-<!ENTITY secondary.label "Proxy secondaire">
-<!ENTITY secondary.tip "S'il y a eu échec pour le proxy primaire, AutoProxy essaiera de refaire une requête vers le proxy secondaire.">
-<!ENTITY advance.label "Avancé">
 <!ENTITY default.label "Par défaut">

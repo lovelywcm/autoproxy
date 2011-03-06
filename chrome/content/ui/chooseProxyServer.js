@@ -26,26 +26,31 @@
 function init()
 {
   var rows = document.getElementsByTagName('rows')[0],
-  menuIndex = function(proxyValue)
+  selectedItem = function(proxyValue)
   {
     return (parseInt(proxyValue) + proxy.server.length + 1) % (proxy.server.length + 1);
   };
 
-  // row for setting default proxy
+  // menu list for setting default proxy
   menu.newList(E('defaultProxy'), prefs.defaultProxy, true);
 
   // one row per rule group
   for each (let subscription in filterStorage.subscriptions) {
-    var row = cE('row');
-    var groupName = cE('label');
-    row.appendChild(groupName);
-    rows.insertBefore(row, E('groupSeparator'));
-    groupName.setAttribute('value', subscription.typeDesc + ": " + subscription.title);
-    menu.newList(row, menuIndex(subscription.proxy));
+    var group      = cE("row"),
+        groupType  = cE("label"),
+        groupTitle = cE("textbox");
+    rows.insertBefore(group, E('groupSeparator'));
+
+    group.appendChild(groupType);
+    group.appendChild(groupTitle);
+    groupType.setAttribute("value", subscription.typeDesc + ": ");
+    groupTitle.setAttribute("value", subscription.title);
+
+    menu.newList(group, selectedItem(subscription.proxy));
   }
 
   // row for setting fallback proxy
-  menu.newList(E('fallbackProxy'), menuIndex(prefs.fallbackProxy));
+  menu.newList(E('fallbackProxy'), selectedItem(prefs.fallbackProxy));
 }
 
 var menu =
@@ -93,6 +98,11 @@ var menu =
 
 function save()
 {
+  var textboxs = document.getElementsByTagName("textbox");
+  for (var j=0; j<textboxs.length; j++) {
+    filterStorage.subscriptions[j].title = textboxs[j].value;
+  }
+
   var menus = document.getElementsByTagName("menulist");
   for (var i=0; i<menus.length; i++) {
     var selected = menus[i].selectedIndex;

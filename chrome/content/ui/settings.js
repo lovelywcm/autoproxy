@@ -1146,14 +1146,12 @@ function fillContext()
   if (selectedSubscription instanceof aup.RegularSubscription)
   {
     E("context-edit").hidden = true;
-    E("context-editsubscription").setAttribute("disabled", false);
     E("context-synchsubscription").hidden = false;
   }
   else
   {
     E("context-edit").hidden = false;
     E("context-edit").setAttribute("disabled", !(currentFilter instanceof aup.Filter));
-    E("context-editsubscription").setAttribute("disabled", currentFilter instanceof aup.Filter);
     E("context-synchsubscription").hidden = true;
   }
 

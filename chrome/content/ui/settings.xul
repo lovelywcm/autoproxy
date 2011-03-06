@@ -100,7 +100,7 @@
 <popupset id="aupPopups">
   <menupopup id="listitem-context" onpopupshowing="return fillContext()">
     <menuitem id="context-synchsubscription" label="&context.synchsubscription.label;" oncommand="synchSubscription(event.shiftKey)" key="synchsubscription-key" />
-    <menuitem id="context-editsubscription" label="&context.editsubscription.label;..." oncommand="editFilter('subscription')" key="edit-key"/>
+    <menuitem id="context-editsubscription" label="&context.editsubscription.label;..." oncommand="ruleGroupSettings()" key="edit-key"/>
     <menuitem id="context-edit" label="&context.edit.label;" oncommand="editFilter('filter')" key="edit-key"/>
     <menuitem id="context-resethitcount" label="&context.resethitcount.label;..." oncommand="resetHitCounts(false)"/>
     <menuitem id="context-moveup" label="&context.moveup.label;" oncommand="treeView.moveFilter(true)" key="moveup-key"/>

@@ -7,7 +7,6 @@ pref("extensions.autoproxy.defaulttoolbaraction", 0);
 pref("extensions.autoproxy.detachsidebar", false);
 pref("extensions.autoproxy.enable_key", "");
 pref("extensions.autoproxy.flash_scrolltoitem", true);
-pref("extensions.autoproxy.hideimagemanager", true);
 pref("extensions.autoproxy.middleClick_global", true);
 pref("extensions.autoproxy.patternsbackupinterval", 24);
 pref("extensions.autoproxy.patternsbackups", 5);

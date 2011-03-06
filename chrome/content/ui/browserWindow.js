@@ -269,42 +269,6 @@ function aupReloadPrefs() {
   updateElement(aupGetPaletteButton());
 }
 
-/**
- * Tests whether image manager context menu entry should be hidden with user's current preferences.
- * @return Boolean
- */
-function shouldHideImageManager()
-{
-  if (typeof arguments.callee._result != "undefined")
-    return arguments.callee._result;
-
-  let result = false;
-  if (prefs.hideimagemanager && "@mozilla.org/permissionmanager;1" in Cc)
-  {
-    try
-    {
-      result = true;
-      let enumerator = Cc["@mozilla.org/permissionmanager;1"].getService(Ci.nsIPermissionManager).enumerator;
-      while (enumerator.hasMoreElements())
-      {
-        let item = enumerator.getNext().QueryInterface(Ci.nsIPermission);
-        if (item.type == "image" && item.capability == Ci.nsIPermissionManager.DENY_ACTION)
-        {
-          result = false;
-          break;
-        }
-      }
-    }
-    catch(e)
-    {
-      result = false;
-    }
-  }
-
-  arguments.callee._result = result;
-  return result;
-}
-
 function aupConfigureKey(key, value) {
   var valid = {
     accel: "accel",

@@ -16,7 +16,7 @@
  * The Initial Developer of the Original Code is
  * Wang Congming <lovelywcm@gmail.com>.
  *
- * Portions created by the Initial Developer are Copyright (C) 2009-2010
+ * Portions created by the Initial Developer are Copyright (C) 2009-2011
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -25,11 +25,16 @@
 
 function init()
 {
+  var rows = document.getElementsByTagName('rows')[0],
+  menuIndex = function(proxyValue)
+  {
+    return (parseInt(proxyValue) + proxy.server.length + 1) % (proxy.server.length + 1);
+  };
+
   // row for setting default proxy
   menu.newList( E('defaultProxy'), prefs.defaultProxy, true );
 
   // one row per rule group
-  var rows = document.getElementsByTagName('rows')[0];
   for each (let subscription in aup.filterStorage.subscriptions) {
     var row = cE('row');
     var groupName = cE('label');
@@ -38,18 +43,14 @@ function init()
 
     groupName.setAttribute('value', subscription.typeDesc + ": " + subscription.title);
 
-    // for http, https and ftp proxy, we need 3 menu lists per row
     // Parameter given to menu.newList() is to mark this munu item as selected
-    // dummy, to be implemented
-    menu.newList( row, proxy.server.length );
+    menu.newList(row, menuIndex(subscription.proxy));
     menu.newList( row, proxy.server.length );
     menu.newList( row, proxy.server.length );
   }
 
   // row for setting fallback proxy
-  menu.newList( E('fallbackProxy'),
-        prefs.fallbackProxy == -1 ? proxy.server.length : prefs.fallbackProxy );
-  // dummy, to be implemented
+  menu.newList(E('fallbackProxy'), menuIndex(prefs.fallbackProxy));
   menu.newList( E('fallbackProxy'), 0 );
   menu.newList( E('fallbackProxy'), 0 );
 }

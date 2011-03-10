@@ -34,7 +34,7 @@ var proxy =
 {
   server: null,
   defaultProxy: null,
-  fallbackProxy: null,
+  direct: null,
 
   validConfigs: null,
   getName: null,
@@ -80,17 +80,7 @@ var proxy =
      */
     proxy.defaultProxy = proxy.server[prefs.defaultProxy] || proxy.server[1];
 
-    /**
-     * Refresh fallbackProxy (nsIProxyInfo)
-     *
-     * prefs.fallbackProxy:
-     *   -1: same as default proxy
-     *    0: direct
-     *   1 - customProxy/knownProxy.length: corresponding proxy
-     *   other: invalid, take 0 as it's value(direct connect)
-     */
-    if ( prefs.fallbackProxy == -1 ) proxy.fallbackProxy = proxy.defaultProxy;
-    else proxy.fallbackProxy = proxy.server[prefs.fallbackProxy] || proxy.server[0];
+    proxy.direct = proxy.server[0];
 
     pS.unregisterFilter(proxy);
     pS.registerFilter(proxy, 0);
@@ -150,11 +140,32 @@ var proxy =
   applyFilter: function(pS, uri, aProxy)
   {
     if (prefs.proxyMode == 'disabled' || uri.schemeIs('feed')) return this.server[0];
-    if (prefs.proxyMode == 'global') return this.defaultProxy;
 
     var match = policy.autoMatching(uri);
-    if (!match || match instanceof WhitelistFilter) return this.fallbackProxy;
 
+    if (prefs.proxyMode == 'auto') {
+      return this.getGroupProxy(match) || this.direct;
+    }
+
+    if (prefs.proxyMode == 'global') {
+      if (this.isNoProxy(match)) return this.direct;
+      return this.getGroupProxy(match) || this.defaultProxy;
+    }
+  },
+
+  isNoProxy: function(match)
+  {
+    if (match instanceof WhitelistFilter)
+      for each (var s in match.subscriptions)
+        if (!s.disabled && s.url == "~fl~")
+          return true;
+
+    return false;
+  },
+
+  getGroupProxy: function(match)
+  {
+    if (!match || match instanceof WhitelistFilter) return null;
     for each (var s in match.subscriptions)
       if (!s.disabled)
         if (s.proxy == "-1") return this.defaultProxy;

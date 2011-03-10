@@ -50,12 +50,6 @@
 
     <!-- rule groups will be append here by JS -->
     <menuseparator id="groupSeparator"/>
-
-    <row id="fallbackProxy">
-      <label value="&fallback.label;"/>
-      <!-- fallback proxy menu list will be append here by JS -->
-    </row>
-    <menuseparator/>
   </rows>
 </grid>
 </dialog>

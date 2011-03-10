@@ -48,9 +48,6 @@ function init()
 
     menu.newList(group, selectedItem(subscription.proxy));
   }
-
-  // row for setting fallback proxy
-  menu.newList(E('fallbackProxy'), selectedItem(prefs.fallbackProxy));
 }
 
 var menu =
@@ -109,12 +106,12 @@ function save()
     var selected = menus[i].selectedIndex;
     if (selected == proxy.server.length) { selected = -1; }
 
-    if (i == 0) { prefs.defaultProxy = selected; }
-    else if (i == menus.length - 1) { prefs.fallbackProxy = selected; }
+    if (i == 0) {
+      prefs.defaultProxy = selected;
+      prefs.save();
+    }
     else {
       filterStorage.subscriptions[i-1].proxy = selected;
     }
   }
-
-  prefs.save();
 }

@@ -105,7 +105,7 @@ var prefs = {
   // Loads a pref and stores it as a property of the object
   loadPref: function(pref) {
     try {
-      if(["customProxy", "fallbackProxy", "defaultProxy"].indexOf(pref[0]) > -1)
+      if(pref[0] == "customProxy")
         this[pref[0]] = decodeURI( this.branch["get" + pref[1] + "Pref"](pref[0]) );
       else this[pref[0]] = this.branch["get" + pref[1] + "Pref"](pref[0]);
     }
@@ -118,7 +118,7 @@ var prefs = {
   // Saves a property of the object into the corresponding pref
   savePref: function(pref) {
     try {
-      if(["customProxy", "fallbackProxy", "defaultProxy"].indexOf(pref[0]) > -1)
+      if(pref[0] == "customProxy")
         this.branch["set" + pref[1] + "Pref"]( pref[0], encodeURI(this[pref[0]]) );
       else this.branch["set" + pref[1] + "Pref"]( pref[0], this[pref[0]] );
     }

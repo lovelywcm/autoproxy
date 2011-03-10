@@ -25,11 +25,7 @@
 
 function init()
 {
-  var rows = document.getElementsByTagName('rows')[0],
-  selectedItem = function(proxyValue)
-  {
-    return (parseInt(proxyValue) + proxy.server.length + 1) % (proxy.server.length + 1);
-  };
+  var rows = document.getElementsByTagName('rows')[0];
 
   // menu list for setting default proxy
   menu.newList(E('defaultProxy'), prefs.defaultProxy, true);
@@ -46,7 +42,7 @@ function init()
     groupType.setAttribute("value", subscription.typeDesc);
     groupTitle.setAttribute("value", subscription.title || aup.getString("unnamed"));
 
-    menu.newList(group, selectedItem(subscription.proxy));
+    menu.newList(group, subscription.proxy + 1);
   }
 }
 
@@ -56,11 +52,9 @@ var menu =
 
   /**
    * Create a menu list with several menu items:
-   *   "direct connect" item
+   *   "default proxy" item
    *    ....
    *    several items according to how many proxy servers
-   *    ...
-   *   "default proxy" item
    *
    * @param node {DOM node}: which node should this new menu list append to
    * @param index {int}: which menu item should be selected by default
@@ -72,12 +66,10 @@ var menu =
     this.menuList.appendChild(cE('menupopup'));
     node.appendChild(this.menuList);
 
-    proxy.getName.forEach(this.newItem);
-
-    if (isDefaultProxyPopup)
-      this.menuList.firstChild.firstChild.hidden = true;
-    else
+    if (!isDefaultProxyPopup)
       this.newItem(aup.getString('defaultProxy'));
+
+    proxy.getName.forEach(this.newItem);
 
     this.menuList.selectedIndex = index;
   },
@@ -104,14 +96,12 @@ function save()
   var menus = document.getElementsByTagName("menulist");
   for (var i=0; i<menus.length; i++) {
     var selected = menus[i].selectedIndex;
-    if (selected == proxy.server.length) { selected = -1; }
-
     if (i == 0) {
       prefs.defaultProxy = selected;
       prefs.save();
     }
     else {
-      filterStorage.subscriptions[i-1].proxy = selected;
+      filterStorage.subscriptions[i-1].proxy = selected - 1;
     }
   }
 }

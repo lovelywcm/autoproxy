@@ -588,7 +588,6 @@ function aupExecuteAction(action, e)
     case 4: //cycle default proxy
       if (aup.proxyTipTimer) aup.proxyTipTimer.cancel();
       prefs.defaultProxy = ++prefs.defaultProxy % proxy.server.length;
-      if (prefs.defaultProxy == 0) prefs.defaultProxy = 1;
       prefs.save();
       //show tooltip
       let tooltip = E("showCurrentProxy");
@@ -638,15 +637,6 @@ function makeProxyItems(popup, menu)
       popup.appendChild(item);
     else
       menu.parentNode.insertBefore(item, menu);
-  }
-
-  // use 'direct connect' as default proxy is confusing, so hide it
-  if (popup)
-    popup.firstChild.hidden = true;
-  else {
-    while (menu.previousSibling.tagName != 'menuseparator')
-      menu = menu.previousSibling;
-    menu.hidden = true;
   }
 }
 

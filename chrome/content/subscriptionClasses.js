@@ -33,15 +33,15 @@
  *
  * @param {String} url    download location of the subscription
  * @param {String} title  title of the subscription
- * @param {String} proxy  which proxy should be used for this subscription,
- *          will be implicitly converted to {Integer}, see aup.proxy.server.
+ * @param {Integer} proxy  which proxy should be used for this subscription,
+ *              -1 means default proxy, others see aup.proxy.server.
  * @constructor
  */
 function Subscription(url, title, proxy)
 {
   this.url = url;
   this.title = title;
-  this.proxy = proxy || "-1";
+  this.proxy = (proxy === "") ? -1 : proxy;
   this.filters = [];
   Subscription.knownSubscriptions[url] = this;
 }

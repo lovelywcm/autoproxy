@@ -449,7 +449,7 @@ var filterStorage =
 
       let val = line.value;
       if (wantObj === true && /^(\w+)=(.*)$/.test(val))
-        curObj[RegExp.$1] = RegExp.$2;
+        curObj[RegExp.$1] = (RegExp.$1 == "proxy") ? parseInt(RegExp.$2) : RegExp.$2;
       else if (/^\s*\[(.+)\]\s*$/.test(val))
       {
         let newSection = RegExp.$1.toLowerCase();

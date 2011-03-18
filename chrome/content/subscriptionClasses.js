@@ -41,7 +41,7 @@ function Subscription(url, title, proxy)
 {
   this.url = url;
   this.title = title;
-  this.proxy = (proxy === "") ? -1 : proxy;
+  this.proxy = isNaN(proxy) ? -1 : proxy;
   this.filters = [];
   Subscription.knownSubscriptions[url] = this;
 }
@@ -98,7 +98,7 @@ Subscription.prototype =
     return aup.getString(this._typeDescId);
   },
 
-  set typeDesc()
+  set typeDesc(value)
   {
   }
 };

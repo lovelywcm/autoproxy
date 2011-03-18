@@ -96,6 +96,10 @@ Subscription.prototype =
   get typeDesc()
   {
     return aup.getString(this._typeDescId);
+  },
+
+  set typeDesc()
+  {
   }
 };
 aup.Subscription = Subscription;

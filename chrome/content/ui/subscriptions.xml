@@ -2,7 +2,7 @@
 
 <subscriptions>
   <subscription title="gfwList (P.R.China)"
-                url="http://autoproxy-gfwlist.googlecode.com/svn/trunk/gfwlist.txt"
+                url="https://autoproxy-gfwlist.googlecode.com/svn/trunk/gfwlist.txt"
                 homepage="http://autoproxy-gfwlist.googlecode.com/" />
 </subscriptions>
 

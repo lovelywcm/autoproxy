@@ -486,7 +486,14 @@ function aupFillPopup(event)
 
 
   // Fill "Report to gfwList" Menu Items
-  elements.report.hidden = !aup.getSubscription("http://autoproxy-gfwlist.googlecode.com/svn/trunk/gfwlist.txt");
+  function isGfwlistSubscribed()
+  {
+    for (var subscriptionUrl in filterStorage.knownSubscriptions)
+      if (subscriptionUrl.indexOf("gfwlist.txt") > 0)
+        return true;
+    return false;
+  }
+  elements.report.hidden = !isGfwlistSubscribed();
 
 
   // Fill "Sidebar" Menu Items

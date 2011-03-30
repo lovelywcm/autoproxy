@@ -106,6 +106,6 @@
         <toolbarbutton id="aup-sidebar-close" command="aup-command-sidebar" tooltiptext="&closesidebar.label;"/>
       </toolbar>
     </toolbox>
-    <iframe id="aup-sidebar-browser" flex="1"/>
+    <iframe id="aup-sidebar-browser" flex="1" src=""/>
   </vbox>
 </overlay>

@@ -29,11 +29,11 @@
  *
  * @param menuItem  document.getElementById
  */
-function enableProxyOn(menuItem)
+function enableProxyOn(menuItem, location)
 {
   // global, intended
   curItem = menuItem;
-  var location = aupHooks.getBrowser().currentURI;
+  location = location || aupHooks.getBrowser().currentURI;
 
   // remove previously created items
   while (curItem.previousSibling && curItem.previousSibling.className == 'enableProxyOn')

@@ -336,7 +336,7 @@ function fillInContext(/**Event*/ e)
   if (!item || ("tooltip" in item && !("filter" in item)))
     return false;
 
-  enableProxyOn(E('contextOpen'), item);
+  enableProxyOn(E('contextOpen'), aup.makeURL(item.location));
 
   E("contextCopyFilter").setAttribute("disabled", !allItems.some(function(item) {return "filter" in item && item.filter}));
 

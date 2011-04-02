@@ -46,7 +46,7 @@
   <label control="version" value="&version.title;"/>
   <textbox id="version" flex="1" class="plain" readonly="true" tabindex="-1"/>
 </hbox>
-<description id="description">&description;</description>
+<description id="slogan">&slogan;</description>
 
 <groupbox id="mainGroup">
   <hbox>

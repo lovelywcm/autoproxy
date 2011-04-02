@@ -17,7 +17,8 @@ locale  autoproxy de    chrome/locale/de/
 locale  autoproxy en-US chrome/locale/en-US/
 locale  autoproxy es-ES chrome/locale/es-ES/
 locale  autoproxy fr    chrome/locale/fr/
-locale  autoproxy pt-BR chrome/locale/zh-CN/
+locale  autoproxy pt-BR chrome/locale/pt-BR/
+locale  autoproxy sq-AL chrome/locale/sq-AL/
 locale  autoproxy sv-SE chrome/locale/sv-SE/
 locale  autoproxy zh-CN chrome/locale/zh-CN/
 

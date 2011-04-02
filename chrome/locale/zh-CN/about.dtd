@@ -1,7 +1,8 @@
 <!ENTITY dialog.title "关于 AutoProxy">
-<!ENTITY caption.title "AutoProxy">
 <!ENTITY version.title "版本">
-<!ENTITY description "撞墙已成往事！被墙网站自动代理，正常网站直接连接。">
-<!ENTITY homepage.label "AutoProxy 主页：">
+<!ENTITY description "翻墙于无形，撞墙已成往事！">
+<!ENTITY homepage.label "主页：">
 <!ENTITY author.label "作者：">
+<!ENTITY members.label "活跃团队成员：">
 <!ENTITY contributors.label "贡献者：">
+<!ENTITY translators.label "译者：">

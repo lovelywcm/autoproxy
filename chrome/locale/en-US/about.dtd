@@ -1,13 +1,11 @@
 <!ENTITY dialog.title       "About AutoProxy">
-
-<!ENTITY caption.title      "AutoProxy">
 <!ENTITY version.title      "Version">
-<!ENTITY description        "
-  AutoProxy allows you to decide which site will be proxyed while leaving others 
-  surfed directly. You don't need to switch the proxy status between enabled 
-  and disabled manually any more.
-">
 
-<!ENTITY homepage.label     "AutoProxy homepage:">
+<!--Note to translators: this slogan is not necessary to be translated literal, you are free to make it more localized (For example, show your opposition to network censorship, if appropriate).-->
+<!ENTITY description        "Proxy management made easy.">
+
+<!ENTITY homepage.label     "Homepage:">
 <!ENTITY author.label       "Author:">
+<!ENTITY members.label      "Active team members:">
 <!ENTITY contributors.label "Contributors:">
+<!ENTITY translators.label  "Translators:">

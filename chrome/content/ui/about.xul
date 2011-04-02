@@ -41,38 +41,50 @@
 <script type="application/x-javascript;version=1.7" src="utils.js"/>
 <script type="application/x-javascript;version=1.7" src="about.js"/>
 
-<description id="title" value="&caption.title;"/>
+<description id="title" value="AutoProxy"/>
 <hbox align="start">
   <label control="version" value="&version.title;"/>
   <textbox id="version" flex="1" class="plain" readonly="true" tabindex="-1"/>
 </hbox>
+<description id="description">&description;</description>
 
 <groupbox id="mainGroup">
-  <description id="description">
-    &description;
-  </description>
+  <hbox>
+    <label id="author" value="&author.label;"/>
+    <label id="authorName" value="WCM" onclick="aup.loadInBrowser('http://twitter.com/WCM')"/>
+  </hbox>
 
-  <description id="homepageTitle" value="&homepage.label;"/>
-  <description id="homepage" value="https://autoproxy.org/" onclick="aup.loadInBrowser(this.getAttribute('value'))"/>
+  <hbox>
+    <label id="homepage" value="&homepage.label;"/>
+    <label id="homepageLink" value="https://autoproxy.org/" onclick="aup.loadInBrowser(this.getAttribute('value'))"/>
+  </hbox>
 
-  <description id="authorTitle" value="&author.label;"/>
-  <description id="author" value="WCM @ Twitter, lovelywcm@Gmail.com"/>
+  <description id="members" value="&members.label;"/>
+  <hbox>
+    <label value="jimmy_xu_wrk" onclick="aup.loadInBrowser('http://twitter.com/jimmy_xu_wrk')"/>
+    <label value="mengxl" onclick="aup.loadInBrowser('http://twitter.com/mengxl')"/>
+    <label value="Ratoo" onclick="aup.loadInBrowser('http://twitter.com/Ratoo')"/>
+    <label value="slimx" onclick="aup.loadInBrowser('about:where should I link to? plz update yourself.')"/>
+  </hbox>
 
-  <description id="contributorsTitle" value="&contributors.label;"/>
-  <vbox id="contributorsBox">
-    <description value="Wladimir Palant - The Author of Adblock Plus"/>
-    <spacer height="15"/>
-    <description value="slimx - Co-developer"/>
-    <description value="blogtd@blogtd.org - Logo designer"/>
-    <description value="easthero - The first tweet &amp; blog report about AutoProxy"/>
-    <description value="jimmy_xu_wrk - @AutoProxy Twitter &amp; gfwList maintainer"/>
-    <description value="Ratoo - @AutoProxy Twitter account &amp; gfwList maintainer"/>
-    <spacer height="15"/>
+  <description id="contributors" value="&contributors.label;"/>
+  <vbox>
     <description value="Blackdire - Simplified Chinese translation of Adblock Plus"/>
-    <description value="Edgard Dias Magalhaes - Brazilian Portuguese translation"/>
-    <description value="Mikael Hiort af Ornäs - Swedish translation"/>
-    <description value="myahoo - French translation"/>
-    <description value="Omi - Spanish translation"/>
+    <description value="blogtd - Logo designer"/>
+    <description value="easthero - The first tweet &amp; blog report about AutoProxy"/>
+    <description value="Wladimir Palant - The Author of Adblock Plus"/>
+  </vbox>
+
+  <description id="translators" value="&translators.label;"/>
+  <vbox>
+    <description value="de (German): Sebastian Zartner"/>
+    <description value="en-US (English): WCM"/>
+    <description value="es-ES (Spanish): Omi"/>
+    <description value="fr (French): myahoo"/>
+    <description value="pt-BR (Brazilian Portuguese): Edgard Dias Magalhaes"/>
+    <description value="sq-AL (Albanian): Mustafi"/>
+    <description value="sv-SE (Swedish): Mikael Hiort af Ornäs"/>
+    <description value="zh-CN (Simplified Chinese): WCM"/>
   </vbox>
 </groupbox>
 

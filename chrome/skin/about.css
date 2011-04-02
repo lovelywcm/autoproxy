@@ -25,33 +25,25 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
 #title {
-  font-size: 400%;
+  font-size: 300%;
   font-weight: bold;
-}
-
-#mainGroup {
-  margin-top: 15px;
-}
-
-#homepageTitle, #authorTitle, #contributorsTitle {
-  font-weight: bold;
-}
-
-#description, #homepage, #author {
-  margin-bottom: 10px;
 }
 
 #description {
-  width: 450px;
+  margin: 5px 0;
 }
 
-#homepage {
+#author, #homepage, #members, #contributors, #translators {
+  font-weight: bold;
+}
+
+#members, #contributors, #translators {
+  margin-top: 15px;
+}
+
+#authorName, #homepageLink, #members + hbox > label {
   color: #0000E0;
   text-decoration: underline;
   cursor: pointer;
 }
 
-#contributorsBox {
-  height: 200px;
-  overflow: auto;
-}

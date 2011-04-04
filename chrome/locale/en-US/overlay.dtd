@@ -25,7 +25,4 @@
 <!ENTITY closesidebar.label     "Close proxyable items">
 <!-- Note: This access key should usually be the same as opensidebar.accesskey. It is the same menu item with different label depending on whether the sidebar is currently open.-->
 <!ENTITY closesidebar.accesskey "V">
-
-<!ENTITY objecttab.title        "Proxy">
-<!ENTITY objecttab.tooltip      "Click here to proxy this object with AutoProxy">
 <!ENTITY switchProxy.label      "Default proxy: ">

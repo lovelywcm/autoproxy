@@ -11,5 +11,3 @@
 <!ENTITY sidebar.title "Objekte der aktuellen Seite, die via Proxy geladen werden können">
 <!ENTITY settings.label "Einstellungen">
 <!ENTITY closesidebar.label "Proxy-bare Objekte schließen">
-<!ENTITY objecttab.title "Proxy">
-<!ENTITY objecttab.tooltip "Hier klicken, um dieses Objekt mit AutoProxy via Proxy zu laden">

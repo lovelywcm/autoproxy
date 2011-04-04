@@ -11,5 +11,3 @@
 <!ENTITY sidebar.title "Éléments proxyable de la page actuelle">
 <!ENTITY settings.label "Préférences">
 <!ENTITY closesidebar.label "Fermer les éléments proxyables">
-<!ENTITY objecttab.title "Proxy">
-<!ENTITY objecttab.tooltip "Cliquez ici pour utiliser un proxy avec AutoProxy">

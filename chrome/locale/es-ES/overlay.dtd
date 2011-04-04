@@ -14,6 +14,4 @@
 <!ENTITY report.label "Enviar a gfwList">
 <!ENTITY report.accesskey "R">
 <!ENTITY closesidebar.label "Cerrar elementos pasables por proxy">
-<!ENTITY objecttab.title "Proxy">
-<!ENTITY objecttab.tooltip "Pincha aquí para pasar por proxy este objeto con AutoProxy">
 <!ENTITY switchProxy.label "Proxy por defecto:">

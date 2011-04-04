@@ -14,6 +14,4 @@
 <!ENTITY report.label "Relatório para gfwList">
 <!ENTITY report.accesskey "R">
 <!ENTITY closesidebar.label "Fechar itens bloqueáveis pelo proxy">
-<!ENTITY objecttab.title "Proxy">
-<!ENTITY objecttab.tooltip "Clique aqui para referir este objeto ao proxy com o AutoProxy">
 <!ENTITY switchProxy.label "Proxy padrão:">

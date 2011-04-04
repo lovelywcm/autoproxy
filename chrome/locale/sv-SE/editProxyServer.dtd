@@ -15,8 +15,16 @@
 <!ENTITY warning.text "Varning: Du har valt att ta bort alla proxyservrar.
 
 
+
+
+
+
  Kom ihåg att lägga till en ny proxyserver, annars kommer inte AutoProxy att fungera.">
 <!ENTITY note.text "Obs: Du har valt att ta bort standardproxyn. Kom ihåg att ange en ny
+
+
+
+
 
 
  standardproxyserver (via &quot;Välj proxyserver&quot;-menyn), annars fungerar kanske inte AutoProxy.">

@@ -11,13 +11,9 @@
 <!ENTITY context.frame.label "Moldura do proxy">
 <!ENTITY sidebar.title "Itens bloqueáveis pelo proxy nesta página">
 <!ENTITY settings.label "Preferências">
-<!ENTITY settings.accesskey "F">
 <!ENTITY report.label "Relatório para gfwList">
 <!ENTITY report.accesskey "R">
-<!ENTITY opensidebar.label "Abrir itens bloqueáveis pelo proxy">
-<!ENTITY opensidebar.accesskey "B">
 <!ENTITY closesidebar.label "Fechar itens bloqueáveis pelo proxy">
-<!ENTITY closesidebar.accesskey "B">
 <!ENTITY objecttab.title "Proxy">
 <!ENTITY objecttab.tooltip "Clique aqui para referir este objeto ao proxy com o AutoProxy">
 <!ENTITY switchProxy.label "Proxy padrão:">

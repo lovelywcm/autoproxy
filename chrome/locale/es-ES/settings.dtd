@@ -1,7 +1,6 @@
 <!ENTITY dialog.title "Preferencias de AutoProxy">
 <!ENTITY filters.label "Regla Proxy">
 <!ENTITY filters.accesskey "R">
-<!ENTITY add.label "Añadir regla">
 <!ENTITY add.accesskey "A">
 <!ENTITY addRuleGroup.label "Añadir grupo de reglas">
 <!ENTITY addRuleGroup.accesskey "G">
@@ -21,7 +20,6 @@
 <!ENTITY proxies.accesskey "S">
 <!ENTITY editproxies.label "Editar servidor proxy">
 <!ENTITY editproxies.accesskey "E">
-<!ENTITY chooseproxies.label "Choose proxy server">
 <!ENTITY chooseproxies.accesskey "C">
 <!ENTITY edit.label "Editar">
 <!ENTITY edit.accesskey "E">
@@ -53,7 +51,6 @@
 <!ENTITY mode.auto.accesskey "A">
 <!ENTITY mode.global.label "Modo global">
 <!ENTITY mode.global.accesskey "G">
-<!ENTITY mode.disabled.label "Desactivar AutoProxy">
 <!ENTITY mode.disabled.accesskey "D">
 <!ENTITY showintoolbar.label "Mostrar en la barra de tareas">
 <!ENTITY showintoolbar.accesskey "B">
@@ -83,7 +80,6 @@
 <!ENTITY context.edit.label "Editar regla">
 <!ENTITY context.resethitcount.label "Reiniciar contador estadístico para la regla">
 <!ENTITY context.synchsubscription.label "Actualizar la subscripción ahora">
-<!ENTITY context.editsubscription.label "Editar subscripción">
 <!ENTITY context.moveup.label "Subir regla">
 <!ENTITY context.movedown.label "Bajar regla">
 <!ENTITY context.movegroupup.label "Subir grupo">

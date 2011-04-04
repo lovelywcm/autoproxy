@@ -10,10 +10,6 @@
 <!ENTITY context.frame.label "Cade du proxy">
 <!ENTITY sidebar.title "Éléments proxyable de la page actuelle">
 <!ENTITY settings.label "Préférences">
-<!ENTITY settings.accesskey "f">
-<!ENTITY opensidebar.label "Ouvrir les éléments proxyables">
-<!ENTITY opensidebar.accesskey "B">
 <!ENTITY closesidebar.label "Fermer les éléments proxyables">
-<!ENTITY closesidebar.accesskey "B">
 <!ENTITY objecttab.title "Proxy">
 <!ENTITY objecttab.tooltip "Cliquez ici pour utiliser un proxy avec AutoProxy">

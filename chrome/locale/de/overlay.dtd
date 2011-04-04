@@ -10,10 +10,6 @@
 <!ENTITY context.frame.label "Proxy Frame">
 <!ENTITY sidebar.title "Objekte der aktuellen Seite, die via Proxy geladen werden können">
 <!ENTITY settings.label "Einstellungen">
-<!ENTITY settings.accesskey "s">
-<!ENTITY opensidebar.label "Proxy-bare Objekte öffnen">
-<!ENTITY opensidebar.accesskey "f">
 <!ENTITY closesidebar.label "Proxy-bare Objekte schließen">
-<!ENTITY closesidebar.accesskey "s">
 <!ENTITY objecttab.title "Proxy">
 <!ENTITY objecttab.tooltip "Hier klicken, um dieses Objekt mit AutoProxy via Proxy zu laden">

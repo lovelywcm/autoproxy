@@ -1,9 +1,5 @@
 <!ENTITY dialog.title       "About AutoProxy">
 <!ENTITY version.title      "Version">
-
-<!--Note to translators: this slogan is not necessary to be translated literal, you are free to make it more localized (For example, show your opposition to network censorship, if appropriate).-->
-<!ENTITY slogan             "Proxy management made easy.">
-
 <!ENTITY homepage.label     "Homepage:">
 <!ENTITY author.label       "Author:">
 <!ENTITY members.label      "Active team members:">

@@ -35,18 +35,14 @@
   title="&dialog.title;"
   id="AutoProxyAboutWindow"
   windowtype="aup:about"
-  onload="fillInVersion()"
   buttons="accept">
-
-<script type="application/x-javascript;version=1.7" src="utils.js"/>
-<script type="application/x-javascript;version=1.7" src="about.js"/>
 
 <description id="title" value="AutoProxy"/>
 <hbox align="start">
   <label control="version" value="&version.title;"/>
   <textbox id="version" flex="1" class="plain" readonly="true" tabindex="-1"/>
 </hbox>
-<description id="slogan">&slogan;</description>
+<description id="slogan"></description>
 
 <groupbox id="mainGroup">
   <hbox>
@@ -87,5 +83,8 @@
     <description value="zh-CN (Simplified Chinese): WCM"/>
   </vbox>
 </groupbox>
+
+<script type="application/x-javascript;version=1.7" src="utils.js"/>
+<script type="application/x-javascript;version=1.7" src="about.js"/>
 
 </dialog>

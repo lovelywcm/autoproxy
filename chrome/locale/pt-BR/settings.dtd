@@ -1,6 +1,10 @@
 <!ENTITY dialog.title "Preferências do AutoProxy">
 <!ENTITY filters.label "Regra do Proxy">
 <!ENTITY filters.accesskey "R">
+<!ENTITY add.label "Acrescentar regra">
+<!ENTITY add.accesskey "A">
+<!ENTITY addRuleGroup.label "Adicionar grupo de regras">
+<!ENTITY addRuleGroup.accesskey "G">
 <!ENTITY addsubscription.label "Acrescentar assinatura de regra">
 <!ENTITY addsubscription.accesskey "S">
 <!ENTITY synchsubscriptions.label "Atualizar todas as assinaturas">
@@ -49,6 +53,7 @@
 <!ENTITY mode.auto.accesskey "A">
 <!ENTITY mode.global.label "Global Mode">
 <!ENTITY mode.global.accesskey "G">
+<!ENTITY mode.disabled.label "Disable AutoProxy">
 <!ENTITY mode.disabled.accesskey "D">
 <!ENTITY showintoolbar.label "Exibir na barra de ferramentas">
 <!ENTITY showintoolbar.accesskey "B">
@@ -78,6 +83,7 @@
 <!ENTITY context.edit.label "Editar regra">
 <!ENTITY context.resethitcount.label "Zerar as estatísticas de hit para regras">
 <!ENTITY context.synchsubscription.label "Atualizar assinatura agora">
+<!ENTITY context.editsubscription.label "Editar assinatura">
 <!ENTITY context.moveup.label "Mover regra para cima">
 <!ENTITY context.movedown.label "Mover regra para baixo">
 <!ENTITY context.movegroupup.label "Mover grupo para cima">
@@ -86,3 +92,11 @@
 <!ENTITY context.disable.label "Desativar">
 <!ENTITY apply.label "Aplicar">
 <!ENTITY apply.accesskey "P">
+<!ENTITY changeStatusClickBehaviour.label "Comportamento do clique no ícone da barra de status">
+<!ENTITY changeToolbarClickBehaviour.label "Comportamento do clique no ícone da barra de ferramentas">
+<!ENTITY changeClickBehaviour_context "Menu de contexto">
+<!ENTITY changeClickBehaviour_proxyMenu "Menu Proxy">
+<!ENTITY changeClickBehaviour_cycleProxy "Ciclo do Proxy">
+<!ENTITY changeClickBehaviour_quickAdd "Filtro de adição rápida">
+<!ENTITY changeClickBehaviour_preference "Preferência">
+<!ENTITY changeClickBehaviour_proxyable "Itens Submetidos ao Proxy">

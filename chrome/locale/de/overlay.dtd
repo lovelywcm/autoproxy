@@ -15,6 +15,5 @@
 <!ENTITY opensidebar.accesskey "f">
 <!ENTITY closesidebar.label "Proxy-bare Objekte schließen">
 <!ENTITY closesidebar.accesskey "s">
-<!ENTITY whitelist.site.label "Proxy deaktivieren für --">
 <!ENTITY objecttab.title "Proxy">
 <!ENTITY objecttab.tooltip "Hier klicken, um dieses Objekt mit AutoProxy via Proxy zu laden">

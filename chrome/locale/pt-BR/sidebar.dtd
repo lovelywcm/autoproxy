@@ -19,11 +19,6 @@
 <!ENTITY tooltip.docDomain.label "Document source:">
 <!ENTITY tooltip.filter.label "Regra em uso:">
 <!ENTITY tooltip.filterSource.label "Fonte da regra:">
-<!ENTITY context.block.label "Filtrar este item">
-<!ENTITY context.editfilter.label "Editar regra em uso">
-<!ENTITY context.whitelist.label "Acrescentar regra de exceção para item">
-<!ENTITY context.disablefilter.label "Desativar regra --">
-<!ENTITY context.enablefilter.label "Reativar regra --">
 <!ENTITY context.disablefilteronsite.label "Desativar esta regra em --">
 <!ENTITY context.enablefilteronsite.label "Reativar regra em --">
 <!ENTITY context.open.label "Abrir em nova aba">

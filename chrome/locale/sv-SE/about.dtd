@@ -1,7 +1,8 @@
-<!ENTITY dialog.title       "Om AutoProxy">
-
-<!ENTITY caption.title      "AutoProxy">
-<!ENTITY version.title      "Version">
-<!ENTITY homepage.label     "AutoProxys webbplats:">
-<!ENTITY author.label       "Skapat av:">
+<!ENTITY dialog.title "Om AutoProxy">
+<!ENTITY version.title "Version">
+<!ENTITY slogan "Proxyhantering när den är som enklast.">
+<!ENTITY homepage.label "AutoProxys webbplats:">
+<!ENTITY author.label "Skapat av:">
+<!ENTITY members.label "Aktiva utvecklingsgruppmedlemmar:">
 <!ENTITY contributors.label "Medarbetare:">
+<!ENTITY translators.label "Översättare:">

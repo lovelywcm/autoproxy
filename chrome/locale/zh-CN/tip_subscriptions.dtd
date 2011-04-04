@@ -1,3 +1,4 @@
+<!ENTITY welcome.title "Welcome to AutoProxy">
 <!ENTITY subscribe.title "添加 AutoProxy 规则订阅">
 <!ENTITY description.par1 "感谢您安装 AutoProxy。这个扩展可以帮助您自动、高效地使用代理。当然，高效的代理管理需要定义一些好的规则。您可以自己定义，也可以简单地订阅其他人已经定义好的规则列表。">
 <!ENTITY description.par2 "订阅之后，您仍然可以定义自己的规则，或者添加／删除订阅。">
@@ -13,4 +14,3 @@
 <!ENTITY defaultBtn.custom "自定义">
 <!ENTITY acceptBtn.label "订阅">
 <!ENTITY acceptBtn.accesskey "S">
-<!ENTITY welcome.title         "Welcome to AutoProxy">

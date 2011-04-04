@@ -19,11 +19,6 @@
 <!ENTITY tooltip.docDomain.label "Dokumentquelle:">
 <!ENTITY tooltip.filter.label "Angewandte Regel:">
 <!ENTITY tooltip.filterSource.label "Regelquelle:">
-<!ENTITY context.block.label "Dieses Objekt via Proxy laden">
-<!ENTITY context.editfilter.label "Angewandte Regel bearbeiten">
-<!ENTITY context.whitelist.label "Kein-Proxy Regel für dieses Objekt hinzufügen">
-<!ENTITY context.disablefilter.label "Regel -- deaktivieren">
-<!ENTITY context.enablefilter.label "Regel -- aktivieren">
 <!ENTITY context.disablefilteronsite.label "Diese Regel für -- deaktivieren">
 <!ENTITY context.enablefilteronsite.label "Diese Regel für -- aktivieren">
 <!ENTITY context.open.label "In neuem Tab öffnen">

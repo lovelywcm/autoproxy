@@ -13,7 +13,11 @@
 <!ENTITY resetButton.label "Reset to default">
 <!ENTITY resetButton.accesskey "R">
 <!ENTITY warning.text "Warning: you chose to delete all proxies, please
+
+
  remember to add a new proxy, or AutoProxy will not work.">
 <!ENTITY note.text "Note: you chose to delete the default proxy, please remember to set a new
+
+
  default proxy(by &quot;Choose proxy server&quot; menu), or AutoProxy may not work.">
 <!ENTITY tip.text "Tip: Click the &quot;Cancel&quot; button can undo previous operation.">

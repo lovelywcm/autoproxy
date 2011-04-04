@@ -1,3 +1,2 @@
-<!ENTITY dialog.title      "选择代理">
-
-<!ENTITY default.label     "默认代理">
+<!ENTITY dialog.title "选择代理">
+<!ENTITY default.label "默认代理">

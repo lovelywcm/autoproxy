@@ -60,7 +60,7 @@
   <!-- Toolbar -->
   <toolbarpalette id="BrowserToolbarPalette">
     <toolbarbutton id="aup-toolbarbutton" type="menu-button" insertbefore="print-button"
-        class="chromeclass-toolbar-additional"/>
+        class="chromeclass-toolbar-additional toolbarbutton-1"/>
   </toolbarpalette>
 
   <!-- Tools menu -->

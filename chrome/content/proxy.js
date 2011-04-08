@@ -66,6 +66,10 @@ var proxy =
     proxy.defaultProxy = proxy.server[prefs.defaultProxy] || proxy.server[0];
     proxy.nameOfDefaultProxy = proxy.getName[prefs.defaultProxy] || proxy.getName[0];
 
+    // Refresh fallbackProxy {nsIProxyInfo}
+    proxy.fallbackProxy = prefs.fallbackProxy == -1 ?
+           proxy.direct : proxy.server[prefs.fallbackProxy];
+
     pS.unregisterFilter(proxy);
     pS.registerFilter(proxy, 0);
   },
@@ -123,13 +127,19 @@ var proxy =
   //
   applyFilter: function(pS, uri, aProxy)
   {
-    if (prefs.proxyMode == 'disabled' || uri.schemeIs('feed')) return this.direct;
+    if (prefs.proxyMode == 'disabled' || uri.schemeIs('feed'))
+      return this.direct;
 
     var match = policy.autoMatching(uri);
-    return this.getGroupProxy(match) ||
-      (prefs.proxyMode == 'auto' || this.isNoProxy(match) ? this.direct : this.defaultProxy);
+
+    if (this.isNoProxy(match)) return this.direct;
+    if (prefs.proxyMode == "auto")
+      return this.getGroupProxy(match) || this.fallbackProxy;
+
+    return this.defaultProxy;
   },
 
+  // @todo: bug, whitelist in other group may overwrite "global no proxy" group
   isNoProxy: function(match)
   {
     if (match instanceof WhitelistFilter)

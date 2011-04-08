@@ -19,11 +19,6 @@
 <!ENTITY tooltip.docDomain.label "Document source:">
 <!ENTITY tooltip.filter.label "Règle effective :">
 <!ENTITY tooltip.filterSource.label "Source de la règle :">
-<!ENTITY context.block.label "Utiliser le proxy pour cet élément">
-<!ENTITY context.editfilter.label "Éditer la règle utilisée">
-<!ENTITY context.whitelist.label "Ajouter la règle « pas de proxy » pour l'élément">
-<!ENTITY context.disablefilter.label "Désactiver la règle --">
-<!ENTITY context.enablefilter.label "Réactiver la règle --">
 <!ENTITY context.disablefilteronsite.label "Désactiver cette règle pour --">
 <!ENTITY context.enablefilteronsite.label "Réactiver la règle pour --">
 <!ENTITY context.open.label "Ouvrir dans un nouvel onglet">

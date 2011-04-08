@@ -22,10 +22,11 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-function fillInVersion() {
-  var versionField = document.getElementById("version");
-  versionField.value = aup.getInstalledVersion();
+var versionField = document.getElementById("version"),
+    sloganField  = document.getElementById("slogan");
 
-  // Work-around for bug 494901, change align attribute to ensure correct positioning
-  versionField.parentNode.setAttribute("align", "baseline");
-}
+versionField.value = aup.getInstalledVersion();
+sloganField.value = aup.getString("extensions.autoproxy@autoproxy.org.description");
+
+// Work-around for bug 494901, change align attribute to ensure correct positioning
+versionField.parentNode.setAttribute("align", "baseline");

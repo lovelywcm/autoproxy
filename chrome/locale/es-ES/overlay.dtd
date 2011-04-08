@@ -1,4 +1,5 @@
 <!ENTITY status.tooltip "Estado:">
+<!ENTITY defaultProxy.tooltip "Proxy por defecto:">
 <!ENTITY blocked.tooltip "Elementos pasados por proxy en esta página:">
 <!ENTITY filters.tooltip "Reglas más activas:">
 <!ENTITY menuitem.label "Preferencias de AutoProxy">
@@ -10,11 +11,7 @@
 <!ENTITY context.frame.label "Marco Proxy">
 <!ENTITY sidebar.title "Elementos pasables por proxy en la página actual">
 <!ENTITY settings.label "Preferencias">
-<!ENTITY settings.accesskey "F">
-<!ENTITY opensidebar.label "Abrir elementos pasables por proxy">
-<!ENTITY opensidebar.accesskey "B">
+<!ENTITY report.label "Enviar a gfwList">
+<!ENTITY report.accesskey "R">
 <!ENTITY closesidebar.label "Cerrar elementos pasables por proxy">
-<!ENTITY closesidebar.accesskey "B">
-<!ENTITY whitelist.site.label "Desactivar en --">
-<!ENTITY objecttab.title "Proxy">
-<!ENTITY objecttab.tooltip "Pincha aquí para pasar por proxy este objeto con AutoProxy">
+<!ENTITY switchProxy.label "Proxy por defecto:">

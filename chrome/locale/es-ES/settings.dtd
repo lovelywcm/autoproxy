@@ -1,6 +1,9 @@
 <!ENTITY dialog.title "Preferencias de AutoProxy">
 <!ENTITY filters.label "Regla Proxy">
 <!ENTITY filters.accesskey "R">
+<!ENTITY add.accesskey "A">
+<!ENTITY addRuleGroup.label "Añadir grupo de reglas">
+<!ENTITY addRuleGroup.accesskey "G">
 <!ENTITY addsubscription.label "Añadir subscripción de regla">
 <!ENTITY addsubscription.accesskey "S">
 <!ENTITY synchsubscriptions.label "Actualizar todas las subscripciones">
@@ -17,7 +20,6 @@
 <!ENTITY proxies.accesskey "S">
 <!ENTITY editproxies.label "Editar servidor proxy">
 <!ENTITY editproxies.accesskey "E">
-<!ENTITY chooseproxies.label "Choose proxy server">
 <!ENTITY chooseproxies.accesskey "C">
 <!ENTITY edit.label "Editar">
 <!ENTITY edit.accesskey "E">
@@ -86,3 +88,11 @@
 <!ENTITY context.disable.label "Desactivar">
 <!ENTITY apply.label "Aplicar">
 <!ENTITY apply.accesskey "P">
+<!ENTITY changeStatusClickBehaviour.label "Pinche en Comportamiento del icono de estado">
+<!ENTITY changeToolbarClickBehaviour.label "Pinche en Comportamiento de la barra de iconos">
+<!ENTITY changeClickBehaviour_context "Menú contextual">
+<!ENTITY changeClickBehaviour_proxyMenu "Menú proxy">
+<!ENTITY changeClickBehaviour_cycleProxy "Ciclo de proxy">
+<!ENTITY changeClickBehaviour_quickAdd "Añadir filtro rápidamente">
+<!ENTITY changeClickBehaviour_preference "Preferencia">
+<!ENTITY changeClickBehaviour_proxyable "Elementos enrutables">

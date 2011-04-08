@@ -1,4 +1,5 @@
 <!ENTITY status.tooltip "Status:">
+<!ENTITY defaultProxy.tooltip "Proxy padrão:">
 <!ENTITY blocked.tooltip "Itens bloqueados pelo proxy nesta página:">
 <!ENTITY filters.tooltip "Regras mais ativas:">
 <!ENTITY menuitem.label "Preferências do AutoProxy">
@@ -10,11 +11,7 @@
 <!ENTITY context.frame.label "Moldura do proxy">
 <!ENTITY sidebar.title "Itens bloqueáveis pelo proxy nesta página">
 <!ENTITY settings.label "Preferências">
-<!ENTITY settings.accesskey "F">
-<!ENTITY opensidebar.label "Abrir itens bloqueáveis pelo proxy">
-<!ENTITY opensidebar.accesskey "B">
+<!ENTITY report.label "Relatório para gfwList">
+<!ENTITY report.accesskey "R">
 <!ENTITY closesidebar.label "Fechar itens bloqueáveis pelo proxy">
-<!ENTITY closesidebar.accesskey "B">
-<!ENTITY whitelist.site.label "Desabilitar em --">
-<!ENTITY objecttab.title "Proxy">
-<!ENTITY objecttab.tooltip "Clique aqui para referir este objeto ao proxy com o AutoProxy">
+<!ENTITY switchProxy.label "Proxy padrão:">

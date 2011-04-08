@@ -1,6 +1,6 @@
 <!ENTITY dialog.title "Sobre AutoProxy">
-<!ENTITY caption.title "AutoProxy">
 <!ENTITY version.title "Versión">
-<!ENTITY homepage.label "Página web de AutoProxy:">
 <!ENTITY author.label "Autor:">
+<!ENTITY members.label "Miembros del equipo:">
 <!ENTITY contributors.label "Colaboradores:">
+<!ENTITY translators.label "Traductores:">

@@ -1,30 +1,17 @@
-<!ENTITY dialog.title            "编辑代理服务器">
-
-<!ENTITY name.label              "给它取个名字:">
-
-<!ENTITY host.label              "代理主机:">
-
-<!ENTITY port.label              "端口:">
-
-<!ENTITY http.label              "http">
-
-<!ENTITY socks4.label            "socks4">
-
-<!ENTITY socks5.label            "socks5">
-
-<!ENTITY delete.label            "删除">
-
-<!ENTITY addButton.label         "添加代理">
-<!ENTITY addButton.accesskey     "A">
-
-<!ENTITY delButton.label         "删除代理">
-<!ENTITY delButton.accesskey     "D">
-
-<!ENTITY resetButton.label       "重置为默认设置">
-<!ENTITY resetButton.accesskey   "R">
-
-<!ENTITY warning.text            "警告：您把所有的代理都删除了。如果不添加新的代理，我就罢工！">
-
-<!ENTITY note.text               "注意：您删除了默认的代理。请记得设置一个新的默认代理（在“选择代理服务器”菜单中），否则 AutoProxy 可能不会正常工作。">
-
-<!ENTITY tip.text                "提示：如果您想反悔的话，就点击“取消”按钮吧~。">
+<!ENTITY dialog.title "编辑代理服务器">
+<!ENTITY name.label "给它取个名字:">
+<!ENTITY host.label "代理主机:">
+<!ENTITY port.label "端口:">
+<!ENTITY http.label "http">
+<!ENTITY socks4.label "socks4">
+<!ENTITY socks5.label "socks5">
+<!ENTITY delete.label "删除">
+<!ENTITY addButton.label "添加代理">
+<!ENTITY addButton.accesskey "A">
+<!ENTITY delButton.label "删除代理">
+<!ENTITY delButton.accesskey "D">
+<!ENTITY resetButton.label "重置为默认设置">
+<!ENTITY resetButton.accesskey "R">
+<!ENTITY warning.text "警告：您把所有的代理都删除了。如果不添加新的代理，我就罢工！">
+<!ENTITY note.text "注意：您删除了默认的代理。请记得设置一个新的默认代理（在“选择代理服务器”菜单中），否则 AutoProxy 可能不会正常工作。">
+<!ENTITY tip.text "提示：如果您想反悔的话，就点击“取消”按钮吧~。">

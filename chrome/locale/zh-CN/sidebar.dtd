@@ -8,6 +8,7 @@
 <!ENTITY filter.label "规则">
 <!ENTITY state.label "状态">
 <!ENTITY size.label "大小">
+<!ENTITY docDomain.label "引用来源">
 <!ENTITY noitems.label "没有可代理的项目">
 <!ENTITY whitelisted.label "禁止使用代理的项目">
 <!ENTITY tooltip.address.label "地址：">
@@ -15,6 +16,7 @@
 <!ENTITY tooltip.type.blocked "(已代理)">
 <!ENTITY tooltip.type.whitelisted "(禁止使用代理)">
 <!ENTITY tooltip.size.label "大小:">
+<!ENTITY tooltip.docDomain.label "引用来源：">
 <!ENTITY tooltip.filter.label "生效的规则:">
 <!ENTITY tooltip.filterSource.label "规则来源:">
 <!ENTITY context.disablefilteronsite.label "这 --  禁用这条规则">
@@ -24,5 +26,3 @@
 <!ENTITY context.copy.label "复制项目地址">
 <!ENTITY context.copyFilter.label "复制规则">
 <!ENTITY context.selectAll.label "全选">
-<!ENTITY docDomain.label          "引用来源">
-<!ENTITY tooltip.docDomain.label  "引用来源：">

@@ -30,7 +30,7 @@ row > label {
   text-align: right;
 }
 
-#defaultProxy > label {
+#defaultProxy > label, #fallbackProxy > label {
   font-weight: bold;
   font-size: 120%;
 }

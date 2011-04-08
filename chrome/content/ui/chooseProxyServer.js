@@ -44,6 +44,10 @@ function init()
 
     menu.newList(group, subscription.proxy + 1);
   }
+
+  // row for setting fallback proxy
+  menu.newList(E('fallbackProxy'),
+    (prefs.fallbackProxy + proxy.server.length + 1) % (proxy.server.length + 1), "fallbackProxy");
 }
 
 var menu =
@@ -58,18 +62,22 @@ var menu =
    *
    * @param node {DOM node}: which node should this new menu list append to
    * @param index {int}: which menu item should be selected by default
-   * @param isDefaultProxyPopup {boolean}: if true, "default proxy" menu item won't be created
+   * @todo: @param isDefaultProxyPopup {boolean}: if true, "default proxy" menu item won't be created
    */
-  newList: function(node, index, isDefaultProxyPopup)
+  newList: function(node, index, special)
   {
     this.menuList = cE('menulist');
     this.menuList.appendChild(cE('menupopup'));
     node.appendChild(this.menuList);
 
-    if (!isDefaultProxyPopup)
+    if (!special)
       this.newItem(aup.getString('defaultProxy'));
 
     proxy.getName.forEach(this.newItem);
+
+    if (special == "fallbackProxy") {
+      this.newItem('no proxy');
+    }
 
     this.menuList.selectedIndex = index;
   },
@@ -98,6 +106,10 @@ function save()
     var selected = menus[i].selectedIndex;
     if (i == 0) {
       prefs.defaultProxy = selected;
+      prefs.save();
+    }
+    else if (i == menus.length - 1) {
+      prefs.fallbackProxy = selected == proxy.server.length ? -1 : selected;
       prefs.save();
     }
     else {

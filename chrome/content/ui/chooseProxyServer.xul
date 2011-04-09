@@ -43,7 +43,7 @@
 <grid>
   <rows>
     <row id="defaultProxy">
-      <label value="&default.label;"/>
+      <label/>
       <!-- menu list will be insert here by JS -->
     </row>
     <menuseparator/>
@@ -52,7 +52,7 @@
     <menuseparator id="groupSeparator"/>
 
     <row id="fallbackProxy">
-      <label value="&fallback.label;"/>
+      <label/>
       <!-- fallback proxy menu list will be insert here by JS -->
     </row>
     <menuseparator/>

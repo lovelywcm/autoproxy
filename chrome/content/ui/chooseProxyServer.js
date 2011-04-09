@@ -28,6 +28,7 @@ function init()
   var rows = document.getElementsByTagName('rows')[0];
 
   // menu list for setting default proxy
+  E('defaultProxy').firstChild.value = aup.getString('default_proxy');
   menu.newList(E('defaultProxy'), prefs.defaultProxy, true);
 
   // one row per rule group
@@ -54,6 +55,7 @@ function init()
   }
 
   // row for setting fallback proxy
+  E('fallbackProxy').firstChild.value = aup.getString('not_matching');
   menu.newList(E('fallbackProxy'),
     (prefs.fallbackProxy + proxy.server.length + 1) % (proxy.server.length + 1), "fallbackProxy");
 }

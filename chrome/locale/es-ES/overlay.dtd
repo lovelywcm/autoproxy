@@ -11,7 +11,11 @@
 <!ENTITY context.frame.label "Marco Proxy">
 <!ENTITY sidebar.title "Elementos pasables por proxy en la página actual">
 <!ENTITY settings.label "Preferencias">
+<!ENTITY settings.accesskey "P">
 <!ENTITY report.label "Enviar a gfwList">
 <!ENTITY report.accesskey "R">
-<!ENTITY closesidebar.label "Cerrar elementos pasables por proxy">
+<!ENTITY opensidebar.label "Elementos a pasar por el proxy">
+<!ENTITY opensidebar.accesskey "V">
+<!ENTITY closesidebar.label "Cerrar elementos a pasar por el proxy">
+<!ENTITY closesidebar.accesskey "V">
 <!ENTITY switchProxy.label "Proxy por defecto:">

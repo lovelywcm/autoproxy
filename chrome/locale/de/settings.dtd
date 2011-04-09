@@ -1,7 +1,10 @@
 <!ENTITY dialog.title "AutoProxy Einstellungen">
 <!ENTITY filters.label "Proxy Regel">
 <!ENTITY filters.accesskey "R">
+<!ENTITY add.label "Proxy-Regel hinzufügen">
 <!ENTITY add.accesskey "z">
+<!ENTITY addRuleGroup.label "Regelgruppe hinzufügen">
+<!ENTITY addRuleGroup.accesskey "G">
 <!ENTITY addsubscription.label "Regel-Abonnement hinzufügen">
 <!ENTITY addsubscription.accesskey "A">
 <!ENTITY synchsubscriptions.label "Alle Abonnements aktualisieren">
@@ -50,6 +53,7 @@
 <!ENTITY mode.auto.accesskey "A">
 <!ENTITY mode.global.label "Globaler Modus">
 <!ENTITY mode.global.accesskey "G">
+<!ENTITY mode.disabled.label "Proxy deaktivieren">
 <!ENTITY mode.disabled.accesskey "d">
 <!ENTITY showintoolbar.label "In Symbolleiste anzeigen">
 <!ENTITY showintoolbar.accesskey "y">
@@ -79,6 +83,7 @@
 <!ENTITY context.edit.label "Regel bearbeiten">
 <!ENTITY context.resethitcount.label "Zugriffsstatistik für Regel zurücksetzen">
 <!ENTITY context.synchsubscription.label "Abonnement jetzt aktualisieren">
+<!ENTITY context.editsubscription.label "Regelgruppe bearbeiten">
 <!ENTITY context.moveup.label "Regel nach oben verschieben">
 <!ENTITY context.movedown.label "Regel nach unten verschieben">
 <!ENTITY context.movegroupup.label "Gruppe nach oben verschieben">
@@ -87,3 +92,11 @@
 <!ENTITY context.disable.label "Deaktivieren">
 <!ENTITY apply.label "Anwenden">
 <!ENTITY apply.accesskey "A">
+<!ENTITY changeStatusClickBehaviour.label "Statussymbol Klickaktion">
+<!ENTITY changeToolbarClickBehaviour.label "Toolbarsymbol Klickaktion">
+<!ENTITY changeClickBehaviour_context "Kontextmenü">
+<!ENTITY changeClickBehaviour_proxyMenu "Proxymenü">
+<!ENTITY changeClickBehaviour_cycleProxy "Proxyzyklus">
+<!ENTITY changeClickBehaviour_quickAdd "Filter schnell hinzufügen">
+<!ENTITY changeClickBehaviour_preference "Einstellung">
+<!ENTITY changeClickBehaviour_proxyable "Proxy-bare Elemente">

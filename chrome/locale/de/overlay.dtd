@@ -1,4 +1,5 @@
 <!ENTITY status.tooltip "Status:">
+<!ENTITY defaultProxy.tooltip "Standardproxy:">
 <!ENTITY blocked.tooltip "Objekte dieser Seite, die via Proxy geladen wurden:">
 <!ENTITY filters.tooltip "Am häufigsten angewandte Regeln:">
 <!ENTITY menuitem.label "AutoProxy Einstellungen">
@@ -10,4 +11,11 @@
 <!ENTITY context.frame.label "Proxy Frame">
 <!ENTITY sidebar.title "Objekte der aktuellen Seite, die via Proxy geladen werden können">
 <!ENTITY settings.label "Einstellungen">
+<!ENTITY settings.accesskey "E">
+<!ENTITY report.label "gfwList berichten">
+<!ENTITY report.accesskey "B">
+<!ENTITY opensidebar.label "Proxy-bare Elemente">
+<!ENTITY opensidebar.accesskey "V">
 <!ENTITY closesidebar.label "Proxy-bare Objekte schließen">
+<!ENTITY closesidebar.accesskey "V">
+<!ENTITY switchProxy.label "Standardproxy:">

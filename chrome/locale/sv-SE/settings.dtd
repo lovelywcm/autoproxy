@@ -1,6 +1,7 @@
 <!ENTITY dialog.title "Inställningar för AutoProxy">
 <!ENTITY filters.label "Proxyregel">
 <!ENTITY filters.accesskey "r">
+<!ENTITY add.label "Lägg till proxyregel">
 <!ENTITY add.accesskey "L">
 <!ENTITY addRuleGroup.label "Lägg till regelgrupp">
 <!ENTITY addRuleGroup.accesskey "g">
@@ -16,6 +17,7 @@
 <!ENTITY clearall.accesskey "T">
 <!ENTITY resethitcounts.label "Nollställ träffstatistik">
 <!ENTITY resethitcounts.accesskey "N">
+<!ENTITY proxies.label "Proxyserver">
 <!ENTITY proxies.accesskey "s">
 <!ENTITY editproxies.label "Redigera proxyserver">
 <!ENTITY editproxies.accesskey "e">
@@ -51,6 +53,7 @@
 <!ENTITY mode.auto.accesskey "A">
 <!ENTITY mode.global.label "Globalläge">
 <!ENTITY mode.global.accesskey "G">
+<!ENTITY mode.disabled.label "Inaktivera proxy">
 <!ENTITY mode.disabled.accesskey "I">
 <!ENTITY showintoolbar.label "Visa i verktygsfältet">
 <!ENTITY showintoolbar.accesskey "y">
@@ -80,6 +83,7 @@
 <!ENTITY context.edit.label "Redigera regel">
 <!ENTITY context.resethitcount.label "Nollställ träffstatistik för regel">
 <!ENTITY context.synchsubscription.label "Uppdatera prenumeration nu">
+<!ENTITY context.editsubscription.label "Redigera regelgrupp">
 <!ENTITY context.moveup.label "Flytta regel uppåt">
 <!ENTITY context.movedown.label "Flytta regel nedåt">
 <!ENTITY context.movegroupup.label "Flytta grupp uppåt">

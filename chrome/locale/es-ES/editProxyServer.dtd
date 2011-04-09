@@ -6,6 +6,12 @@
 <!ENTITY socks4.label "socks4">
 <!ENTITY socks5.label "socks5">
 <!ENTITY delete.label "Borrar">
+<!ENTITY addButton.label "Añadir proxy">
 <!ENTITY addButton.accesskey "A">
+<!ENTITY delButton.label "Borrar proxy">
 <!ENTITY delButton.accesskey "D">
+<!ENTITY resetButton.label "Restablecer información">
 <!ENTITY resetButton.accesskey "R">
+<!ENTITY warning.text "Atención: ha elegido borrar todos los proxies; recuerde añadir uno o AutoProxy no funcionará.">
+<!ENTITY note.text "Nota: ha elegido borrar el proxy por defecto; recuerde establecer otro como tal (en el menú &quot;Elegir servidor proxy&quot;), o AutoProxy podría no funcionar.">
+<!ENTITY tip.text "Truco: Pinche en el botón &quot;Cancelar&quot; para deshacer la operación anterior.">

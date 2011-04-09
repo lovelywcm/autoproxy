@@ -1,4 +1,5 @@
 <!ENTITY status.tooltip "Status:">
+<!ENTITY defaultProxy.tooltip "Standardproxy:">
 <!ENTITY blocked.tooltip "Objekt via proxy på den här sidan:">
 <!ENTITY filters.tooltip "Mest aktiva regler:">
 <!ENTITY menuitem.label "Inställningar för AutoProxy">
@@ -10,9 +11,13 @@
 <!ENTITY context.frame.label "Ram via proxy">
 <!ENTITY sidebar.title "Proxyhanteringsbara objekt på aktuell sida">
 <!ENTITY settings.label "Inställningar">
+<!ENTITY settings.accesskey "I">
 <!ENTITY report.label "Rapportera till gfwList">
 <!ENTITY report.accesskey "w">
+<!ENTITY opensidebar.label "Proxyhanteringsbara objekt">
 <!-- Note: This access key should usually be the same as closesidebar.accesskey. It is the same menu item with different label depending on whether the sidebar is currently open.-->
+<!ENTITY opensidebar.accesskey "x">
 <!ENTITY closesidebar.label "Stäng Proxyhanteringsbara objekt">
 <!-- Note: This access key should usually be the same as opensidebar.accesskey. It is the same menu item with different label depending on whether the sidebar is currently open.-->
+<!ENTITY closesidebar.accesskey "x">
 <!ENTITY switchProxy.label "Standardproxyserver:">

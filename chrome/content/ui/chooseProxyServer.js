@@ -45,6 +45,14 @@ function init()
     menu.newList(group, subscription.proxy + 1);
   }
 
+  // if user has no rule group, insert a note
+  if (E('groupSeparator').previousSibling.tagName == 'menuseparator') {
+    var note = cE('label');
+    note.setAttribute('disabled', true);
+    note.setAttribute('value', 'no proxy rule found');
+    E('groupSeparator').parentNode.insertBefore(note, E('groupSeparator'));
+  }
+
   // row for setting fallback proxy
   menu.newList(E('fallbackProxy'),
     (prefs.fallbackProxy + proxy.server.length + 1) % (proxy.server.length + 1), "fallbackProxy");

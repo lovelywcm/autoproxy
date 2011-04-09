@@ -30,6 +30,10 @@ row > label {
   text-align: right;
 }
 
+menuseparator + label {
+  text-align: center;
+}
+
 #defaultProxy > label, #fallbackProxy > label {
   font-weight: bold;
   font-size: 120%;

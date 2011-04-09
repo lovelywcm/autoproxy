@@ -163,3 +163,5 @@ aup.proxy = proxy;
 
 // @TODO: ";" & "$" is not allowed in proxy name
 // @TODO: review editProxyServer.js
+// @TODO: proxy name should be unique
+// @TODO: aup.getString('no proxy') && aup.getString('default proxy') are reserved

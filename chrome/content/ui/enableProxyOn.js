@@ -36,8 +36,7 @@ function enableProxyOn(menuItem, location)
   location = location || aupHooks.getBrowser().currentURI;
 
   // remove previously created items
-  while (curItem.previousSibling && curItem.previousSibling.className == 'enableProxyOn')
-    curItem.parentNode.removeChild(curItem.previousSibling);
+  removeAllMenuItems(curItem, 'enableProxyOn');
 
   if (prefs.proxyMode!='auto' || !proxy.isProxyableScheme(location)) return;
 

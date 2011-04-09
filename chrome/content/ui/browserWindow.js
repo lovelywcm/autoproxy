@@ -474,7 +474,7 @@ function aupFillPopup(event)
   let popup = event.target;
 
   // Not at-target call, ignore
-  if (popup.getAttribute("id").indexOf("options") >= 0)
+  if (popup.id != "aup-status-popup" && popup.id != "aup-toolbar-popup")
     return;
 
   // Need to do it this way to prevent a Gecko bug from striking
@@ -516,6 +516,8 @@ function aupFillPopup(event)
   // Fill "Enable Proxy On" Menu Items
   enableProxyOn(elements.modeauto);
 
+  // Fill "choose proxy for rule groups" Menu Items
+  chooseProxy4RuleGroups(elements.modeauto);
 
   // Fill "Proxy Mode" Menu Items
   elements.modeauto.setAttribute("checked", "auto" == prefs.proxyMode);
@@ -650,4 +652,89 @@ function makeProxyItems(popup, menu)
 function report2gfwList()
 {
   aup.loadInBrowser("https://gfwlist.autoproxy.org/report/?url=" + aupHooks.getBrowser().currentURI.spec);
+}
+
+
+function chooseProxy4RuleGroups(flagItem)
+{
+  // remove previously created items
+  removeAllMenuItems(flagItem, 'chooseProxy4RuleGroups');
+
+  // one menu per rule group
+  for each (var subscription in filterStorage.knownSubscriptions) {
+    createRuleGroupProxyPopup(subscription);
+  }
+
+  // "when not matching" menu
+  createRuleGroupProxyPopup();
+
+  // create a menuseparator
+  flagItem.parentNode.insertBefore(cE('menuseparator'), flagItem);
+  flagItem.previousSibling.className = 'chooseProxy4RuleGroups';
+
+
+  function createRuleGroupProxyPopup(subscription)
+  {
+    var groupMenu = cE('menu'),
+        groupPopup = cE('menupopup'),
+        menuLabel, selectedProxy;
+
+    if (subscription) {
+      selectedProxy = subscription.proxy == -1 ? "default proxy" : proxy.getName[subscription.proxy];
+      menuLabel = subscription.title + ": " + selectedProxy;
+    }
+    else {
+      selectedProxy = prefs.fallbackProxy == -1 ? "no proxy": proxy.getName[prefs.fallbackProxy];
+      menuLabel = 'When not matching: ' + selectedProxy;
+    }
+
+    groupMenu.className = 'chooseProxy4RuleGroups';
+    groupMenu.setAttribute('label', menuLabel);
+    groupMenu.setAttribute('disabled', prefs.proxyMode != 'auto');
+    groupMenu.setAttribute('value', subscription ? subscription.url : 'fallback');
+    groupMenu.appendChild(groupPopup);
+
+    // popup proxy items created here
+    createMenuItem(subscription ? "default proxy" : "no proxy");
+    groupPopup.appendChild(cE('menuseparator'));
+    proxy.getName.forEach(createMenuItem);
+
+    flagItem.parentNode.insertBefore(groupMenu, flagItem);
+
+    // place this function here for convenience,
+    // though out of createRuleGroupProxyPopup() would be better.
+    function createMenuItem(proxyName)
+    {
+      var menuItem = cE('menuitem');
+      menuItem.setAttribute('type', 'radio');
+      menuItem.setAttribute('label', proxyName);
+      menuItem.setAttribute('checked', proxyName == selectedProxy);
+      menuItem.addEventListener("command", setGroupProxy, false);
+      groupPopup.appendChild(menuItem);
+    }
+  }
+}
+
+function setGroupProxy(event)
+{
+  var menuItem = event.target,
+      selectedIndex = proxy.getName.indexOf(menuItem.label),
+      subscriptionUrl = menuItem.parentNode.parentNode.value;
+
+  if (subscriptionUrl == 'fallback') {
+    prefs.fallbackProxy = selectedIndex;
+    prefs.save();
+  }
+  else {
+    filterStorage.knownSubscriptions[subscriptionUrl].proxy = selectedIndex;
+  }
+}
+
+function removeAllMenuItems(lastItem, className)
+{
+  while (lastItem.previousSibling) {
+    lastItem.previousSibling.className == className ?
+      lastItem.parentNode.removeChild(lastItem.previousSibling) :
+      lastItem = lastItem.previousSibling;
+  }
 }

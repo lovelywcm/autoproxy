@@ -55,7 +55,7 @@
       <menuitem id="aup-status-closesidebar" label="&closesidebar.label;" accesskey="&closesidebar.accesskey;" key="aup-key-sidebar" command="aup-command-sidebar"/>
       <menuseparator/>
       <menu id="aup-status-switchProxy" label="&switchProxy.label;" key="aup-key-contextmenu">
-        <menupopup id="options-switchProxy"/>
+        <menupopup/>
       </menu>
       <menuseparator/>
       <!--"Enable Proxy On" menu items will be insert here by JS-->

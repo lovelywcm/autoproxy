@@ -665,6 +665,15 @@ function chooseProxy4RuleGroups(flagItem)
     createRuleGroupProxyPopup(subscription);
   }
 
+  // if user has no rule group, insert a note
+  if (flagItem.previousSibling.className != 'chooseProxy4RuleGroups') {
+    var note = cE('menu');
+    note.className = 'chooseProxy4RuleGroups';
+    note.setAttribute('disabled', true);
+    note.setAttribute('label', 'no proxy rule found');
+    flagItem.parentNode.insertBefore(note, flagItem);
+  }
+
   // "when not matching" menu
   createRuleGroupProxyPopup();
 

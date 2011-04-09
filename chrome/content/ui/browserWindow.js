@@ -670,7 +670,7 @@ function chooseProxy4RuleGroups(flagItem)
     var note = cE('menu');
     note.className = 'chooseProxy4RuleGroups';
     note.setAttribute('disabled', true);
-    note.setAttribute('label', 'no proxy rule found');
+    note.setAttribute('label', aup.getString('no_proxy_rule'));
     flagItem.parentNode.insertBefore(note, flagItem);
   }
 
@@ -689,12 +689,12 @@ function chooseProxy4RuleGroups(flagItem)
         menuLabel, selectedProxy;
 
     if (subscription) {
-      selectedProxy = subscription.proxy == -1 ? "default proxy" : proxy.getName[subscription.proxy];
+      selectedProxy = subscription.proxy == -1 ? aup.getString('default_proxy') : proxy.getName[subscription.proxy];
       menuLabel = (subscription.title || subscription.typeDesc) + ": " + selectedProxy;
     }
     else {
-      selectedProxy = prefs.fallbackProxy == -1 ? "no proxy": proxy.getName[prefs.fallbackProxy];
-      menuLabel = 'When not matching: ' + selectedProxy;
+      selectedProxy = prefs.fallbackProxy == -1 ? aup.getString('no_proxy') : proxy.getName[prefs.fallbackProxy];
+      menuLabel = aup.getString('not_matching') + ': ' + selectedProxy;
     }
 
     groupMenu.className = 'chooseProxy4RuleGroups';
@@ -704,7 +704,7 @@ function chooseProxy4RuleGroups(flagItem)
     groupMenu.appendChild(groupPopup);
 
     // popup proxy items created here
-    createMenuItem(subscription ? "default proxy" : "no proxy");
+    createMenuItem(aup.getString(subscription ? 'default_proxy' : 'no_proxy'));
     groupPopup.appendChild(cE('menuseparator'));
     proxy.getName.forEach(createMenuItem);
 

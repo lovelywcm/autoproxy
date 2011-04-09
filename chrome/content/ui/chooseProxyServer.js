@@ -49,7 +49,7 @@ function init()
   if (E('groupSeparator').previousSibling.tagName == 'menuseparator') {
     var note = cE('label');
     note.setAttribute('disabled', true);
-    note.setAttribute('value', 'no proxy rule found');
+    note.setAttribute('value', aup.getString('no_proxy_rule'));
     E('groupSeparator').parentNode.insertBefore(note, E('groupSeparator'));
   }
 
@@ -79,12 +79,12 @@ var menu =
     node.appendChild(this.menuList);
 
     if (!special)
-      this.newItem(aup.getString('defaultProxy'));
+      this.newItem(aup.getString('default_proxy'));
 
     proxy.getName.forEach(this.newItem);
 
     if (special == "fallbackProxy") {
-      this.newItem('no proxy');
+      this.newItem(aup.getString('no_proxy'));
     }
 
     this.menuList.selectedIndex = index;

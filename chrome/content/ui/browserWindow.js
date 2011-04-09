@@ -690,7 +690,7 @@ function chooseProxy4RuleGroups(flagItem)
 
     if (subscription) {
       selectedProxy = subscription.proxy == -1 ? "default proxy" : proxy.getName[subscription.proxy];
-      menuLabel = subscription.title + ": " + selectedProxy;
+      menuLabel = (subscription.title || subscription.typeDesc) + ": " + selectedProxy;
     }
     else {
       selectedProxy = prefs.fallbackProxy == -1 ? "no proxy": proxy.getName[prefs.fallbackProxy];

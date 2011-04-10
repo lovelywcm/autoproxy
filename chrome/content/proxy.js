@@ -143,8 +143,8 @@ var proxy =
   isNoProxy: function(match)
   {
     if (match instanceof WhitelistFilter)
-      for each (var s in match.subscriptions)
-        if (!s.disabled && s.url == "~wl~")
+//      for each (var s in match.subscriptions)
+//        if (!s.disabled && s.url == "~wl~")
           return true;
 
     return false;

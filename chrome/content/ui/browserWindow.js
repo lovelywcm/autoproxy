@@ -503,15 +503,9 @@ function aupFillPopup(event)
 
 
   // Fill "Default Proxy" Menu Items
-  var menu = popup.getElementsByTagName('menu')[0];
-  menu.label = aup.getString('default_proxy') + ": " + proxy.nameOfDefaultProxy;
-  while (menu.previousSibling.tagName != 'menuseparator')
-    menu.parentNode.removeChild(menu.previousSibling);
-
-  popup = proxy.server.length > 3 ? menu.firstChild : null;
-  makeProxyItems(popup, menu);
-
-  menu.hidden = !popup;
+  var defaultProxyMenu = popup.getElementsByTagName('menu')[0];
+  defaultProxyMenu.label = aup.getString('default_proxy') + ": " + proxy.nameOfDefaultProxy;
+  makeProxyItems(defaultProxyMenu.firstChild);
 
 
   // Fill "Enable Proxy On" Menu Items
@@ -630,10 +624,9 @@ function switchDefaultProxy(event)
   }
 }
 
-function makeProxyItems(popup, menu)
+function makeProxyItems(popup)
 {
-  if (popup)
-    while (popup.firstChild) popup.removeChild(popup.firstChild);
+  while (popup.firstChild) popup.removeChild(popup.firstChild);
 
   for each (let p in proxy.getName) {
     let item = cE('menuitem');
@@ -643,10 +636,7 @@ function makeProxyItems(popup, menu)
     item.setAttribute('name', 'radioGroup-switchProxy');
     item.addEventListener("command", switchDefaultProxy, false);
     if (proxy.nameOfDefaultProxy == p) item.setAttribute('checked', true);
-    if (popup)
-      popup.appendChild(item);
-    else
-      menu.parentNode.insertBefore(item, menu);
+    popup.appendChild(item);
   }
 }
 

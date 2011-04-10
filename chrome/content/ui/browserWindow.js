@@ -507,6 +507,7 @@ function aupFillPopup(event)
   enableProxyOn(elements.defaultProxy);
 
   // Fill "Default Proxy" Menu Items
+  elements.defaultProxy.disabled = 'disabled' == prefs.proxyMode;
   elements.defaultProxy.label = aup.getString('default_proxy') + ": " + proxy.nameOfDefaultProxy;
   makeProxyItems(elements.defaultProxy.firstChild);
 

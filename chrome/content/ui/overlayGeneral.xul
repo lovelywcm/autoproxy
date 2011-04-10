@@ -54,7 +54,7 @@
       <menuitem id="aup-status-opensidebar" label="&opensidebar.label;" accesskey="&opensidebar.accesskey;" key="aup-key-sidebar" command="aup-command-sidebar"/>
       <menuitem id="aup-status-closesidebar" label="&closesidebar.label;" accesskey="&closesidebar.accesskey;" key="aup-key-sidebar" command="aup-command-sidebar"/>
       <menuseparator/>
-      <menu id="aup-status-switchProxy" label="&switchProxy.label;" key="aup-key-contextmenu">
+      <menu id="aup-status-defaultProxy" key="aup-key-contextmenu">
         <menupopup/>
       </menu>
       <menuseparator/>
@@ -63,11 +63,8 @@
       <menuitem id="aup-status-modeglobal" label="&mode.global.label;" accesskey="&mode.global.accesskey;" type="radio" key="aup-key-modeglobal" command="aup-command-modeglobal"/>
       <menuitem id="aup-status-modedisabled" label="&mode.disabled.label;" accesskey="&mode.disabled.accesskey;" type="radio" key="aup-key-modedisabled" command="aup-command-modedisabled"/>
     </menupopup>
-    <menupopup id="aup-popup-switchProxy"></menupopup>
-    <tooltip id="showCurrentProxy" orient="horizontal">
-      <label value="&switchProxy.label;"/>
-      <label id="showCurrentProxyValue"/>
-    </tooltip>
+    <menupopup id="aup-popup-defaultProxyList"></menupopup>
+    <tooltip id="cycleDefaultProxy"></tooltip>
   </popupset>
   <keyset id="aup-keyset"/>
   <commandset id="aup-commandset">

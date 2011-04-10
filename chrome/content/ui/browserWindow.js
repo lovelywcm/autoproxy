@@ -504,10 +504,11 @@ function aupFillPopup(event)
 
   // Fill "Default Proxy" Menu Items
   var menu = popup.getElementsByTagName('menu')[0];
+  menu.label = aup.getString('default_proxy') + ": " + proxy.nameOfDefaultProxy;
   while (menu.previousSibling.tagName != 'menuseparator')
     menu.parentNode.removeChild(menu.previousSibling);
 
-  popup = proxy.validConfigs.length > 3 ? menu.firstChild : null;
+  popup = proxy.server.length > 3 ? menu.firstChild : null;
   makeProxyItems(popup, menu);
 
   menu.hidden = !popup;
@@ -592,25 +593,25 @@ function aupExecuteAction(action, e)
     case 2:
       aup.openSettingsDialog();
       break;
-    case 3: //quick add
+    case 3: // quick add
       break;
-    case 4: //cycle default proxy
+    case 4: // cycle default proxy
       if (aup.proxyTipTimer) aup.proxyTipTimer.cancel();
       prefs.defaultProxy = ++prefs.defaultProxy % proxy.server.length;
       prefs.save();
-      //show tooltip
-      let tooltip = E("showCurrentProxy");
-      let tooltipLabel = E("showCurrentProxyValue");
-      tooltipLabel.value = proxy.nameOfDefaultProxy;
+      // show tooltip
+      let tooltip = E("cycleDefaultProxy");
+      tooltip.label = aup.getString('default_proxy') + ": " + proxy.nameOfDefaultProxy;
       if (e.screenX && e.screenY)
         tooltip.openPopupAtScreen(e.screenX, e.screenY, false);
       else
         tooltip.openPopupAtScreen(e.target.boxObject.screenX, e.target.boxObject.screenY, false);
       aup.proxyTipTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-      aup.proxyTipTimer.initWithCallback( {notify:function(){tooltip.hidePopup();}}, 2000, Components.interfaces.nsITimer.TYPE_ONE_SHOT );
+      aup.proxyTipTimer.initWithCallback(
+        {notify: function(){tooltip.hidePopup()}}, 2000, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
       break;
-    case 5: //default proxy menu
-      let popup = E("aup-popup-switchProxy");
+    case 5: // default proxy menu
+      let popup = E("aup-popup-defaultProxyList");
       makeProxyItems(popup);
       if (e.screenX && e.screenY) popup.openPopupAtScreen(e.screenX, e.screenY, false);
       else popup.openPopupAtScreen(e.target.boxObject.screenX, e.target.boxObject.screenY, false);

@@ -730,11 +730,3 @@ function setGroupProxy(event)
   }
 }
 
-function removeAllMenuItems(lastItem, className)
-{
-  while (lastItem.previousSibling) {
-    lastItem.previousSibling.className == className ?
-      lastItem.parentNode.removeChild(lastItem.previousSibling) :
-      lastItem = lastItem.previousSibling;
-  }
-}

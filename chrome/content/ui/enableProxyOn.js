@@ -57,12 +57,13 @@ function enableProxyOn(flagItem, location)
   // create "disable proxy on site" menu items
   makeSiteCheckbox('@@||');
 
+  // create a menu separator
   flagItem.parentNode.insertBefore(cE('menuseparator'), flagItem);
   flagItem.previousSibling.className = 'enableProxyOn';
 
 
   /**
-   * @param prefix  {string} "||" or "@@||"
+   * @param prefix {string} "||" or "@@||"
    */
   function makeSiteCheckbox(prefix)
   {
@@ -90,9 +91,6 @@ function enableProxyOn(flagItem, location)
   }
 
 
-  /**
-   *
-   */
   function makeNewCheckbox(filter, labeltempl)
   {
     if (filter instanceof aup.WhitelistFilter && !isActive(filter)) return;
@@ -172,5 +170,14 @@ function suffixed(/**Filter*/ filter)
   return [filter.text + "^", filter.text + "/"].map(aup.Filter.fromText);
 }
 
+
+function removeAllMenuItems(lastItem, className)
+{
+  while (lastItem.previousSibling) {
+    lastItem.previousSibling.className == className ?
+      lastItem.parentNode.removeChild(lastItem.previousSibling) :
+      lastItem = lastItem.previousSibling;
+  }
+}
 
 // @TODO: reuse code for top window

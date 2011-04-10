@@ -92,3 +92,10 @@
 <!ENTITY context.disable.label "Inaktivera">
 <!ENTITY apply.label "Verkställ">
 <!ENTITY apply.accesskey "e">
+<!ENTITY changeClickBehaviour.label "När ikonen klickas:">
+<!ENTITY changeClickBehaviour_context "Snabbmeny">
+<!ENTITY changeClickBehaviour_proxyMenu "Proxymeny">
+<!ENTITY changeClickBehaviour_cycleProxy "Rulla igenom standardproxylägen">
+<!ENTITY changeClickBehaviour_proxyMode "Rulla igenom proxylägen">
+<!ENTITY changeClickBehaviour_preference "Inställningar">
+<!ENTITY changeClickBehaviour_proxyable "Proxyhanteringsbara objekt">

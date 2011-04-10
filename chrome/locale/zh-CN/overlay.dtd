@@ -18,4 +18,3 @@
 <!ENTITY opensidebar.accesskey "V">
 <!ENTITY closesidebar.label "关闭可代理资源列表">
 <!ENTITY closesidebar.accesskey "V">
-<!ENTITY switchProxy.label "默认代理：">

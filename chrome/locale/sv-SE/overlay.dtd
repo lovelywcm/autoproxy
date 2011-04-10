@@ -20,4 +20,3 @@
 <!ENTITY closesidebar.label "Stäng Proxyhanteringsbara objekt">
 <!-- Note: This access key should usually be the same as opensidebar.accesskey. It is the same menu item with different label depending on whether the sidebar is currently open.-->
 <!ENTITY closesidebar.accesskey "x">
-<!ENTITY switchProxy.label "Standardproxyserver:">

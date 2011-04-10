@@ -92,11 +92,10 @@
 <!ENTITY context.disable.label "禁用">
 <!ENTITY apply.label "应用">
 <!ENTITY apply.accesskey "P">
-<!ENTITY changeStatusClickBehaviour.label "单击状态栏图标行为">
-<!ENTITY changeToolbarClickBehaviour.label "单击工具栏图标行为">
+<!ENTITY changeClickBehaviour.label "点击图标时：">
 <!ENTITY changeClickBehaviour_context "快捷菜单">
-<!ENTITY changeClickBehaviour_proxyMenu "代理菜单">
-<!ENTITY changeClickBehaviour_cycleProxy "代理循环">
-<!ENTITY changeClickBehaviour_quickAdd "快速添加规则">
-<!ENTITY changeClickBehaviour_preference "首选项">
+<!ENTITY changeClickBehaviour_proxyMenu "默认代理选择列表">
+<!ENTITY changeClickBehaviour_cycleProxy "切换默认代理">
+<!ENTITY changeClickBehaviour_proxyMode "切换代理模式">
+<!ENTITY changeClickBehaviour_preference "弹出首选项">
 <!ENTITY changeClickBehaviour_proxyable "可代理资源列表">

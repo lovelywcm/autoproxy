@@ -92,11 +92,3 @@
 <!ENTITY context.disable.label "Deaktivieren">
 <!ENTITY apply.label "Anwenden">
 <!ENTITY apply.accesskey "A">
-<!ENTITY changeStatusClickBehaviour.label "Statussymbol Klickaktion">
-<!ENTITY changeToolbarClickBehaviour.label "Toolbarsymbol Klickaktion">
-<!ENTITY changeClickBehaviour_context "Kontextmenü">
-<!ENTITY changeClickBehaviour_proxyMenu "Proxymenü">
-<!ENTITY changeClickBehaviour_cycleProxy "Proxyzyklus">
-<!ENTITY changeClickBehaviour_quickAdd "Filter schnell hinzufügen">
-<!ENTITY changeClickBehaviour_preference "Einstellung">
-<!ENTITY changeClickBehaviour_proxyable "Proxy-bare Elemente">

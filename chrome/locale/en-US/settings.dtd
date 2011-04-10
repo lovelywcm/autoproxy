@@ -108,10 +108,10 @@
 <!ENTITY apply.label                     "Apply">
 <!ENTITY apply.accesskey                 "P">
 
-<!ENTITY changeClickBehaviour.label      "Behavior when click on icon">
+<!ENTITY changeClickBehaviour.label      "When click on icon:">
 <!ENTITY changeClickBehaviour_context    "Context menu">
 <!ENTITY changeClickBehaviour_proxyMenu  "Proxy menu">
 <!ENTITY changeClickBehaviour_cycleProxy "Cycle default proxy">
-<!ENTITY changeClickBehaviour_quickAdd   "Cycle proxy mode">
+<!ENTITY changeClickBehaviour_proxyMode  "Cycle proxy mode">
 <!ENTITY changeClickBehaviour_preference "Preference">
 <!ENTITY changeClickBehaviour_proxyable  "Proxyable items">

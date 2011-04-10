@@ -18,4 +18,3 @@
 <!ENTITY opensidebar.accesskey "V">
 <!ENTITY closesidebar.label "Cerrar elementos a pasar por el proxy">
 <!ENTITY closesidebar.accesskey "V">
-<!ENTITY switchProxy.label "Proxy por defecto:">

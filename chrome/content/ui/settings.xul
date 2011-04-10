@@ -193,7 +193,7 @@
             <menuitem label="&changeClickBehaviour_context;" oncommand="changeClickBehaver(0)" type="radio"/>
             <menuitem label="&changeClickBehaviour_proxyable;" oncommand="changeClickBehaver(1)" type="radio"/>
             <menuitem label="&changeClickBehaviour_preference;" oncommand="changeClickBehaver(2)" type="radio"/>
-            <menuitem label="&changeClickBehaviour_quickAdd;" oncommand="changeClickBehaver(3)" type="radio"/>
+            <menuitem label="&changeClickBehaviour_proxyMode;" oncommand="changeClickBehaver(3)" type="radio"/>
             <menuitem label="&changeClickBehaviour_cycleProxy;" oncommand="changeClickBehaver(4)" type="radio"/>
             <menuitem label="&changeClickBehaviour_proxyMenu;" oncommand="changeClickBehaver(5)" type="radio"/>
           </menupopup>

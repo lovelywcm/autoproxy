@@ -92,11 +92,3 @@
 <!ENTITY context.disable.label "Desactivar">
 <!ENTITY apply.label "Aplicar">
 <!ENTITY apply.accesskey "P">
-<!ENTITY changeStatusClickBehaviour.label "Pinche en Comportamiento del icono de estado">
-<!ENTITY changeToolbarClickBehaviour.label "Pinche en Comportamiento de la barra de iconos">
-<!ENTITY changeClickBehaviour_context "Menú contextual">
-<!ENTITY changeClickBehaviour_proxyMenu "Menú proxy">
-<!ENTITY changeClickBehaviour_cycleProxy "Ciclo de proxy">
-<!ENTITY changeClickBehaviour_quickAdd "Añadir filtro rápidamente">
-<!ENTITY changeClickBehaviour_preference "Preferencia">
-<!ENTITY changeClickBehaviour_proxyable "Elementos enrutables">

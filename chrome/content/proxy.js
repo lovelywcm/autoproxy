@@ -144,7 +144,7 @@ var proxy =
   {
     if (match instanceof WhitelistFilter)
       for each (var s in match.subscriptions)
-        if (!s.disabled && s.url == "~fl~")
+        if (!s.disabled && s.url == "~wl~")
           return true;
 
     return false;

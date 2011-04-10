@@ -60,7 +60,7 @@
     <label value="jimmy_xu_wrk" onclick="aup.loadInBrowser('http://twitter.com/jimmy_xu_wrk')"/>
     <label value="mengxl" onclick="aup.loadInBrowser('http://twitter.com/mengxl')"/>
     <label value="Ratoo" onclick="aup.loadInBrowser('http://twitter.com/Ratoo')"/>
-    <label value="slimx" onclick="aup.loadInBrowser('about:where should I link to? plz update yourself.')"/>
+    <label value="slimx" onclick="aup.loadInBrowser('mailto:slimxfir@gmail.com')"/>
   </hbox>
 
   <description id="contributors" value="&contributors.label;"/>

@@ -565,10 +565,8 @@ function aupTogglePref(pref) {
 // Handle clicks on statusbar/toolbar panel
 function aupClickHandler(e)
 {
-  if (e.button == 1) {
-    prefs.proxyMode = proxy.mode[ (proxy.mode.indexOf(prefs.proxyMode)+1) % 3 ];
-    prefs.save();
-  }
+  if (e.button == 1) cycleProxyMode();
+
   // e.button is undefined when left click on tool bar icon
   else if (e.button != 2 && e.target.tagName != 'menuitem')
     aupExecuteAction(e.target.tagName == 'image' ? prefs.defaultstatusbaraction : prefs.defaulttoolbaraction, e);
@@ -587,7 +585,8 @@ function aupExecuteAction(action, e)
     case 2:
       aup.openSettingsDialog();
       break;
-    case 3: // quick add
+    case 3:
+      cycleProxyMode();
       break;
     case 4: // cycle default proxy
       if (aup.proxyTipTimer) aup.proxyTipTimer.cancel();
@@ -644,7 +643,6 @@ function report2gfwList()
 {
   aup.loadInBrowser("https://gfwlist.autoproxy.org/report/?url=" + aupHooks.getBrowser().currentURI.spec);
 }
-
 
 function chooseProxy4RuleGroups(flagItem)
 {
@@ -730,3 +728,8 @@ function setGroupProxy(event)
   }
 }
 
+function cycleProxyMode()
+{
+  prefs.proxyMode = proxy.mode[(proxy.mode.indexOf(prefs.proxyMode) + 1) % 3];
+  prefs.save();
+}

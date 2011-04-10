@@ -2,8 +2,8 @@
 
 pref("extensions.autoproxy.clearStatsOnHistoryPurge", true);
 pref("extensions.autoproxy.currentVersion", "0.0");
-pref("extensions.autoproxy.defaultstatusbaraction", 5);
-pref("extensions.autoproxy.defaulttoolbaraction", 0);
+pref("extensions.autoproxy.defaultstatusbaraction", 3);
+pref("extensions.autoproxy.defaulttoolbaraction", 3);
 pref("extensions.autoproxy.detachsidebar", false);
 pref("extensions.autoproxy.enable_key", "");
 pref("extensions.autoproxy.flash_scrolltoitem", true);

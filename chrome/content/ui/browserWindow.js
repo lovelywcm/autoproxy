@@ -484,6 +484,8 @@ function aupFillPopup(event)
     if (list[i].id && /\-(\w+)$/.test(list[i].id))
       elements[RegExp.$1] = list[i];
 
+  // fix for default proxy, it is "menu" but not "menuitem"
+  elements['defaultProxy'] = popup.getElementsByTagName('menu')[0];
 
   // Fill "Report to gfwList" Menu Items
   function isGfwlistSubscribed()
@@ -501,15 +503,12 @@ function aupFillPopup(event)
   elements.opensidebar.hidden = sidebarOpen;
   elements.closesidebar.hidden = !sidebarOpen;
 
+  // Fill "Enable Proxy On" Menu Items
+  enableProxyOn(elements.defaultProxy);
 
   // Fill "Default Proxy" Menu Items
-  var defaultProxyMenu = popup.getElementsByTagName('menu')[0];
-  defaultProxyMenu.label = aup.getString('default_proxy') + ": " + proxy.nameOfDefaultProxy;
-  makeProxyItems(defaultProxyMenu.firstChild);
-
-
-  // Fill "Enable Proxy On" Menu Items
-  enableProxyOn(elements.modeauto);
+  elements.defaultProxy.label = aup.getString('default_proxy') + ": " + proxy.nameOfDefaultProxy;
+  makeProxyItems(elements.defaultProxy.firstChild);
 
   // Fill "choose proxy for rule groups" Menu Items
   chooseProxy4RuleGroups(elements.modeauto);

@@ -3011,17 +3011,10 @@ let treeView = {
 
 
 
-function changeClickBehaver(action, isToobar)
+function changeClickBehaver(action)
 {
-  if (!isToobar) {
-    if (prefs.defaultstatusbaraction == action) return;
-    prefs.defaultstatusbaraction = action;
-  }
-  else {
-    if (prefs.defaulttoolbaraction == action) return;
-    prefs.defaulttoolbaraction = action;
-  }
-
+  prefs.defaulttoolbaraction = action;
+  prefs.defaultstatusbaraction = action;
   prefs.save();
 }
 

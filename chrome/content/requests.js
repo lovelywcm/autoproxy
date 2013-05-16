@@ -460,7 +460,7 @@ RequestEntry.prototype =
 function getWeakReference(/**nsISupports*/ node) /**nsIWeakReference*/
 {
   if (node instanceof Ci.nsISupportsWeakReference)
-    return node.GetWeakReference();
+    return Cu.getWeakReference(node);
   else
     return null;
 }

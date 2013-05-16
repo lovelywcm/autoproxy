@@ -15,10 +15,10 @@ version=$(awk -F '>|<' 'NR==9 {printf $3}' install.rdf)
 timestamp=$(date +%Y%m%d%H)
 versionPlusTimestamp=$version"."$timestamp
 
-sed -i "s/em:version.*/em:version>$versionPlusTimestamp<\/em:version>/" install.rdf
-sed -i "s/{{VERSION}}/$versionPlusTimestamp/" components/AutoProxy.js
+sed -i '' "s/em:version.*/em:version>$versionPlusTimestamp<\/em:version>/" install.rdf
+sed -i '' "s/{{VERSION}}/$versionPlusTimestamp/" components/AutoProxy.js
 
 zip -r autoproxy-$versionPlusTimestamp.xpi chrome components defaults install.rdf chrome.manifest icon.png
 
-sed -i "s/em:version.*/em:version>$version<\/em:version>/" install.rdf
-sed -i "s/$versionPlusTimestamp/{{VERSION}}/" components/AutoProxy.js
+sed -i '' "s/em:version.*/em:version>$version<\/em:version>/" install.rdf
+sed -i '' "s/$versionPlusTimestamp/{{VERSION}}/" components/AutoProxy.js

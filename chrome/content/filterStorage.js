@@ -501,6 +501,7 @@ var filterStorage =
           case "subscription":
             wantObj = true;
             curObj = {};
+            curObj.title = "";
             break;
           case "subscription filters":
           case "subscription patterns":

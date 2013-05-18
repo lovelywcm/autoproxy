@@ -1,7 +1,17 @@
 <!ENTITY dialog.title "Editar o servidor de proxy">
 <!ENTITY name.label "Dar um nome:">
+<!ENTITY host.label "Hospedeiro do Proxy:">
 <!ENTITY port.label "Porta:">
 <!ENTITY http.label "http">
 <!ENTITY socks4.label "socks4">
 <!ENTITY socks5.label "socks5">
 <!ENTITY delete.label "Apagar">
+<!ENTITY addButton.label "Adicionar proxy">
+<!ENTITY addButton.accesskey "A">
+<!ENTITY delButton.label "Excluir proxy">
+<!ENTITY delButton.accesskey "E">
+<!ENTITY resetButton.label "Redefinir para padrão">
+<!ENTITY resetButton.accesskey "R">
+<!ENTITY warning.text "Atenção: você escolheu excluir todos os proxies, lembre-se de adicionar um novo proxy ou o AutoProxy não funcionará.">
+<!ENTITY note.text "Nota: você optou por excluir o proxy padrão, lembre-se de definir um novo proxy padrão (no menu &quot;Escolher servidor proxy&quot;) ou o AutoProxy pode funcionará.">
+<!ENTITY tip.text "Dica: O clique no botão &quot;Cancelar&quot; desfará a operação anterior.">

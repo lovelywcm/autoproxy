@@ -1,0 +1,65 @@
+<!ENTITY filters.label "Proxy Rregulla">
+<!ENTITY filters.accesskey "R">
+<!ENTITY add.accesskey "A">
+<!ENTITY addRuleGroup.accesskey "G">
+<!ENTITY addsubscription.accesskey "S">
+<!ENTITY synchsubscriptions.accesskey "D">
+<!ENTITY import.accesskey "M">
+<!ENTITY export.accesskey "X">
+<!ENTITY clearall.accesskey "L">
+<!ENTITY resethitcounts.accesskey "R">
+<!ENTITY proxies.accesskey "S">
+<!ENTITY editproxies.accesskey "E">
+<!ENTITY chooseproxies.accesskey "C">
+<!ENTITY edit.label "Redakto">
+<!ENTITY edit.accesskey "E">
+<!ENTITY cut.label "Shkëput">
+<!ENTITY cut.accesskey "T">
+<!ENTITY copy.label "Kopjo">
+<!ENTITY copy.accesskey "C">
+<!ENTITY paste.label "Hidhe">
+<!ENTITY paste.accesskey "P">
+<!ENTITY remove.label "Grise">
+<!ENTITY remove.accesskey "D">
+<!ENTITY menu.find.label "Gjeje">
+<!ENTITY menu.find.accesskey "F">
+<!ENTITY menu.findagain.label "Gjeje përsëri">
+<!ENTITY menu.findagain.accesskey "G">
+<!ENTITY view.label "Shihe">
+<!ENTITY view.accesskey "V">
+<!ENTITY sort.label "Radhit sipar">
+<!ENTITY sort.accesskey "S">
+<!ENTITY sort.none.label "Pa radhitur">
+<!ENTITY sort.none.accesskey "U">
+<!ENTITY sort.ascending.label "Radhitje A &gt; ZH">
+<!ENTITY sort.ascending.accesskey "A">
+<!ENTITY sort.descending.label "Radhitje ZH &gt; A">
+<!ENTITY sort.descending.accesskey "Z">
+<!ENTITY options.label "Przgjedhjet">
+<!ENTITY options.accesskey "O">
+<!ENTITY mode.auto.accesskey "A">
+<!ENTITY mode.global.accesskey "G">
+<!ENTITY mode.disabled.accesskey "D">
+<!ENTITY showintoolbar.accesskey "B">
+<!ENTITY showinstatusbar.accesskey "S">
+<!ENTITY help.label "Ndihmë">
+<!ENTITY help.accesskey "H">
+<!ENTITY gettingStarted.label "Duke filluar">
+<!ENTITY gettingStarted.accesskey "s">
+<!ENTITY faq.accesskey "F">
+<!ENTITY filterdoc.accesskey "R">
+<!ENTITY about.label "Rreth AutoProxy">
+<!ENTITY about.accesskey "B">
+<!ENTITY filter.column "Rregullat">
+<!ENTITY filter.accesskey "F">
+<!ENTITY slow.column "Shfaqe filtruesit">
+<!ENTITY slow.accesskey "w">
+<!ENTITY enabled.column "Mundëso">
+<!ENTITY enabled.accesskey "n">
+<!ENTITY hitcount.accesskey "H">
+<!ENTITY lasthit.accesskey "L">
+<!ENTITY context.edit.label "Redakto rregullën">
+<!ENTITY context.disable.label "Pamundëso">
+<!ENTITY apply.label "Apliko">
+<!ENTITY apply.accesskey "P">
+<!ENTITY changeClickBehaviour_preference "Parapëlqimet">

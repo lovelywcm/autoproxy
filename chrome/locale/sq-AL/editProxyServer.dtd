@@ -1,0 +1,13 @@
+<!ENTITY dialog.title "Redakto Proxy Serverin">
+<!ENTITY name.label "Emëroje:">
+<!ENTITY host.label "Proxy Host:">
+<!ENTITY port.label "Porti:">
+<!ENTITY http.label "http">
+<!ENTITY socks4.label "socks4">
+<!ENTITY socks5.label "socks5">
+<!ENTITY delete.label "Grise">
+<!ENTITY addButton.label "Vendos proxy">
+<!ENTITY addButton.accesskey "A">
+<!ENTITY delButton.label "Grise proxy-n">
+<!ENTITY delButton.accesskey "D">
+<!ENTITY resetButton.accesskey "R">

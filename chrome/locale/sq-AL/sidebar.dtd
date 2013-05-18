@@ -1,0 +1,12 @@
+<!ENTITY search.label "Kërko:">
+<!ENTITY search.accesskey "S">
+<!ENTITY type.label "LLoji">
+<!ENTITY address.label "Adresa">
+<!ENTITY filter.label "Rregulla">
+<!ENTITY state.label "Gjendja">
+<!ENTITY size.label "Madhësia">
+<!ENTITY docDomain.label "Burimi i dokumentit">
+<!ENTITY tooltip.address.label "Adresa:">
+<!ENTITY tooltip.type.label "Lloji:">
+<!ENTITY tooltip.size.label "Madhësia:">
+<!ENTITY context.copyFilter.label "Kojpo rregullën">

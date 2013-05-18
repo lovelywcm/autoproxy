@@ -92,3 +92,10 @@
 <!ENTITY context.disable.label "Deaktivieren">
 <!ENTITY apply.label "Anwenden">
 <!ENTITY apply.accesskey "A">
+<!ENTITY changeClickBehaviour.label "Bei Klick auf Symbol:">
+<!ENTITY changeClickBehaviour_context "Kontextmenü:">
+<!ENTITY changeClickBehaviour_proxyMenu "Proxymenü">
+<!ENTITY changeClickBehaviour_cycleProxy "Standardproxy auswählen">
+<!ENTITY changeClickBehaviour_proxyMode "Proxy Modus auswählen">
+<!ENTITY changeClickBehaviour_preference "Einstellung">
+<!ENTITY changeClickBehaviour_proxyable "Via Proxy ladbare Objekte">

@@ -1492,13 +1492,28 @@ let treeView = {
     else
       return filter;
   },
+  
+  generateProperties: function(list, properties)
+  {
+    if (properties)
+    {
+      // Gecko 21 and below: we have an nsISupportsArray parameter, add atoms
+      // to that.
+      for (let i = 0; i < list.length; i++)
+        if (list[i] in this.atoms)
+          properties.AppendElement(this.atoms[list[i]]);
+      return null;
+    }
+    else
+    {
+      // Gecko 22+: no parameter, just return a string
+      return list.join(" ");
+    }
+  },
 
   getColumnProperties: function(col, properties)
   {
-    col = col.id;
-
-    if (col in this.atoms)
-      properties.AppendElement(this.atoms[col]);
+    return this.generateProperties(["col-" + col.id], properties);
   },
 
   getRowProperties: function(row, properties)
@@ -1507,37 +1522,39 @@ let treeView = {
     if (!subscription)
       return;
 
-    properties.AppendElement(this.atoms["selected-" + this.selection.isSelected(row)]);
-    properties.AppendElement(this.atoms["subscription-" + !filter]);
-    properties.AppendElement(this.atoms["filter-" + (filter instanceof aup.Filter)]);
-    properties.AppendElement(this.atoms["filter-regexp-" + (filter instanceof aup.RegExpFilter && !filter.shortcut)]);
-    properties.AppendElement(this.atoms["description-" + (typeof filter == "string")]);
-    properties.AppendElement(this.atoms["subscription-special-" + (subscription instanceof aup.SpecialSubscription)]);
-    properties.AppendElement(this.atoms["subscription-external-" + (subscription instanceof aup.ExternalSubscription)]);
-    properties.AppendElement(this.atoms["subscription-autoDownload-" + (subscription instanceof aup.DownloadableSubscription && subscription.autoDownload)]);
-    properties.AppendElement(this.atoms["subscription-disabled-" + subscription.disabled]);
-    properties.AppendElement(this.atoms["subscription-upgradeRequired-" + (subscription instanceof aup.DownloadableSubscription && subscription.upgradeRequired)]);
-    properties.AppendElement(this.atoms["subscription-dummy-" + (subscription instanceof aup.Subscription && subscription.url == "~dummy~")]);
+    let list = [];
+    list.push("selected-" + this.selection.isSelected(row));
+    list.push("subscription-" + !filter);
+    list.push("filter-" + (filter instanceof aup.Filter));
+    list.push("filter-regexp-" + (filter instanceof aup.RegExpFilter && !filter.shortcut));
+    list.push("description-" + (typeof filter == "string"));
+    list.push("subscription-special-" + (subscription instanceof aup.SpecialSubscription));
+    list.push("subscription-external-" + (subscription instanceof aup.ExternalSubscription));
+    list.push("subscription-autoDownload-" + (subscription instanceof aup.DownloadableSubscription && subscription.autoDownload));
+    list.push("subscription-disabled-" + subscription.disabled);
+    list.push("subscription-upgradeRequired-" + (subscription instanceof aup.DownloadableSubscription && subscription.upgradeRequired));
+    list.push("subscription-dummy-" + (subscription instanceof aup.Subscription && subscription.url == "~dummy~"));
     if (filter instanceof aup.Filter)
     {
       if (filter instanceof aup.ActiveFilter)
-        properties.AppendElement(this.atoms["filter-disabled-" + filter.disabled]);
+        list.push("filter-disabled-" + filter.disabled);
 
       if (filter instanceof aup.CommentFilter)
-        properties.AppendElement(this.atoms["type-comment"]);
+        list.push("type-comment");
       else if (filter instanceof aup.BlockingFilter)
-        properties.AppendElement(this.atoms["type-filterlist"]);
+        list.push("type-filterlist");
       else if (filter instanceof aup.WhitelistFilter)
-        properties.AppendElement(this.atoms["type-whitelist"]);
+        list.push("type-whitelist");
       else if (filter instanceof aup.InvalidFilter)
-        properties.AppendElement(this.atoms["type-invalid"]);
+        list.push("type-invalid");
     }
+    
+    return this.generateProperties(list, properties);
   },
 
   getCellProperties: function(row, col, properties)
   {
-    this.getColumnProperties(col, properties);
-    this.getRowProperties(row, properties);
+    return this.getRowProperties(row, properties) + " " + this.getColumnProperties(col, properties);
   },
 
   isContainer: function(row)

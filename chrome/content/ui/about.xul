@@ -65,6 +65,7 @@
 
   <description id="contributors" value="&contributors.label;"/>
   <vbox>
+    <description value="agunchan - Fix bugs for Firefox 21+"/>
     <description value="Blackdire - Simplified Chinese translation of Adblock Plus"/>
     <description value="blogtd - Logo designer"/>
     <description value="easthero - The first tweet &amp; blog report about AutoProxy"/>

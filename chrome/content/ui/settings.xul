@@ -89,7 +89,7 @@
   <command id="export-command" oncommand="exportList()"/>
   <command id="selectall-command" oncommand="treeView.selection.selectAll()"/>
   <command id="copy-command" oncommand="copyToClipboard()"/>
-  <command id="cut-command" oncommand="copyToClipboard(); removeFilters(false)"/>
+  <command id="cut-command" oncommand="cutToClipboard()"/>
   <command id="paste-command" oncommand="pasteFromClipboard()"/>
   <command id="remove-command" oncommand="removeFilters(true)"/>
   <command id="find-command" oncommand="E('findbar').startFind(E('findbar').FIND_NORMAL)"/>

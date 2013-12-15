@@ -425,6 +425,14 @@ function saveDefaultDir(dir)
  */
 function addFilters(filters)
 {
+  let [sub, filter] = treeView.getRowInfo(treeView.selection.currentIndex);
+  let addtoSub = null;
+  //add to selected SpecialSubscription, otherwise choose first SpecialSubscription
+  if (sub instanceof aup.SpecialSubscription)
+  {
+    addtoSub = sub;
+  }
+
   let commentQueue = [];
   let lastAdded = null;
   for each (let text in filters)
@@ -443,7 +451,7 @@ function addFilters(filters)
     else
     {
       lastAdded = filter;
-      let subscription = treeView.addFilter(filter, null, null, true);
+      let subscription = treeView.addFilter(filter, addtoSub, null, true);
       if (subscription && commentQueue.length)
       {
         // Insert comments before the filter that follows them
@@ -457,7 +465,7 @@ function addFilters(filters)
   for each (let comment in commentQueue)
   {
     lastAdded = comment;
-    treeView.addFilter(comment, null, null, true);
+    treeView.addFilter(comment, addtoSub, null, true);
   }
 
   return lastAdded;
@@ -966,6 +974,14 @@ function copyToClipboard()
   {
     return filter.text;
   }).join(lineBreak) + lineBreak);
+}
+
+/**
+* Cut selected filters to clipboard 
+*/
+function cutToClipboard() {
+  copyToClipboard(); 
+  removeFilters(false);
 }
 
 /**
@@ -2204,24 +2220,24 @@ let treeView = {
 
     if (!subscription)
     {
-      for each (let s in this.subscriptions)
-      {
-        if (s instanceof aup.SpecialSubscription)
+        for each (let s in this.subscriptions)
         {
-          if (s._sortedFilters.indexOf(filter) >= 0 || s.filters.indexOf(filter) >= 0)
-          {
-            if (!s.disabled) {
-              subscription = s;
-              break;
+            if (s instanceof aup.SpecialSubscription)
+            {
+            if (s._sortedFilters.indexOf(filter) >= 0 || s.filters.indexOf(filter) >= 0)
+            {
+                if (!s.disabled) {
+                subscription = s;
+                break;
+                }
+                else if (subscription.disabled)
+                subscription = s;
             }
-            else if (subscription.disabled)
-              subscription = s;
-          }
 
-          if (!subscription || subscription.disabled && !s.disabled)
-            subscription = s;
+            if (!subscription || subscription.disabled && !s.disabled)
+                subscription = s;
+            }
         }
-      }
     }
     if (!subscription)
       return null;
@@ -2271,7 +2287,7 @@ let treeView = {
 
     if (subscription instanceof aup.SpecialSubscription && subscription._sortedFilters.length == 1)
     {
-      this.boxObject.rowCountChanged(parentRow, this.getSubscriptionRowCount(subscription));
+      this.boxObject.rowCountChanged(parentRow, 1);
     }
     else if (!(subscription.url in this.closed))
     {
@@ -2864,6 +2880,7 @@ let treeView = {
       }
       else if (e.keyCode == e.DOM_VK_CANCEL || e.keyCode == e.DOM_VK_ESCAPE)
       {
+        me.editor.field.value = "";
         me.stopEditor(false);
         e.preventDefault();
         e.stopPropagation();
@@ -2874,8 +2891,10 @@ let treeView = {
       setTimeout(function()
       {
         let focused = document.commandDispatcher.focusedElement;
-        if (!focused || focused != me.editor.field)
+        if (!focused || focused != me.editor.field) {
+          me.editor.field.value = "";
           me.stopEditor(true, true);
+        }
       }, 0);
     };
 
@@ -2893,8 +2912,35 @@ let treeView = {
     this.stopEditor(false);
 
     let row = this.selection.currentIndex;
-    let [subscription, filter] = this.getRowInfo(row);
-    if (!(subscription instanceof aup.SpecialSubscription) || !(filter instanceof aup.Filter))
+    let [subscription, filter] = [null, null];
+    if (row != -1) {
+        [subscription, filter] = this.getRowInfo(row);
+    }
+    let hasSpecialSubscription = false; 
+    if (row == -1 || !(subscription instanceof aup.SpecialSubscription)) {
+        for each (let sub in this.subscriptions) {
+            if (sub instanceof aup.SpecialSubscription) {
+                hasSpecialSubscription = true;
+                subscription = sub;
+                filter = null;
+                row = this.getSubscriptionRow(subscription);
+                break;
+            }
+        }
+    }
+    else {
+        hasSpecialSubscription = true;
+    }
+    
+    if (!hasSpecialSubscription) {
+        addRuleGroup();
+        subscription = this.subscriptions[this.subscriptions.length - 1];
+        filter = null;
+        row = this.getSubscriptionRow(subscription);
+    }
+    
+    /*
+    if (!(subscription instanceof aup.SpecialSubscription) || (filter && !(filter instanceof aup.Filter)))
     {
       let dummySubscription = new aup.Subscription("~dummy~");
       dummySubscription._typeDescId = "new_filter_group_title";
@@ -2908,12 +2954,21 @@ let treeView = {
       this.selectRow(row);
       this.editorDummy = dummySubscription;
     }
-    else if (insert)
+    */ 
+    if (insert)
     {
       if (subscription._sortedFilters == subscription.filters)
         subscription._sortedFilters = subscription.filters.slice();
 
-      let index = subscription._sortedFilters.indexOf(filter);
+      let index = 0;
+      if (filter) {
+          index = subscription._sortedFilters.indexOf(filter);
+      } else {
+          //insert editor to next row of subscription when selected subscription to add new filter
+          if (subscription.url in this.closed)
+            this.toggleOpenState(row);
+          ++row;
+      }
       subscription._sortedFilters.splice(index, 0, " ");
       this.boxObject.rowCountChanged(row, 1);
 
@@ -2979,6 +3034,7 @@ let treeView = {
     this.editor.field.removeEventListener("keypress", this.editorKeyPressHandler, false);
     this.editor.field.removeEventListener("blur", this.editorBlurHandler, false);
 
+    let editedSubscription = null;
     let insert = (this.editorDummy != null);
     if (this.editorDummy instanceof aup.Subscription)
     {
@@ -2992,7 +3048,7 @@ let treeView = {
     {
       let [subscription, index] = this.editorDummy;
       subscription._sortedFilters.splice(index, 1);
-      this.boxObject.rowCountChanged(this.editedRow, -1);
+      editedSubscription = subscription;
       this.selectRow(this.editedRow);
     }
     else
@@ -3002,6 +3058,8 @@ let treeView = {
       this.boxObject.treeBody.parentNode.focus();
 
     let [subscription, filter] = this.getRowInfo(this.editedRow);
+    if (editedSubscription)
+        subscription = editedSubscription;
     let text = aup.normalizeFilter(this.editor.value);
     if (save && text && (insert || !(filter instanceof aup.Filter) || text != filter.text))
     {
@@ -3009,20 +3067,23 @@ let treeView = {
       if (filter)
         this.addFilter(newFilter, subscription, filter);
       else
-        this.addFilter(newFilter);
+        this.addFilter(newFilter, subscription);
 
       if (!insert)
         this.removeFilter(subscription, filter);
 
+      this.boxObject.rowCountChanged(this.editedRow, -1);
       onChange();
     }
 
     this.editor.field.value = "";
     this.editorParent.hidden = true;
-
-    this.editedRow = -1;
+    
+    if (!text && this.editorDummy)
+        this.boxObject.rowCountChanged(this.editedRow, -1);
     this.editorDummy = null;
-    this.editorDummyInit = (save ? "" : text);
+    this.editorDummyInit = "";
+    this.editedRow = -1;
   }
 };
 

@@ -118,7 +118,10 @@ function init()
   E("listStack").addEventListener("keypress", onListKeyPress, true);
 
   // Use our fake browser with the findbar - and prevent default action on Enter key
-  E("findbar").browser = fastFindBrowser;
+  let findbar = E("findbar");
+  for (let prop in fastFindBrowser)
+    findbar[prop] = fastFindBrowser[prop];
+
   E("findbar").addEventListener("keypress", function(event)
   {
     // Work-around for bug 490047
@@ -425,6 +428,14 @@ function saveDefaultDir(dir)
  */
 function addFilters(filters)
 {
+  let [sub, filter] = treeView.getRowInfo(treeView.selection.currentIndex);
+  let addtoSub = null;
+  //add to selected SpecialSubscription, otherwise choose first SpecialSubscription
+  if (sub instanceof aup.SpecialSubscription)
+  {
+    addtoSub = sub;
+  }
+
   let commentQueue = [];
   let lastAdded = null;
   for each (let text in filters)
@@ -443,7 +454,7 @@ function addFilters(filters)
     else
     {
       lastAdded = filter;
-      let subscription = treeView.addFilter(filter, null, null, true);
+      let subscription = treeView.addFilter(filter, addtoSub, null, true);
       if (subscription && commentQueue.length)
       {
         // Insert comments before the filter that follows them
@@ -457,7 +468,7 @@ function addFilters(filters)
   for each (let comment in commentQueue)
   {
     lastAdded = comment;
-    treeView.addFilter(comment, null, null, true);
+    treeView.addFilter(comment, addtoSub, null, true);
   }
 
   return lastAdded;
@@ -966,6 +977,14 @@ function copyToClipboard()
   {
     return filter.text;
   }).join(lineBreak) + lineBreak);
+}
+
+/**
+* Cut selected filters to clipboard 
+*/
+function cutToClipboard() {
+  copyToClipboard(); 
+  removeFilters(false);
 }
 
 /**
@@ -1492,13 +1511,28 @@ let treeView = {
     else
       return filter;
   },
+  
+  generateProperties: function(list, properties)
+  {
+    if (properties)
+    {
+      // Gecko 21 and below: we have an nsISupportsArray parameter, add atoms
+      // to that.
+      for (let i = 0; i < list.length; i++)
+        if (list[i] in this.atoms)
+          properties.AppendElement(this.atoms[list[i]]);
+      return null;
+    }
+    else
+    {
+      // Gecko 22+: no parameter, just return a string
+      return list.join(" ");
+    }
+  },
 
   getColumnProperties: function(col, properties)
   {
-    col = col.id;
-
-    if (col in this.atoms)
-      properties.AppendElement(this.atoms[col]);
+    return this.generateProperties(["col-" + col.id], properties);
   },
 
   getRowProperties: function(row, properties)
@@ -1507,37 +1541,39 @@ let treeView = {
     if (!subscription)
       return;
 
-    properties.AppendElement(this.atoms["selected-" + this.selection.isSelected(row)]);
-    properties.AppendElement(this.atoms["subscription-" + !filter]);
-    properties.AppendElement(this.atoms["filter-" + (filter instanceof aup.Filter)]);
-    properties.AppendElement(this.atoms["filter-regexp-" + (filter instanceof aup.RegExpFilter && !filter.shortcut)]);
-    properties.AppendElement(this.atoms["description-" + (typeof filter == "string")]);
-    properties.AppendElement(this.atoms["subscription-special-" + (subscription instanceof aup.SpecialSubscription)]);
-    properties.AppendElement(this.atoms["subscription-external-" + (subscription instanceof aup.ExternalSubscription)]);
-    properties.AppendElement(this.atoms["subscription-autoDownload-" + (subscription instanceof aup.DownloadableSubscription && subscription.autoDownload)]);
-    properties.AppendElement(this.atoms["subscription-disabled-" + subscription.disabled]);
-    properties.AppendElement(this.atoms["subscription-upgradeRequired-" + (subscription instanceof aup.DownloadableSubscription && subscription.upgradeRequired)]);
-    properties.AppendElement(this.atoms["subscription-dummy-" + (subscription instanceof aup.Subscription && subscription.url == "~dummy~")]);
+    let list = [];
+    list.push("selected-" + this.selection.isSelected(row));
+    list.push("subscription-" + !filter);
+    list.push("filter-" + (filter instanceof aup.Filter));
+    list.push("filter-regexp-" + (filter instanceof aup.RegExpFilter && !filter.shortcut));
+    list.push("description-" + (typeof filter == "string"));
+    list.push("subscription-special-" + (subscription instanceof aup.SpecialSubscription));
+    list.push("subscription-external-" + (subscription instanceof aup.ExternalSubscription));
+    list.push("subscription-autoDownload-" + (subscription instanceof aup.DownloadableSubscription && subscription.autoDownload));
+    list.push("subscription-disabled-" + subscription.disabled);
+    list.push("subscription-upgradeRequired-" + (subscription instanceof aup.DownloadableSubscription && subscription.upgradeRequired));
+    list.push("subscription-dummy-" + (subscription instanceof aup.Subscription && subscription.url == "~dummy~"));
     if (filter instanceof aup.Filter)
     {
       if (filter instanceof aup.ActiveFilter)
-        properties.AppendElement(this.atoms["filter-disabled-" + filter.disabled]);
+        list.push("filter-disabled-" + filter.disabled);
 
       if (filter instanceof aup.CommentFilter)
-        properties.AppendElement(this.atoms["type-comment"]);
+        list.push("type-comment");
       else if (filter instanceof aup.BlockingFilter)
-        properties.AppendElement(this.atoms["type-filterlist"]);
+        list.push("type-filterlist");
       else if (filter instanceof aup.WhitelistFilter)
-        properties.AppendElement(this.atoms["type-whitelist"]);
+        list.push("type-whitelist");
       else if (filter instanceof aup.InvalidFilter)
-        properties.AppendElement(this.atoms["type-invalid"]);
+        list.push("type-invalid");
     }
+    
+    return this.generateProperties(list, properties);
   },
 
   getCellProperties: function(row, col, properties)
   {
-    this.getColumnProperties(col, properties);
-    this.getRowProperties(row, properties);
+    return this.getRowProperties(row, properties) + " " + this.getColumnProperties(col, properties);
   },
 
   isContainer: function(row)
@@ -2187,24 +2223,24 @@ let treeView = {
 
     if (!subscription)
     {
-      for each (let s in this.subscriptions)
-      {
-        if (s instanceof aup.SpecialSubscription)
+        for each (let s in this.subscriptions)
         {
-          if (s._sortedFilters.indexOf(filter) >= 0 || s.filters.indexOf(filter) >= 0)
-          {
-            if (!s.disabled) {
-              subscription = s;
-              break;
+            if (s instanceof aup.SpecialSubscription)
+            {
+            if (s._sortedFilters.indexOf(filter) >= 0 || s.filters.indexOf(filter) >= 0)
+            {
+                if (!s.disabled) {
+                subscription = s;
+                break;
+                }
+                else if (subscription.disabled)
+                subscription = s;
             }
-            else if (subscription.disabled)
-              subscription = s;
-          }
 
-          if (!subscription || subscription.disabled && !s.disabled)
-            subscription = s;
+            if (!subscription || subscription.disabled && !s.disabled)
+                subscription = s;
+            }
         }
-      }
     }
     if (!subscription)
       return null;
@@ -2254,7 +2290,7 @@ let treeView = {
 
     if (subscription instanceof aup.SpecialSubscription && subscription._sortedFilters.length == 1)
     {
-      this.boxObject.rowCountChanged(parentRow, this.getSubscriptionRowCount(subscription));
+      this.boxObject.rowCountChanged(parentRow, 1);
     }
     else if (!(subscription.url in this.closed))
     {
@@ -2847,6 +2883,7 @@ let treeView = {
       }
       else if (e.keyCode == e.DOM_VK_CANCEL || e.keyCode == e.DOM_VK_ESCAPE)
       {
+        me.editor.field.value = "";
         me.stopEditor(false);
         e.preventDefault();
         e.stopPropagation();
@@ -2857,8 +2894,10 @@ let treeView = {
       setTimeout(function()
       {
         let focused = document.commandDispatcher.focusedElement;
-        if (!focused || focused != me.editor.field)
+        if (!focused || focused != me.editor.field) {
+          me.editor.field.value = "";
           me.stopEditor(true, true);
+        }
       }, 0);
     };
 
@@ -2876,8 +2915,35 @@ let treeView = {
     this.stopEditor(false);
 
     let row = this.selection.currentIndex;
-    let [subscription, filter] = this.getRowInfo(row);
-    if (!(subscription instanceof aup.SpecialSubscription) || !(filter instanceof aup.Filter))
+    let [subscription, filter] = [null, null];
+    if (row != -1) {
+        [subscription, filter] = this.getRowInfo(row);
+    }
+    let hasSpecialSubscription = false; 
+    if (row == -1 || !(subscription instanceof aup.SpecialSubscription)) {
+        for each (let sub in this.subscriptions) {
+            if (sub instanceof aup.SpecialSubscription) {
+                hasSpecialSubscription = true;
+                subscription = sub;
+                filter = null;
+                row = this.getSubscriptionRow(subscription);
+                break;
+            }
+        }
+    }
+    else {
+        hasSpecialSubscription = true;
+    }
+    
+    if (!hasSpecialSubscription) {
+        addRuleGroup();
+        subscription = this.subscriptions[this.subscriptions.length - 1];
+        filter = null;
+        row = this.getSubscriptionRow(subscription);
+    }
+    
+    /*
+    if (!(subscription instanceof aup.SpecialSubscription) || (filter && !(filter instanceof aup.Filter)))
     {
       let dummySubscription = new aup.Subscription("~dummy~");
       dummySubscription._typeDescId = "new_filter_group_title";
@@ -2891,12 +2957,21 @@ let treeView = {
       this.selectRow(row);
       this.editorDummy = dummySubscription;
     }
-    else if (insert)
+    */ 
+    if (insert)
     {
       if (subscription._sortedFilters == subscription.filters)
         subscription._sortedFilters = subscription.filters.slice();
 
-      let index = subscription._sortedFilters.indexOf(filter);
+      let index = 0;
+      if (filter) {
+          index = subscription._sortedFilters.indexOf(filter);
+      } else {
+          //insert editor to next row of subscription when selected subscription to add new filter
+          if (subscription.url in this.closed)
+            this.toggleOpenState(row);
+          ++row;
+      }
       subscription._sortedFilters.splice(index, 0, " ");
       this.boxObject.rowCountChanged(row, 1);
 
@@ -2962,6 +3037,7 @@ let treeView = {
     this.editor.field.removeEventListener("keypress", this.editorKeyPressHandler, false);
     this.editor.field.removeEventListener("blur", this.editorBlurHandler, false);
 
+    let editedSubscription = null;
     let insert = (this.editorDummy != null);
     if (this.editorDummy instanceof aup.Subscription)
     {
@@ -2975,7 +3051,7 @@ let treeView = {
     {
       let [subscription, index] = this.editorDummy;
       subscription._sortedFilters.splice(index, 1);
-      this.boxObject.rowCountChanged(this.editedRow, -1);
+      editedSubscription = subscription;
       this.selectRow(this.editedRow);
     }
     else
@@ -2985,6 +3061,8 @@ let treeView = {
       this.boxObject.treeBody.parentNode.focus();
 
     let [subscription, filter] = this.getRowInfo(this.editedRow);
+    if (editedSubscription)
+        subscription = editedSubscription;
     let text = aup.normalizeFilter(this.editor.value);
     if (save && text && (insert || !(filter instanceof aup.Filter) || text != filter.text))
     {
@@ -2992,20 +3070,23 @@ let treeView = {
       if (filter)
         this.addFilter(newFilter, subscription, filter);
       else
-        this.addFilter(newFilter);
+        this.addFilter(newFilter, subscription);
 
       if (!insert)
         this.removeFilter(subscription, filter);
 
+      this.boxObject.rowCountChanged(this.editedRow, -1);
       onChange();
     }
 
     this.editor.field.value = "";
     this.editorParent.hidden = true;
-
-    this.editedRow = -1;
+    
+    if (!text && this.editorDummy)
+        this.boxObject.rowCountChanged(this.editedRow, -1);
     this.editorDummy = null;
-    this.editorDummyInit = (save ? "" : text);
+    this.editorDummyInit = "";
+    this.editedRow = -1;
   }
 };
 

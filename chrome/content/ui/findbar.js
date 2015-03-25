@@ -50,7 +50,14 @@ let fastFindBrowser =
     init: function() {},
     setDocShell: function() {},
     setSelectionModeAndRepaint: function() {},
-    collapseSelection: function() {}
+    collapseSelection: function() {},
+    // compatibility with Nightly 26+
+    addResultListener: function() {},
+    removeResultListener: function() {},
+    highlight: function() {},
+    focusContent: function () {},
+    enableSelection : function() {},
+    removeSelection: function () {}
   },
   currentURI: aup.makeURL("http://example.com/"),
   contentWindow: {
@@ -65,7 +72,7 @@ let fastFindBrowser =
     scrollByPages: function(num)
     {
       E("list").boxObject.scrollByPages(num);
-    },
+    }
   },
 
   addEventListener: function(event, handler, capture)
@@ -78,3 +85,6 @@ let fastFindBrowser =
   },
 }
 
+// compatibility with Nightly 26+
+fastFindBrowser.finder = fastFindBrowser.fastFind;
+fastFindBrowser.finder.fastFind = fastFindBrowser.fastFind.find;

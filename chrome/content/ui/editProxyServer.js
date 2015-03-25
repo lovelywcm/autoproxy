@@ -126,7 +126,7 @@ function delSelectedRow()
 
   // check whether default proxy has been removed.
   // it may be modified before delete, so do a new loop.
-  if (defaultProxy != 0 ) {
+  if (defaultProxy >= 0 ) {
     show("note");
     for (row=rows.firstChild.nextSibling; row; row=row.nextSibling) {
       if (row.firstChild.value == aup.proxy.nameOfDefaultProxy) {
@@ -156,7 +156,7 @@ function reset2Default()
   init();
   window.sizeToContent();
 
-  defaultProxy = 10;
+  defaultProxy = 2;
 }
 
 function saveProxyServerSettings()
@@ -204,20 +204,20 @@ function saveProxyServerSettings()
   if (pConfig) {
     // remove the last "$" symbol
     pConfig = pConfig.replace(/\$$/, "");
-      if (defaultProxy > 0) {
+      if (defaultProxy >= 0) {
           let newProxies = aup.proxy.configToObj(pConfig);
           let hasDefaultProxy = newProxies.some(function(proxy, index) {
               if (proxy.name == aup.proxy.nameOfDefaultProxy) {
-                  prefs.defaultProxy = index + 1;
+                  prefs.defaultProxy = index;
                   return true;
               }
           });
-          if (!hasDefaultProxy) prefs.defaultProxy = 1;
+          if (!hasDefaultProxy) prefs.defaultProxy = 0;
       }
   }
   else {
     // all proxies removed, restore to default.
-    prefs.defaultProxy = 10;
+    prefs.defaultProxy = 2;
   }
 
   prefs.customProxy = (pConfig == prefs.knownProxy ? '' : pConfig);

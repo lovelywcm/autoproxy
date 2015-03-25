@@ -23,7 +23,7 @@ pref("extensions.autoproxy.synchronizationinterval", 24);
 
 pref("extensions.autoproxy.contextmenu_key", "Accel Alt M");
 pref("extensions.autoproxy.customProxy", "");
-pref("extensions.autoproxy.default_proxy", 9);
+pref("extensions.autoproxy.default_proxy", 2);
 pref("extensions.autoproxy.fallbackProxy", -1);
 pref("extensions.autoproxy.knownProxy", "Free Gate;;8580;$GAppProxy;;8000;$GoAgent;;8087;$GPass;;8000;$JAP;;4001;$PaperBus;;3998;$Puff;;1984;$ssh -D;;7070;socks$Toonel;;8080;$Tor;;9050;socks$Wu Jie;;9666;$Your Freedom;;8080;");
 pref("extensions.autoproxy.modeauto_key", "Accel Alt A");
